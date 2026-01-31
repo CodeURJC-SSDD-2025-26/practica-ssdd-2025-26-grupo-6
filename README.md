@@ -1,76 +1,82 @@
-# [Nombre de la Aplicación]
+# Palomix
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| [Nombre 1] | [email1]@alumnos.urjc.es | [User1] |
-| [Nombre 2] | [email2]@alumnos.urjc.es | [User2] |
-| [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
-| [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
+| Matias Maccarrone | ma.maccarrone.2023@alumnos.urjc.es | MatiasMaccarrone |
+| Alejandro Carretero Badorrey |a.carreterob.2023@alumnos.urjc.es | Carretero2005 |
+| Raúl Sánchez López | r.sanchezl.2023@alumnos.urjc.es | RaulSanchezLopez |
+| Carla García Romero |c.garciarom.2023@alumnos.urjc.es | Carlss50 |
 
 ---
 
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+La aplicación va a ser una mejora de la actual LetterBox, es decir, una aplicación de reseñas de peliculas y series. La diferencia con LetterBox es que va a tener funcionalidades adicionales a las actuales, como listas con recomendaciones o filtros de búsquedas, entre otras.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Foros, Edad 
+2. Usuario Anónimo: Id
+3. Administrador: Nombre de Administrador, Correo Electrónico
+4. Pelicula: Título, Género, Lista de Valoraciones, Reparto, Plataformas, Duración (minutos), Sinopsis, Año de Lanzamiento, Cantidad de valoraciones, Cantidad de Listas a las que pertenece
+5. Valoración: Cantidad de Estrellas, Reseña
+6. Lista de peliculas: Peliculas
+7. Foros: Usuarios, mensajes
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- Usuario - Valoracion : Un Usuario puede tener varias Valoraciones (1:N)
+- Pelicula - Valoracion : Una Pelicula puede tener varias Valoraciones (1:N)
+- Pelicula - Lista de Peliculas : Una Pelicula puede pertenecer a varias Listas de Peliculas (N:M)
+- Administrador - Pelicula : Un Administrador puede gestionar Peliculas (N:M)
+- Administrador - Usuario : Varios Administrador pueden gestionar a varios Usuarios (N:M)
+- Administrador - Foros : Varios Administrador pueden gestionar a varios Foros (N:M)
+- Administrador - Valoracion : Varios Administrador pueden gestionar a varios Valoracion (N:M)
+- Administrador - Lista de Peliculas : Varios Administrador pueden gestionar a varias Listas de Peliculas (N:M)
+
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
+  - Permisos: Visualizar películas, listas de películas y valoraciones de películas
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos: Gestionar su perfil, añadir/borrar/modificar sus valoraciones, crear/modificar listas de peliculas, crear/escribir foros, modificar su historial de peliculas, visualizar estadisticas de peliculas y géneros, y las mismas funcionalidades del usuario anónimo
+  - Es dueño de: Su Perfil de Usuario, sus Valoraciones y sus Listas de Películas
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos: Gestión completa de peliculas, visualización de estadísticas, moderación de contenido en valoraciones y foros
+  - Es dueño de: Peliculas, Categorías, puede gestionar todos las valoraciones, Usuarios, listas de peliculas y foros 
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- Usuario Registrado y Administrador - Una imagen de avatar 
+- Pelicula - Una imagen de portada
+- Lista de Peliculas - Portada de la primera Pelicula
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
-- **Gráfico 2**: [Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
+- Gráfico circular de peliculas vistas por género
+- Gráfico de barras de valoraciones de peliculas del usuario
+- Gráfico de barras de valoraciones de cada pelicula
 
 ### **Tecnología Complementaria**
 Indicar qué tecnología complementaria se empleará:
 
-- [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
-- [Ej: Generación de PDFs de facturas usando iText o similar]
+- Envío de correos electrónicos automáticos mediante JavaMailSender, que nombre las peliculas agregadas
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algoritmo/Consulta**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Descripción**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
-- **Alternativa**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
+- **Algoritmo/Consulta**: Sistema de recomendaciones basado en el historial de valoraciones del usuario
+- **Descripción**: Analiza las peliculas valoradas  y sugiere peliculas similares utilizando filtrado colaborativo
+- **Alternativa**: Filtrado de peliculas por género, año de lanzamiento y valoración general
 
 ---
 
