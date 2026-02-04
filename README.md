@@ -19,66 +19,68 @@ La aplicación va a ser una mejora de la actual LetterBox, es decir, una aplicac
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
 1. Usuario: Id
-   1.1 Usuario Anonimo
-   1.2 Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones y Edad.
-   1.3 Administrador: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Edad y Permisos.
-2. Filmografía: Id, Nombre, Género, Valoración, Duración, Plataformas, Sinopsis, Año y Director.
-   2.1 Película 
-   2.2 Series: Temporadas.
+   - 1.1 Usuario Anonimo
+   - 1.2 Usuario Registrado: Nombre de Usuario, Correo electrónico y Edad.
+   - 1.3 Administrador: Nombre de Usuario, Correo electrónico, Edad y Permisos.
+2. Filmografía: Id, Nombre, Duración, Media de Valoraciones, Plataformas, Sinopsis y Año.
+   - 2.1 Película 
+   - 2.2 Series: Temporadas.
 3. Valoración: Estrellas, Reseñas.
-4. Director: Id, Nombre, Año de Nacimiento.
+4. Director: Nombre, Año de Nacimiento.
 5. Género: Nombre.
+6. Listas: Nombre y película/serie.
 
 **Relaciones entre entidades:**
-- Usuario - Valoracion : Un Usuario puede tener varias Valoraciones (1:N)
-- Pelicula - Valoracion : Una Pelicula puede tener varias Valoraciones (1:N)
-- Pelicula - Lista de Peliculas : Una Pelicula puede pertenecer a varias Listas de Peliculas (N:M)
-- Administrador - Pelicula : Un Administrador puede gestionar Peliculas (N:M)
-- Administrador - Usuario : Varios Administrador pueden gestionar a varios Usuarios (N:M)
-- Administrador - Valoracion : Varios Administrador pueden gestionar a varios Valoracion (N:M)
-- Administrador - Lista de Peliculas : Varios Administrador pueden gestionar a varias Listas de Peliculas (N:M)
+- Usuario Registrado - Valoración : Un Usuario puede tener una o varias Valoraciones, pero cada Valoración pertenece a un único Usuario (1:N)
+- Usuario Registrado - Listas : Un Usuario puede crear y modificar cero o varias Listas, y una Lista pertenece solo a un Usuario (1:N)
+- Usuario - Filmografía : Un Usuario puede buscar una o varias Filmografías, y una Filmografía puede ser vista por uno o varios Usuarios (N:M)
+- Administrador - Filmografía : Un Administrador puede modificar cero o varias Filmografías, y una Filmografía puede ser modificada por uno o varios Administradores (N:M)
+- Filmografía - Valoración : Una Filmografía puede tener cero o varias Valoraciones, pero cada Valoración se asigna a una sola Filmografía (1:N)
+- Filmografía - Listas : Una Filmografía puede estar incluida en cero o varias Listas, y una lista puede contener una o varias Filmografías (N:M)
+- Filmografía - Género : Una Filmografía puede pertenecer a uno o varios Géneros, y un Género puede tener cero o varias Filmografías (N:M)
+- Director - Filmografía : Un Director puede dirigir una o varias Filmografías, y una Filmografía está dirigida por un único Director (1:N)
 
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: Visualizar películas, listas de películas y valoraciones de películas
+  - Permisos: Visualizar filmografías, listas de filmografías y valoraciones de filmografías.
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: Gestionar su perfil, añadir/borrar/modificar sus valoraciones, crear/modificar listas de peliculas, modificar su historial de peliculas, visualizar estadisticas de peliculas y géneros, y las mismas funcionalidades del usuario anónimo
-  - Es dueño de: Su Perfil de Usuario, sus Valoraciones y sus Listas de Películas
+  - Permisos: Gestionar su perfil, añadir/borrar/modificar sus valoraciones, crear/modificar listas de filmografías, modificar su historial de filmogrfías, visualizar estadisticas de filmografías y géneros, y las mismas funcionalidades del usuario anónimo
+  - Es dueño de: Su Perfil de Usuario, sus Valoraciones y sus Listas de filmografía
 
 * **Administrador**: 
-  - Permisos: Gestión completa de peliculas, visualización de estadísticas y moderación de contenido en valoraciones 
-  - Es dueño de: Peliculas, Categorías, puede gestionar todos las valoraciones, Usuarios y listas de peliculas 
+  - Permisos: Gestión completa de filmografías, visualización de estadísticas y moderación de contenido en valoraciones 
+  - Es dueño de: filmografías, géneros y directores puede gestionar todos las valoraciones, Usuarios y listas de filmografías 
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 - Usuario Registrado y Administrador - Una imagen de avatar 
-- Pelicula - Una imagen de portada
-- Lista de Peliculas - Portada de la primera Pelicula
+- Filmografía - Una imagen de portada
+- Lista de Filmografía - Portada de la primera Filmografía
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- Gráfico circular de peliculas vistas por género
-- Gráfico de barras de valoraciones de peliculas del usuario
-- Gráfico de barras de valoraciones de cada pelicula
+- Gráfico circular de filmografías vistas por género
+- Gráfico de barras de valoraciones de filmografías del usuario
+- Gráfico de barras de valoraciones de cada filmografías
 
 ### **Tecnología Complementaria**
 Indicar qué tecnología complementaria se empleará:
 
-- Envío de correos electrónicos automáticos mediante JavaMailSender, que nombre las peliculas agregadas
+- Envío de correos electrónicos automáticos mediante JavaMailSender, que nombre las filmografías agregadas
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
 - **Algoritmo/Consulta**: Sistema de recomendaciones basado en el historial de valoraciones del usuario
-- **Descripción**: Analiza las peliculas valoradas  y sugiere peliculas similares utilizando filtrado colaborativo
-- **Alternativa**: Filtrado de peliculas por género, año de lanzamiento y valoración general
+- **Descripción**: Analiza las filmografías valoradas  y sugiere similares utilizando filtrado colaborativo
+- **Alternativa**: Filtrado de filmogrfías por género, director y valoración general
 
 ---
 
