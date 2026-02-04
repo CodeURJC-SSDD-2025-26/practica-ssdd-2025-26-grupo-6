@@ -18,12 +18,16 @@ La aplicación va a ser una mejora de la actual LetterBox, es decir, una aplicac
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Edad 
-2. Usuario Anónimo: Id
-3. Administrador: Nombre de Administrador, Correo Electrónico
-4. Pelicula: Título, Género, Lista de Valoraciones, Reparto, Plataformas, Duración (minutos), Sinopsis, Año de Lanzamiento, Cantidad de valoraciones, Cantidad de Listas a las que pertenece
-5. Valoración: Cantidad de Estrellas, Reseña
-6. Lista de peliculas: Peliculas
+1. Usuario: Id
+   1.1 Usuario Anonimo
+   1.2 Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones y Edad.
+   1.3 Administrador: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Edad y Permisos.
+2. Filmografía: Id, Nombre, Género, Valoración, Duración, Plataformas, Sinopsis, Año y Director.
+   2.1 Película 
+   2.2 Series: Temporadas.
+3. Valoración: Estrellas, Reseñas.
+4. Director: Id, Nombre, Año de Nacimiento.
+5. Género: Nombre.
 
 **Relaciones entre entidades:**
 - Usuario - Valoracion : Un Usuario puede tener varias Valoraciones (1:N)
