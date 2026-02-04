@@ -18,13 +18,12 @@ La aplicación va a ser una mejora de la actual LetterBox, es decir, una aplicac
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Foros, Edad 
+1. Usuario Registrado: Nombre de Usuario, Correo electrónico, Listas de peliculas, Listas de valoraciones, Edad 
 2. Usuario Anónimo: Id
 3. Administrador: Nombre de Administrador, Correo Electrónico
 4. Pelicula: Título, Género, Lista de Valoraciones, Reparto, Plataformas, Duración (minutos), Sinopsis, Año de Lanzamiento, Cantidad de valoraciones, Cantidad de Listas a las que pertenece
 5. Valoración: Cantidad de Estrellas, Reseña
 6. Lista de peliculas: Peliculas
-7. Foros: Usuarios, mensajes
 
 **Relaciones entre entidades:**
 - Usuario - Valoracion : Un Usuario puede tener varias Valoraciones (1:N)
@@ -32,7 +31,6 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 - Pelicula - Lista de Peliculas : Una Pelicula puede pertenecer a varias Listas de Peliculas (N:M)
 - Administrador - Pelicula : Un Administrador puede gestionar Peliculas (N:M)
 - Administrador - Usuario : Varios Administrador pueden gestionar a varios Usuarios (N:M)
-- Administrador - Foros : Varios Administrador pueden gestionar a varios Foros (N:M)
 - Administrador - Valoracion : Varios Administrador pueden gestionar a varios Valoracion (N:M)
 - Administrador - Lista de Peliculas : Varios Administrador pueden gestionar a varias Listas de Peliculas (N:M)
 
@@ -45,12 +43,12 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: Gestionar su perfil, añadir/borrar/modificar sus valoraciones, crear/modificar listas de peliculas, crear/escribir foros, modificar su historial de peliculas, visualizar estadisticas de peliculas y géneros, y las mismas funcionalidades del usuario anónimo
+  - Permisos: Gestionar su perfil, añadir/borrar/modificar sus valoraciones, crear/modificar listas de peliculas, modificar su historial de peliculas, visualizar estadisticas de peliculas y géneros, y las mismas funcionalidades del usuario anónimo
   - Es dueño de: Su Perfil de Usuario, sus Valoraciones y sus Listas de Películas
 
 * **Administrador**: 
-  - Permisos: Gestión completa de peliculas, visualización de estadísticas, moderación de contenido en valoraciones y foros
-  - Es dueño de: Peliculas, Categorías, puede gestionar todos las valoraciones, Usuarios, listas de peliculas y foros 
+  - Permisos: Gestión completa de peliculas, visualización de estadísticas y moderación de contenido en valoraciones 
+  - Es dueño de: Peliculas, Categorías, puede gestionar todos las valoraciones, Usuarios y listas de peliculas 
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
