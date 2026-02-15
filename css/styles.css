@@ -85,3 +85,89 @@ html, body{
     color: #3a3f6b !important;
 }
 
+/* ===== TARJETA DE RESEÑA (BASADA EN TU DIBUJO) ===== */
+.card-resena {
+    background: var(--bs-secondary);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid var(--bs-info);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-top: 50px !important;    /* Espacio con el header */
+    margin-bottom: 50px !important; /* Espacio con el footer */
+    margin-left: auto;              /* Centrado horizontal */
+    margin-right: auto;
+}
+
+.foto-valorar {
+    width: 220px; 
+    aspect-ratio: 2 / 3; 
+    margin: 0 auto 20px auto; 
+    display: block; 
+    background: var(--bs-primary);
+    border: 2px dashed var(--bs-info);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.foto-valorar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+/* Formulario (Abajo) */
+.formulario-resena {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.valoracion-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.valoracion-group input {
+    width: 70px;
+    padding: 8px;
+    background: var(--bs-primary);
+    border: 1px solid var(--bs-info);
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.estrella {
+    font-size: 1.5rem;
+}
+
+.formulario-resena textarea {
+    width: 100%;
+    height: 120px;
+    background: var(--bs-primary);
+    border: 1px solid var(--bs-info);
+    color: var(--bs-text-color);
+    padding: 12px;
+    border-radius: 8px;
+    resize: none;
+}
+
+/* Botón Guardar */
+.btn-guardar {
+    background: var(--bs-info);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end; /* A la derecha como en el dibujo */
+    transition: background 0.3s;
+}
+
+.btn-guardar:hover {
+    background: #4c5290;
+}
