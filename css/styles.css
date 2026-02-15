@@ -78,10 +78,11 @@ html, body{
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: auto; 
-    width: 100%;
+    width: 98%;
     gap: 15px;
     padding: 20px;
     background-color: var(--bs-secondary);
+    border-radius: 10px;
 }
 
 /* Films Scrollbar*/
