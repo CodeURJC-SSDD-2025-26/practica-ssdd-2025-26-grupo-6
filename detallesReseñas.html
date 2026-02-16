@@ -56,26 +56,38 @@
             </div>
         </div>
         <div class="content">
-                <div class="card-resena">
-                    <div class="foto-valorar">
+                <div class="card-review">
+                    <div class="photo-evaluate">
                         <img src="images/avatar.jpg" alt="Poster" onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
-                </div>
+                    </div>
 
-                <form class="formulario-resena">
-                <div class="d-flex flex-column gap-2">
-                    <label class="fw-bold text-white">Valoración:</label>
-                        <div class="valoracion-group">
-                            <input type="number" min="0" max="5" step="0.5" value="0">
-                            <span class="estrella">⭐</span>
-                        </div>
-                </div>
+                <form class="form-review">
+                    <div class="d-flex flex-column gap-2">
+                        <label class="fw-bold text-white">Valoración:</label>
+                            <div class="evaluate-group">
+                                <select class ="form-select" style="width: auto; min-width: 80px">
+                                    <option value="0">0</option>
+                                    <option value="0.5">0.5</option>
+                                    <option value="1">1</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="4">4</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <span class="star">⭐</span>
+                            </div>
+                    </div>
 
-                <div class="d-flex flex-column gap-2">
-                    <label class="fw-bold text-white">Descripción:</label>
-                    <textarea placeholder="Escribe tu reseña aquí..."></textarea>
-                </div>
+                    <div class="d-flex flex-column gap-2">
+                        <label class="fw-bold text-white">Descripción:</label>
+                        <textarea placeholder="Escribe tu reseña aquí..."></textarea>
+                    </div>
 
-                <button type="submit" class="btn-guardar">Guardar Reseña</button>
+                    <button type="submit" class="btn-save">Guardar Reseña</button>
                 </form>
         </div>
         <footer class="footer py-3">
