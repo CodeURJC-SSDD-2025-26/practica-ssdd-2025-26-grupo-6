@@ -3,6 +3,8 @@
     --bs-secondary :  #1d213d;
     --bs-info : #3a3f6b;
     --bs-text-color: #bbbbbb;
+    --bg-secondary: #3a3f6b;
+    --bg-primary: #282c50;
 }
 
 /* BODY */
@@ -37,6 +39,7 @@ html, body{
     align-items:baseline;
     background: var(--bs-secondary);
     padding: 10px;
+    
 }
 
 .icon { 
@@ -143,3 +146,13 @@ html, body{
 .footer .nav-link:hover {
     color: #3a3f6b !important;
 }
+
+/* LOGIN */
+.container-login{
+    display:flexbox; 
+    align-items : center; 
+    justify-content : center; 
+    min-width: 100vh;
+}
+
+
