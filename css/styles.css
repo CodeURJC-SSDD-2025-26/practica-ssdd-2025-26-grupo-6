@@ -85,6 +85,7 @@ html, body{
     color: #3a3f6b !important;
 }
 
+/* ===== REVIEW DETAILS ===== */
 /* ===== REVIEW CARD ===== */
 .card-review {
     background: var(--bs-secondary);
@@ -161,3 +162,6 @@ html, body{
 .btn-save:hover {
     background: #4c5290;
 }
+
+/* ===== REVIEW ===== */
+
