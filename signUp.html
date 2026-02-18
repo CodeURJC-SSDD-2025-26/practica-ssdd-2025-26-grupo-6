@@ -20,33 +20,35 @@
                 <div class="col-md-5 margin-1">
                     <div class="card p-4 bg-dark text-white rounded-4"> 
                         <form>
-                            <h1 class="h3 mb-3 text-center">Iniciar Sesión</h1>
-                            
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                <label for="floatingInput" class="text-dark">Correo Electrónico</label>
+                            <h1 class="h3 mb-3 text-center">Crear Cuenta</h1>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
+                                    <label for="floatingInput" class="text-dark">Correo Electrónico</label>
+                                </div>
                             </div>
-                            
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="user123"/>
+                                    <label for="floatingInput" class="text-dark">Nombre de Usuario</label>
+                                </div>
+                            </div>
+                            </div>
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword" class="text-dark">Contraseña</label>
                             </div>
-                            <div class="container-sm">
-                                <div class="row my-3">
-                                    <div class="col">
-                                        <div class="form-check text-start">
-                                            <input class="form-check-input" type="checkbox" value="remember-me" id="checkDefault">
-                                            <label class="form-check-label" for="checkDefault">Recordarme</label>
-                                        </div>
-                                    </div>
-                                    <div class="col offset-sm-3"><a href="#"><h6>Me olvidé la contraseña</h6></a></div>
-                                </div>
-                                <div class="row my-3">
-                                    <div class="col"><a href="signUp.html"><h6>Crear Cuenta</h6></a></div>
-                                    <div class="col offset-sm-3"><a href="principal.html"><h6>  No quiero iniciar sesión</h6></a></div>
-                                </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword" class="text-dark">Repite la Contraseña</label>
                             </div>
-                            <a href="principal.html"><button class="btn btn-primary w-100 py-2" type="button">Acceder</button></a>
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="floatingInput" placeholder="DD/MM/YYYY"/>
+                                <label for="floatingInput" class="text-dark">Año de Nacimiento</label>
+                            </div>
+                            
+                            <a href="login.html"><button class="btn btn-primary w-100 py-2" type="button">Crear Cuenta</button></a>
                         </form>
                     </div>
                 </div>
