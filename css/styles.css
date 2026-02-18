@@ -308,3 +308,22 @@ html, body{
     margin-top: 10px;
     text-align: center;
 }
+
+/* FOOTERS PAGES */
+.container-pag{
+    margin : auto ;
+    padding: 5vw;
+    padding-top :2vw ;
+
+    color : var(--bs-text-color);
+}
+
+.container-pag .card{
+    padding : 1vw;
+    background-color: var(--bs-info);
+    color: var(--bs-text-color);
+}
+
+.container-pag .card-title{
+    padding-left: 1vw;
+}
