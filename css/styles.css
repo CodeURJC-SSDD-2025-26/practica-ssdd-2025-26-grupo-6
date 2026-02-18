@@ -134,51 +134,123 @@ html, body{
 
 /* Movie Details */
 .movie-details{
-    display: flex;
-    padding: 2%;
+    display: grid;
+    grid-template-columns: 250px 1fr auto;
+    gap: 32px;
+    padding: 32px 2%;
+    padding-left: 60px;
     color: white;
-    align-items: center;
+    align-items: start;
 }
 
 .movie-image {
-    flex: 0 0 250px; /* Fixed width for the image */
+    width: 250px; /* Fixed width for the image */
 }
 
 .poster {
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover; /* Ensure the image covers the area without distortion */
-    display: block;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
 
 .movie-text {
-    max-width: 800px;
-    padding: 40px;
-    text-align: justify;
+    max-width: 67ch;
+    padding: 8px 0;
+    padding-left: 30px;
+    text-align: left;
+}
+
+.movie-title {
+    font-weight: 800;
+    font-size: clamp(26px, 3vw, 34px);
+    margin: 0 0 10px 0;
+}
+
+
+/*Series Details*/
+.series-seasons{
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+    font-weight: 700;
+    margin-left: 16px;
+}
+
+.movie-genre{
+    margin: 0 0 16px 0;
+    color: var(--bs-text-color);
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 .double-row{
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
-.movie-review{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 70%;
+.movie-year, .movie-duration{
+    margin: 0;
+    margin-left: 0px;
+    color: var(--bs-text-color);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.movie-year::after, .movie-duration::after{
+    content: "•";
+    color: rgba(255,255,255,0.2);
+    margin: 0 10px;
+}
+
+.movie-duration{
+    margin-left: -16px;
+}
+
+.movie-director{
+    margin: 0;
+    color: #8f93ad;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 14px;
+}
+
+.director{
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.movie-platforms{
+    margin: 8px 0 0 0;
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--bs-info);
+    color: #e0e7ff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.movie-sinopsis{
+    margin-top: 18px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-size: 15px;
+    max-width: 64ch;
+    text-align: justify;
 }
 
 .movie-stars{
     display: flex;
     gap: 5px;
-    margin-bottom: 10px;
-    justify-content: center;    
+    margin-bottom: 10px;  
 }
 
+/* Buttons */
 .btn-primary{
     background-color: var(--bs-secondary);
     border: none;
@@ -231,11 +303,17 @@ html, body{
     text-overflow: ellipsis;
 }
 
+.temporada-footer{
+    text-align: left;
+}
+
 .card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-top: 1px solid rgba(255, 255, 255, 0.3); /*line*/
     margin-top: 10px; 
-    padding-top: 12px;
-    text-align: right;    
+    padding-top: 12px;   
 }
 
 /* FOOTER */
