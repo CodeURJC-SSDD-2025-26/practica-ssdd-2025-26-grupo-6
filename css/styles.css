@@ -473,7 +473,12 @@ html, body{
 }
 
 .star {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: gray;
+}
+.star.activa {
+    color: gold;
 }
 
 .form-review textarea {
@@ -521,4 +526,18 @@ html, body{
 
 .container-pag .card-title{
     padding-left: 1vw;
+}
+
+/* PAGE LIST REVIEWS */
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal .card-text {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
 }
