@@ -57,33 +57,26 @@
         </div>
         <div class="content">
                 <div class="card-review">
+                    <h2 class="fw-bold text-center mb-4">Avatar</h2>
                     <div class="photo-evaluate">
-                        <img src="images/avatar.jpg" alt="Poster" onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
+                        <img src="images/carteleraEjemploAvatar.webp" alt="Poster" onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
                     </div>
 
                 <form class="form-review">
                     <div class="d-flex flex-column gap-2">
                         <label class="fw-bold text-white">Valoración:</label>
-                            <div class="evaluate-group">
-                                <select class ="form-select" style="width: auto; min-width: 80px">
-                                    <option value="0">0</option>
-                                    <option value="0.5">0.5</option>
-                                    <option value="1">1</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2">2</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3">3</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4">4</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <i class="bi bi-star-fill"></i>
+                            <div class="d-flex" id="stars">
+                                <i class="bi bi-star star" data-value="1"></i>
+                                <i class="bi bi-star star" data-value="2"></i>
+                                <i class="bi bi-star star" data-value="3"></i>
+                                <i class="bi bi-star star" data-value="4"></i>                                
+                                <i class="bi bi-star star" data-value="5"></i>
+                                <input type="hidden" id="rating" name="rating">
                             </div>
                     </div>
 
                     <div class="d-flex flex-column gap-2">
-                        <label class="fw-bold text-white">Descripción:</label>
+                        <label class="fw-bold text-white">Reseña:</label>
                         <textarea placeholder="Escribe tu reseña aquí..."></textarea>
                     </div>
 
@@ -122,5 +115,6 @@
                 </div>
             </div>
         </footer>
+        <script src="js/stars.js"></script>
     </body>
 </html>
