@@ -53,29 +53,13 @@
             </div>
             <div class="profile">
                 <a href="#">
-                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+                    <img id="avatarLogo" src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
                 </a>
             </div>
         </div>
         
         <div class="content">
             <div class="options">
-            <!--
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="perfil.html">Perfil</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Mis Listas</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>         
-             -->
                 <div class="botonProfile">
                     Perfil
                 </div>
@@ -87,7 +71,7 @@
                 <div class="itemProfile1">
                     <a href="#">
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal" data-bs-target="#avatarModal">
-                        <img src="images/perfilNoReg.jpg" class="rounded-circle" width="175" height="175">
+                        <img id="avatarProfile"src="images/perfilNoReg.jpg" class="rounded-circle" width="175" height="175">
                         </button>
                     </a>
                 </div>
@@ -97,8 +81,8 @@
                 <div class="itemProfile3">
                     <button type="submit"class="btn btn-primary">Editar Perfil</button>
                 </div>
-                <div class="itemProfile4">  
-                    <p>fermin.lopez@gmail.com</p>
+                <div class="itemProfile4">
+                    fermin.lopez@gmail.com
                 </div>
                 <div class="itemProfile5">
                     <p>03-03-1930</p>
@@ -109,9 +93,6 @@
                 <div class="itemProfile7">
                     Año de Nacimiento:
                 </div>
-
-
-                
             </div>
         </div>
         <footer class="footer py-3">
@@ -132,8 +113,6 @@
                     <a href="#" class="nav-link px-2">Sobre Nosotros</a>
                 </li>
             </ul>
-
-            
             <div class="d-flex justify-content-between">
                 <p class="text-center">&copy; 2025 Company, Inc</p>
                 <div class="d-flex justify-content-between gap-3">
@@ -157,32 +136,24 @@
                         <div class="container">
                             <div class="row g-3">
                                 <div class="col-6 text-center">
-                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="100" height="100">
+                                    <div class="mb-3">
+                                        <img src="images/perfilNoReg.jpg" id="previewAvatar" class="rounded-circle" width="100" height="100">
+                                    </div>
+                                    <select class="form-select" id="selectAvatar" aria-label="Selecciona un avatar">
+                                        <option value="images/perfilNoReg.jpg" selected>Estandar (Gris)</option>
+                                        <option value="images/Palomix.jpg">Palomix</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="saveAvatar" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
                     </div>
                 </div>
             </div>
         </div>  
-         
+        <script src="js/avatar.js"></script>
     </body>
 </html>
