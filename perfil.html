@@ -12,6 +12,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <!-- Our CSS -->
         <link rel="stylesheet" href="css/styles.css">
     </head>
@@ -72,8 +74,7 @@
                             </ul>
                         </div>
                     </div>
-                </nav>
-               
+                </nav>         
              -->
                 <div class="botonProfile">
                     Perfil
@@ -85,26 +86,28 @@
             <div class="profileInfo">
                 <div class="itemProfile1">
                     <a href="#">
+                        <button type="button" class="btn p-0 border-0" data-bs-toggle="modal" data-bs-target="#avatarModal">
                         <img src="images/perfilNoReg.jpg" class="rounded-circle" width="175" height="175">
+                        </button>
                     </a>
                 </div>
                 <div class="itemProfile2">
                     <p>Usuario</p>
                 </div>
                 <div class="itemProfile3">
-                    <p>Editar perfil</p>
+                    <button type="submit"class="btn btn-primary">Editar Perfil</button>
                 </div>
                 <div class="itemProfile4">  
                     <p>fermin.lopez@gmail.com</p>
                 </div>
                 <div class="itemProfile5">
-                    <p>1960</p>
+                    <p>03-03-1930</p>
                 </div>
                 <div class="itemProfile6">
                     Correo:
                 </div>
                 <div class="itemProfile7">
-                    Edad:
+                    Año de Nacimiento:
                 </div>
 
 
@@ -143,10 +146,43 @@
                 </div>
             </div>
         </footer>
-
-
-
-
-
+        <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="avatarTitleLabel">¿Qué Avatar quieres ser?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row g-3">
+                                <div class="col-6 text-center">
+                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <img src="images/logo.png" class="rounded-circle" width="100" height="100">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="100" height="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+         
     </body>
 </html>

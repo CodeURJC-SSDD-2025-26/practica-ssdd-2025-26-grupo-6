@@ -134,12 +134,7 @@ html, body{
     grid-area: area3; 
 
     min-height: 50px; 
-    background: var(--bs-info);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border:1px solid black;
-    border-radius: 10px;
+    
 }
 .itemProfile4{
     grid-area: area4;
@@ -185,7 +180,13 @@ html, body{
     align-items:center;
     justify-content:center;
 }
-
+#avatarModal .modal-content{
+    background-color: var(--bs-secondary);
+    color: var(--bs-text-color);
+}
+#avatarModal .btn-close{
+    filter: invert(1) brightness(200%);
+}
 
 /* FOOTER */
 .footer {
