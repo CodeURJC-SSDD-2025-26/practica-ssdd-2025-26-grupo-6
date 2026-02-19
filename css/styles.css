@@ -68,6 +68,7 @@ html, body{
 /* profile section*/
 .profile { grid-area: profile; }
 
+
 /* CONTENT */
 .content{
     grid-area: content; 
@@ -168,7 +169,6 @@ html, body{
     margin: 0 0 10px 0;
 }
 
-
 /*Series Details*/
 .series-seasons{
     margin: 0;
@@ -250,6 +250,7 @@ html, body{
     margin-bottom: 10px;  
 }
 
+
 /* Buttons */
 .btn-primary{
     background-color: var(--bs-secondary);
@@ -259,7 +260,8 @@ html, body{
 .btn-primary:hover{
     background-color: var(--bs-info);
     border: none;
-}   
+}  
+
 
 /* Review Section */
 .review-section{
@@ -314,6 +316,34 @@ html, body{
     border-top: 1px solid rgba(255, 255, 255, 0.3); /*line*/
     margin-top: 10px; 
     padding-top: 12px;   
+}
+
+/*Administer Movie*/
+.container-administer{
+    display: flex; 
+    align-items : center; 
+    justify-content : center; 
+    padding: 40px;
+}
+
+
+/* Centra la imagen dentro de la card y controla su tamaño */
+.image-administer{
+    display: block;
+    margin-inline: auto;      /* centra horizontal */
+    max-width: 300px;         /* tamaño máximo de la imagen */
+    width: 90%;               /* respeta el 90% del contenedor */
+    height: auto;             /* mantiene proporción */
+}
+
+.administer-title{
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+.administer-movie .card{
+    padding: 40px;
 }
 
 /* FOOTER */
