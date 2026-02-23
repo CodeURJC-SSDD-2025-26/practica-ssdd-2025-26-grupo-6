@@ -1,121 +1,155 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Palomix" />
-        <meta name="author" content="Grupo 6" />
-        <title>Palomix - Peliculas</title>
-        <!-- Libraries-->
-         <!--Bootstrap Librarie-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-        <!-- Our CSS -->
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body class="primary principal">
-        <div class="header">
-            <div class="icon">
-                <a class="navbar-brand" href="principal.html">
-                    <img src="images/logo.png" width="100" height="100">
-                </a>
-            </div> 
-            <div class="menus">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="principal.html">Peliculas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="series.html">Series</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="listas.html">Listas</a>
-                                </li>
-                            </ul>
-                        </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="primary principal">
+    <div class="header">
+        <div class="icon">
+            <a class="navbar-brand" href="principal.html">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">Peliculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="listas.html">Listas</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </div>
-            <div class="search">
-                 <div class="input-group mb-3">
-                    <button class="btn btn-outline-primary" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
                 </div>
-            </div>
-            <div class="profile">
-                <a href="perfil.html">
-                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
-                </a>
+            </nav>
+        </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="button" id="searchBtn">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" id="searchInput">
             </div>
         </div>
-
-        <div class="container-pag">
-            <div class="row"><h2>Politicas de Cookies</h2></div>
-            <div class="row">
-                    <p>En Palomix utilizamos cookies para mejorar tu experiencia de navegación. </p>
-                    <p>Las Cookies son pequeños archivos que se guardan en tu dispositivo y nos ayudan a recordar tus preferencias, analizar el uso de la web y ofrecerte un servicio más personalizado.</p>
-
-                    <div class="card-group gap-2">
-                    <div class="card ">
-                        <div class="card-title"><h4>Cookies técnicas </h4></div>
-                        <div class="card-body"><p>Necesarias para que la web funcione correctamente</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title"><h4>Cookies de análisis</h4></div>
-                        <div class="card-body"><p>Nos permiten entender cómo navegan los usuarios y mejorar la plataforma.</p></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title"><h4>Cookies de terceros</h4></div>
-                        <div class="card-body"><p> pueden proceder de servicios externos como herramientas de análisis.</p></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title"><h4>Responsabilidad  </h4></div>
-                        <div class="card-body"><p>Puedes configurar o desactivar las cookies desde tu navegador en cualquier momento. Ten en cuenta que algunas funciones podrían dejar de estar disponibles si las bloqueas.</p>  </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        
-        <footer class="footer py-3">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item">
-                    <a href="principal.html" class="nav-link px-2">Inicio</a>
+        <div class="profile dropdown">
+            <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                <li>
+                    <hr class="dropdown-divider">
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">Política de Cookies</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">Aviso Legal</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">FAQs</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2">Sobre Nosotros</a>
-                </li>
+                <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar Sesión</a></li>
             </ul>
+        </div>
+    </div>
 
-            
-            <div class="d-flex justify-content-between">
-                <p class="text-center">&copy; 2025 Company, Inc</p>
-                <div class="d-flex justify-content-between gap-3">
-                    <a href="#">
-                        <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
-                    </a>
-                    <a href="#">
-                        <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
-                    </a>
+    <div class="container-pag">
+        <div class="row">
+            <h2>Politicas de Cookies</h2>
+        </div>
+        <div class="row">
+            <p>En Palomix utilizamos cookies para mejorar tu experiencia de navegación. </p>
+            <p>Las Cookies son pequeños archivos que se guardan en tu dispositivo y nos ayudan a recordar tus
+                preferencias, analizar el uso de la web y ofrecerte un servicio más personalizado.</p>
+
+            <div class="card-group gap-2">
+                <div class="card ">
+                    <div class="card-title">
+                        <h4>Cookies técnicas </h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Necesarias para que la web funcione correctamente</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Cookies de análisis</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Nos permiten entender cómo navegan los usuarios y mejorar la plataforma.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Cookies de terceros</h4>
+                    </div>
+                    <div class="card-body">
+                        <p> pueden proceder de servicios externos como herramientas de análisis.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Responsabilidad </h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Puedes configurar o desactivar las cookies desde tu navegador en cualquier momento. Ten en
+                            cuenta que algunas funciones podrían dejar de estar disponibles si las bloqueas.</p>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </body>
+        </div>
+    </div>
+
+    <footer class="footer py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="principal.html" class="nav-link px-2">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a href="politicasCookies.html" class="nav-link px-2">Política de Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a href="avisoLegal.html" class="nav-link px-2">Aviso Legal</a>
+            </li>
+            <li class="nav-item">
+                <a href="preguntasFrecuentes.html" class="nav-link px-2">Preguntas Frecuentes</a>
+            </li>
+            <li class="nav-item">
+                <a href="nosotros.html" class="nav-link px-2">Sobre Nosotros</a>
+            </li>
+        </ul>
+
+
+        <div class="d-flex justify-content-between">
+            <p class="text-center">&copy; 2025 Company, Inc</p>
+            <div class="d-flex justify-content-between gap-3">
+                <a href="#">
+                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                </a>
+                <a href="#">
+                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>src = "js/searchFunc.js"</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
-    

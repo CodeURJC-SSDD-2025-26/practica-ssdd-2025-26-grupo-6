@@ -498,11 +498,14 @@ html, body{
 }
 
 
+
  /* SEARCH RESULTS*/
 .result {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
     width: 98%;
     gap: 15px;
     padding: 20px;
