@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="primary principal">
+    <div class="header">
+        <div class="icon">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">Peliculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Listas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
+            </div>
+        </div>
+        <div class="profile">
+            <a href="#">
+                <img id="avatarLogo" src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="options">
+            <div class="botonProfile">
+                Perfil
+            </div>
+            <div class="botonProfile">
+                Mis Listas
+            </div>
+        </div>
+        <div class="card p-4 profileInfo rounded-4 border-0"><h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
+            <div class="text-center mb-4">
+                <div class="itemProfile1">
+                    <a href="#">
+                        <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
+                            data-bs-target="#avatarModal">
+                            <img id="avatarProfile" src="images/perfilNoReg.jpg" class="rounded-circle" width="175" height="175">
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="profileFields">
+                <div class="mb-3 text-center">
+                    <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
+                    <div class="itemProfile2" id="username">
+                        Carlitronks171
+                    </div>
+                </div>
+                <div class="mb-3 text-center">
+                    <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
+                    <div class="itemProfile4" id="email">
+                        fermin.lopez@gmail.com
+                    </div>
+                </div>
+                <div class="mb-3 text-center">
+                    <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
+                    <div class="itemProfile5" id="yearBirth">
+                        03-03-1930
+                    </div>
+                </div>
+                <div class="itemProfile3 mt-4">
+                    <button type="submit" id="editarPerfilBtn" class="btn btn-primary">Editar Perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="principal.html" class="nav-link px-2">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Política de Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Aviso Legal</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Sobre Nosotros</a>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <p class="text-center">&copy; 2025 Company, Inc</p>
+            <div class="d-flex justify-content-between gap-3">
+                <a href="#">
+                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                </a>
+                <a href="#">
+                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="avatarTitleLabel">¿Qué Avatar quieres ser?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="text-center mb-4">
+                            <p>Seleccionado actualmente:</p>
+                            <img src="images/perfilNoReg.jpg" id="previewAvatar"
+                                class="rounded-circle border border-primary border-3" width="100" height="100">
+                        </div>
+                        <div class="row g-3 justify-content-center" id="avatarGallery">
+                            <div class="col-4 text-center">
+                                <img src="images/perfilNoReg.jpg"
+                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
+                                    data-value="images/perfilNoReg.jpg">
+                            </div>
+                            <div class="col-4 text-center">
+                                <img src="images/Palomix.jpg"
+                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
+                                    data-value="images/Palomix.jpg">
+                            </div>
+                            <div class="col-4 text-center">
+                                <img src="images/filmix1.jpg"
+                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
+                                    data-value="images/filmix1.jpg">
+                            </div>
+                            <div class="col-4 text-center">
+                                <img src="images/filmixGafas1.jpg"
+                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
+                                    data-value="images/filmixGafas1.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="saveAvatar" class="btn btn-primary" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/avatar.js"></script>
+    <script src="js/formularioPerfil.js"></script>
+</body>
+
+</html>

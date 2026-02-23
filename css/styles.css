@@ -354,7 +354,125 @@ html, body{
 .administer-movie .card{
     padding: 40px;
 }
+.options{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px; 
+    padding: 10px;
+}
+.botonProfile{
+    border: 1px solid black;
+    background: var(--bs-secondary);
+    color: var(--bs-text-color);
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius:12px;
+    height: 50px;
 
+    /*To center the test in the botton*/
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.itemProfile1{
+    margin-bottom:1rem;
+}
+.profileInfo{
+    max-width:600px;
+    margin: 20px auto;
+    background: var(--bs-secondary)!important;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.1)!important;
+    border-radius:1.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    font-size:1.2rem;
+    
+}
+.input-perfil-personalizado{
+    width:100%;
+    border:none;
+    background:transparent;
+    color: var(--bs-text-color);
+    text-align:center;
+    outline: none;
+    font-weight:500;
+    font-size:1.1rem;
+}
+#yearBirthInput{
+    color-scheme: dark;
+}
+.itemProfile2, .itemProfile4, .itemProfile5{
+    width:100%;
+    min-height: 60px;
+    background:var(--bs-info) !important;
+    color:var(--bs-text-color)!important;
+    font-size:1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    margin-bottom:1.5rem !important;
+
+    border:none!important;
+    border-radius:12px !important;
+    transition:all 0.2s ease;
+    padding:12px 20px !important;
+}
+.btn-primary{
+    background-color:#0d6efd !important;
+    border: none;
+    transition: opacity 0.2s;
+    padding: 12px;
+    width:100%;
+    font-weight:bold;
+    transition: all 0.2s;
+}
+.btn-primary:hover{
+    opacity:0.9;
+    transform:translateY(-1px);
+}
+
+.itemProfile2:hover, .itemProfile4:hover, .itemProfile5:hover{
+    background:#444a7c !important;
+    transform: translateY(-2px);
+}
+.profileInfo label{
+    color: var(--bs-text-color);
+    font-weight:600;
+    font-size:0.7rem;
+    letter-spacing:0.05rem;
+    display: block;
+    
+
+}
+
+#avatarModal .modal-content{
+    background-color: var(--bs-secondary);
+    color: var(--bs-text-color);
+}
+#avatarModal .btn-close{
+    filter: invert(1) brightness(200%);
+}
+.img-selectable{
+    cursor:pointer;
+    transition:transform 0.2s, border-color 0.2s;
+    border: 3px solid transparent;
+    width:80px;
+    height:80px;
+    object-fit:cover;
+}
+.img-selectable:hover{
+    transform:scale(1.1);
+    border-color: var(--bs-info);
+}
+.active-avatar{
+    border-color: var(--bs-info);
+}
+#avatarGallery{
+    padding:10px;
+    background: var(--bs-primary);
+    border-radius:10px;
+}
 /* FOOTER */
 .footer {
     background: var(--bs-secondary);
