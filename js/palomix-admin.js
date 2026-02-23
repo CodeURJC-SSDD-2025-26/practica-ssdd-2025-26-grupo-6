@@ -1,23 +1,19 @@
-// js/palomix-admin.js
-
-// Referencias a elementos
 const posterInput = document.getElementById('posterInput');
 const posterPreview = document.getElementById('posterPreview');
 
-// Seguridad: si alguno no existe, no seguimos
+// if both elements exist, set up the preview functionality
 if (posterInput && posterPreview) {
 
-  // 1) Abrir selector al pulsar la imagen
+  // 1) Open selector
   posterPreview.addEventListener('click', () => {
     posterInput.click();
   });
 
-  // 3) Previsualizar cuando el usuario selecciona un archivo
+  // 2) Preview selected image
   posterInput.addEventListener('change', (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validaciones recomendadas
     const maxMB = 5;
     const allowed = ['image/jpeg', 'image/png', 'image/webp'];
 
@@ -32,7 +28,7 @@ if (posterInput && posterPreview) {
       return;
     }
 
-    // Previsualizar con FileReader
+    // Preview with FileReader
     const reader = new FileReader();
     reader.onload = () => {
       posterPreview.src = reader.result; // Data URL
