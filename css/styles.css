@@ -198,7 +198,7 @@ html, body{
     font-weight: 600;
 }
 
-.movie-year::after, .movie-duration::after{
+.movie-year::after, .movie-duration::after, .movie-genre::after{
     content: "•";
     color: rgba(255,255,255,0.2);
     margin: 0 10px;
@@ -234,6 +234,8 @@ html, body{
     font-size: 13px;
     font-weight: 700;
 }
+
+
 
 .movie-sinopsis{
     margin-top: 18px;
