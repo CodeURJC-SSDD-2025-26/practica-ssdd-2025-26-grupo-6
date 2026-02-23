@@ -418,7 +418,7 @@ html, body{
     transition:all 0.2s ease;
     padding:12px 20px !important;
 }
-.btn-primary{
+.pageProfile .btn-primary{
     background-color:#0d6efd !important;
     border: none;
     transition: opacity 0.2s;
@@ -427,7 +427,7 @@ html, body{
     font-weight:bold;
     transition: all 0.2s;
 }
-.btn-primary:hover{
+.pageProfile .btn-primary:hover{
     opacity:0.9;
     transform:translateY(-1px);
 }
