@@ -59,36 +59,38 @@
             </a>
         </div>
     </div>
-    
+
     <!-- Page content -->
     <div class="movieContent">
         <!--INFORMATION OF THE MOVIE-->
-        <div class="movie-details">
-            <div class="movie-image"><img class="poster" src="images/carteleraEjemploAvatar.webp" alt="..." /></div>
-            <div class="movie-text">
-                <h1 class="movie-title">Avatar</h1>
-                <div class="double-row">
+        <div class="row px-4 py-4 justify-content-center justify-content-md-start text-center text-md-start align-items-md-center">
+            <div class="col-12 col-md-3 d-flex justify-content-center justify-content-md-start ps-md-5 pt-md-2">
+                <img class="poster" src="images/carteleraEjemploAvatar.webp" alt="..." />
+            </div>
+            <div class="col-12 col-md-8 ps-md-3">
+                <h1 class="movie-title text-center text-md-start mt-sm-2">Avatar</h1>
+                <div class="d-flex flex-wrap align-items-center gap-3 w-100 justify-content-center justify-content-md-start">
                     <h4 class="movie-genre">Acción</h4>
                     <h4 class="movie-genre">Aventura</h4>
                     <h4 class="movie-genre">Ciencia Ficción</h4>
                 </div>
-                <div class="double-row">
+                <div class="d-flex flex-wrap align-items-center gap-3 w-100 justify-content-center justify-content-md-start">
                     <h4 class="movie-director">DIRIGIDA POR</h4>
                     <h5 class="director">James Cameron</h5>
                 </div>
-                <div class="double-row">
+                <div class="d-flex flex-wrap align-items-center gap-3 w-100 justify-content-center justify-content-md-start">
                     <h4 class="movie-year">2009</h4>
                     <h4 class="movie-duration">162 mins</h4>
                 </div>
-                <div class="double-row">
-                    <h4 class="movie-platforms">Disney +</h4> <!--Just the "free" ones-->
-                    <h4 class="movie-platforms">HBO</h4> <!--Just the "free" ones-->
+                <div class="d-flex flex-wrap align-items-center gap-3 w-100 justify-content-center justify-content-md-start">
+                    <h4 class="movie-platforms">Disney +</h4>
+                    <h4 class="movie-platforms">HBO</h4>
                 </div>
                 <p class="movie-sinopsis">Entramos en el mundo Avatar de la mano de Jake Sully, un ex-Marine en silla de
                     ruedas, que ha sido reclutado para viajar a Pandora, donde existe un mineral raro y muy preciado que
                     puede solucionar la crisis energética existente en la Tierra.</p>
-                <div class="double-row">
-                    <div class="movie-stars">
+                <div class="d-flex flex-wrap align-items-center gap-3 w-100 justify-content-center justify-content-md-start">
+                    <div class="movie-stars d-flex gap-2">
                         <i class="bi bi-star"></i>
                         <i class="bi bi-star"></i>
                         <i class="bi bi-star"></i>
@@ -101,53 +103,156 @@
         </div>
 
         <!--REVIEW MOVIE SECTION-->
-        <div class="review-section">
-            <div class="card1">
-                <div class="review">
-                    <div class="double-row-review">
-                        <h3 class="card-title">Jose María</h3>
-                        <div class="rating">
-                            <h4 class="punctuation">4</h4>
-                            <i class="bi bi-star-fill"></i>
+        <div class="content px-5">
+            <div class="row row-cols-1 row-cols-md-3 g-5">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                <div class="rating d-flex align-items-center">
+                                    <h4 class="punctuation m-0 me-1">4</h4>
+                                    <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3" style="text-align: justify;">Esta película me ha sorprendido
+                                muchísimo. La historia está muy bien construida, los personajes tienen profundidad y el
+                                ritmo no decae en ningún momento. La fotografía es espectacular y la banda sonora
+                                acompaña perfectamente cada escena. Hola hola hola hola hola hola hola hola hola hola
+                                hola hola hola hola hola hola hola</p>
+                            <hr class="m-0">
+                            <div class="d-flex justify-content-end">
+                                <div class="card-footer bg-transparent py-1 border-0">
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalReseña1"> Ver más </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
-                            numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    <div class="modal fade" id="modalReseña1" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                            <div class="rating d-flex align-item-center">
+                                                <h4 class="punctuation m-0 me-1">4</h4>
+                                                <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <p class="card-text mt-3" style="text-align: justify;">Esta película me ha
+                                            sorprendido muchísimo. La historia está muy bien construida, los personajes
+                                            tienen profundidad y el ritmo no decae en ningún momento. La fotografía es
+                                            espectacular y la banda sonora acompaña perfectamente cada escena. Hola hola
+                                            hola hola hola hola hola hola hola hola hola hola hola hola hola hola</p>
+                                        <hr class="m-2">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
                 </div>
-            </div>
-            <div class="card2">
-                <div class="review">
-                    <div class="double-row-review">
-                        <h3 class="card-title">Carla</h3>
-                        <div class="rating">
-                            <h4 class="punctuation">4</h4>
-                            <i class="bi bi-star-fill"></i>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                <div class="rating d-flex align-items-center">
+                                    <h4 class="punctuation m-0 me-1">4</h4>
+                                    <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3" style="text-align: justify;">Esta película me ha sorprendido
+                                muchísimo. La historia está muy bien construida, los personajes tienen profundidad y el
+                                ritmo no decae en ningún momento. La fotografía es espectacular y la banda sonora
+                                acompaña perfectamente cada escena. Hola hola hola hola hola hola hola hola hola hola
+                                hola hola hola hola hola hola hola</p>
+                            <hr class="m-0">
+                            <div class="d-flex justify-content-end">
+                                <div class="card-footer bg-transparent py-1 border-0"> <a class="btn btn-primary btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#modalReseña1"> Ver más </a> </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
-                            numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    <div class="modal fade" id="modalReseña1" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                            <div class="rating d-flex align-item-center">
+                                                <h4 class="punctuation m-0 me-1">4</h4>
+                                                <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <p class="card-text mt-3" style="text-align: justify;">Esta película me ha
+                                            sorprendido muchísimo. La historia está muy bien construida, los personajes
+                                            tienen profundidad y el ritmo no decae en ningún momento. La fotografía es
+                                            espectacular y la banda sonora acompaña perfectamente cada escena. Hola hola
+                                            hola hola hola hola hola hola hola hola hola hola hola hola hola hola</p>
+                                        <hr class="m-2">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
                 </div>
-            </div>
-            <div class="card3">
-                <div class="review">
-                    <div class="double-row-review">
-                        <h3 class="card-title">Matymacca</h3>
-                        <div class="rating">
-                            <h4 class="punctuation">4</h4>
-                            <i class="bi bi-star-fill"></i>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                <div class="rating d-flex align-items-center">
+                                    <h4 class="punctuation m-0 me-1">4</h4>
+                                    <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3" style="text-align: justify;">Esta película me ha sorprendido
+                                muchísimo. La historia está muy bien construida, los personajes tienen profundidad y el
+                                ritmo no decae en ningún momento. La fotografía es espectacular y la banda sonora
+                                acompaña perfectamente cada escena. Hola hola hola hola hola hola hola hola hola hola
+                                hola hola hola hola hola hola hola</p>
+                            <hr class="m-0">
+                            <div class="d-flex justify-content-end">
+                                <div class="card-footer bg-transparent py-1 border-0"> <a class="btn btn-primary btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#modalReseña1"> Ver más </a> </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
-                            numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    <div class="modal fade" id="modalReseña1" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title m-0">CarlaGarcíaRomero</h5>
+                                            <div class="rating d-flex align-item-center">
+                                                <h4 class="punctuation m-0 me-1">4</h4>
+                                                <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <p class="card-text mt-3" style="text-align: justify;">Esta película me ha
+                                            sorprendido muchísimo. La historia está muy bien construida, los personajes
+                                            tienen profundidad y el ritmo no decae en ningún momento. La fotografía es
+                                            espectacular y la banda sonora acompaña perfectamente cada escena. Hola hola
+                                            hola hola hola hola hola hola hola hola hola hola hola hola hola hola</p>
+                                        <hr class="m-2">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
                 </div>
             </div>
         </div>
@@ -184,6 +289,7 @@
                 </div>
             </div>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
