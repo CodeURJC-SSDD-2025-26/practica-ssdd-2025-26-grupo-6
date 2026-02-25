@@ -232,11 +232,6 @@ html, body{
 
 
 /* Buttons */
-.btn-primary{
-    background-color: var(--bs-secondary);
-    border: none;
-}
-
 .btn-primary:hover{
     background-color: var(--bs-info);
     border: none;
@@ -360,7 +355,7 @@ html, body{
     transition:all 0.2s ease;
     padding:12px 20px !important;
 }
-.pageProfile .btn-primary{
+.btn-primary{
     background-color:#0d6efd !important;
     border: none;
     transition: opacity 0.2s;
@@ -431,10 +426,13 @@ html, body{
 
 /* LOGIN */
 .container-login{
-    display:flexbox; 
-    align-items : center; 
-    justify-content : center; 
-    min-width: 100vh;
+    max-width:50vw;
+    background: var(--bs-secondary)!important;
+    padding: 5vh;
+    border: 1px solid rgba(255,255,255,0.1)!important;
+    border-radius:1.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    font-size:1.2rem;
 }
 
 

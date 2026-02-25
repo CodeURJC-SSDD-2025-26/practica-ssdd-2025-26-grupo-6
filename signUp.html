@@ -14,51 +14,47 @@
 </head>
 
 <body class="primary">
-    <div class="container-login">
-        <div class="row w-100 align-items-center">
-            <div class="col-md-6 text-center">
-                <img class="mb-4 img-fluid" src="images/logo.png" alt="Logo Palomix" width="90%" height="90%" />
-            </div>
-
-            <div class="col-md-5 margin-1">
-                <div class="card p-4 bg-dark text-white rounded-4">
-                    <form>
-                        <h1 class="h3 mb-3 text-center">Crear Cuenta</h1>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email"
-                                        placeholder="name@example.com" />
-                                    <label for="floatingInput" class="text-dark">Correo Electrónico</label>
-                                </div>
-                            <div class="col">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="user" placeholder="user123"
-                                        data-bs-toggle="popover" data-bs-title="Formato de Usuario"
-                                        data-bs-trigger="focus"
-                                        data-bs-content="Debe tener entre 5 y 12 caracteres, sin espacios." />
-                                    <label for="floatingInput" class="text-dark">Nombre de Usuario</label>
-                                </div>
-                            </div>
+    <div class="row p-5">
+        <div class="col-md-6 text-center">
+            <img class="mb-2 img-fluid" src="images/logo.png" alt="Logo Palomix" width="80%" height="90%" />
+        </div>
+        <div class="col">
+            <div class="container-login">
+                <h1 class="text-center text-light pb-4">Crear Cuenta</h1>
+                <form >
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" />
+                        <label for="floatingInput" class="text-dark">Correo Electrónico</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="user" placeholder="user123" data-bs-toggle="popover"
+                            data-bs-title="Formato de Usuario" data-bs-trigger="focus"
+                            data-bs-content="Debe tener entre 5 y 12 caracteres, sin espacios." />
+                        <label for="floatingInput" class="text-dark">Nombre de Usuario</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <label for="floatingPassword" class="text-dark">Contraseña</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password2" placeholder="Password">
+                        <label for="floatingPassword" class="text-dark">Repite la Contraseña</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="birthDate" placeholder="DD/MM/YYYY" />
+                        <label for="floatingInput" class="text-dark">Año de Nacimiento</label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary w-100 py-2" type="button" id="signUpBtn">Crear
+                                Cuenta</button>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="Password">
-                            <label for="floatingPassword" class="text-dark">Contraseña</label>
+                        <div class="col">
+                            <button class="btn btn-danger w-100 py-2" type="button" id="cancelBtn">Cancelar</button>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password2" placeholder="Password">
-                            <label for="floatingPassword" class="text-dark">Repite la Contraseña</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="birthDate" placeholder="DD/MM/YYYY" />
-                            <label for="floatingInput" class="text-dark">Año de Nacimiento</label>
-                        </div>
-
-                        <button class="btn btn-primary w-100 py-2" type="button" id="signUpBtn">Crear Cuenta</button>
-                        <button class="btn btn-primary w-100 py-2" type="button" id="cancelBtn">Cancelar</button>
-                    </form>
-                </div>
-            </div>
+                    </div>
+                </form>
+              </div>
         </div>
     </div>
     <footer class="footer py-3">

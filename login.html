@@ -16,76 +16,77 @@
 </head>
 
 <body class="primary">
+    <div class="row p-5">
+        <div class="col-md-6 text-center">
+            <img class="mb-2 img-fluid" src="images/logo.png" alt="Logo Palomix" width="80%" height="90%" />
+        </div>
+        <div class="col mt-5">
+            <div class="container-login">
+                <h1 class="mb-3 text-center text-light">Iniciar Sesión</h1>
+                <form>
 
-    <div class="container-login">
-        <div class="row w-100 align-items-center">
-            <div class="col-md-6 text-center">
-                <img class="mb-4 img-fluid" src="images/logo.png" alt="Logo Palomix" width="90%" height="90%" />
+                    <div class="form-floating mb-3" id="fEmail">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
+                        <label for="floatingInput" class="text-dark">Correo Electrónico</label>
+                    </div>
+
+                    <div class="form-floating mb-3" id="fPass">
+                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                        <label for="floatingPassword" class="text-dark">Contraseña</label>
+                    </div>
+
+                    <div class="container-sm">
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="form-check text-start">
+                                    <input class="form-check-input" type="checkbox" value="remember-me"
+                                        id="checkDefault">
+                                    <label class="form-check-label text-light" for="checkDefault">Recordarme</label>
+                                </div>
+                            </div>
+                            <div class="col offset-sm-3">
+                                <a class="btn-invisible text-decoration-underline bg-none" type="button" id="resetPass"
+                                    data-bs-toggle="modal" data-bs-target="#modalRecuperar">
+                                    <h6>Me olvidé la contraseña</h6>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col">
+                                <a href="signUp.html">
+                                    <h6>Crear Cuenta</h6>
+                                </a>
+                            </div>
+                            <div class="col offset-sm-3">
+                                <a href="principal.html">
+                                    <h6> No quiero iniciar sesión</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2" id="loginButton" type="button">Acceder</button>
+                </form>
             </div>
+        </div>
 
-            <div class="col-md-5 margin-1">
-                <div class="card p-4 bg-dark text-white rounded-4">
-                    <form>
-                        <h1 class="h3 mb-3 text-center">Iniciar Sesión</h1>
-
-                        <div class="form-floating mb-3" id="fEmail">
+        <div class="modal" tabindex="-1" id="modalRecuperar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Reiniciar Contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Introduce tu correo electrónico para enviar el código de recuperación.</p>
+                        <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" placeholder="name@example.com"
                                 required />
                             <label for="floatingInput" class="text-dark">Correo Electrónico</label>
                         </div>
-
-                        <div class="form-floating mb-3" id="fPass">
-                            <input type="password" class="form-control" id="password" placeholder="Password" required>
-                            <label for="floatingPassword" class="text-dark">Contraseña</label>
-                        </div>
-
-                        <div class="container-sm">
-                            <div class="row my-3">
-                                <div class="col">
-                                    <div class="form-check text-start">
-                                        <input class="form-check-input" type="checkbox" value="remember-me"
-                                            id="checkDefault">
-                                        <label class="form-check-label" for="checkDefault">Recordarme</label>
-                                    </div>
-                                </div>
-                                <div class="col offset-sm-3">
-                                    <a class="btn-invisible text-decoration-underline bg-none" type="button"
-                                        id="resetPass" data-bs-toggle="modal" data-bs-target="#modalRecuperar">
-                                        <h6>Me olvidé la contraseña</h6>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row my-3">
-                                <div class="col"><a href="signUp.html">
-                                        <h6>Crear Cuenta</h6>
-                                    </a></div>
-                                <div class="col offset-sm-3"><a href="principal.html">
-                                        <h6> No quiero iniciar sesión</h6>
-                                    </a></div>
-                            </div>
-                        </div>
-                        <button class="btn-primary w-100 py-2" id="loginButton" type="button">Acceder</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal" tabindex="-1" id="modalRecuperar">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Reiniciar Contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Introduce tu correo electrónico para enviar el código de recuperación.</p>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
-                        <label for="floatingInput" class="text-dark">Correo Electrónico</label>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar correo</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Enviar correo</button>
+                    </div>
                 </div>
             </div>
         </div>
