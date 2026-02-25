@@ -6,17 +6,15 @@
   }
 
   function init() {
-    const container = document.getElementById('generosContainer');
+    const container = document.getElementById('camposGeneros');
     const addBtn = document.getElementById('addGenero');
     const removeBtn = document.getElementById('removeGenero');
-    
-    if (!container || !addBtn || !removeBtn) return;
 
-    const doubleRow = document.querySelector('#generosContainer .double-row');
+    if (!container || !addBtn || !removeBtn) return;    
 
     addBtn.addEventListener('click', () => {
       const nuevo = crearCampoGenero();
-      container.insertBefore(nuevo, doubleRow);
+      container.appendChild(nuevo);
       nuevo.querySelector('input').focus();
     });
 
@@ -26,20 +24,14 @@
         campos[campos.length - 1].remove();
       }
     });
-
   }
-  
+
   function crearCampoGenero() {
     const wrapper = document.createElement('div');
-    wrapper.className = 'genero-extra';
-
+    wrapper.className = 'input-group genero-extra';
     wrapper.innerHTML = `
-      <div class="form-floating mb-1">
-          <input type="text" class="form-control" name="genres[]" placeholder="Género">
-          <label class="text-dark administer-form">Género</label>
-      </div>
+      <input type="text" class="form-control" name="genres[]" placeholder="Género">
     `;
-
     return wrapper;
   }
 })();

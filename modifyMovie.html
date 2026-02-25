@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<!-- Navbar -->
+<body class="primary principal">
+    <div class="header">
+        <div class="icon">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">Peliculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Listas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
+            </div>
+        </div>
+        <div class="profile">
+            <a href="perfil.html">
+                <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </a>
+        </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h1 class="mb-3 text-center text-white fs-3 fs-md-2">Modificar Película</h1>
+
+                    <!-- Clikable Image -->
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <img id="posterPreview" src="images/peliculaAdministrador.jpg"
+                            alt="Seleccionar imagen" class="border rounded-3 img-fluid"
+                            style="width: 200px; height: 200px; object-fit: cover; cursor: pointer;">
+                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar la portada de la película
+                        </p>
+                    </div>
+                    <!-- Hidden Input file -->
+                    <input id="posterInput" type="file" accept="image/*" class="d-none">
+
+                    <!-- Form -->
+                    <form class="d-flex flex-column gap-3 administer-form">
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Título:</label>
+                            <input type="text" class="form-control" id="titleInput" placeholder="Título de la película" value="Avatar">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" id="directorInput" placeholder="Director" value="James Cameron">
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Año de lanzamiento:</label>
+                                    <input type="number" class="form-control" id="yearInput"
+                                        placeholder="Año de lanzamiento" min="1800" max="2026" value="2009">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Duración:</label>
+                                    <input type="number" class="form-control" id="durationInput"
+                                        placeholder="Duración (minutos)" min="0" value="162">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="generosContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Género:</label>
+                            <div id="camposGeneros" class="d-flex flex-column gap-2">
+                                <div class="input-group genero-extra">
+                                    <input type="text" class="form-control" name="genres[]" placeholder="Género" value="Ciencia ficción">
+                                    <button type="button" class="btn btn-outline-primary" id="addGenero">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removeGenero">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="platformsContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Plataforma:</label>
+                            <div id="camposPlataformas" class="d-flex flex-column gap-2">
+                                <div class="input-group platform-extra">
+                                    <input type="text" class="form-control" name="platforms[]" placeholder="Plataforma" value="Disney+">
+                                    <button type="button" class="btn btn-outline-primary" id="addPlatform">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removePlatform">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Sinopsis:</label>
+                            <textarea class="form-control" id="sinopsisInput" placeholder="Sinopsis"
+                                style="height: 100px">Un explorador humano y una mujer de la raza Na'vi se unen para luchar contra los humanos que invaden su planeta.</textarea>
+                        </div>
+                        <button class="btn btn-primary w-100 py-2 fw-bold" type="submit">Modificar Película</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="principal.html" class="nav-link px-2">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Política de Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Aviso Legal</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2">Sobre Nosotros</a>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <p class="text-center">&copy; 2025 Company, Inc</p>
+            <div class="d-flex justify-content-between gap-3">
+                <a href="#">
+                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                </a>
+                <a href="#">
+                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/palomix-admin.js"></script>
+    <script src="js/genres.js"></script>
+    <script src="js/platforms.js"></script>
+</body>
+
+</html>

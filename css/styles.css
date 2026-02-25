@@ -231,13 +231,6 @@ html, body{
 }
 
 
-/* Buttons */
-.btn-primary:hover{
-    background-color: var(--bs-info);
-    border: none;
-}  
-
-
 /* Review Section */
 .card-text{
     display: -webkit-box;
@@ -264,39 +257,13 @@ html, body{
     margin-top: 10px; 
 }
 
-/*Administer Movie*/
-.container-administer{
-    display: flex; 
-    align-items : center; 
-    justify-content : center; 
-    padding: 40px;
-}
-
-
-/* Centra la imagen dentro de la card y controla su tamaño */
-.image-administer{
-    display: block;
-    margin-inline: auto;      /* centra horizontal */
-    max-width: 300px;         /* tamaño máximo de la imagen */
-    width: 90%;               /* respeta el 90% del contenedor */
-    height: auto;             /* mantiene proporción */
-}
-
-.administer-title{
-    align-items: center;
-    color: white;
-    padding: 20px;
-}
-
-.administer-movie .card{
-    padding: 40px;
-}
 .options{
     display: flex;
     justify-content: flex-start;
     gap: 10px; 
     padding: 10px;
 }
+
 .botonProfile{
     border: 1px solid black;
     background: var(--bs-secondary);
@@ -315,7 +282,7 @@ html, body{
 .itemProfile1{
     margin-bottom:1rem;
 }
-.profileInfo{
+.generic-card{
     max-width:600px;
     margin: 20px auto;
     background: var(--bs-secondary)!important;
@@ -324,7 +291,6 @@ html, body{
     border-radius:1.5rem !important;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     font-size:1.2rem;
-    
 }
 .input-perfil-personalizado{
     width:100%;
@@ -356,7 +322,6 @@ html, body{
     padding:12px 20px !important;
 }
 .btn-primary{
-    background-color:#0d6efd !important;
     border: none;
     transition: opacity 0.2s;
     padding: 12px;
@@ -364,7 +329,7 @@ html, body{
     font-weight:bold;
     transition: all 0.2s;
 }
-.pageProfile .btn-primary:hover{
+.btn-primary:hover{
     opacity:0.9;
     transform:translateY(-1px);
 }
@@ -373,14 +338,12 @@ html, body{
     background:#444a7c !important;
     transform: translateY(-2px);
 }
-.profileInfo label{
+.generic-card label{
     color: var(--bs-text-color);
     font-weight:600;
     font-size:0.7rem;
     letter-spacing:0.05rem;
     display: block;
-    
-
 }
 
 #avatarModal .modal-content{
@@ -601,4 +564,7 @@ html, body{
     display: block;
     -webkit-line-clamp: unset;
     overflow: visible;
+}
+
+.admnister-form{
 }
