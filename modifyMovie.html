@@ -17,8 +17,8 @@
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<!-- Navbar -->
 
+<!-- Navbar -->
 <body class="primary principal">
     <div class="header">
         <div class="icon">
@@ -54,91 +54,90 @@
             </div>
         </div>
         <div class="profile">
-            <a href="#">
+            <a href="perfil.html">
                 <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
             </a>
         </div>
     </div>
-    <!-- Page content -->
-    <div class="container-administer">
-        <div class="row w-100 justify-content-center">
-            <div class="col-12 col-md-8 col-lg-9 administer-movie">
-                <div class="card p-4 bg-secondary text-white rounded-">
-                    <h1 class="mb-4 text-center">Añadir/Modificar Serie</h1>
-                    <!-- Imagen clicable -->
-                    <div class="text-center mb-2">
-                        <img id="posterPreview" src="images/administradorImagenFondoPelicula.webp" alt="Seleccionar imagen" class="border" style="width: 200px; height: 200px; object-fit: cover; cursor: pointer;">
-                        <p class="mt-2 text-white-50">Pulsa la imagen para subir la portada de la serie</p>
-                    </div>
 
-                    <!-- Input file oculto -->
+    <!-- Page content -->
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h1 class="mb-3 text-center text-white fs-3 fs-md-2">Modificar Película</h1>
+
+                    <!-- Clikable Image -->
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <img id="posterPreview" src="images/peliculaAdministrador.jpg"
+                            alt="Seleccionar imagen" class="border rounded-3 img-fluid"
+                            style="width: 200px; height: 200px; object-fit: cover; cursor: pointer;">
+                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar la portada de la película
+                        </p>
+                    </div>
+                    <!-- Hidden Input file -->
                     <input id="posterInput" type="file" accept="image/*" class="d-none">
 
-                    <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="titleInput" placeholder="Título de la película">
-                            <label for="titleInput" class="text-dark">Título de la serie</label>
+                    <!-- Form -->
+                    <form class="d-flex flex-column gap-3 administer-form">
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Título:</label>
+                            <input type="text" class="form-control" id="titleInput" placeholder="Título de la película" value="Avatar">
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="directorInput" placeholder="Director">
-                            <label for="directorInput" class="text-dark administer-form">Director</label>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" id="directorInput" placeholder="Director" value="James Cameron">
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-floating">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Año de lanzamiento:</label>
                                     <input type="number" class="form-control" id="yearInput"
-                                        placeholder="Año de lanzamiento">
-                                    <label for="yearInput" class="text-dark administer-form">Año de
-                                        lanzamiento</label>
+                                        placeholder="Año de lanzamiento" min="1800" max="2026" value="2009">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="seasonInput"
-                                        placeholder="Número de temporadas">
-                                    <label for="seasonInput" class="text-dark administer-form">Número de
-                                        temporadas</label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-floating mb-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Duración:</label>
                                     <input type="number" class="form-control" id="durationInput"
-                                        placeholder="Duración (minutos)">
-                                    <label for="durationInput" class="text-dark administer-form">Duración
-                                        (minutos)</label>
+                                        placeholder="Duración (minutos)" min="0" value="162">
                                 </div>
                             </div>
                         </div>
-                        <div class="genero-field" id="generosContainer">
-                            <div class="genero-extra">
-                                <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" name="genres[]" placeholder="Género">
-                                    <label class="text-dark administer-form">Género</label>
+                        <div id="generosContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Género:</label>
+                            <div id="camposGeneros" class="d-flex flex-column gap-2">
+                                <div class="input-group genero-extra">
+                                    <input type="text" class="form-control" name="genres[]" placeholder="Género" value="Ciencia ficción">
+                                    <button type="button" class="btn btn-outline-primary" id="addGenero">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removeGenero">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="double-row">
-                                <button type="button" class="btn btn-primary mb-2 mt-1" id="addGenero">Añadir género</button>
-                                <button type="button" class="btn btn-primary mb-2 mt-1" id="removeGenero">Eliminar género</button>
-                            </div>
                         </div>
-                        <div class="platform-field" id="platformsContainer">
-                            <div class="platform-extra">
-                                <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" name="platforms[]" placeholder="Plataformas disponibles">
-                                    <label class="text-dark administer-form">Plataformas disponibles</label>
+                        <div id="platformsContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Plataforma:</label>
+                            <div id="camposPlataformas" class="d-flex flex-column gap-2">
+                                <div class="input-group platform-extra">
+                                    <input type="text" class="form-control" name="platforms[]" placeholder="Plataforma" value="Disney+">
+                                    <button type="button" class="btn btn-outline-primary" id="addPlatform">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removePlatform">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="double-row">
-                                <button type="button" class="btn btn-primary mb-2 mt-1" id="addPlatform">Añadir plataforma</button>
-                                <button type="button" class="btn btn-primary mb-2 mt-1" id="removePlatform">Eliminar plataforma</button>
-                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" id="sinopsisInput" placeholder="Sinopsis"
-                                style="height: 100px"></textarea>
-                            <label for="sinopsisInput" class="text-dark">Sinopsis</label>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Sinopsis:</label>
+                            <textarea class="form-control" id="sinopsisInput" placeholder="Sinopsis"
+                                style="height: 100px">Un explorador humano y una mujer de la raza Na'vi se unen para luchar contra los humanos que invaden su planeta.</textarea>
                         </div>
-                        <input class="btn btn-primary w-100 py-2" type="submit" value="Añadir Película">
+                        <button class="btn btn-primary w-100 py-2 fw-bold" type="submit">Modificar Película</button>
                     </form>
                 </div>
             </div>
@@ -164,7 +163,6 @@
                 <a href="#" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
-
         <div class="d-flex justify-content-between">
             <p class="text-center">&copy; 2025 Company, Inc</p>
             <div class="d-flex justify-content-between gap-3">
@@ -177,6 +175,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="js/palomix-admin.js"></script>
     <script src="js/genres.js"></script>
     <script src="js/platforms.js"></script>
