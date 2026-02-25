@@ -1,87 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Palomix" />
-        <meta name="author" content="Grupo 6" />
-        <title>Palomix - Peliculas</title>
-        <!-- Libraries-->
-         <!--Bootstrap Librarie-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-        <!-- Our CSS -->
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body class="primary principal">
-        <div class="header">
-            <div class="icon">
-                <a class="navbar-brand" href="#">
-                    <img src="images/logo.png" width="100" height="100">
-                </a>
-            </div> 
-            <div class="menus">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="principal.html">Peliculas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="series.html">Series</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Listas</a>
-                                </li>
-                            </ul>
-                        </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="primary principal">
+    <div class="header">
+        <div class="icon">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">Peliculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Listas</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </div>
-            <div class="search">
-                 <div class="input-group mb-3">
-                    <button class="btn btn-outline-primary" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
                 </div>
-            </div>
-            <div class="profile">
-                <a href="perfil.html">
-                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
-                </a>
+            </nav>
+        </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
             </div>
         </div>
-        <div class="content">
-                <div class="card-review">
-                    <h2 class="fw-bold text-center mb-4">Avatar</h2>
-                    <div class="photo-evaluate">
-                        <img src="images/carteleraEjemploAvatar.webp" alt="Poster" onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
-                    </div>
+        <div class="profile dropdown">
+            <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                <li><a class="dropdown-item" href="administrador.html">Administración</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="card-review">
+            <h2 class="fw-bold text-center mb-4">Avatar</h2>
+            <div class="photo-evaluate">
+                <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
+                    onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
+            </div>
 
-                <form class="form-review">
-                    <div class="d-flex flex-column gap-2">
-                        <label class="fw-bold text-white">Valoración:</label>
-                            <div class="d-flex" id="stars">
-                                <i class="bi bi-star star" data-value="1"></i>
-                                <i class="bi bi-star star" data-value="2"></i>
-                                <i class="bi bi-star star" data-value="3"></i>
-                                <i class="bi bi-star star" data-value="4"></i>                                
-                                <i class="bi bi-star star" data-value="5"></i>
-                                <input type="hidden" id="rating" name="rating">
-                            </div>
+            <form class="form-review">
+                <div class="d-flex flex-column gap-2">
+                    <label class="fw-bold text-white">Valoración:</label>
+                    <div class="d-flex" id="stars">
+                        <i class="bi bi-star star" data-value="1"></i>
+                        <i class="bi bi-star star" data-value="2"></i>
+                        <i class="bi bi-star star" data-value="3"></i>
+                        <i class="bi bi-star star" data-value="4"></i>
+                        <i class="bi bi-star star" data-value="5"></i>
+                        <input type="hidden" id="rating" name="rating">
                     </div>
+                </div>
 
-                    <div class="d-flex flex-column gap-2">
-                        <label class="fw-bold text-white">Reseña:</label>
-                        <textarea placeholder="Escribe tu reseña aquí..."></textarea>
-                    </div>
+                <div class="d-flex flex-column gap-2">
+                    <label class="fw-bold text-white">Reseña:</label>
+                    <textarea placeholder="Escribe tu reseña aquí..."></textarea>
+                </div>
 
-                    <button type="submit" class="btn-save">Guardar Reseña</button>
-                </form>
+                <button type="submit" class="btn-save">Guardar Reseña</button>
+            </form>
         </div>
         <footer class="footer py-3">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -102,7 +115,7 @@
                 </li>
             </ul>
 
-            
+
             <div class="d-flex justify-content-between">
                 <p class="text-center">&copy; 2025 Company, Inc</p>
                 <div class="d-flex justify-content-between gap-3">
@@ -116,5 +129,6 @@
             </div>
         </footer>
         <script src="js/stars.js"></script>
-    </body>
+</body>
+
 </html>

@@ -53,10 +53,19 @@
                 <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
             </div>
         </div>
-        <div class="profile">
-            <a href="perfil.html">
+        <div class="profile dropdown">
+            <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
-            </a>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                <li><a class="dropdown-item" href="administrador.html">Administración</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar Sesión</a></li>
+            </ul>
         </div>
     </div>
 
