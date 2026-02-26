@@ -232,15 +232,7 @@ html, body{
 
 
 /* Buttons */
-.btn-primary{
-    background-color: var(--bs-secondary);
-    border: none;
-}
 
-.btn-primary:hover{
-    background-color: var(--bs-info);
-    border: none;
-}  
 
 
 /* Review Section */
@@ -360,7 +352,7 @@ html, body{
     transition:all 0.2s ease;
     padding:12px 20px !important;
 }
-.pageProfile .btn-primary{
+.btn-primary{
     background-color:#0d6efd !important;
     border: none;
     transition: opacity 0.2s;
@@ -369,7 +361,7 @@ html, body{
     font-weight:bold;
     transition: all 0.2s;
 }
-.pageProfile .btn-primary:hover{
+.btn-primary:hover{
     opacity:0.9;
     transform:translateY(-1px);
 }
@@ -542,6 +534,11 @@ html, body{
 }
 .star.activa {
     color: gold;
+}
+.star.parcial {
+    background: linear-gradient(to right, gold 30%, gray 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .form-review textarea {
