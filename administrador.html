@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body class="primary principal" id="page-peliculas">
+    <div class="header">
+        <div class="icon">
+            <a class="navbar-brand" href="principal.html">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">Peliculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="listas.html">Listas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="button" id="searchBtn">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" id="searchInput">
+            </div>
+        </div>
+        <div class="profile dropdown">
+            <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="options">
+            <a href="perfil.html" class="botonProfile text-decoration-none">
+                Perfil
+            </a>
+            <div class="botonProfile">
+                Mis Listas
+            </div>
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-8 ">
+                <div class="table-responsive">
+                    <table class="table table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:27%;">
+                            <col style="width:39%;">
+                            <col style="width:10%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+
+                            <caption class="captionAdminister">Usuarios del sistema</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Cumpleaños</th>
+                                <th scope="col" class="text-center align-middle">Editar</th>
+                                <th scope="col" class="text-center align-middle">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Usuario1</td>
+                                <td>Correo1</td>
+                                <td>Nacimiento1</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Usuario2</td>
+                                <td>Correo2</td>
+                                <td>Nacimiento2</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Usuario3</td>
+                                <td>Correo3</td>
+                                <td>Nacimiento3</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger">
+
+                                        </i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Usuario4</td>
+                                <td>Correo4</td>
+                                <td>Nacimiento4</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </colgroup>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row w-100 justify-content-center">
+            <div class="col-8 ">
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:35%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:25%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+
+                            <caption class="captionAdminister">Peliculas</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" class="text-center">Duración</th>
+                                <th scope="col" class="text-center">Media</th>
+                                <th scope="col">Plataformas</th>
+
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Como aprendi a dejar de preocuparme y a amar la bomba y la larguisima parodia</td>
+                                <td class="text-center">130min</td>
+                                <td class="text-center">4,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>La ciudad de las estrellas: LA La Land</td>
+                                <td class="text-center">90min</td>
+                                <td class="text-center">2,5</td>
+                                <td>Netflix/Amazon Prime</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Piratas del Caribe</td>
+                                <td class="text-center">150min</td>
+                                <td class="text-center">3,2</td>
+                                <td>Disney+/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Star Wars: Amenaza fantasma</td>
+                                <td class="text-center">110min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                        </colgroup>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-8 ">
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:35%;">
+                            <col style="width:5%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:20%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+
+                            <caption class="captionAdminister">Series</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" class="text-center">Temporada</th>
+                                <th scope="col" class="text-center">Duración</th>
+                                <th scope="col" class="text-center">Media</th>
+                                <th scope="col">Plataformas</th>
+
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Como conoci a vuestra madre</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">300min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></button>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Friends</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">400min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Big ban theory</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">500min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Breaking Bad</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">450min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                        </colgroup>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-8 ">
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:34%;">
+                            <col style="width:8%;">
+                            <col style="width:34%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+
+                            <caption class="captionAdminister">Listas</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">N.Peliculas</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Accion</td>
+                                <td class="text-center">7</td>
+                                <td>Usuario1</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Aventura</td>
+                                <td class="text-center">546</td>
+                                <td>Usuario2</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Romántica</td>
+                                <td class="text-center">2</td>
+                                <td>Usuario3</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Preferidas</td>
+                                <td class="text-center">0583</td>
+                                <td>Usuario4</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                        </colgroup>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer class="footer py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="principal.html" class="nav-link px-2">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a href="politicasCookies.html" class="nav-link px-2">Política de Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a href="avisoLegal.html" class="nav-link px-2">Aviso Legal</a>
+            </li>
+            <li class="nav-item">
+                <a href="preguntasFrecuentes.html" class="nav-link px-2">Preguntas Frecuentes</a>
+            </li>
+            <li class="nav-item">
+                <a href="nosotros.html" class="nav-link px-2">Sobre Nosotros</a>
+            </li>
+        </ul>
+
+
+        <div class="d-flex justify-content-between">
+            <p class="text-center">&copy; 2025 Company, Inc</p>
+            <div class="d-flex justify-content-between gap-3">
+                <a href="#">
+                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                </a>
+                <a href="#">
+                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- Our JS -->
+    <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
+    <script src="js/loadMoviesSeriesLists.js"></script>
+    <script>src = "js/searchFunc.js"</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

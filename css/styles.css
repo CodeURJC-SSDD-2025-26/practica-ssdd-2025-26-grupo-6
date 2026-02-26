@@ -387,6 +387,9 @@ html, body{
     
 
 }
+.captionAdminister{
+    color:var(--bs-text-color);
+}
 
 #avatarModal .modal-content{
     background-color: var(--bs-secondary);
