@@ -10,7 +10,6 @@
 /* BODY */
 html, body{
     margin: 0;
-    height: 100%;
     overflow-x: hidden;
 }
 
@@ -33,32 +32,14 @@ html, body{
 /* HEADER */
 .header {
     grid-area: header;
-    display: grid;
-    grid-template-columns: 10% 50% 30% 10%;
-    grid-template-areas: "icon menus search profile";
-    align-items:baseline;
     background: var(--bs-secondary);
-    padding: 10px;
-    
 }
 
-.icon { 
-    grid-area: icon;
-    padding-left: 30px; 
-}
-
-.hola{
-    background-color: red;
-}
-
- /* menus */
-.menus {
-    grid-area: menus;
-}
-
-.menus .nav {
+.nav{
     display: flex;
-    gap: 20px;
+    gap: 4vw;
+    padding-left: 0;
+    justify-content: flex-start;
 }
 
 .nav-link {
@@ -87,8 +68,8 @@ html, body{
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: auto; 
-    width: 98%;
     gap: 15px;
+    width: 95vw;
     padding: 20px;
     background-color: var(--bs-secondary);
     border-radius: 10px;
@@ -138,8 +119,6 @@ html, body{
     text-align: center;
 }
 
-<<<<<<< HEAD
-=======
 /* Movie Details */
 .poster {
     width: 100%;
@@ -242,7 +221,6 @@ html, body{
 
 
 
->>>>>>> modifydetalles
 /* Review Section */
 .card-text{
     display: -webkit-box;
@@ -334,10 +312,7 @@ html, body{
     padding:12px 20px !important;
 }
 .btn-primary{
-<<<<<<< HEAD
-=======
     background-color:#0d6efd !important;
->>>>>>> modifydetalles
     border: none;
     padding: 12px;
     width:100%;
