@@ -87,8 +87,9 @@
                             <col style="width:10%;">
                             <col style="width:8%;">
                             <col style="width:8%;">
+                        </colgroup>
 
-                            <caption class="captionAdminister">Usuarios del sistema</caption>
+                        <caption class="captionAdminister">Usuarios del sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -160,12 +161,19 @@
                                 </td>
                             </tr>
                         </tbody>
-                        </colgroup>
+
                     </table>
 
                 </div>
             </div>
 
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalUsuarios">
+                    Mas usuarios</button>
+            </div>
         </div>
 
 
@@ -182,8 +190,8 @@
                             <col style="width:25%;">
                             <col style="width:8%;">
                             <col style="width:8%;">
-
-                            <caption class="captionAdminister">Peliculas</caption>
+                        </colgroup>
+                        <caption class="captionAdminister">Peliculas</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -260,11 +268,18 @@
 
 
                         </tbody>
-                        </colgroup>
+
 
                     </table>
 
                 </div>
+            </div>
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalPeliculas">
+                    Mas Peliculas</button>
             </div>
         </div>
         <div class="row w-100 justify-content-center">
@@ -280,8 +295,9 @@
                             <col style="width:20%;">
                             <col style="width:8%;">
                             <col style="width:8%;">
+                        </colgroup>
 
-                            <caption class="captionAdminister">Series</caption>
+                        <caption class="captionAdminister">Series</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -360,16 +376,20 @@
                                             class="bi bi-trash3 fs-5 text-danger"></i></button>
                                 </td>
                             </tr>
-
-
                         </tbody>
-                        </colgroup>
-
                     </table>
-
                 </div>
             </div>
         </div>
+
+        <div class="row w-100 justify-content-center">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalSeries">
+                    Mas Series</button>
+            </div>
+        </div>
+
         <div class="row w-100 justify-content-center">
             <div class="col-8 ">
                 <div class="table-responsive">
@@ -381,8 +401,9 @@
                             <col style="width:34%;">
                             <col style="width:8%;">
                             <col style="width:8%;">
+                        </colgroup>
 
-                            <caption class="captionAdminister">Listas</caption>
+                        <caption class="captionAdminister">Listas</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -453,13 +474,19 @@
 
 
                         </tbody>
-                        </colgroup>
 
                     </table>
 
                 </div>
             </div>
 
+        </div>
+    </div>
+    <div class="row w-100 justify-content-center">
+        <div class="col-3">
+            <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                data-bs-target="#modalListas">
+                Mas Listas</button>
         </div>
     </div>
     <footer class="footer py-3">
@@ -494,6 +521,514 @@
             </div>
         </div>
     </footer>
+
+    <div class="modal fade" id="modalUsuarios" tabindex="-1" aria-labelledby="UsuariosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="UsuariosTitleLabel">Todos los usuarios</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100"
+                                style="table-layout:fixed;">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:27%;">
+                                    <col style="width:39%;">
+                                    <col style="width:10%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Usuarios del sistema</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Cumpleaños</th>
+                                        <th scope="col" class="text-center align-middle">Editar</th>
+                                        <th scope="col" class="text-center align-middle">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Usuario1</td>
+                                        <td>Correo@1</td>
+                                        <td>Nacimiento1</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Usuario2</td>
+                                        <td>Correo@2</td>
+                                        <td>Nacimiento2</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Usuario3</td>
+                                        <td>Correo@3</td>
+                                        <td>Nacimiento3</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger">
+
+                                                </i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Usuario4</td>
+                                        <td>Correo@4</td>
+                                        <td>Nacimiento4</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">5</th>
+                                        <td>Usuario5</td>
+                                        <td>Correo@5</td>
+                                        <td>Nacimiento5</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">6</th>
+                                        <td>Usuario6</td>
+                                        <td>Correo@6</td>
+                                        <td>Nacimiento6</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">7</th>
+                                        <td>Usuario7</td>
+                                        <td>Correo@7</td>
+                                        <td>Nacimiento7</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <div class="row w-100  justify-content-end align-items-center">
+                        <div class="col-1 text-center">
+                            <button type="button" class="btn btn-secondary w-100"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-2 text-center">
+                            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                                Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalPeliculas" tabindex="-1" aria-labelledby="PeliculasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PeliculasTitleLabel">Todas las Peliculas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100"
+                                style="table-layout:fixed;">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:35%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:25%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Peliculas</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col" class="text-center">Duración</th>
+                                        <th scope="col" class="text-center">Media</th>
+                                        <th scope="col">Plataformas</th>
+
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Como aprendi a dejar de preocuparme y a amar la bomba y la larguisima
+                                            parodia</td>
+                                        <td class="text-center">130min</td>
+                                        <td class="text-center">4,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>La ciudad de las estrellas: LA La Land</td>
+                                        <td class="text-center">90min</td>
+                                        <td class="text-center">2,5</td>
+                                        <td>Netflix/Amazon Prime</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Piratas del Caribe</td>
+                                        <td class="text-center">150min</td>
+                                        <td class="text-center">3,2</td>
+                                        <td>Disney+/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Star Wars: Amenaza fantasma</td>
+                                        <td class="text-center">110min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row w-100  justify-content-end align-items-center">
+                        <div class="col-1 text-center">
+                            <button type="button" class="btn btn-secondary w-100"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-2 text-center">
+                            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                                Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalSeries" tabindex="-1" aria-labelledby="SeriesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todos las series</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100"
+                                style="table-layout:fixed;">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:35%;">
+                                    <col style="width:5%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:20%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Series</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col" class="text-center">Temporada</th>
+                                        <th scope="col" class="text-center">Duración</th>
+                                        <th scope="col" class="text-center">Media</th>
+                                        <th scope="col">Plataformas</th>
+
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Como conoci a vuestra madre</td>
+                                        <td class="text-center">1</td>
+                                        <td class="text-center">300min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></button>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Friends</td>
+                                        <td class="text-center">2</td>
+                                        <td class="text-center">400min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Big ban theory</td>
+                                        <td class="text-center">3</td>
+                                        <td class="text-center">500min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Breaking Bad</td>
+                                        <td class="text-center">4</td>
+                                        <td class="text-center">450min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row w-100  justify-content-end align-items-center">
+                        <div class="col-1 text-center">
+                            <button type="button" class="btn btn-secondary w-100"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-2 text-center">
+                            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                                Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalListas" tabindex="-1" aria-labelledby="ListasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ListasTitleLabel">Todos las Listas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100"
+                                style="table-layout:fixed;">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:34%;">
+                                    <col style="width:8%;">
+                                    <col style="width:34%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+
+                                    <caption class="captionAdminister">Listas</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">N.Peliculas</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Accion</td>
+                                        <td class="text-center">7</td>
+                                        <td>Usuario1</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Aventura</td>
+                                        <td class="text-center">546</td>
+                                        <td>Usuario2</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Romántica</td>
+                                        <td class="text-center">2</td>
+                                        <td>Usuario3</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Preferidas</td>
+                                        <td class="text-center">0583</td>
+                                        <td>Usuario4</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                                </colgroup>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row w-100  justify-content-end align-items-center">
+                        <div class="col-1 text-center">
+                            <button type="button" class="btn btn-secondary w-100"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-2 text-center">
+                            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                                Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Our JS -->
     <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
     <script src="js/loadMoviesSeriesLists.js"></script>

@@ -46,6 +46,11 @@ html, body{
     grid-area: icon;
     padding-left: 30px; 
 }
+
+.hola{
+    background-color: red;
+}
+
  /* menus */
 .menus {
     grid-area: menus;
@@ -74,8 +79,8 @@ html, body{
     grid-area: content; 
     padding: 20px;
     color: var(--bs-text-color);
-    width: 100vw;
 }
+
  /* Films container*/
 .films {
     display: flex;
@@ -232,15 +237,7 @@ html, body{
 
 
 /* Buttons */
-.btn-primary{
-    background-color: var(--bs-secondary);
-    border: none;
-}
 
-.btn-primary:hover{
-    background-color: var(--bs-info);
-    border: none;
-}  
 
 
 /* Review Section */
@@ -269,39 +266,13 @@ html, body{
     margin-top: 10px; 
 }
 
-/*Administer Movie*/
-.container-administer{
-    display: flex; 
-    align-items : center; 
-    justify-content : center; 
-    padding: 40px;
-}
-
-
-/* Centra la imagen dentro de la card y controla su tamaño */
-.image-administer{
-    display: block;
-    margin-inline: auto;      /* centra horizontal */
-    max-width: 300px;         /* tamaño máximo de la imagen */
-    width: 90%;               /* respeta el 90% del contenedor */
-    height: auto;             /* mantiene proporción */
-}
-
-.administer-title{
-    align-items: center;
-    color: white;
-    padding: 20px;
-}
-
-.administer-movie .card{
-    padding: 40px;
-}
 .options{
     display: flex;
     justify-content: flex-start;
     gap: 10px; 
     padding: 10px;
 }
+
 .botonProfile{
     border: 1px solid black;
     background: var(--bs-secondary);
@@ -320,7 +291,7 @@ html, body{
 .itemProfile1{
     margin-bottom:1rem;
 }
-.profileInfo{
+.generic-card{
     max-width:600px;
     margin: 20px auto;
     background: var(--bs-secondary)!important;
@@ -329,7 +300,6 @@ html, body{
     border-radius:1.5rem !important;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     font-size:1.2rem;
-    
 }
 .input-perfil-personalizado{
     width:100%;
@@ -360,16 +330,15 @@ html, body{
     transition:all 0.2s ease;
     padding:12px 20px !important;
 }
-.pageProfile .btn-primary{
+.btn-primary{
     background-color:#0d6efd !important;
     border: none;
-    transition: opacity 0.2s;
     padding: 12px;
     width:100%;
     font-weight:bold;
     transition: all 0.2s;
 }
-.pageProfile .btn-primary:hover{
+.btn-primary:hover{
     opacity:0.9;
     transform:translateY(-1px);
 }
@@ -378,17 +347,15 @@ html, body{
     background:#444a7c !important;
     transform: translateY(-2px);
 }
-.profileInfo label{
+.captionAdminister{
+    color: var(--bs-text-color);
+}
+.generic-card label{
     color: var(--bs-text-color);
     font-weight:600;
     font-size:0.7rem;
     letter-spacing:0.05rem;
     display: block;
-    
-
-}
-.captionAdminister{
-    color:var(--bs-text-color);
 }
 
 #avatarModal .modal-content{
@@ -434,10 +401,13 @@ html, body{
 
 /* LOGIN */
 .container-login{
-    display:flexbox; 
-    align-items : center; 
-    justify-content : center; 
-    min-width: 100vh;
+    max-width:50vw;
+    background: var(--bs-secondary)!important;
+    padding: 5vh;
+    border: 1px solid rgba(255,255,255,0.1)!important;
+    border-radius:1.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    font-size:1.2rem;
 }
 
 
@@ -539,12 +509,17 @@ html, body{
 }
 
 .star {
-    font-size: 2rem;
+    font-size: 1.7rem;
     cursor: pointer;
     color: gray;
 }
 .star.activa {
     color: gold;
+}
+.star.parcial {
+    background: linear-gradient(to right, gold 30%, gray 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .form-review textarea {
@@ -606,4 +581,14 @@ html, body{
     display: block;
     -webkit-line-clamp: unset;
     overflow: visible;
+}
+
+
+/* DO NOT DELETE*/
+.poster {
+    width: 70%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
