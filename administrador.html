@@ -14,6 +14,9 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!--Chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
@@ -67,7 +70,7 @@
             </ul>
         </div>
     </div>
-    <div class="content">
+    <div class="content-fluid">
         <div class="options">
             <a href="perfil.html" class="botonProfile text-decoration-none">
                 Perfil
@@ -161,12 +164,9 @@
                                 </td>
                             </tr>
                         </tbody>
-
                     </table>
-
                 </div>
             </div>
-
         </div>
         <div class="row w-100 justify-content-center">
             <div class="col-3">
@@ -283,7 +283,7 @@
             </div>
         </div>
         <div class="row w-100 justify-content-center">
-            <div class="col-8 ">
+            <div class="col-10 ">
                 <div class="table-responsive">
                     <table class="table table-striped caption-top table-bordered">
                         <colgroup>
@@ -489,6 +489,18 @@
                 Mas Listas</button>
         </div>
     </div>
+    <div class="graficos">
+        <canvas  id="myPie"></canvas>
+    </div>
+
+    <div class="graficos">
+        <canvas  id="myReviewsBarFilm"></canvas>
+    </div>
+
+    <div class="graficos">
+        <canvas  id="myReviewsBarUser"></canvas>
+    </div>
+
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
@@ -822,7 +834,7 @@
                                     <tr>
                                         <th scope="col" class="text-center">ID</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col" class="text-center">Temporada</th>
+                                        <th scope="col" class="text-center">Temp</th>
                                         <th scope="col" class="text-center">Duración</th>
                                         <th scope="col" class="text-center">Media</th>
                                         <th scope="col">Plataformas</th>
@@ -1033,6 +1045,9 @@
     <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
     <script src="js/loadMoviesSeriesLists.js"></script>
     <script>src = "js/searchFunc.js"</script>
+    <script src="js/graficoCircular.js" defer></script>
+    <script src="js/graficoBarrasValoracionesUsuario.js" defer></script>
+    <script src="js/graficoBarrasValoracionesPeliculas.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

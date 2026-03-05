@@ -377,6 +377,9 @@ html, body{
     transform:scale(1.1);
     border-color: var(--bs-info);
 }
+.table-responsable {
+    -webkit-overflow-scrolling: touch;
+}
 .active-avatar{
     border-color: var(--bs-info);
 }
@@ -548,6 +551,11 @@ html, body{
 
 .btn-save:hover {
     background: #4c5290;
+}
+
+.graficos{
+    width:500px; 
+    margin: auto;
 }
 
 /* FOOTERS PAGES */
