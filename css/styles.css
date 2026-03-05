@@ -12,11 +12,8 @@ html, body{
     margin: 0;
     overflow-x: hidden;
 }
+.primary{ background-color: var(--bs-primary); }
 
-
-.primary{
-    background-color: var(--bs-primary);
-}
 
 /* GRID PRINCIPAL */
 .principal{
@@ -54,6 +51,11 @@ html, body{
     padding: 20px;
     color: var(--bs-text-color);
 }
+
+
+/* LEGAL ADVISE */
+.legal-info span{ text-decoration: underline; }
+/*HASTA AQUÍ NO BORRAR*/
 
  /* Films container*/
 .films {
@@ -521,27 +523,7 @@ html, body{
     background: #4c5290;
 }
 
-/* FOOTERS PAGES */
-.container-pag{
-    margin : auto ;
-    padding: 5vw;
-    padding-top :2vw ;
-
-    color : var(--bs-text-color);
-}
-
-.container-pag .card{
-    padding : 1vw;
-    background-color: var(--bs-info);
-    color: var(--bs-text-color);
-}
-
-.container-pag .card-title{
-    padding-left: 1vw;
-}
-
 /* PAGE LIST REVIEWS */
-
 .card-title {
   white-space: nowrap;
   overflow: hidden;
