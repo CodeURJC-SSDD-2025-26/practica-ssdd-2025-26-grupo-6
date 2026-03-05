@@ -117,14 +117,6 @@ html, body{
 }
 
 /* Movie Details */
-.poster {
-    width: 100%;
-    aspect-ratio: 2 / 3; 
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-}
-
 .movie-title {
     font-weight: 800;
     font-size: clamp(26px, 3vw, 34px);
@@ -206,17 +198,6 @@ html, body{
     max-width: 64ch;
     
 }
-
-@media (max-width: 767px) {
-    .poster {
-        width: 140px;
-    }
-}
-
-
-/* Buttons */
-
-
 
 /* Review Section */
 .card-text{
@@ -536,14 +517,4 @@ html, body{
     display: block;
     -webkit-line-clamp: unset;
     overflow: visible;
-}
-
-
-/* DO NOT DELETE*/
-.poster {
-    width: 70%;
-    height: auto;
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }

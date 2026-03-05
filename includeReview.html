@@ -19,6 +19,7 @@
 </head>
 
 <body class="primary principal">
+    <!-- Navbar -->
     <div class="header">
         <div class="row align-items-baseline px-5">
             <div class="col-2"><a class="navbar-brand" href="principal.html"><img src="images/logo.png" width="100"
@@ -71,8 +72,9 @@
                 </ul>
             </div>
         </div>
-
     </div>
+
+    <!-- Page Content -->
     <div class="content">
         <div class="card p-4 generic-card rounded-4 border-0">
             <h2 class="h3 mb-4 text-center text-white">Avatar</h2>
@@ -81,6 +83,7 @@
                     onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
             </div>
             <form class="form-review">
+                <!-- Stars -->
                 <div class="d-flex flex-column gap-1">
                     <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
                     <div class="d-flex mt-0" id="stars">
@@ -92,8 +95,7 @@
                         <input type="hidden" id="rating" name="rating">
                     </div>
                 </div>
-
-
+                <!-- Review -->
                 <div class="d-flex flex-column gap-2">
                     <label class="fw-bold text-white fs-6">Reseña:</label>
                     <textarea class="form-control bg-white text-dark"
@@ -103,26 +105,26 @@
             </form>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
                 <a href="principal.html" class="nav-link px-2">Inicio</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Política de Cookies</a>
+                <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Aviso Legal</a>
+                <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">FAQs</a>
+                <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Sobre Nosotros</a>
+                <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
-
-
         <div class="d-flex justify-content-between">
             <p class="text-center">&copy; 2025 Company, Inc</p>
             <div class="d-flex justify-content-between gap-3">
@@ -135,6 +137,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="js/searchFunc.js"></script>
     <script src="js/stars.js"></script>
 </body>
