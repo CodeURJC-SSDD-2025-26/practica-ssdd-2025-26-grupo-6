@@ -22,56 +22,74 @@
 
 <body class="primary principal">
     <div class="header">
-        <div class="row align-items-baseline px-5">
-            <div class="col-2"><a class="navbar-brand" href="principal.html"><img src="images/logo.png" width="100"
-                        height="100"></a></div>
-            <div class="col-5">
-                <nav class="navbar navbar-expand">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse " id="navbarNavDropdown">
-                            <ul class="nav nav-pills ">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="principal.html">
-                                        <h5>Peliculas</h5>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="series.html">
-                                        <h5>Series</h5>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="listas.html">
-                                        <h5>Listas</h5>
-                                    </a>
-                                </li>
-                            </ul>
+        <div class="row align-items-center px-5">
+            <div class="col-auto d-none d-lg-block">
+                <a class="navbar-brand" href="principal.html">
+                    <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
+                </a>
+            </div>
+
+            <nav class="col navbar navbar-expand-lg">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+
+                    <a class="navbar-brand d-lg-none" href="principal.html">
+                        <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
+                    </a>
+
+                    <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-list fs-1" ></i> 
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">
+                                    <h5>Peliculas</h5>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">
+                                    <h5>Series</h5>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="listas.html">
+                                    <h5>Listas</h5>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="d-flex flex-column flex-lg-row gap-3 align-items-center">
+                            <div class="search">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-primary" type="button" id="searchBtn">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                    <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
+                                </div>
+                            </div>
+
+                            <div class="col-1 profile dropdown text-end">
+                                <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar
+                                            Sesión</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </nav>
-            </div>
-            <div class="col-4 search">
-                <div class="input-group mb-3">
-                    <button class="btn btn-outline-primary" type="button" id="searchBtn">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" id="searchInput">
                 </div>
-            </div>
-            <div class="col-1 profile dropdown text-end">
-                <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
-                    <li><a class="dropdown-item" href="administrador.html">Administración</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar Sesión</a></li>
-                </ul>
-            </div>
+            </nav>
         </div>
 
     </div>

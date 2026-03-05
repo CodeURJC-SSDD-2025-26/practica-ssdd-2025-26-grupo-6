@@ -27,16 +27,16 @@ const series = [
 ];
 
 const listas = [
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' }
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' }
 ];
 
 

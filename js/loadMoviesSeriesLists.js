@@ -19,19 +19,16 @@ function cargarContenido(datos) {
 }
 
 //depends on the page, load the content of peliculas, series or listas
-document.addEventListener('DOMContentLoaded', () => {
+if (document.getElementById('page-peliculas')) {
+    cargarContenido(peliculas);
+}
 
-    if (document.getElementById('page-peliculas')) {
-        cargarContenido(peliculas);
-    }
+else if (document.getElementById('page-series')) {
+    console.log("Cargando Series...");
+    cargarContenido(series);
+}
 
-    else if (document.getElementById('page-series')) {
-        console.log("Cargando Series...");
-        cargarContenido(series);
-    }
-
-    else if (document.getElementById('page-listas')) {
-        console.log("Cargando Listas...");
-        cargarContenido(listas);
-    }
-});
+else if (document.getElementById('page-listas')) {
+    console.log("Cargando Listas...");
+    cargarContenido(listas);
+}

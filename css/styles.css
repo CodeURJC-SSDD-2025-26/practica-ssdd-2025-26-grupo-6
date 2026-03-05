@@ -35,13 +35,6 @@ html, body{
     background: var(--bs-secondary);
 }
 
-.nav{
-    display: flex;
-    gap: 4vw;
-    padding-left: 0;
-    justify-content: flex-start;
-}
-
 .nav-link {
     color: var(--bs-text-color) !important;
 }
