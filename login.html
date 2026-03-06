@@ -8,33 +8,37 @@
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
     <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
-
-
 </head>
 
 <body class="primary">
+    <!-- Page Content -->
     <div class="row p-5">
+        <!-- Logo -->
         <div class="col-md-6 text-center">
             <img class="mb-2 img-fluid" src="images/logo.png" alt="Logo Palomix" width="80%" height="90%" />
         </div>
+
+        <!-- Form -->
         <div class="col mt-5">
             <div class="container-login">
                 <h1 class="mb-3 text-center text-light">Iniciar Sesión</h1>
                 <form>
-
                     <div class="form-floating mb-3" id="fEmail">
                         <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
                         <label for="floatingInput" class="text-dark">Correo Electrónico</label>
                     </div>
-
                     <div class="form-floating mb-3" id="fPass">
                         <input type="password" class="form-control" id="password" placeholder="Password" required>
                         <label for="floatingPassword" class="text-dark">Contraseña</label>
                     </div>
-
                     <div class="container-sm">
                         <div class="row my-3">
                             <div class="col">
@@ -69,6 +73,7 @@
             </div>
         </div>
 
+        <!-- Modal -->
         <div class="modal" tabindex="-1" id="modalRecuperar">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -91,6 +96,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
@@ -109,8 +116,6 @@
                 <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
-
-
         <div class="d-flex justify-content-between">
             <p class="text-center">&copy; 2025 Company, Inc</p>
             <div class="d-flex justify-content-between gap-3">
@@ -123,6 +128,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="js/searchFunc.js"></script>
     <script src="js/signUpLogin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

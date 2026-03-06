@@ -19,6 +19,7 @@
 </head>
 
 <body class="primary principal" id="page-peliculas">
+    <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
             <div class="col-auto d-none d-lg-block">
@@ -26,22 +27,17 @@
                     <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
                 </a>
             </div>
-
             <nav class="col navbar navbar-expand-lg">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
-
                     <a class="navbar-brand d-lg-none" href="principal.html">
                         <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
                     </a>
-
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-list fs-1" ></i> 
                     </button>
-
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
@@ -59,7 +55,6 @@
                                 </a>
                             </li>
                         </ul>
-
                         <div class="d-flex flex-column flex-lg-row gap-3 align-items-center">
                             <div class="search">
                                 <div class="input-group">
@@ -69,7 +64,6 @@
                                     <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
                                 </div>
                             </div>
-
                             <div class="col-1 profile dropdown text-end">
                                 <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -89,8 +83,9 @@
                 </div>
             </nav>
         </div>
-
     </div>
+
+    <!-- Page Content -->
     <div class="content">
         <!-- The amount of section can be modified by changing names in "h5", adding o eliminating sections-->
         <div style="margin-top: 30px;" id="peliculasNuevas"> <!-- First Section -->
@@ -104,19 +99,17 @@
             <!-- Section Title-->
             <h5>Peliculas de Acción</h5>
             <!-- Films section-->
-            <div class="films">
-
-            </div>
+            <div class="films"></div>
         </div>
         <div style="margin-top: 30px;" id="peliculasAventura"> <!-- Third Section -->
             <!-- Section Title-->
             <h5>Peliculas de Aventura</h5>
             <!-- Films section-->
-            <div class="films">
-
-            </div>
+            <div class="films"></div>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
@@ -135,7 +128,6 @@
                 <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
-
         <div class="d-flex justify-content-between">
             <p class="text-center">&copy; 2025 Company, Inc</p>
             <div class="d-flex justify-content-between gap-3">
@@ -148,9 +140,9 @@
             </div>
         </div>
     </footer>
-    <!-- Our JS -->
-    <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
-    <script src="js/searchFunc.js"></script>
+    
+    <!-- Scripts -->
+    <script src="js/searchFunc.js"></script> 
     <script src="js/loadMoviesSeriesLists.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
