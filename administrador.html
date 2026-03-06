@@ -79,7 +79,7 @@
                 Mis Listas
             </div>
         </div>
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center">
             <div class="col-8 ">
                 <div class="table-responsive">
                     <table class="table table table-striped caption-top table-bordered">
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center mb-5">
             <div class="col-3">
                 <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
                     data-bs-target="#modalUsuarios">
@@ -176,9 +176,7 @@
             </div>
         </div>
 
-
-
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center">
             <div class="col-8 ">
                 <div class="table-responsive">
                     <table class="table table-striped caption-top table-bordered">
@@ -191,7 +189,7 @@
                             <col style="width:8%;">
                             <col style="width:8%;">
                         </colgroup>
-                        <caption class="captionAdminister">Peliculas</caption>
+                        <caption class="captionAdminister">Peliculas del sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -275,7 +273,7 @@
                 </div>
             </div>
         </div>
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center mb-5">
             <div class="col-3">
                 <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
                     data-bs-target="#modalPeliculas">
@@ -297,7 +295,7 @@
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="captionAdminister">Series</caption>
+                        <caption class="captionAdminister">Series del sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -382,7 +380,7 @@
             </div>
         </div>
 
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center mb-5">
             <div class="col-3">
                 <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
                     data-bs-target="#modalSeries">
@@ -390,7 +388,7 @@
             </div>
         </div>
 
-        <div class="row w-100 justify-content-center">
+        <div class="row mx-0 justify-content-center">
             <div class="col-8 ">
                 <div class="table-responsive">
                     <table class="table table-striped caption-top table-bordered">
@@ -403,7 +401,7 @@
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="captionAdminister">Listas</caption>
+                        <caption class="captionAdminister">Listas del sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -482,14 +480,14 @@
 
         </div>
     </div>
-    <div class="row w-100 justify-content-center">
+    <div class="row mx-0 justify-content-center mb-5">
         <div class="col-3">
             <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
                 data-bs-target="#modalListas">
                 Mas Listas</button>
         </div>
     </div>
-    <div class="graficos">
+    <div class="graficos mb-5">
         <canvas id="myPie"></canvas>
     </div>
 
@@ -497,7 +495,7 @@
         <canvas id="myReviewsBarFilm"></canvas>
     </div>
 
-    <div class="graficos">
+    <div class="graficos mb-5">
         <canvas id="myReviewsBarUser"></canvas>
     </div>
 
@@ -667,11 +665,8 @@
                                         </td>
                                     </tr>
                                 </tbody>
-
                             </table>
-
                         </div>
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -679,7 +674,6 @@
                     <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
                         Cambios</button>
-
                 </div>
             </div>
         </div>
@@ -796,7 +790,7 @@
         <div class="modal-dialog modal-xl modal-table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todos las series</h1>
+                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todas las series</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -911,7 +905,7 @@
         <div class="modal-dialog modal-xl modal-table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ListasTitleLabel">Todos las Listas</h1>
+                    <h1 class="modal-title fs-5" id="ListasTitleLabel">Todas las Listas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -1018,6 +1012,7 @@
     <script src="js/graficoCircular.js" defer></script>
     <script src="js/graficoBarrasValoracionesUsuario.js" defer></script>
     <script src="js/graficoBarrasValoracionesPeliculas.js" defer></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
