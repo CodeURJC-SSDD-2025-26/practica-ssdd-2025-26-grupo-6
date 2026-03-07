@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const data = {
             labels: ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4', '4,5', '5' ],
             datasets: [{
-                label: 'Mi dataset',
                 data: [0, 1, 3, 27 , 15 , 57, 109 , 89 ,110, 60, 10],
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#589245']
             }]
@@ -17,13 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
             data: data,
             options: {
                 responsive: true,
+                maintainAspectRatio: true,
                 plugins: {
                     legend: {
                         position: 'top',
+                        display: false
                     },
                     title: {
                         display: true,
-                        text: 'Gafico de Valoraciones de Usuario'
+                        text: 'Gafico de Valoraciones de Usuario',
+                        font: {
+                            size: 20,
+                            weight: 'bold'
+                        },
+                        color: '#bbbbbb'
+
                     }
                 }
             },

@@ -288,9 +288,6 @@ html, body{
     align-items:center;
     justify-content: center;
 }
-.itemProfile1{
-    margin-bottom:1rem;
-}
 .generic-card{
     max-width:600px;
     margin: 20px auto;
@@ -314,7 +311,7 @@ html, body{
 #yearBirthInput{
     color-scheme: dark;
 }
-.itemProfile2, .itemProfile4, .itemProfile5{
+.profile-text{
     width:100%;
     min-height: 60px;
     background:var(--bs-info) !important;
@@ -330,6 +327,10 @@ html, body{
     transition:all 0.2s ease;
     padding:12px 20px !important;
 }
+.profile-text:hover{
+    background:#444a7c !important;
+    transform: translateY(-2px);
+}
 .btn-primary{
     background-color:#0d6efd !important;
     border: none;
@@ -343,10 +344,6 @@ html, body{
     transform:translateY(-1px);
 }
 
-.itemProfile2:hover, .itemProfile4:hover, .itemProfile5:hover{
-    background:#444a7c !important;
-    transform: translateY(-2px);
-}
 .captionAdminister{
     color: var(--bs-text-color);
 }
@@ -557,6 +554,10 @@ html, body{
     width:500px; 
     margin: auto;
 }
+canvas{
+    width:100% !important;
+    height:auto !important;
+}
 
 /* FOOTERS PAGES */
 .container-pag{
@@ -601,7 +602,7 @@ html, body{
 .modal-table-admin table {
     min-width: 700px;
 }
-.modal-table-admin .modal-footer .btn{
+.modal-table-admin .modal-footer .btn, #avatarModal .modal-footer .btn{
     width: auto !important;
 }
 

@@ -12,12 +12,18 @@
     <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <!--Chart.js Librarie-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -62,7 +68,7 @@
             </a>
         </div>
     </div>
-    <div class="content-fluid">   
+    <div class="content-fluid">
         <div class="options">
             <a href="administrador.html" class="botonProfile text-decoration-none">
                 Administrador
@@ -71,41 +77,44 @@
                 Mis Listas
             </div>
         </div>
-        <div class="card p-4 generic-card rounded-4 border-0">
-            <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
-            <div class="text-center mb-4">
-                <div class="itemProfile1">
-                    <a href="#">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 col-lg-7">
+                <div class="card p-4 generic-card rounded-4 border-0 mb-5">
+                    <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
+                    <div class="text-center mb-4">
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
                             data-bs-target="#avatarModal">
                             <img id="avatarProfile" src="images/perfilNoReg.jpg" class="rounded-circle" width="175"
                                 height="175">
                         </button>
-                    </a>
+                    </div>
+                    <div class="profileFields">
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
+                            <div class="profile-text" id="username">
+                                Carlitronks171
+                            </div>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
+                            <div class="profile-text" id="email">
+                                fermin.lopez@gmail.com
+                            </div>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
+                            <div class="profile-text" id="yearBirth">
+                                03-03-1930
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" id="editarPerfilBtn" class="btn btn-primary">Editar Perfil</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="profileFields">
-                <div class="mb-3 text-center">
-                    <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
-                    <div class="itemProfile2" id="username">
-                        Carlitronks171
-                    </div>
-                </div>
-                <div class="mb-3 text-center">
-                    <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
-                    <div class="itemProfile4" id="email">
-                        fermin.lopez@gmail.com
-                    </div>
-                </div>
-                <div class="mb-3 text-center">
-                    <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
-                    <div class="itemProfile5" id="yearBirth">
-                        03-03-1930
-                    </div>
-                </div>
-                <div class="itemProfile3 mt-4">
-                    <button type="submit" id="editarPerfilBtn" class="btn btn-primary">Editar Perfil</button>
-                </div>
+            <div class="col-10 col-lg-5 pe-lg-5 mb-5">
+                <canvas id="myReviewsBarUser"></canvas>
             </div>
         </div>
     </div>
@@ -187,6 +196,7 @@
     </div>
     <script src="js/avatar.js"></script>
     <script src="js/formularioPerfil.js"></script>
+    <script src="js/graficoBarrasValoracionesUsuario.js" defer></script>
 </body>
 
 </html>
