@@ -10,14 +10,10 @@
 /* BODY */
 html, body{
     margin: 0;
-    height: 100%;
     overflow-x: hidden;
 }
+.primary{ background-color: var(--bs-primary); }
 
-
-.primary{
-    background-color: var(--bs-primary);
-}
 
 /* GRID PRINCIPAL */
 .principal{
@@ -33,32 +29,7 @@ html, body{
 /* HEADER */
 .header {
     grid-area: header;
-    display: grid;
-    grid-template-columns: 10% 50% 30% 10%;
-    grid-template-areas: "icon menus search profile";
-    align-items:baseline;
     background: var(--bs-secondary);
-    padding: 10px;
-    
-}
-
-.icon { 
-    grid-area: icon;
-    padding-left: 30px; 
-}
-
-.hola{
-    background-color: red;
-}
-
- /* menus */
-.menus {
-    grid-area: menus;
-}
-
-.menus .nav {
-    display: flex;
-    gap: 20px;
 }
 
 .nav-link {
@@ -80,29 +51,126 @@ html, body{
     padding: 20px;
     color: var(--bs-text-color);
 }
+.generic-card{
+    max-width:600px;
+    margin: 20px auto;
+    background: var(--bs-secondary)!important;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.1)!important;
+    border-radius:1.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    font-size:1.2rem;
+}
+.generic-card label{
+    color: var(--bs-text-color);
+    font-weight:600;
+    font-size:0.7rem;
+    letter-spacing:0.05rem;
+    display: block;
+}
+.btn-primary{
+    background-color:#0d6efd !important;
+    border: none;
+    padding: 12px;
+    width:100%;
+    font-weight:bold;
+    transition: all 0.2s;
+}
+.btn-primary:hover{
+    opacity:0.9;
+    transform:translateY(-1px);
+}
+/*Stars for reviews*/
+.star {
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: gray;
+}
+.star.activa { color: gold; }
+.star.parcial {
+    background: linear-gradient(to right, gold 30%, gray 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.card-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
- /* Films container*/
+
+/* FOOTER */
+.footer {
+    background: var(--bs-secondary);
+    padding: 20px;
+    color: var(--bs-text-color);
+}
+.footer .nav-link { color: var(--bs-text-color) !important; }
+
+.footer .nav-link:hover { color: #3a3f6b !important; }
+
+
+/* INCLUDE REVIEW */
+.photo-evaluate {
+    width: 220px; 
+    aspect-ratio: 2 / 3; 
+    margin: 0 auto 20px auto; 
+    display: block; 
+    background: var(--bs-primary);
+    border: 2px solid var(--bs-info);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.photo-evaluate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+/* Form */
+.form-review {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-review textarea {
+    width: 100%;
+    height: 120px;
+    background: var(--bs-primary);
+    border: 1px solid var(--bs-info);
+    color: var(--bs-text-color);
+    padding: 12px;
+    border-radius: 8px;
+    resize: none;
+}
+
+
+/* LEGAL ADVISE */
+.legal-info span{ text-decoration: underline; }
+
+
+ /* LISTS */
 .films {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: auto; 
-    width: 98%;
     gap: 15px;
+    width: 95vw;
     padding: 20px;
     background-color: var(--bs-secondary);
     border-radius: 10px;
 }
-
 /* Films Scrollbar*/
-.films::-webkit-scrollbar{
-    background-color: #131527;
-}
+.films::-webkit-scrollbar{ background-color: #131527; }
 .films::-webkit-scrollbar-thumb{
     background-color:var(--bs-info);
     border-radius: 10px;
 }
-
 /* Films */
 .films .card {
     flex: 0 0 180px; 
@@ -112,25 +180,15 @@ html, body{
     padding: 10px;
     transition: transform 0.3s ease;
 }
-
 /* when mouse goes over the card, it*/
-.films .card:hover {
-    transform: scale(1.05);
-}
-
-
+.films .card:hover { transform: scale(1.05);}
 .films .card img {
     width: 100%;
     height: 250px;
     object-fit: cover; 
     border-radius: 5px;
 }
-
-.films .card a {
-    text-decoration: none; 
-}
-
-
+.films .card a { text-decoration: none; }
 .films .card h5 {
     color: white;
     font-size: 0.9rem;
@@ -138,109 +196,20 @@ html, body{
     text-align: center;
 }
 
-/* Movie Details */
-.poster {
-    width: 100%;
-    aspect-ratio: 2 / 3; 
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-}
 
-.movie-title {
-    font-weight: 800;
-    font-size: clamp(26px, 3vw, 34px);
-    margin: 0 0 10px 0;
-    color: white;
-}
-
-/*Series Details*/
-.series-seasons{
-    margin: 0;
-    color: rgba(255,255,255,0.92);
-    font-weight: 700;
-}
-
-.movie-genre{
-    margin: 0 0 16px 0;
-    color: var(--bs-text-color);
-    font-weight: 600;
-    letter-spacing: 0.3px;
-}
-
-.double-row{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.movie-year, .movie-duration{
-    margin: 0;
-    margin-left: 0px;
-    color: var(--bs-text-color);
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.movie-year::after, .movie-duration::after, .movie-genre::after{
-    content: "•";
-    color: rgba(255,255,255,0.2);
-    margin: 0 10px;
-}
-
-.movie-duration{
-    margin-left: -16px;
-}
-
-.movie-director{
-    margin: 0;
-    color: #8f93ad;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 14px;
-}
-
-.director{
-    margin: 0;
-    color: rgba(255,255,255,0.92);
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.movie-platforms{
-    margin: 8px 0 0 0;
-    display: inline-flex;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--bs-info);
-    color: #e0e7ff;
-    font-size: 13px;
-    font-weight: 700;
+/* LOGIN */
+.container-login{
+    max-width:50vw;
+    background: var(--bs-secondary)!important;
+    padding: 5vh;
+    border: 1px solid rgba(255,255,255,0.1)!important;
+    border-radius:1.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    font-size:1.2rem;
 }
 
 
-.movie-sinopsis{
-    margin-top: 18px;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.6;
-    font-size: 15px;
-    max-width: 64ch;
-    
-}
-
-@media (max-width: 767px) {
-    .poster {
-        width: 140px;
-    }
-}
-
-
-/* Buttons */
-
-
-
-/* Review Section */
+/* MOVIES AND SERIES DETAILS */
 .card-text{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -249,7 +218,11 @@ html, body{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.modal .card-text {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+}
 .card-title{
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -258,7 +231,6 @@ html, body{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .card-footer{
     display: flex;
     justify-content: space-between;
@@ -266,13 +238,8 @@ html, body{
     margin-top: 10px; 
 }
 
-.options{
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px; 
-    padding: 10px;
-}
 
+/* PROFILE */
 .botonProfile{
     border: 1px solid black;
     background: var(--bs-secondary);
@@ -288,16 +255,17 @@ html, body{
     align-items:center;
     justify-content: center;
 }
-.generic-card{
-    max-width:600px;
-    margin: 20px auto;
-    background: var(--bs-secondary)!important;
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.1)!important;
-    border-radius:1.5rem !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    font-size:1.2rem;
+.profile-field{
+    transition:all 0.2 ease;
+    min-height: 60mx;
+    background: var(--bs-info) ;
+    color: var(--bs-text-color);
 }
+.profile-field:hover{
+    background: #444a7c !important;
+    transform: translateY(-2px);
+}
+
 .input-perfil-personalizado{
     width:100%;
     border:none;
@@ -308,60 +276,12 @@ html, body{
     font-weight:500;
     font-size:1.1rem;
 }
-#yearBirthInput{
-    color-scheme: dark;
-}
-.profile-text{
-    width:100%;
-    min-height: 60px;
-    background:var(--bs-info) !important;
-    color:var(--bs-text-color)!important;
-    font-size:1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center ;
-    margin-bottom:1.5rem !important;
-
-    border:none!important;
-    border-radius:12px !important;
-    transition:all 0.2s ease;
-    padding:12px 20px !important;
-}
-.profile-text:hover{
-    background:#444a7c !important;
-    transform: translateY(-2px);
-}
-.btn-primary{
-    background-color:#0d6efd !important;
-    border: none;
-    padding: 12px;
-    width:100%;
-    font-weight:bold;
-    transition: all 0.2s;
-}
-.btn-primary:hover{
-    opacity:0.9;
-    transform:translateY(-1px);
-}
-
-.captionAdminister{
-    color: var(--bs-text-color);
-}
-.generic-card label{
-    color: var(--bs-text-color);
-    font-weight:600;
-    font-size:0.7rem;
-    letter-spacing:0.05rem;
-    display: block;
-}
-
+#yearBirthInput{ color-scheme: dark; }
 #avatarModal .modal-content{
     background-color: var(--bs-secondary);
     color: var(--bs-text-color);
 }
-#avatarModal .btn-close{
-    filter: invert(1) brightness(200%);
-}
+#avatarModal .btn-close{ filter: invert(1) brightness(200%); }
 .img-selectable{
     cursor:pointer;
     transition:transform 0.2s, border-color 0.2s;
@@ -374,181 +294,15 @@ html, body{
     transform:scale(1.1);
     border-color: var(--bs-info);
 }
-.table-responsable {
-    -webkit-overflow-scrolling: touch;
-}
-.active-avatar{
-    border-color: var(--bs-info);
-}
+.active-avatar{ border-color: var(--bs-info); }
 #avatarGallery{
     padding:10px;
     background: var(--bs-primary);
     border-radius:10px;
 }
-/* FOOTER */
-.footer {
-    background: var(--bs-secondary);
-    padding: 20px;
-    color: var(--bs-text-color);
-}
-.footer .nav-link {
-    color: var(--bs-text-color) !important;
-}
 
-.footer .nav-link:hover {
-    color: #3a3f6b !important;
-}
-
-/* LOGIN */
-.container-login{
-    max-width:50vw;
-    background: var(--bs-secondary)!important;
-    padding: 5vh;
-    border: 1px solid rgba(255,255,255,0.1)!important;
-    border-radius:1.5rem !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    font-size:1.2rem;
-}
-
-
-
- /* SEARCH RESULTS*/
-.result {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 98%;
-    gap: 15px;
-    padding: 20px;
-    background-color: var(--bs-secondary);
-    border-radius: 10px;
-}
-
-
-/* Films */
-.result .card {
-    flex: 0 0 180px; 
-    height: auto;
-    background-color: var(--bs-info);
-    border: none;
-    padding: 10px;
-    transition: transform 0.3s ease;
-}
-
-/* when mouse goes over the card, it*/
-.result .card:hover {
-    transform: scale(1.05);
-}
-
-
-.result .card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover; 
-    border-radius: 5px;
-}
-
-.result .card a {
-    text-decoration: none; 
-}
-
-
-.result .card h5 {
-    color: white;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-}
-
-/* ===== REVIEW DETAILS ===== */
-/* ===== REVIEW CARD ===== */
-.card-review {
-    background: var(--bs-secondary);
-    width: 100%;
-    max-width: 500px;
-    border-radius: 15px;
-    padding: 30px;
-    border: 1px solid var(--bs-info);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    margin-top: 50px !important;    
-    margin-bottom: 50px !important; 
-    margin-left: auto;              
-    margin-right: auto;
-}
-
-.photo-evaluate {
-    width: 220px; 
-    aspect-ratio: 2 / 3; 
-    margin: 0 auto 20px auto; 
-    display: block; 
-    background: var(--bs-primary);
-    border: 2px solid var(--bs-info);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.photo-evaluate img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
-}
-/* Form */
-.form-review {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.evaluate-group {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.star {
-    font-size: 1.7rem;
-    cursor: pointer;
-    color: gray;
-}
-.star.activa {
-    color: gold;
-}
-.star.parcial {
-    background: linear-gradient(to right, gold 30%, gray 30%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.form-review textarea {
-    width: 100%;
-    height: 120px;
-    background: var(--bs-primary);
-    border: 1px solid var(--bs-info);
-    color: var(--bs-text-color);
-    padding: 12px;
-    border-radius: 8px;
-    resize: none;
-}
-
-/* Save */
-.btn-save {
-    background: var(--bs-info);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: flex-end; 
-    transition: background 0.3s;
-}
-
-.btn-save:hover {
-    background: #4c5290;
-}
+/* ADMINISTRATOR */
+.captionAdminister{ color: var(--bs-text-color); }
 
 .graficos{
     width:500px; 
@@ -559,59 +313,23 @@ canvas{
     height:auto !important;
 }
 
-/* FOOTERS PAGES */
-.container-pag{
-    margin : auto ;
-    padding: 5vw;
-    padding-top :2vw ;
-
-    color : var(--bs-text-color);
-}
-
-.container-pag .card{
-    padding : 1vw;
-    background-color: var(--bs-info);
-    color: var(--bs-text-color);
-}
-
-.container-pag .card-title{
-    padding-left: 1vw;
-}
-
-/* PAGE LIST REVIEWS */
-
-.card-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.modal .card-text {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-}
-.modal-table-admin .modal-body{
+/* MODALS TABLES */
+.table-admin .modal-body{
     padding: 0.5rem;
 }
-
-.modal-table-admin .table-responsive{
-    overflow-x: auto;
-    -webkit-overflox-scrolling:touch;
+.table-admin{
+    position:relative;
+    overflow-x:auto;
+    display:block;
 }
-.modal-table-admin table {
+
+.table-admin .table-responsive{
+    overflow-x: auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-admin table {
     min-width: 700px;
 }
-.modal-table-admin .modal-footer .btn, #avatarModal .modal-footer .btn{
+.table-admin .modal-footer .btn, #avatarModal .modal-footer .btn{
     width: auto !important;
-}
-
-
-/* DO NOT DELETE*/
-.poster {
-    width: 70%;
-    height: auto;
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
