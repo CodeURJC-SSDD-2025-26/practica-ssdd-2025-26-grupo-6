@@ -328,7 +328,3 @@ canvas{
 .table-admin .modal-footer .btn, #avatarModal .modal-footer .btn, #newListModal .modal-footer .btn, .añadir-lista .btn{
     width: auto !important;
 }
-/* MIS LISTAS */
-.btn-pequeño {
-    width: auto !important;
-}
