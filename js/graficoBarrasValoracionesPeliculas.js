@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 plugins: {
                     legend: {
                         position: 'top',
+                        display: false
                     },
                     title: {
                         display: true,

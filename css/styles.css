@@ -303,11 +303,6 @@ html, body{
 
 /* ADMINISTRATOR */
 .captionAdminister{ color: var(--bs-text-color); }
-
-.graficos{
-    width:500px; 
-    margin: auto;
-}
 canvas{
     width:100% !important;
     height:auto !important;
