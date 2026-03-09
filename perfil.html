@@ -29,103 +29,59 @@
 </head>
 
 <body class="primary principal pageProfile">
-    <!-- Navbar -->
     <div class="header">
-        <div class="row align-items-center px-5">
-            <div class="col-auto d-none d-lg-block">
-                <a class="navbar-brand" href="principal.html">
-                    <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
-                </a>
-            </div>
-            <nav class="col navbar navbar-expand-lg">
-                <div class="container-fluid d-flex justify-content-between align-items-center">
-                    <a class="navbar-brand d-lg-none" href="principal.html">
-                        <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
-                    </a>
-                    <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1" ></i> 
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
+        <div class="icon">
+            <a class="navbar-brand" href="principal.html">
+                <img src="images/logo.png" width="100" height="100">
+            </a>
+        </div>
+        <div class="menus">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link" href="principal.html">
-                                    <h5>Peliculas</h5>
-                                </a>
+                                <a class="nav-link" href="principal.html">Peliculas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="series.html">
-                                    <h5>Series</h5>
-                                </a>
+                                <a class="nav-link" href="series.html">Series</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="lists.html">
-                                    <h5>Listas</h5>
-                                </a>
+                                <a class="nav-link" href="listas.html">Listas</a>
                             </li>
                         </ul>
-                        <div class="d-flex flex-column flex-lg-row gap-3 align-items-center">
-                            <div class="search">
-                                <div class="input-group">
-                                    <button class="btn btn-outline-primary" type="button" id="searchBtn">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                    <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
-                                </div>
-                            </div>
-                            <div class="col-1 profile dropdown text-end">
-                                <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar
-                                            Sesión</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </nav>
         </div>
+        <div class="search">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-primary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
+            </div>
+        </div>
+        <div class="profile">
+            <a href="perfil.html">
+                <img id="avatarLogo" src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+            </a>
+        </div>
     </div>
-<<<<<<< HEAD
     <div class="container-fluid">
         <div class="d-flex justify-content-start gap-3 p-3">
             <a href="administrador.html" class="botonProfile text-decoration-none">
                 Administrador
             </a>
-=======
-
-    <!-- Page Content -->
-    <div class="content">
-        <div class="options">
-            <div class="botonProfile">
-                Perfil
-            </div>
->>>>>>> 9baa9490b6ca8a4f8a167884882047a70bf0f658
             <div class="botonProfile">
                 Mis Listas
             </div>
         </div>
-<<<<<<< HEAD
         <div class="row align-items-center justify-content-center">
             <div class="col-12 col-lg-7">
                 <div class="card p-4 generic-card rounded-4 border-0 mb-5">
                     <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
                     <div class="text-center mb-4">
-=======
-        <div class="card p-4 generic-card rounded-4 border-0">
-            <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
-            <div class="text-center mb-4">
-                <div class="itemProfile1">
-                    <a href="#">
->>>>>>> 9baa9490b6ca8a4f8a167884882047a70bf0f658
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
                             data-bs-target="#avatarModal">
                             <img id="avatarProfile" src="images/perfilNoReg.jpg" class="rounded-circle" width="175"
@@ -162,24 +118,22 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
                 <a href="principal.html" class="nav-link px-2">Inicio</a>
             </li>
             <li class="nav-item">
-                <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
+                <a href="#" class="nav-link px-2">Política de Cookies</a>
             </li>
             <li class="nav-item">
-                <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
+                <a href="#" class="nav-link px-2">Aviso Legal</a>
             </li>
             <li class="nav-item">
-                <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
+                <a href="#" class="nav-link px-2">FAQs</a>
             </li>
             <li class="nav-item">
-                <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
+                <a href="#" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
         <div class="d-flex justify-content-between">
@@ -194,8 +148,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Modal -->
     <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -242,15 +194,9 @@
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
     <script src="js/avatar.js"></script>
     <script src="js/formularioPerfil.js"></script>
-<<<<<<< HEAD
     <script src="js/graficoBarrasValoracionesUsuario.js" defer></script>
-=======
-    <script src="js/searchFunc.js"></script>
->>>>>>> 9baa9490b6ca8a4f8a167884882047a70bf0f658
 </body>
 
 </html>

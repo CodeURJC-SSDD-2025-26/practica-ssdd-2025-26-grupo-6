@@ -240,6 +240,21 @@ html, body{
 
 
 /* PROFILE */
+.botonProfile{
+    border: 1px solid black;
+    background: var(--bs-secondary);
+    color: var(--bs-text-color);
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius:12px;
+    height: 50px;
+
+    /*To center the test in the botton*/
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
 .profile-field{
     transition:all 0.2 ease;
     min-height: 60mx;
