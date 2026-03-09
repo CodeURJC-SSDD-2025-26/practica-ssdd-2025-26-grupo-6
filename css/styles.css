@@ -223,14 +223,6 @@ html, body{
     -webkit-line-clamp: unset;
     overflow: visible;
 }
-.card-title{
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 .card-footer{
     display: flex;
     justify-content: space-between;
@@ -238,39 +230,7 @@ html, body{
     margin-top: 10px; 
 }
 
-/*Administer Movie*/
-.container-administer{
-    display: flex; 
-    align-items : center; 
-    justify-content : center; 
-    padding: 40px;
-}
-
-
-/* Centra la imagen dentro de la card y controla su tamaño */
-.image-administer{
-    display: block;
-    margin-inline: auto;      /* centra horizontal */
-    max-width: 300px;         /* tamaño máximo de la imagen */
-    width: 90%;               /* respeta el 90% del contenedor */
-    height: auto;             /* mantiene proporción */
-}
-
-.administer-title{
-    align-items: center;
-    color: white;
-    padding: 20px;
-}
-
-.administer-movie .card{
-    padding: 40px;
-}
-.options{
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px; 
-    padding: 10px;
-}
+/* PROFILE */
 .botonProfile{
     border: 1px solid black;
     background: var(--bs-secondary);
@@ -286,20 +246,6 @@ html, body{
     align-items:center;
     justify-content: center;
 }
-.itemProfile1{
-    margin-bottom:1rem;
-}
-.profileInfo{
-    max-width:600px;
-    margin: 20px auto;
-    background: var(--bs-secondary)!important;
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.1)!important;
-    border-radius:1.5rem !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    font-size:1.2rem;
-    
-}
 .input-perfil-personalizado{
     width:100%;
     border:none;
@@ -310,53 +256,7 @@ html, body{
     font-weight:500;
     font-size:1.1rem;
 }
-#yearBirthInput{
-    color-scheme: dark;
-}
-.itemProfile2, .itemProfile4, .itemProfile5{
-    width:100%;
-    min-height: 60px;
-    background:var(--bs-info) !important;
-    color:var(--bs-text-color)!important;
-    font-size:1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center ;
-    margin-bottom:1.5rem !important;
-
-    border:none!important;
-    border-radius:12px !important;
-    transition:all 0.2s ease;
-    padding:12px 20px !important;
-}
-.pageProfile .btn-primary{
-    background-color:#0d6efd !important;
-    border: none;
-    transition: opacity 0.2s;
-    padding: 12px;
-    width:100%;
-    font-weight:bold;
-    transition: all 0.2s;
-}
-.pageProfile .btn-primary:hover{
-    opacity:0.9;
-    transform:translateY(-1px);
-}
-
-.itemProfile2:hover, .itemProfile4:hover, .itemProfile5:hover{
-    background:#444a7c !important;
-    transform: translateY(-2px);
-}
-.profileInfo label{
-    color: var(--bs-text-color);
-    font-weight:600;
-    font-size:0.7rem;
-    letter-spacing:0.05rem;
-    display: block;
-    
-
-}
-
+#yearBirthInput{ color-scheme: dark; }
 #avatarModal .modal-content{
     background-color: var(--bs-secondary);
     color: var(--bs-text-color);
@@ -379,193 +279,4 @@ html, body{
     padding:10px;
     background: var(--bs-primary);
     border-radius:10px;
-}
-/* FOOTER */
-.footer {
-    background: var(--bs-secondary);
-    padding: 20px;
-    color: var(--bs-text-color);
-}
-.footer .nav-link {
-    color: var(--bs-text-color) !important;
-}
-
-.footer .nav-link:hover {
-    color: #3a3f6b !important;
-}
-
-/* LOGIN */
-.container-login{
-    display:flexbox; 
-    align-items : center; 
-    justify-content : center; 
-    min-width: 100vh;
-}
-
-
-
- /* SEARCH RESULTS*/
-.result {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 98%;
-    gap: 15px;
-    padding: 20px;
-    background-color: var(--bs-secondary);
-    border-radius: 10px;
-}
-
-
-/* Films */
-.result .card {
-    flex: 0 0 180px; 
-    height: auto;
-    background-color: var(--bs-info);
-    border: none;
-    padding: 10px;
-    transition: transform 0.3s ease;
-}
-
-/* when mouse goes over the card, it*/
-.result .card:hover {
-    transform: scale(1.05);
-}
-
-
-.result .card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover; 
-    border-radius: 5px;
-}
-
-.result .card a {
-    text-decoration: none; 
-}
-
-
-.result .card h5 {
-    color: white;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-}
-
-/* ===== REVIEW DETAILS ===== */
-/* ===== REVIEW CARD ===== */
-.card-review {
-    background: var(--bs-secondary);
-    width: 100%;
-    max-width: 500px;
-    border-radius: 15px;
-    padding: 30px;
-    border: 1px solid var(--bs-info);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    margin-top: 50px !important;    
-    margin-bottom: 50px !important; 
-    margin-left: auto;              
-    margin-right: auto;
-}
-
-.photo-evaluate {
-    width: 220px; 
-    aspect-ratio: 2 / 3; 
-    margin: 0 auto 20px auto; 
-    display: block; 
-    background: var(--bs-primary);
-    border: 2px solid var(--bs-info);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.photo-evaluate img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
-}
-/* Form */
-.form-review {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.evaluate-group {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.star {
-    font-size: 2rem;
-    cursor: pointer;
-    color: gray;
-}
-.star.activa {
-    color: gold;
-}
-
-.form-review textarea {
-    width: 100%;
-    height: 120px;
-    background: var(--bs-primary);
-    border: 1px solid var(--bs-info);
-    color: var(--bs-text-color);
-    padding: 12px;
-    border-radius: 8px;
-    resize: none;
-}
-
-/* Save */
-.btn-save {
-    background: var(--bs-info);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: flex-end; 
-    transition: background 0.3s;
-}
-
-.btn-save:hover {
-    background: #4c5290;
-}
-
-/* FOOTERS PAGES */
-.container-pag{
-    margin : auto ;
-    padding: 5vw;
-    padding-top :2vw ;
-
-    color : var(--bs-text-color);
-}
-
-.container-pag .card{
-    padding : 1vw;
-    background-color: var(--bs-info);
-    color: var(--bs-text-color);
-}
-
-.container-pag .card-title{
-    padding-left: 1vw;
-}
-
-/* PAGE LIST REVIEWS */
-
-.card-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.modal .card-text {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
 }
