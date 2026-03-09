@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    /*const selector = document.getElementById('selectAvatar');*/
+    
     const preview = document.getElementById('previewAvatar');
     const btnGuardar= document.getElementById('saveAvatar');
     const galleryImages = document.querySelectorAll('.img-selectable');
-    /*const allTheAvatars = document.querySelectorAll('.user-avatar');*/
+    
     const avatarLogo = document.getElementById('avatarLogo');
     const avatarProfile = document.getElementById('avatarProfile');
     let selectedScr = "images/perfilNoReg.jpg";
@@ -26,7 +26,4 @@ document.addEventListener('DOMContentLoaded', function() {
             avatarProfile.src = selectedSrc;
         }
         });
-/*
-        document.getElementById('mainProfileAvatar').src = newAvatar;
-    });*/
 });

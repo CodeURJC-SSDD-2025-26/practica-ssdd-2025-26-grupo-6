@@ -274,12 +274,6 @@ html, body{
 
 
 /* PROFILE */
-.options{
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px; 
-    padding: 10px;
-}
 .botonProfile{
     border: 1px solid black;
     background: var(--bs-secondary);
@@ -295,7 +289,17 @@ html, body{
     align-items:center;
     justify-content: center;
 }
-.itemProfile1{ margin-bottom:1rem; }
+.profile-field{
+    transition:all 0.2 ease;
+    min-height: 60mx;
+    background: var(--bs-info) ;
+    color: var(--bs-text-color);
+}
+.profile-field:hover{
+    background: #444a7c !important;
+    transform: translateY(-2px);
+}
+
 .input-perfil-personalizado{
     width:100%;
     border:none;
@@ -307,26 +311,6 @@ html, body{
     font-size:1.1rem;
 }
 #yearBirthInput{ color-scheme: dark; }
-.itemProfile2, .itemProfile4, .itemProfile5{
-    width:100%;
-    min-height: 60px;
-    background:var(--bs-info) !important;
-    color:var(--bs-text-color)!important;
-    font-size:1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center ;
-    margin-bottom:1.5rem !important;
-
-    border:none!important;
-    border-radius:12px !important;
-    transition:all 0.2s ease;
-    padding:12px 20px !important;
-}
-.itemProfile2:hover, .itemProfile4:hover, .itemProfile5:hover{
-    background:#444a7c !important;
-    transform: translateY(-2px);
-}
 #avatarModal .modal-content{
     background-color: var(--bs-secondary);
     color: var(--bs-text-color);
@@ -349,4 +333,37 @@ html, body{
     padding:10px;
     background: var(--bs-primary);
     border-radius:10px;
+}
+
+/* ADMINISTRATOR */
+.captionAdminister{ color: var(--bs-text-color); }
+
+.graficos{
+    width:500px; 
+    margin: auto;
+}
+canvas{
+    width:100% !important;
+    height:auto !important;
+}
+
+/* MODALS TABLES */
+.table-admin .modal-body{
+    padding: 0.5rem;
+}
+.table-admin{
+    position:relative;
+    overflow-x:auto;
+    display:block;
+}
+
+.table-admin .table-responsive{
+    overflow-x: auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-admin table {
+    min-width: 700px;
+}
+.table-admin .modal-footer .btn, #avatarModal .modal-footer .btn{
+    width: auto !important;
 }

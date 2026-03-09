@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Peliculas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!--Chart.js Librarie-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body class="primary principal" id="page-peliculas">
+    <div class="header">
+        <div class="row align-items-center px-5">
+            <div class="col-auto d-none d-lg-block">
+                <a class="navbar-brand" href="principal.html">
+                    <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
+                </a>
+            </div>
+            <nav class="col navbar navbar-expand-lg">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+                    <a class="navbar-brand d-lg-none" href="principal.html">
+                        <img src="images/logo.png" alt="logo" height="100vh" width="100vw">
+                    </a>
+                    <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-list fs-1" ></i> 
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="principal.html">
+                                    <h5>Peliculas</h5>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="series.html">
+                                    <h5>Series</h5>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="lists.html">
+                                    <h5>Listas</h5>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="d-flex flex-column flex-lg-row gap-3 align-items-center">
+                            <div class="search">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-primary" type="button" id="searchBtn">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                    <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
+                                </div>
+                            </div>
+                            <div class="col-1 profile dropdown text-end">
+                                <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión/ Iniciar
+                                            Sesión</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="content">
+        <div class="d-flex justify-content-start gap-3 p-3">
+            <a href="perfil.html" class="botonProfile text-decoration-none">
+                Perfil
+            </a>
+            <div class="botonProfile">
+                Mis Listas
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12 col-md-8 ">
+
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:27%;">
+                            <col style="width:39%;">
+                            <col style="width:10%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                        </colgroup>
+
+                        <caption class="captionAdminister">Usuarios del sistema</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Cumpleaños</th>
+                                <th scope="col" class="text-center align-middle">Editar</th>
+                                <th scope="col" class="text-center align-middle">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Usuario1</td>
+                                <td>Correo1</td>
+                                <td>Nacimiento1</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Usuario2</td>
+                                <td>Correo2</td>
+                                <td>Nacimiento2</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Usuario3</td>
+                                <td>Correo3</td>
+                                <td>Nacimiento3</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger">
+
+                                        </i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Usuario4</td>
+                                <td>Correo4</td>
+                                <td>Nacimiento4</td>
+                                <td class="text-center">
+                                    <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center mb-5">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalUsuarios">
+                    Mas usuarios</button>
+            </div>
+        </div>
+
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12 col-md-8">
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:35%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:25%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                        </colgroup>
+                        <caption class="captionAdminister">Peliculas del sistema</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" class="text-center">Duración</th>
+                                <th scope="col" class="text-center">Media</th>
+                                <th scope="col">Plataformas</th>
+
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Como aprendi a dejar de preocuparme y a amar la bomba y la larguisima parodia</td>
+                                <td class="text-center">130min</td>
+                                <td class="text-center">4,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>La ciudad de las estrellas: LA La Land</td>
+                                <td class="text-center">90min</td>
+                                <td class="text-center">2,5</td>
+                                <td>Netflix/Amazon Prime</td>
+                                <td class="text-center">
+                                    <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Piratas del Caribe</td>
+                                <td class="text-center">150min</td>
+                                <td class="text-center">3,2</td>
+                                <td>Disney+/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Star Wars: Amenaza fantasma</td>
+                                <td class="text-center">110min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center mb-5">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalPeliculas">
+                    Mas Peliculas</button>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12 col-md-8">
+
+
+
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:35%;">
+                            <col style="width:5%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:20%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                        </colgroup>
+
+                        <caption class="captionAdminister">Series del sistema</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" class="text-center">Temporada</th>
+                                <th scope="col" class="text-center">Duración</th>
+                                <th scope="col" class="text-center">Media</th>
+                                <th scope="col">Plataformas</th>
+
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Como conoci a vuestra madre</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">300min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Friends</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">400min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Big ban theory</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">500min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Breaking Bad</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">450min</td>
+                                <td class="text-center">1,5</td>
+                                <td>Netflix/HB0</td>
+                                <td class="text-center">
+                                    <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mx-0 justify-content-center mb-5">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalSeries">
+                    Mas Series</button>
+            </div>
+        </div>
+
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12 col-md-8">
+                <div class="table-responsive">
+                    <table class="table table-striped caption-top table-bordered">
+                        <colgroup>
+                            <col style="width:8%;">
+                            <col style="width:34%;">
+                            <col style="width:8%;">
+                            <col style="width:34%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                        </colgroup>
+
+                        <caption class="captionAdminister">Listas del sistema</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">N.Peliculas</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col" class="text-center">Editar</th>
+                                <th scope="col" class="text-center">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td>Accion</td>
+                                <td class="text-center">7</td>
+                                <td>Usuario1</td>
+                                <td class="text-center">
+                                    <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td>Aventura</td>
+                                <td class="text-center">546</td>
+                                <td>Usuario2</td>
+                                <td class="text-center">
+                                    <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td>Romántica</td>
+                                <td class="text-center">2</td>
+                                <td>Usuario3</td>
+                                <td class="text-center">
+                                    <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td>Preferidas</td>
+                                <td class="text-center">0583</td>
+                                <td>Usuario4</td>
+                                <td class="text-center">
+                                    <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mx-0 justify-content-center mb-5">
+        <div class="col-3">
+            <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                data-bs-target="#modalListas">
+                Mas Listas</button>
+        </div>
+    </div>
+    <div class="graficos mb-5">
+        <canvas id="myPie"></canvas>
+    </div>
+
+    <div class="graficos">
+        <canvas id="myReviewsBarFilm"></canvas>
+    </div>
+
+    <footer class="footer py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="principal.html" class="nav-link px-2">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
+            </li>
+            <li class="nav-item">
+                <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
+            </li>
+            <li class="nav-item">
+                <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
+            </li>
+            <li class="nav-item">
+                <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <p class="text-center">&copy; 2025 Company, Inc</p>
+            <div class="d-flex justify-content-between gap-3">
+                <a href="#">
+                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                </a>
+                <a href="#">
+                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="modalUsuarios" tabindex="-1" aria-labelledby="UsuariosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="UsuariosTitleLabel">Todos los usuarios</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:27%;">
+                                    <col style="width:39%;">
+                                    <col style="width:10%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Usuarios del sistema</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Cumpleaños</th>
+                                        <th scope="col" class="text-center align-middle">Editar</th>
+                                        <th scope="col" class="text-center align-middle">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Usuario1</td>
+                                        <td>Correo@1</td>
+                                        <td>Nacimiento1</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Usuario2</td>
+                                        <td>Correo@2</td>
+                                        <td>Nacimiento2</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Usuario3</td>
+                                        <td>Correo@3</td>
+                                        <td>Nacimiento3</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger">
+
+                                                </i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Usuario4</td>
+                                        <td>Correo@4</td>
+                                        <td>Nacimiento4</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">5</th>
+                                        <td>Usuario5</td>
+                                        <td>Correo@5</td>
+                                        <td>Nacimiento5</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">6</th>
+                                        <td>Usuario6</td>
+                                        <td>Correo@6</td>
+                                        <td>Nacimiento6</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">7</th>
+                                        <td>Usuario7</td>
+                                        <td>Correo@7</td>
+                                        <td>Nacimiento7</td>
+                                        <td class="text-center">
+                                            <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalPeliculas" tabindex="-1" aria-labelledby="PeliculasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PeliculasTitleLabel">Todas las Peliculas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:35%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:25%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Peliculas</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col" class="text-center">Duración</th>
+                                        <th scope="col" class="text-center">Media</th>
+                                        <th scope="col">Plataformas</th>
+
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Como aprendi a dejar de preocuparme y a amar la bomba y la larguisima
+                                            parodia</td>
+                                        <td class="text-center">130min</td>
+                                        <td class="text-center">4,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>La ciudad de las estrellas: LA La Land</td>
+                                        <td class="text-center">90min</td>
+                                        <td class="text-center">2,5</td>
+                                        <td>Netflix/Amazon Prime</td>
+                                        <td class="text-center">
+                                            <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Piratas del Caribe</td>
+                                        <td class="text-center">150min</td>
+                                        <td class="text-center">3,2</td>
+                                        <td>Disney+/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Star Wars: Amenaza fantasma</td>
+                                        <td class="text-center">110min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifyMovie.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalSeries" tabindex="-1" aria-labelledby="SeriesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todas las series</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:35%;">
+                                    <col style="width:5%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:20%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+                                <caption class="captionAdminister">Series</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col" class="text-center">Temp</th>
+                                        <th scope="col" class="text-center">Duración</th>
+                                        <th scope="col" class="text-center">Media</th>
+                                        <th scope="col">Plataformas</th>
+
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Como conoci a vuestra madre</td>
+                                        <td class="text-center">1</td>
+                                        <td class="text-center">300min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Friends</td>
+                                        <td class="text-center">2</td>
+                                        <td class="text-center">400min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Big ban theory</td>
+                                        <td class="text-center">3</td>
+                                        <td class="text-center">500min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Breaking Bad</td>
+                                        <td class="text-center">4</td>
+                                        <td class="text-center">450min</td>
+                                        <td class="text-center">1,5</td>
+                                        <td>Netflix/HB0</td>
+                                        <td class="text-center">
+                                            <a href="modifySeries.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalListas" tabindex="-1" aria-labelledby="ListasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ListasTitleLabel">Todas las Listas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered align-middle w-100">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:34%;">
+                                    <col style="width:8%;">
+                                    <col style="width:34%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+
+                                    <caption class="captionAdminister">Listas</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">N.Peliculas</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row" class="text-center">1</th>
+                                        <td>Accion</td>
+                                        <td class="text-center">7</td>
+                                        <td>Usuario1</td>
+                                        <td class="text-center">
+                                            <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">2</th>
+                                        <td>Aventura</td>
+                                        <td class="text-center">546</td>
+                                        <td>Usuario2</td>
+                                        <td class="text-center">
+                                            <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">3</th>
+                                        <td>Romántica</td>
+                                        <td class="text-center">2</td>
+                                        <td>Usuario3</td>
+                                        <td class="text-center">
+                                            <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-center">4</th>
+                                        <td>Preferidas</td>
+                                        <td class="text-center">0583</td>
+                                        <td>Usuario4</td>
+                                        <td class="text-center">
+                                            <a href="peliculasLista.html" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                                </colgroup>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our JS -->
+    <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
+    <script src="js/loadMoviesSeriesLists.js"></script>
+    <script>src = "js/searchFunc.js"</script>
+    <script src="js/graficoCircular.js" defer></script>
+    <script src="js/graficoBarrasValoracionesPeliculas.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
