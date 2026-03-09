@@ -7,28 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
-    <title>Palomix - Peliculas</title>
+    <title>Palomix - Listas</title>
     <!-- Libraries-->
     <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
-    <!--Chart.js Librarie-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="primary principal pageProfile">
+<body class="primary principal" id="page-listas">
+    <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
             <div class="col-auto d-none d-lg-block">
@@ -73,6 +64,7 @@
                                     <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
                                 </div>
                             </div>
+
                             <div class="col-1 profile dropdown text-end">
                                 <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,57 +85,62 @@
             </nav>
         </div>
     </div>
+
+    <!-- Page Content-->
     <div class="content">
         <div class="d-flex justify-content-start gap-3 p-3">
+            <a href="perfil.html" class="botonProfile text-decoration-none">
+                Perfil
+            </a>
             <a href="administrador.html" class="botonProfile text-decoration-none">
                 Administrador
-            </a>
-            <a href="misListas.html" class="botonProfile text-decoration-none">
-                Mis Listas
-            </a>
+            </a>>
         </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12 col-lg-7">
-                <div class="card p-4 generic-card rounded-4 border-0 mb-5">
-                    <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
-                    <div class="text-center mb-4">
-                        <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
-                            data-bs-target="#avatarModal">
-                            <img id="avatarProfile" src="images/perfilNoReg.jpg" class="rounded-circle" width="175"
-                                height="175">
-                        </button>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
-                        <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
-                            id="username">
-                            Carlitronks171
-                        </div>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
-                        <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
-                            id="email">
-                            fermin.lopez@gmail.com
-                        </div>
-                    </div>
-                    <div class="mb-3 text-center">
-                        <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
-                        <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
-                            id="yearBirth">
-                            03-03-1930
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <button type="submit" id="editarPerfilBtn" class="btn btn-primary">Editar Perfil</button>
-                    </div>
+        <div class="d-flex justify-content-start gap-3 p-3">
+            <div class="botonProfile text-decoration-none">
+                Añadir Lista
+            </div>
+        </div>
+        <!-- First Section -->
+        <div style="margin-top: 30px;">
+            <!-- Section Title-->
+            <div class="row align-items-center pb-2">
+                <div class="col-auto d-flex align-items-center gap-2">
+                    <h4>Me gustan</h4>
                 </div>
             </div>
-            <div class="col-10 col-lg-5 pe-lg-5 mb-5">
-                <canvas id="myReviewsBarUser"></canvas>
+            <!-- Films section-->
+            <div class="films"></div>
+        </div>
+
+        <!-- Second Section -->
+        <div style="margin-top: 30px;">
+            <!-- Section Title-->
+            <div class="row align-items-center pb-2">
+                <div class="col-auto d-flex align-items-center gap-2">
+                    <h4>Peliculas de Ciencia Ficción</h4>
+                </div>
+            </div>
+            <!-- Films section-->
+            <div class="films"></div>
+        </div>
+
+        <!-- Third Section -->
+        <div style="margin-top: 30px;">
+            <!-- Section Title-->
+            <div class="row align-items-center pb-2">
+                <div class="col-auto d-flex align-items-center gap-2">
+                    <h4>Peliculas que tengo que ver</h4>
+                </div>
+            </div>
+            <!-- Films section-->
+            <div class="films">
+                <!-- Card Movies-->
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="footer py-3">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
@@ -174,55 +171,13 @@
             </div>
         </div>
     </footer>
-    <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="avatarTitleLabel">¿Qué Avatar quieres ser?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="text-center mb-4">
-                            <p>Seleccionado actualmente:</p>
-                            <img src="images/perfilNoReg.jpg" id="previewAvatar"
-                                class="rounded-circle border border-primary border-3" width="100" height="100">
-                        </div>
-                        <div class="row g-3 justify-content-center" id="avatarGallery">
-                            <div class="col-4 text-center">
-                                <img src="images/perfilNoReg.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/perfilNoReg.jpg">
-                            </div>
-                            <div class="col-4 text-center">
-                                <img src="images/Palomix.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/Palomix.jpg">
-                            </div>
-                            <div class="col-4 text-center">
-                                <img src="images/filmix1.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/filmix1.jpg">
-                            </div>
-                            <div class="col-4 text-center">
-                                <img src="images/filmixGafas1.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/filmixGafas1.jpg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="saveAvatar" class="btn btn-primary" data-bs-dismiss="modal">Guardar
-                        Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/avatar.js"></script>
-    <script src="js/formularioPerfil.js"></script>
-    <script src="js/graficoBarrasValoracionesUsuario.js" defer></script>
+
+    <!-- Scripts -->
+    <script src="js/searchFunc.js"></script>
+    <script src="js/loadMoviesSeriesLists.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
