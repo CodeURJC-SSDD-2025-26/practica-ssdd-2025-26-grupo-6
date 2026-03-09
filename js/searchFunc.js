@@ -27,16 +27,16 @@ const series = [
 ];
 
 const listas = [
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' }
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' },
+    { titulo: 'LAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'peliculasLista.html' }
 ];
 
 
@@ -46,10 +46,10 @@ document.getElementById('searchBtn')?.addEventListener('click', search);
 
 function search() {
 
-    let query = document.getElementById('searchInput').value.toLowerCase();
+    let query = document.getElementById('searchInput').value.toLowerCase().trim();
     const html = document.querySelector('.content');
 
-    if (query.trim() !== '') {
+    if (query !== '') {
         query = query.toLowerCase();
         const filteredPeliculas = peliculas.filter(pelicula => pelicula.titulo.toLowerCase().includes(query));
         const filteredSeries = series.filter(serie => serie.titulo.toLowerCase().includes(query));
@@ -57,7 +57,7 @@ function search() {
 
         html.innerHTML = `
             <div class="row">
-                <div class="col"><h2>Resultado de búsqueda:</h2></div>
+                <div class="col"><h2>Resultado de búsqueda para: ${query}</h2></div>
             </div>`;
 
         if (filteredPeliculas.length > 0) {

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="primary principal" id="page-peliculas">
+<body class="primary principal">
     <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
@@ -35,7 +35,7 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1" ></i> 
+                        <i class="bi bi-list fs-1"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
@@ -85,27 +85,91 @@
         </div>
     </div>
 
-    <!-- Page Content -->
-    <div class="content">
-        <!-- The amount of section can be modified by changing names in "h5", adding o eliminating sections-->
-        <div style="margin-top: 30px;" id="peliculasNuevas"> <!-- First Section -->
-            <!-- Section Title-->
-            <h5>Peliculas recientemente añadidas</h5>
-            <!-- Films section-->
-            <div class="films">
+    <!-- Page content -->
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h1 class="mb-3 text-center text-white fs-3 fs-md-2">Modificar Película</h1>
+
+                    <!-- Clikable Image -->
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <img id="posterPreview" src="images/peliculaAdministrador.jpg" alt="Seleccionar imagen"
+                            class="border rounded-3 img-fluid"
+                            style="width: 200px; height: 200px; object-fit: cover; cursor: pointer;">
+                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar la portada de la película
+                        </p>
+                    </div>
+                    <!-- Hidden Input file -->
+                    <input id="posterInput" type="file" accept="image/*" class="d-none">
+
+                    <!-- Form -->
+                    <form class="d-flex flex-column gap-3 administer-form">
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Título:</label>
+                            <input type="text" class="form-control" id="titleInput" placeholder="Título de la película"
+                                value="Avatar">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" id="directorInput" placeholder="Director"
+                                value="James Cameron">
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Año de lanzamiento:</label>
+                                    <input type="number" class="form-control" id="yearInput"
+                                        placeholder="Año de lanzamiento" min="1800" max="2026" value="2009">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Duración:</label>
+                                    <input type="number" class="form-control" id="durationInput"
+                                        placeholder="Duración (minutos)" min="0" value="162">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="generosContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Género:</label>
+                            <div id="camposGeneros" class="d-flex flex-column gap-2">
+                                <div class="input-group genero-extra">
+                                    <input type="text" class="form-control" name="genres[]" placeholder="Género"
+                                        value="Ciencia ficción">
+                                    <button type="button" class="btn btn-outline-primary" id="addGenero">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removeGenero">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="platformsContainer" class="d-flex flex-column">
+                            <label class="fw-bold text-white">Plataforma:</label>
+                            <div id="camposPlataformas" class="d-flex flex-column gap-2">
+                                <div class="input-group platform-extra">
+                                    <input type="text" class="form-control" name="platforms[]" placeholder="Plataforma"
+                                        value="Disney+">
+                                    <button type="button" class="btn btn-outline-primary" id="addPlatform">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" id="removePlatform">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Sinopsis:</label>
+                            <textarea class="form-control" id="sinopsisInput" placeholder="Sinopsis"
+                                style="height: 100px">Un explorador humano y una mujer de la raza Na'vi se unen para luchar contra los humanos que invaden su planeta.</textarea>
+                        </div>
+                        <button class="btn btn-primary w-100 py-2 fw-bold" type="submit">Modificar Película</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div style="margin-top: 30px;" id="peliculasAcción"> <!-- Second Section -->
-            <!-- Section Title-->
-            <h5>Peliculas de Acción</h5>
-            <!-- Films section-->
-            <div class="films"></div>
-        </div>
-        <div style="margin-top: 30px;" id="peliculasAventura"> <!-- Third Section -->
-            <!-- Section Title-->
-            <h5>Peliculas de Aventura</h5>
-            <!-- Films section-->
-            <div class="films"></div>
         </div>
     </div>
 
@@ -140,13 +204,12 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Scripts -->
-    <script src="js/searchFunc.js"></script> 
-    <script src="js/loadMoviesSeriesLists.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script src="js/palomix-admin.js"></script>
+    <script src="js/genres.js"></script>
+    <script src="js/platforms.js"></script>
+    <script src="js/searchFunc.js"></script>
 </body>
 
 </html>
