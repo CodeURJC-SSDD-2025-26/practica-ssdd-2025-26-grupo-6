@@ -22,7 +22,8 @@
 
 </head>
 
-<body class="primary principal" id="page-peliculas">
+<body class="primary principal">
+    <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
             <div class="col-auto d-none d-lg-block">
@@ -38,23 +39,23 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1"></i>
+                        <i class="bi bi-list fs-1" ></i> 
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
-                                    <h5>Peliculas</h5>
+                                    <h4>Peliculas</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="series.html">
-                                    <h5>Series</h5>
+                                    <h4>Series</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="lists.html">
-                                    <h5>Listas</h5>
+                                    <h4>Listas</h4>
                                 </a>
                             </li>
                         </ul>
@@ -87,6 +88,8 @@
             </nav>
         </div>
     </div>
+
+    <!-- Page Content -->
     <div class="content">
         <div class="d-flex justify-content-start gap-3 p-3">
             <a href="perfil.html" class="botonProfile text-decoration-none">
@@ -124,9 +127,9 @@
                         <tbody class="table-group-divider">
                             <tr>
                                 <th scope="row" class="text-center">1</th>
-                                <td>Usuario1</td>
-                                <td>Correo1</td>
-                                <td>Nacimiento1</td>
+                                <td>Pepe</td>
+                                <td>pepe@gmail.com</td>
+                                <td>13/06/2005</td>
                                 <td class="text-center">
                                     <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
                                             class="bi bi-pencil-square fs-5"></i></a>
@@ -138,9 +141,9 @@
                             </tr>
                             <tr>
                                 <th scope="row" class="text-center">2</th>
-                                <td>Usuario2</td>
-                                <td>Correo2</td>
-                                <td>Nacimiento2</td>
+                                <td>Maria</td>
+                                <td>mariaruiz@outlook.es</td>
+                                <td>30/12/2000</td>
                                 <td class="text-center">
                                     <a href="perfil.html" class="btn btn-sm border-0 p-0 text-dark"><i
                                             class="bi bi-pencil-square fs-5"></i></a>
@@ -299,7 +302,7 @@
                     Mas Peliculas</button>
             </div>
             <div class="col-auto">
-                <a href="includeMovie.html"  class="btn btn-sm border-0 p-0 "><i
+                <a href="includeMovie.html" class="btn btn-sm border-0 p-0 "><i
                         class="bi bi-plus-square fs-5 text-primary"></i></a>
             </div>
         </div>
@@ -413,7 +416,7 @@
                     Mas Series</button>
             </div>
             <div class="col-auto">
-                <a href="includeSerie.html"  class="btn btn-sm border-0 p-0 "><i
+                <a href="includeSerie.html" class="btn btn-sm border-0 p-0 "><i
                         class="bi bi-plus-square fs-5 text-primary"></i></a>
             </div>
         </div>
@@ -509,16 +512,16 @@
             </div>
 
         </div>
-    </div>
-    <div class="row mx-0 justify-content-center mb-5">
-        <div class="col-3">
-            <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
-                data-bs-target="#modalListas">
-                Mas Listas</button>
+        <div class="row mx-0 justify-content-center mb-5">
+            <div class="col-3">
+                <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalListas">
+                    Mas Listas</button>
+            </div>
         </div>
-    </div>
-    <div class="col-8 col-lg-5 mx-auto mb-5">
-        <canvas id="myPie"></canvas>
+        <div class="col-8 col-lg-5 mx-auto mb-5">
+            <canvas id="myPie"></canvas>
+        </div>
     </div>
 
     <footer class="footer py-3">
@@ -1028,7 +1031,7 @@
     <!-- Our JS -->
     <!-- The scripts go last because they need components, so if they are executed before these componentes are created, it colapses-->
     <script src="js/loadMoviesSeriesLists.js"></script>
-    <script>src = "js/searchFunc.js"</script>
+    <script src="js/searchFunc.js"></script>
     <script src="js/graficoCircular.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

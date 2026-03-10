@@ -43,17 +43,17 @@
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
-                                    <h5>Peliculas</h5>
+                                    <h4>Peliculas</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="series.html">
-                                    <h5>Series</h5>
+                                    <h4>Series</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="lists.html">
-                                    <h5>Listas</h5>
+                                    <h4>Listas</h4>
                                 </a>
                             </li>
                         </ul>
@@ -94,23 +94,7 @@
                 <!-- Poster -->
                 <div class="col-12 col-md-3">
                     <img src="images/carteleraEjemploAvatar.webp" alt="Poster de la película"
-                        class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover; cursor: zoom-in;"
-                        data-bs-toggle="modal" data-bs-target="#modalPoster">
-                </div>
-                <!-- Modal Poster -->
-                <div class="modal fade" id="modalPoster" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl">
-                        <div class="modal-content bg-transparent border-0">
-                            <div class="modal-header border-0 pb-0 justify-content-end">
-                                <button type="button" class="btn-close btn-close-white"
-                                    data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body p-0 text-center">
-                                <img src="images/carteleraEjemploAvatar.webp" alt="Poster ampliado"
-                                    class="img-fluid rounded shadow">
-                            </div>
-                        </div>
-                    </div>
+                        class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
                 </div>
 
                 <!-- Details + Trailer -->
@@ -152,7 +136,13 @@
                                     <i class="bi bi-star-fill star parcial"></i>
                                 </div>
                             </div>
-                            <a href="includeReview.html" class="btn btn-primary w-100 mt-3">Añadir Reseña</a>
+                            <div class="row">
+                                <div class="col"><a href="includeReview.html" class="btn btn-primary w-100 mt-3">Añadir
+                                        Reseña</a></div>
+                                <div class="col"><a data-bs-toggle="modal" data-bs-target="#addToListModal"
+                                        class="btn btn-primary w-100 mt-3">Añadir
+                                        a Lista</a></div>
+                            </div>
                         </div>
                         <!-- Trailer -->
                         <div class="col-12 col-lg-5">
@@ -363,6 +353,49 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Añadir a Lista -->
+    <div class="modal fade" id="addToListModal" tabindex="-1" aria-labelledby="addToListLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addToListLabel">Añadir a Lista</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="favoritos" id="listaFavoritos">
+                            <label class="form-check-label" for="listaFavoritos">Favoritos</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="pendientes" id="listaPendientes">
+                            <label class="form-check-label" for="listaPendientes">Ver más tarde</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="ciencia-ficcion"
+                                id="listaCienciaFiccion">
+                            <label class="form-check-label" for="listaCienciaFiccion">Ciencia Ficción</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

@@ -58,7 +58,7 @@ function signUp() {
     }
 
     //add user to bbdd
-    document.location.href = 'login.html';
+    document.location.href = 'signUp.html';
 }
 
 document.getElementById('cancelBtn')?.addEventListener('click', cancelOp);

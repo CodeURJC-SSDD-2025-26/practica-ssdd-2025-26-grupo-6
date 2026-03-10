@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="primary principal" id="page-peliculas">
+<body class="primary principal">
     <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
@@ -87,32 +87,33 @@
 
     <!-- Page Content -->
     <div class="content">
-        <div class="mt-4" id="peliculasNuevas"> <!-- First Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Peliculas recientemente añadidas</h4>
-                <a class="btn btn-secondary" href="peliculasLista.html">Ver más</a>
+        <div class="card p-4 generic-card rounded-4 border-0">
+            <h2 class="h3 mb-4 text-center text-white">Avatar</h2>
+            <div class="photo-evaluate">
+                <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
+                    onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
             </div>
-            <!-- Films section-->
-            <div class="films"></div>
-        </div>
-        <div class="mt-3" id="peliculasAcción"> <!-- Second Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Peliculas de Acción</h4>
-                <a class="btn btn-secondary" href="peliculasLista.html">Ver más</a>
-            </div>
-            <!-- Films section-->
-            <div class="films"></div>
-        </div>
-        <div class="mt-3 mb-4" id="peliculasAventura"> <!-- Third Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Peliculas de Aventura</h4>
-                <a class="btn btn-secondary" href="peliculasLista.html">Ver más</a>
-            </div>
-            <!-- Films section-->
-            <div class="films"></div>
+            <form class="form-review">
+                <!-- Stars -->
+                <div class="d-flex flex-column gap-1">
+                    <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
+                    <div class="d-flex mt-0" id="stars">
+                        <i class="bi bi-star star" data-value="1"></i>
+                        <i class="bi bi-star star" data-value="2"></i>
+                        <i class="bi bi-star star" data-value="3"></i>
+                        <i class="bi bi-star star" data-value="4"></i>
+                        <i class="bi bi-star star" data-value="5"></i>
+                        <input type="hidden" id="rating" name="rating">
+                    </div>
+                </div>
+                <!-- Review -->
+                <div class="d-flex flex-column gap-2 ">
+                    <label class="fw-bold text-white fs-6">Reseña:</label>
+                    <textarea class="form-control bg-white text-dark" id="reviewInput" placeholder="Review"
+                        style="height: 100px">Es una maravilla de pelicula, he aprendido mucho tortilla de patatas.</textarea>
+                </div>
+                <a href="reseñas.html" class="btn btn-primary w-100">Guardar Reseña</a>
+            </form>
         </div>
     </div>
 
@@ -147,10 +148,10 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Scripts -->
-    <script src="js/searchFunc.js"></script> 
-    <script src="js/loadMoviesSeriesLists.js"></script>
+    <script src="js/searchFunc.js"></script>
+    <script src="js/stars.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

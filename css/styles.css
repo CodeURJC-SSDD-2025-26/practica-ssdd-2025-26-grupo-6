@@ -250,6 +250,8 @@ html, body{
     border-radius:1.5rem !important;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     font-size:1.2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -369,6 +371,6 @@ canvas{
 .table-admin table {
     min-width: 700px;
 }
-.table-admin .modal-footer .btn, #avatarModal .modal-footer .btn, #newListModal .modal-footer .btn, .añadir-lista .btn{
+.table-admin .modal-footer .btn, #avatarModal .modal-footer .btn, #newListModal .modal-footer .btn, .añadir-lista .btn, #addToListModal .btn{
     width: auto !important;
 }

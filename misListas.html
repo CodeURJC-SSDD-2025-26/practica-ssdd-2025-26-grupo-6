@@ -35,23 +35,23 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1"></i>
+                        <i class="bi bi-list fs-1" ></i> 
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
-                                    <h5>Peliculas</h5>
+                                    <h4>Peliculas</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="series.html">
-                                    <h5>Series</h5>
+                                    <h4>Series</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="lists.html">
-                                    <h5>Listas</h5>
+                                    <h4>Listas</h4>
                                 </a>
                             </li>
                         </ul>
@@ -64,7 +64,6 @@
                                     <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
                                 </div>
                             </div>
-
                             <div class="col-1 profile dropdown text-end">
                                 <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,7 +96,8 @@
             </a>
         </div>
         <div class="d-flex justify-content-start gap-3 p-3 añadir-lista">
-            <div class="btn btn-primary rounded w-100" data-bs-toggle="modal" data-bs-target="#newListModal" role="button">
+            <div class="btn btn-primary rounded w-100" data-bs-toggle="modal" data-bs-target="#newListModal"
+                role="button">
                 Añadir Lista
             </div>
         </div>
@@ -108,13 +108,13 @@
                 <div class="col-auto d-flex align-items-center gap-2">
                     <h4>Me gustan</h4>
                 </div>
+                <div class="col-auto ms-auto p-3">
+                    <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
+                            class="bi bi-trash3 fs-5"></i></button>
+                </div>
             </div>
             <!-- Films section-->
             <div class="films"></div>
-        </div>
-        <div class="d-flex justify-content-end gap-3 p-3">
-            <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
-                    class="bi bi-trash3 fs-5"></i></button>
         </div>
         <!-- Second Section -->
         <div style="margin-top: 30px;">
@@ -123,13 +123,13 @@
                 <div class="col-auto d-flex align-items-center gap-2">
                     <h4>Peliculas de Ciencia Ficción</h4>
                 </div>
+                <div class="col-auto  ms-auto p-3">
+                    <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
+                            class="bi bi-trash3 fs-5"></i></button>
+                </div>
             </div>
             <!-- Films section-->
             <div class="films"></div>
-        </div>
-        <div class="d-flex justify-content-end gap-3 p-3">
-            <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
-                    class="bi bi-trash3 fs-5"></i></button>
         </div>
         <!-- Third Section -->
         <div style="margin-top: 30px;">
@@ -138,17 +138,17 @@
                 <div class="col-auto d-flex align-items-center gap-2">
                     <h4>Peliculas que tengo que ver</h4>
                 </div>
+                <div class="col-auto  ms-auto p-3">
+                    <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
+                            class="bi bi-trash3 fs-5"></i></button>
+                </div>
             </div>
             <!-- Films section-->
             <div class="films">
                 <!-- Card Movies-->
             </div>
         </div>
-        <div class="d-flex justify-content-end gap-3 p-3">
-            <button type="button" class="btn btn-sm btn-secondary border  p-2"><i
-                    class="bi bi-trash3 fs-5"></i></button>
-        </div>
-        
+
     </div>
 
     <!-- Footer -->
@@ -174,14 +174,16 @@
             <p class="text-center">&copy; 2025 Company, Inc</p>
             <div class="d-flex justify-content-between gap-3">
                 <a href="#">
-                    <img src="images/logoInsta.webp" class="rounded-circle" width="50" height="50">
+                    <i class="bi bi-instagram"></i>
                 </a>
                 <a href="#">
-                    <img src="images/logoX.webp" class="rounded-circle" width="50" height="50">
+                    <i class="bi bi-twitter-x"></i>
                 </a>
             </div>
         </div>
     </footer>
+
+    <!-- Modal -->
     <div class="modal fade" id="newListModal" tabindex="-1" aria-labelledby="newListLabel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -195,8 +197,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar
-                        Cambios</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar Cambios</button>
                 </div>
             </div>
         </div>

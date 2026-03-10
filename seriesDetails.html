@@ -14,6 +14,8 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!--Chart.js Librarie-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -41,17 +43,17 @@
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
-                                    <h5>Peliculas</h5>
+                                    <h4>Peliculas</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="series.html">
-                                    <h5>Series</h5>
+                                    <h4>Series</h4>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="lists.html">
-                                    <h5>Listas</h5>
+                                    <h4>Listas</h4>
                                 </a>
                             </li>
                         </ul>
@@ -84,7 +86,7 @@
             </nav>
         </div>
     </div>
-    
+
     <!-- Page content -->
     <div class="content">
         <div class="px-5 mb-4 mt-3">
@@ -137,7 +139,7 @@
                                     <i class="bi bi-star-fill star parcial"></i>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary mt-3">Añadir reseña</button>
+                            <a href="includeReview.html" type="button" class="btn btn-primary mt-3">Añadir reseña</a>
                         </div>
                         <!-- Trailer -->
                         <div class="col-12 col-lg-5">
@@ -145,6 +147,9 @@
                             <div class="ratio ratio-16x9 rounded shadow overflow-hidden">
                                 <iframe src="https://www.youtube.com/embed/5PSNL1qE6VY?si=bdNm2Pa2ypqcAwLX"
                                     title="Tráiler" allowfullscreen></iframe>
+                            </div>
+                            <div class="me-3 mt-4">
+                                <canvas id="myReviewsBarFilm"></canvas>
                             </div>
                         </div>
                     </div>
@@ -320,16 +325,16 @@
                 <a href="principal.html" class="nav-link px-2">Inicio</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Política de Cookies</a>
+                <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Aviso Legal</a>
+                <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">FAQs</a>
+                <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link px-2">Sobre Nosotros</a>
+                <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
             </li>
         </ul>
         <div class="d-flex justify-content-between">
@@ -348,6 +353,8 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/searchFunc.js"></script>
+
+    <script src="js/graficoBarrasValoracionesPeliculas.js" defer></script>
 </body>
 
 </html>

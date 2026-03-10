@@ -14,16 +14,16 @@ const peliculas = [
 ];
 
 const series = [
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' },
-    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'movieDetails.html' }
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar2', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar3', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar4', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' },
+    { titulo: 'SAvatar', imagen: 'images/carteleraEjemploAvatar.webp', link: 'seriesDetails.html' }
 ];
 
 const listas = [
@@ -56,9 +56,26 @@ function search() {
         const filteredListas = listas.filter(lista => lista.titulo.toLowerCase().includes(query));
 
         html.innerHTML = `
-            <div class="row">
-                <div class="col"><h2>Resultado de búsqueda para: ${query}</h2></div>
-            </div>`;
+            <div class=mb-5><h2>Resultado de búsqueda para: ${query}</h2></div>`;
+
+        if (filteredPeliculas.length === 0 && filteredSeries.length === 0 && filteredListas.length === 0) {
+            html.innerHTML += `
+                <div class="container d-flex justify-content-center align-items-center text-center">
+                    <div class="row align-items-center justify-content-center">
+                        
+                        <div class="col-8 col-sm-6 col-md-4 col-lg-3">
+                            <img class="img-fluid" src="images/searchError.png" alt="Imagen Error">
+                        </div>
+
+                        <div class="col-12 col-sm-auto text-center text-md-start mt-3 mt-sm-0">
+                            <h2 class="mb-2">No se encuentran resultados para tu búsqueda</h2>
+                            <p class="fs-5">Prueba con otra palabra clave</p>
+                        </div>
+
+                    </div>
+                </div>`;
+            return;
+        }
 
         if (filteredPeliculas.length > 0) {
             html.innerHTML += `<h3>Películas:</h3>
