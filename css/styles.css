@@ -32,10 +32,7 @@ html, body{
     grid-area: header;
     background: var(--bs-secondary);
 }
-
-.nav-link {
-    color: var(--bs-text-color) !important;
-}
+.nav-link { color: var(--bs-text-color) !important; }
 /* search bar*/
 .search { 
     grid-area: search; 
@@ -136,6 +133,12 @@ html, body{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/*Posters*/
+.poster{
+    width: min(220px, 100%);
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
 
 
 /* FOOTER */
@@ -145,7 +148,6 @@ html, body{
     color: var(--bs-text-color);
 }
 .footer .nav-link { color: var(--bs-text-color) !important; }
-
 .footer .nav-link:hover { color: #3a3f6b !important; }
 
 
