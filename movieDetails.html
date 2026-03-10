@@ -86,6 +86,7 @@
             </nav>
         </div>
     </div>
+
     <!-- Page content -->
     <div class="content">
         <div class="px-5 mb-4 mt-3">
@@ -93,7 +94,23 @@
                 <!-- Poster -->
                 <div class="col-12 col-md-3">
                     <img src="images/carteleraEjemploAvatar.webp" alt="Poster de la película"
-                        class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
+                        class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover; cursor: zoom-in;"
+                        data-bs-toggle="modal" data-bs-target="#modalPoster">
+                </div>
+                <!-- Modal Poster -->
+                <div class="modal fade" id="modalPoster" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content bg-transparent border-0">
+                            <div class="modal-header border-0 pb-0 justify-content-end">
+                                <button type="button" class="btn-close btn-close-white"
+                                    data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body p-0 text-center">
+                                <img src="images/carteleraEjemploAvatar.webp" alt="Poster ampliado"
+                                    class="img-fluid rounded shadow">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Details + Trailer -->
