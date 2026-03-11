@@ -104,21 +104,8 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ### **Participación de Miembros en la Práctica 1**
 
-#### **Alumno 1 - [Nombre Completo]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 2 - Matias Maccarrone**
+#### **Alumno 1 - Matias Maccarrone**
 
 
 | Nº    | Commits      | Files      |
@@ -128,6 +115,21 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 |3| [Creación del Header y Footer de las páginas, luego se agregó un menú dropdown en el perfil pero la estructura general se conservó](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/fa2bbbf3ee648cd8114fd858f4e05062e318f94e)  | [principal.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/principal.html)   |
 |4| [Adición de distintas funciones con javaScript, tales como, filtros para el login o signUp, el permitir agregar nueva filmografia con solo escribir sus datos en una estructura en el fichero .js, y que funcione la barra de búsqueda de la cabecera. Estas funcionalidades fueron separadas para más claridad y errores que habían. (El link del commit es el primer código)](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d25cedeb38bed0ac17684903221b7cc5615c1724#diff-d455aa836573252d1dfd9da86558c49ddb9cd10a62efae8093bfad90552a0a7a)  | [loadMoviesSeriesList.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/loadMoviesSeriesLists.js), [loginSignUp.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/signUpLogin.js)   |
 |5| [Funcionamiento completo de la barra de búsqueda del header mediante javaScript. (El link del commit es de la primera implementación, luego se separó y corrigió)](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/15bfdacc1929677929eafd81bbcaca917341c7e6)  | [searchFunc.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/searchFunc.js)    |
+
+---
+
+#### **Alumno 2 - [Alejandro Carretero Badorrey]**
+
+- **Desarrollo del Módulo Multimedia**: Responsable principal del perfil (profile), 
+administrador(administrator) y de mis listas (myLists).
+
+| Nº    | Commits      | Files      |
+|:------------: |:------------:| :------------:|
+|1| [Hacer en una card todo el perfil, además de añadir en el boton de editar perfil que al pulsarle se combierte en un formulario](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d3d2355a1a59484d6f16bd0a35c57e93410c377c)  | [profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/profile.html)   |
+|2| [En este commit lo que hice fue añadir al adminstrador todas las tablas(Usuarios, películas, series, listas) ](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/2055de7fbdffecc0dc41de7f8affed152ff5a86d)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
+|3| [En este commit se hicieron todos los modales de las tablas, para ver un ampliado de las tablas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/70ebd9e13e9237c0b4211e9ce95e1238a70e22a1)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
+|4| [En este commit hice todos los gráficos de todas las páginas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3340fa52294c86cba4362b511cf158a1e9623e65)  | [filmsRatingBarChart.js / userRatingBarChart.js / pieChart.js ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/filmsRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/userRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/pieChart.js)   |
+|5| [En este commit se creo la página myLists que es una página en el perfil con la cual puedes ver todas tus listas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/34af3952fccf0b5c356cb6fc156016eb3c624d9d)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/myLists.html)   |
 
 ---
 
