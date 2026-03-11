@@ -110,6 +110,15 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página en la que se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
+#### **4. Iniciar Sesión**
+![Login](images/login.jpeg)
+
+> Página dedicada a que el usuario inicie sesión en su cuenta, también puede entrar como anónimo, crearse una cuenta o seleccionar la opción de "Olvidé la contraseña".
+#### **5. Crear Cuenta**
+![Crear Cuenta](images/signup.jpeg)
+
+> Página dedicada a que el usuario se cree una cuenta, obligándolo a completar todos los campos, con los formatos correctos.
+
 #### **6. Perfil**
 ![Perfil](images/profile.png)
 
