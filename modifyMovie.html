@@ -35,7 +35,7 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1" ></i> 
+                        <i class="bi bi-list fs-1"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
@@ -94,10 +94,10 @@
 
                     <!-- Clikable Image -->
                     <div class="d-flex flex-column align-items-center mb-3">
-                        <img id="posterPreview" src="images/peliculaAdministrador.jpg"
-                            alt="Seleccionar imagen" class="border rounded-3 img-fluid poster"
-                            style="cursor: pointer;">
-                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar la portada de la película</p>
+                        <img id="posterPreview" src="images/peliculaAdministrador.jpg" alt="Seleccionar imagen"
+                            class="border rounded-3 img-fluid poster" style="cursor: pointer;">
+                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar la portada de la película
+                        </p>
                     </div>
                     <!-- Hidden Input file -->
                     <input id="posterInput" type="file" accept="image/*" class="d-none">
@@ -165,8 +165,13 @@
                             <textarea class="form-control" id="sinopsisInput" placeholder="Sinopsis"
                                 rows="4">Un explorador humano y una mujer de la raza Na'vi se unen para luchar contra los humanos que invaden su planeta.</textarea>
                         </div>
-                        <a href="administrador.html" class="btn btn-primary w-100 py-2 fw-bold" type="submit">Modificar
-                            Película</a>
+                        <div class="d-flex gap-2">
+                            <a href="administrador.html" class="btn btn-primary w-50 py-2 "
+                                type="submit">Modificar
+                                Película</a>
+                            <a href="administrator.html" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                        </div>
+
                     </form>
                 </div>
             </div>
