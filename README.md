@@ -101,102 +101,102 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Es la página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
 
 #### **2. Series**
-![Página Principal](images/series.jpeg)
+![Series](images/series.jpeg)
 
 > Esta página es igual a la principal, pero con la diferencia que se ven series.
 
 #### **3. Listas del sistema**
-![Página Principal](images/lists.jpeg)
+![Listas del sistemas](images/lists.jpeg)
 
 > En esta página se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
 #### **6. Perfil**
-![Página Principal](images/profile.png)
+![Perfil](images/profile.png)
 
 > Aquí el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
 
 #### **7. Detalles de las listas**
-![Página Principal](images/filmsLists.png)
+![Detalles de las listas](images/filmsLists.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **8. Detalles de las películas**
-![Página Principal](images/moviesDetails.jpeg)
+![Detalles de las películas](images/moviesDetails.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **9. Detalles de las series**
-![Página Principal](images/seriesDetails.jpeg)
+![Detalles de las series](images/seriesDetails.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **10. Añadir reseña**
-![Página Principal](images/includeReview.png)
+![Añadir reseña](images/includeReview.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página en la que se muestra la cartelera de la película/serie y se puede añadir una valoración y una reseña escrita.
 
 #### **11. Reseñas**
-![Página Principal](images/reviews.jpeg)
+![Reseñas](images/reviews.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página en la que se muestran una lista de todas las reseñas de una película/serie De cada reseña se tiene su valoración y su reseña escrita además del nombre del usuario que la escribió.
 
 #### **12. Mis listas**
-![Página Principal](images/myLists.jpeg)
+![Mis listas](images/myLists.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **13. Mis reseñas**
-![Página Principal](images/myReviews.png)
+![Mis reseñas](images/myReviews.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **14. Modificar reseña**
-![Página Principal](images/modifyReview.png)
+![Modificar reseña](images/modifyReview.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde se muestra una reseña que ya ha sido escrita y que el usuario quiere modificar. Se puede modificar tanto la puntuación como la parte escrita.
 
 #### **15. Administrador**
-![Página Principal](images/administrator.jpeg)
+![Administrador](images/administrator.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde el administrador puede editar y eliminar usuarios, películas, series, y listas tanto del sistema como de cada usuario. Además se pueden añadir series y películas. En la parte inferior, se encuentra un gráfico con los géneros.
 
 #### **16. Añadir película**
-![Página Principal](images/includeMovies.jpeg)
+![Añadir película](images/includeMovies.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **17. Modificar película**
-![Página Principal](images/modifyMovies.jpeg)
+![Modificar película](images/modifyMovies.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **18. Añadir serie**
-![Página Principal](images/includeSeries.jpeg)
+![Añadir serie](images/includeSeries.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **19. Modificar series**
-![Página Principal](images/modifySeries.jpeg)
+![Modificar series](images/modifySeries.jpeg)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **20. Políticas de cookies**
-![Página Principal](images/cookies.png)
+![Políticas de cookies](images/cookies.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **21. Aviso legal**
-![Página Principal](images/legalAdvice.png)
+![Aviso legal](images/legalAdvice.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **22. Preguntas Frecuentes**
-![Página Principal](images/frequentlyAskedQuestions.png)
+![Preguntas Frecuentes](images/frequentlyAskedQuestions.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
 #### **23. Sobre nosotros**
-![Página Principal](images/aboutUs.png)
+![Sobre nosotros](images/aboutUs.png)
 
 > [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
 
