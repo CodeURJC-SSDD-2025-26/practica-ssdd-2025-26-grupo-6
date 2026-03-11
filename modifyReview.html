@@ -86,79 +86,81 @@
     </div>
 
     <!-- Page Content -->
-    <div class="content">
-        <div class="card p-4 generic-card rounded-4 border-0">
-            <h2 class="h3 mb-4 text-center text-white">Avatar</h2>
-            <div class="photo-evaluate">
-                <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
-                    onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
+    <div class="container-fluid py-4 content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h3 class="mb-3 text-center text-white fs-md-2">Avatar</h3>
+                    <!-- Poster -->
+                    <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
+                        class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster">
+                        
+                    <form class="form-review">
+                        <!-- Stars -->
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
+                            <div class="d-flex mt-0" id="stars">
+                                <i class="bi bi-star star" data-value="1"></i>
+                                <i class="bi bi-star star" data-value="2"></i>
+                                <i class="bi bi-star star" data-value="3"></i>
+                                <i class="bi bi-star star" data-value="4"></i>
+                                <i class="bi bi-star star" data-value="5"></i>
+                                <input type="hidden" id="rating" name="rating">
+                            </div>
+                        </div>
+                        <!-- Review -->
+                        <div class="d-flex flex-column gap-2 ">
+                            <label class="fw-bold text-white fs-6">Reseña:</label>
+                            <textarea class="form-control bg-white text-dark" id="reviewInput" placeholder="Review"
+                                rows="4"> Es una maravilla de película, he aprendido mucho y me parece muy entretenida.</textarea>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="myReviews.html" class="btn btn-primary p-2 w-50">Guardar Reseña</a>
+                            <a href="myReviews.html" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+
+                        </div>
+                    </form>
+                </div>
             </div>
-            <form class="form-review">
-                <!-- Stars -->
-                <div class="d-flex flex-column gap-1">
-                    <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
-                    <div class="d-flex mt-0" id="stars">
-                        <i class="bi bi-star star" data-value="1"></i>
-                        <i class="bi bi-star star" data-value="2"></i>
-                        <i class="bi bi-star star" data-value="3"></i>
-                        <i class="bi bi-star star" data-value="4"></i>
-                        <i class="bi bi-star star" data-value="5"></i>
-                        <input type="hidden" id="rating" name="rating">
+
+            <!-- Footer -->
+            <footer class="footer py-3">
+                <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item">
+                        <a href="principal.html" class="nav-link px-2">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between">
+                    <p class="text-center">&copy; 2025 Company, Inc</p>
+                    <div class="d-flex justify-content-between gap-3">
+                        <a href="#">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
                     </div>
                 </div>
-                <!-- Review -->
-                <div class="d-flex flex-column gap-2 ">
-                    <label class="fw-bold text-white fs-6">Reseña:</label>
-                    <textarea class="form-control bg-white text-dark" id="reviewInput" placeholder="Review"
-                        rows="4"> Es una maravilla de película, he aprendido mucho y me parece muy entretenida.</textarea>
-                </div>
-                <div class="d-flex gap-2">
-                    <a href="myReviews.html" class="btn btn-primary p-2 w-50">Guardar Reseña</a>
-                    <a href="myReviews.html" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+            </footer>
 
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer py-3">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item">
-                <a href="principal.html" class="nav-link px-2">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a href="cookies.html" class="nav-link px-2">Política de Cookies</a>
-            </li>
-            <li class="nav-item">
-                <a href="legalAdvise.html" class="nav-link px-2">Aviso Legal</a>
-            </li>
-            <li class="nav-item">
-                <a href="frequentlyAskedQuestions.html" class="nav-link px-2">Preguntas Frecuentes</a>
-            </li>
-            <li class="nav-item">
-                <a href="aboutUs.html" class="nav-link px-2">Sobre Nosotros</a>
-            </li>
-        </ul>
-        <div class="d-flex justify-content-between">
-            <p class="text-center">&copy; 2025 Company, Inc</p>
-            <div class="d-flex justify-content-between gap-3">
-                <a href="#">
-                    <i class="bi bi-instagram"></i>
-                </a>
-                <a href="#">
-                    <i class="bi bi-twitter-x"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/searchFunc.js"></script>
-    <script src="js/stars.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+            <!-- Scripts -->
+            <script src="js/searchFunc.js"></script>
+            <script src="js/stars.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>
