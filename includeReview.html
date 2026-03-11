@@ -35,23 +35,23 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1" ></i> 
+                        <i class="bi bi-list fs-1"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="principal.html">
-                                    <h4>Peliculas</h4>
+                                    <h5>Peliculas</h5>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="series.html">
-                                    <h4>Series</h4>
+                                    <h5>Series</h5>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="lists.html">
-                                    <h4>Listas</h4>
+                                    <h5>Listas</h5>
                                 </a>
                             </li>
                         </ul>
@@ -86,36 +86,41 @@
     </div>
 
     <!-- Page Content -->
-    <div class="content">
-        <div class="card p-4 generic-card rounded-4 border-0">
-            <h2 class="h3 mb-4 text-center text-white">Avatar</h2>
-            <div class="photo-evaluate">
-                <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
-                    onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
+    <div class="container-fluid py-4 content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h3 class="mb-3 text-center text-white fs-md-2">Avatar</h3>
+                    <!-- Poster -->
+                    <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
+                        class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster">
+
+                    <form class="form-review">
+                        <!-- Stars -->
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
+                            <div class="d-flex mt-0" id="stars">
+                                <i class="bi bi-star star" data-value="1"></i>
+                                <i class="bi bi-star star" data-value="2"></i>
+                                <i class="bi bi-star star" data-value="3"></i>
+                                <i class="bi bi-star star" data-value="4"></i>
+                                <i class="bi bi-star star" data-value="5"></i>
+                                <input type="hidden" id="rating" name="rating">
+                            </div>
+                        </div>
+                        <!-- Review -->
+                        <div class="d-flex flex-column gap-2">
+                            <label class="fw-bold text-white fs-6">Reseña:</label>
+                            <textarea class="form-control bg-white text-dark"
+                                placeholder="Escribe tu reseña aquí..."></textarea>
+                        </div>
+                        <a href="reseñas.html" class="btn btn-primary w-100">Guardar Reseña</a>
+                    </form>
+                </div>
             </div>
-            <form class="form-review">
-                <!-- Stars -->
-                <div class="d-flex flex-column gap-1">
-                    <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
-                    <div class="d-flex mt-0" id="stars">
-                        <i class="bi bi-star star" data-value="1"></i>
-                        <i class="bi bi-star star" data-value="2"></i>
-                        <i class="bi bi-star star" data-value="3"></i>
-                        <i class="bi bi-star star" data-value="4"></i>
-                        <i class="bi bi-star star" data-value="5"></i>
-                        <input type="hidden" id="rating" name="rating">
-                    </div>
-                </div>
-                <!-- Review -->
-                <div class="d-flex flex-column gap-2">
-                    <label class="fw-bold text-white fs-6">Reseña:</label>
-                    <textarea class="form-control bg-white text-dark"
-                        placeholder="Escribe tu reseña aquí..."></textarea>
-                </div>
-                <a href="reseñas.html" class="btn btn-primary w-100">Guardar Reseña</a>
-            </form>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="footer py-3">

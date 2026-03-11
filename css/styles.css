@@ -32,10 +32,7 @@ html, body{
     grid-area: header;
     background: var(--bs-secondary);
 }
-
-.nav-link {
-    color: var(--bs-text-color) !important;
-}
+.nav-link { color: var(--bs-text-color) !important; }
 /* search bar*/
 .search { 
     grid-area: search; 
@@ -107,8 +104,8 @@ html, body{
     background-color:#0d6efd !important;
     border: none;
     padding: 12px;
-    width:100%;
-    font-weight:bold;
+    width: 100%;
+    font-weight: bold;
     transition: all 0.2s;
 }
 .btn-primary:hover{
@@ -136,6 +133,19 @@ html, body{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/*Posters*/
+.poster{
+    width: min(220px, 100%);
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+/*Modal buttons*/
+.modal .btn-primary{
+    border: none;
+    padding: 7px;
+    width:100%;
+}
+
 
 
 /* FOOTER */
@@ -145,7 +155,6 @@ html, body{
     color: var(--bs-text-color);
 }
 .footer .nav-link { color: var(--bs-text-color) !important; }
-
 .footer .nav-link:hover { color: #3a3f6b !important; }
 
 
@@ -188,7 +197,7 @@ html, body{
 .legal-info span{ text-decoration: underline; }
 
 
- /* LISTS */
+/* LISTS */
 /* Films container*/
 .films {
     display: flex;
@@ -201,7 +210,6 @@ html, body{
     background-color: var(--bs-secondary);
     border-radius: 10px;
 }
-
 /* Films Scrollbar*/
 .films::-webkit-scrollbar{
     background-color: #131527;
@@ -210,7 +218,6 @@ html, body{
     background-color:var(--bs-info);
     border-radius: 10px;
 }
-
 /* Films */
 .films .card {
     flex: 0 0 180px; 
@@ -257,6 +264,14 @@ html, body{
 
 
 /* MOVIES AND SERIES DETAILS */
+.label-directed{
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    font-weight: bold;
+}
+.badge-custom{
+    background:#3a3f6b;
+}
 .card-text{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -264,6 +279,7 @@ html, body{
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: justify;
 }
 .modal .card-text {
     display: block;
@@ -374,4 +390,9 @@ canvas{
 }
 .table-admin .modal-footer .btn, #modalAvatar .modal-footer .btn, #newListModal .modal-footer .btn, .add-list .btn, #addToListModal .btn{
     width: auto !important;
+}
+
+/*FilmsList*/
+.film-list{
+    background-color: var(--bs-secondary)
 }
