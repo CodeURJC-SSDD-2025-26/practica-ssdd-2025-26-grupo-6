@@ -1,4 +1,5 @@
 (function () {
+  //Check if the DOM is loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -6,29 +7,33 @@
   }
 
   function init() {
-    const container = document.getElementById('camposGeneros');
-    const addBtn = document.getElementById('addGenero');
-    const removeBtn = document.getElementById('removeGenero');
+    const container = document.getElementById('genreFields');
+    const addBtn = document.getElementById('addGenre');
+    const removeBtn = document.getElementById('removeGenre');
 
+    //Safety check, ensure all the required elements are in the DOM
     if (!container || !addBtn || !removeBtn) return;    
 
+    //Add a new genre field
     addBtn.addEventListener('click', () => {
-      const nuevo = crearCampoGenero();
-      container.appendChild(nuevo);
+      const newF = createGenreField();
+      container.appendChild(newF);
       nuevo.querySelector('input').focus();
     });
 
+    //Remove the last genre field
     removeBtn.addEventListener('click', () => {
-      const campos = container.querySelectorAll('.genero-extra');
-      if (campos.length > 1) {
-        campos[campos.length - 1].remove();
+      const fields = container.querySelectorAll('.genre-extra');
+      if (fields.length > 1) {
+        fields[fields.length - 1].remove();
       }
     });
   }
 
-  function crearCampoGenero() {
+  //Create and return the input group
+  function createGenreField() {
     const wrapper = document.createElement('div');
-    wrapper.className = 'input-group genero-extra';
+    wrapper.className = 'input-group genre-extra';
     wrapper.innerHTML = `
       <input type="text" class="form-control" name="genres[]" placeholder="Género">
     `;

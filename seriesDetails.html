@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
-    <title>Palomix - Peliculas</title>
+    <title>Palomix - Detalles Series</title>
     <!-- Libraries-->
     <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -160,7 +160,10 @@
 
         <!--Review Movie Section-->
         <div class="content px-5">
-            <h3 class="fw-bold mb-3">Reseñas:</h3>
+            <div class="d-flex justify-content-start align-items-center gap-3 mb-2 view-more">
+                <h3 class="fw-bold mb-0">Reseñas:</h3>
+                <a class="btn btn-secondary" href="reseñas.html">Ver más</a>
+            </div>
             <div class="row row-cols-1 row-cols-md-3 g-5">
                 <!-- Review 1 -->
                 <div class="col">
@@ -351,6 +354,49 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Add to List -->
+    <div class="modal fade" id="addToListModal" tabindex="-1" aria-labelledby="addToListLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addToListLabel">Añadir a Lista</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="favoritos" id="listaFavoritos">
+                            <label class="form-check-label" for="listaFavoritos">Favoritos</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="pendientes" id="listaPendientes">
+                            <label class="form-check-label" for="listaPendientes">Ver más tarde</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="ciencia-ficcion"
+                                id="listaCienciaFiccion">
+                            <label class="form-check-label" for="listaCienciaFiccion">Ciencia Ficción</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

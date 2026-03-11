@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
-    <title>Palomix - Peliculas</title>
+    <title>Palomix - Añadir Serie</title>
     <!-- Libraries-->
     <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -137,13 +137,13 @@
                         </div>
                         <div id="generosContainer" class="d-flex flex-column">
                             <label class="fw-bold text-white">Género:</label>
-                            <div id="camposGeneros" class="d-flex flex-column gap-2">
-                                <div class="input-group genero-extra">
+                            <div id="genreFields" class="d-flex flex-column gap-2">
+                                <div class="input-group genre-extra">
                                     <input type="text" class="form-control" name="genres[]" placeholder="Género">
-                                    <button type="button" class="btn btn-outline-primary" id="addGenero">
+                                    <button type="button" class="btn btn-outline-primary" id="addGenre">
                                         <i class="bi bi-plus-lg"></i>
                                     </button>
-                                    <button type="button" class="btn btn-outline-danger" id="removeGenero">
+                                    <button type="button" class="btn btn-outline-danger" id="removeGenre">
                                         <i class="bi bi-dash-lg"></i>
                                     </button>
                                 </div>
@@ -151,7 +151,7 @@
                         </div>
                         <div id="platformsContainer" class="d-flex flex-column">
                             <label class="fw-bold text-white">Plataforma:</label>
-                            <div id="camposPlataformas" class="d-flex flex-column gap-2">
+                            <div id="platformField" class="d-flex flex-column gap-2">
                                 <div class="input-group platform-extra">
                                     <input type="text" class="form-control" name="platforms[]" placeholder="Plataforma">
                                     <button type="button" class="btn btn-outline-primary" id="addPlatform">
@@ -209,7 +209,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/palomix-admin.js"></script>
+    <script src="js/posterMoviesSeries.js"></script>
     <script src="js/genres.js"></script>
     <script src="js/platforms.js"></script>
     <script src="js/searchFunc.js"></script>
