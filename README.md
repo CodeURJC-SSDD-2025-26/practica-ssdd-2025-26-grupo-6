@@ -101,102 +101,102 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
 
 #### **2. Series**
-![Página Principal](images/series.jpeg)
+![Series](images/series.jpeg)
 
 > Página igual a la principal, pero con la diferencia que se ven series.
 
 #### **3. Listas del sistema**
-![Página Principal](images/lists.jpeg)
+![Listas del sistemas](images/lists.jpeg)
 
 > Página en la que se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
 #### **6. Perfil**
-![Página Principal](images/profile.png)
+![Perfil](images/profile.png)
 
 > Página en la que el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
 
 #### **7. Detalles de las listas**
-![Página Principal](images/filmsLists.png)
+![Detalles de las listas](images/filmsLists.png)
 
 > Página donde se muestran todas las películas o series que componen una lista, con la posibilidad de acceder al detalle de cada una de ellas. 
 
 #### **8. Detalles de las películas**
-![Página Principal](images/moviesDetails.jpeg)
+![Detalles de las películas](images/moviesDetails.jpeg)
 
 > Página de detalle de una película, donde se muestra toda la información de la película, como su sinopsis, año de estreno, duración, etc. Además, se muestran las valoraciones que tiene la película y el usuario puede añadir su propia valoración. También se encuentra un trailer, un botón para añadir la película a una lista y un botón para ver las reseñas de la película. 
 
 #### **9. Detalles de las series**
-![Página Principal](images/seriesDetails.jpeg)
+![Detalles de las series](images/seriesDetails.jpeg)
 
 > Página de detalle de una serie, con la misma información que la página de detalle de una película, pero con la diferencia de que se muestra el número de temporadas, en lugar de la duración. 
 
 #### **10. Añadir reseña**
-![Página Principal](images/includeReview.png)
+![Añadir reseña](images/includeReview.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página en la que se muestra la cartelera de la película/serie y se puede añadir una valoración y una reseña escrita.
 
 #### **11. Reseñas**
-![Página Principal](images/reviews.jpeg)
+![Reseñas](images/reviews.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página en la que se muestran una lista de todas las reseñas de una película/serie De cada reseña se tiene su valoración y su reseña escrita además del nombre del usuario que la escribió.
 
 #### **12. Mis listas**
-![Página Principal](images/myLists.jpeg)
+![Mis listas](images/myLists.jpeg)
 
 > Página donde los usuarios pueden ver las listas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido o eliminarla.
 
 #### **13. Mis reseñas**
-![Página Principal](images/myReviews.png)
+![Mis reseñas](images/myReviews.png)
 
 > Página donde los usuarios pueden ver las reseñas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido, modificarla o eliminarla.
 
 #### **14. Modificar reseña**
-![Página Principal](images/modifyReview.png)
+![Modificar reseña](images/modifyReview.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde se muestra una reseña que ya ha sido escrita y que el usuario quiere modificar. Se puede modificar tanto la puntuación como la parte escrita.
 
 #### **15. Administrador**
-![Página Principal](images/administrator.jpeg)
+![Administrador](images/administrator.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde el administrador puede editar y eliminar usuarios, películas, series, y listas tanto del sistema como de cada usuario. Además se pueden añadir series y películas. En la parte inferior, se encuentra un gráfico con los géneros.
 
 #### **16. Añadir película**
-![Página Principal](images/includeMovies.jpeg)
+![Añadir película](images/includeMovies.jpeg)
 
 > Página de creación de películas, con un formulario para introducir los datos de la película, como el título, la sinopsis, el año de estreno, etc.
 
 #### **17. Modificar película**
-![Página Principal](images/modifyMovies.jpeg)
+![Modificar película](images/modifyMovies.jpeg)
 
 > Página de modificación de películas, con un formulario para editar los mismos datos que se añaden en la página de creación de películas, pero con los campos ya rellenados con la información actual de la película que se va a modificar.
 
 #### **18. Añadir serie**
-![Página Principal](images/includeSeries.jpeg)
+![Añadir serie](images/includeSeries.jpeg)
 
 > Página de creación de series, con un formulario para introducir los datos de la serie, como el título, la sinopsis, el año de estreno, etc.
 
 #### **19. Modificar series**
-![Página Principal](images/modifySeries.jpeg)
+![Modificar series](images/modifySeries.jpeg)
 
 > Página de modificación de series, funciona igual que la de las películas, pero con los campos correspondientes a las series, como el número de temporadas.
 
 #### **20. Políticas de cookies**
-![Página Principal](images/cookies.png)
+![Políticas de cookies](images/cookies.png)
 
 > Página con información sobre las políticas de cookies de la aplicación, explicando qué tipos de cookies se utilizan, su finalidad.
 
 #### **21. Aviso legal**
-![Página Principal](images/legalAdvise.png)
+![Aviso legal](images/legalAdvice.png)
 
 > Página con información legal sobre la aplicación, incluyendo términos de uso, propiedad intelectual y responsabilidad.
 
 #### **22. Preguntas Frecuentes**
-![Página Principal](images/frequentlyAskedQuestions.png)
+![Preguntas Frecuentes](images/frequentlyAskedQuestions.png)
 
 > Página en la que se muestran las preguntas frecuentes de los usuarios, con su respuesta correspondiente, para resolver dudas comunes sobre el funcionamiento de la aplicación.
 
 #### **23. Sobre nosotros**
-![Página Principal](images/aboutUs.png)
+![Sobre nosotros](images/aboutUs.png)
 
 > Página en la que se explica quiénes somos y qué hacemos.
 
