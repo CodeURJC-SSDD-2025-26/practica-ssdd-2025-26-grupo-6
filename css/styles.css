@@ -388,7 +388,8 @@ canvas{
 .table-admin table {
     min-width: 700px;
 }
-.table-admin .modal-footer .btn, #modalAvatar .modal-footer .btn, #newListModal .modal-footer .btn, .add-list .btn, #addToListModal .btn{
+
+.btn-small{
     width: auto !important;
 }
 
