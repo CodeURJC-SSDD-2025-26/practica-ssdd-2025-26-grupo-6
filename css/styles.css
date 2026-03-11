@@ -197,7 +197,7 @@ html, body{
 .legal-info span{ text-decoration: underline; }
 
 
- /* LISTS */
+/* LISTS */
 /* Films container*/
 .films {
     display: flex;
@@ -390,4 +390,9 @@ canvas{
 }
 .table-admin .modal-footer .btn, #avatarModal .modal-footer .btn, #newListModal .modal-footer .btn, .añadir-lista .btn, #addToListModal .btn{
     width: auto !important;
+}
+
+/*FilmsList*/
+.film-list{
+    background-color: var(--bs-secondary)
 }
