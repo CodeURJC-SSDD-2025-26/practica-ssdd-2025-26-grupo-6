@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const ctx = document.getElementById('myReviewsBarUser');
     if (ctx) {
+
+        /* Chart Data */
         const data = {
             labels: ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4', '4,5', '5' ],
             datasets: [{
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }]
         };
 
+        /*Chart Shape*/
         const config = {
             type: 'bar',
             data: data,
@@ -24,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     title: {
                         display: true,
-                        text: 'Gafico de Valoraciones de Usuario',
+                        text: 'Grafico de Valoraciones de Usuario',
                         font: {
                             size: 20,
                             weight: 'bold'
@@ -38,6 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         new Chart(ctx, config);
     } else {
-        console.error("No se encontró el elemento con id ''")
+        console.error("Element with id '' not found")
     }
 })

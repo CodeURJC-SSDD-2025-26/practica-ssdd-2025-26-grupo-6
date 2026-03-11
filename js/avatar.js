@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    /* Declare Variables */
     const preview = document.getElementById('previewAvatar');
-    const btnGuardar= document.getElementById('saveAvatar');
+    const btnSave= document.getElementById('saveAvatar');
     const galleryImages = document.querySelectorAll('.img-selectable');
     
     const avatarLogo = document.getElementById('avatarLogo');
     const avatarProfile = document.getElementById('avatarProfile');
-    let selectedScr = "images/perfilNoReg.jpg";
+    let selectedSrc = "images/perfilNoReg.jpg";
+
+    /* Select Avatar */
     galleryImages.forEach(IMG => {
         IMG.addEventListener('click',function(){
             galleryImages.forEach(i => i.classList.remove('active-avatar'));
@@ -18,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     })
 
-    btnGuardar.addEventListener('click', function() {
+    /* Save the Selection */
+    btnSave.addEventListener('click', function() {
         if(avatarLogo){
             avatarLogo.src = selectedSrc;
         }

@@ -324,11 +324,11 @@ html, body{
     font-size:1.1rem;
 }
 #yearBirthInput{ color-scheme: dark; }
-#avatarModal .modal-content{
+#modalAvatar .modal-content{
     background-color: var(--bs-secondary);
     color: var(--bs-text-color);
 }
-#avatarModal .btn-close{ filter: invert(1) brightness(200%); }
+#modalAvatar .btn-close{ filter: invert(1) brightness(200%); }
 .img-selectable{
     cursor:pointer;
     transition:transform 0.2s, border-color 0.2s;
@@ -372,6 +372,6 @@ canvas{
 .table-admin table {
     min-width: 700px;
 }
-.table-admin .modal-footer .btn, #avatarModal .modal-footer .btn, #newListModal .modal-footer .btn, .añadir-lista .btn, #addToListModal .btn{
+.table-admin .modal-footer .btn, #modalAvatar .modal-footer .btn, #newListModal .modal-footer .btn, .add-list .btn, #addToListModal .btn{
     width: auto !important;
 }

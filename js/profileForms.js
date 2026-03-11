@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const btnEditarPerfil = document.getElementById('editarPerfilBtn');
+
+    /* Declare Variable */
+    const btnEditProfile = document.getElementById('editProfileBtn');
     const usernameElement = document.getElementById('username');
     const emailElement = document.getElementById('email');
     const yearBirthElement = document.getElementById('yearBirth');
-    const btnGuardar = document.createElement('button');
-    btnGuardar.textContent = 'Guardar Cambios';
-    btnGuardar.className='btn btn-primary';
-    btnGuardar.style.display = 'none';
-    btnEditarPerfil.parentNode.insertBefore(btnGuardar, btnEditarPerfil.nextSibling);
+    const btnSave = document.createElement('button');
+    btnSave.textContent = 'Guardar Cambios';
+    btnSave.className='btn btn-primary';
+    btnSave.style.display = 'none';
+    btnEditProfile.parentNode.insertBefore(btnSave, btnEditProfile.nextSibling);
 
-
-    btnEditarPerfil.addEventListener('click', function () {
+    /* Inserted the Html and converted to form */
+    btnEditProfile.addEventListener('click', function () {
 
         const parts= yearBirthElement.textContent.trim().split('-');
         const formatedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
@@ -19,12 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
         emailElement.innerHTML = `<input type="email" id="emailInput" class="input-perfil-personalizado" value="${emailElement.textContent.trim()}">`;
         yearBirthElement.innerHTML = `<input type="date" id="yearBirthInput" class="input-perfil-personalizado" value="${formatedDate}">`;
 
-        btnEditarPerfil.style.display = 'none';
-        btnGuardar.style.display = 'inline-block';
+        btnEditProfile.style.display = 'none';
+        btnSave.style.display = 'inline-block';
 
     });
 
-    btnGuardar.addEventListener('click', function () {
+    /* Save Elements */
+    btnSave.addEventListener('click', function () {
         const newUsername = document.getElementById('usernameInput').value;
         const newEmail = document.getElementById('emailInput').value;
         const newYearBirth = document.getElementById('yearBirthInput').value;
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         yearBirthElement.textContent = formatedDateFinal;
 
 
-        btnEditarPerfil.style.display = 'inline-block';
-        btnGuardar.style.display = 'none';
+        btnEditProfile.style.display = 'inline-block';
+        btnSave.style.display = 'none';
     })
 });             

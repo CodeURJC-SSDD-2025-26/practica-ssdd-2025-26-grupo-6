@@ -1,29 +1,32 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    const ctx = document.getElementById('myPie');
+    const ctx = document.getElementById('myReviewsBarFilm');
     if (ctx) {
+
+        /* Chart Data */
         const data = {
-            labels: ['Terrror', 'Romance', 'Aventuras', 'Ciencia ficcón'],
+            labels: ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4', '4,5', '5' ],
             datasets: [{
-                label: 'Mi dataset',
-                data: [10, 20, 30, 25],
+                data: [450, 837, 1212,6969, 2523, 4657,7523,14006,9305, 15685, 9565],
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#589245']
             }]
         };
 
+        /* Chart Shape */ 
         const config = {
-            type: 'pie',
+            type: 'bar',
             data: data,
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
                         position: 'top',
+                        display: false
                     },
                     title: {
                         display: true,
-                        text: 'Grafico de Géneros'
+                        text: 'Grafico de valoraciones de películas'
                     }
                 }
             },
@@ -31,6 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         new Chart(ctx, config);
     } else {
-        console.error("No se encontró el elemento con id ''")
+        console.error("Element with id '' not found")
     }
 })
