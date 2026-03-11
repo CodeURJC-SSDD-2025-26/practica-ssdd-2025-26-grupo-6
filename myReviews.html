@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
-    <title>Palomix - Modificar Reseña</title>
+    <title>Palomix - Reseñas</title>
     <!-- Libraries-->
     <!--Bootstrap Librarie-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="primary principal">
+<body class="primary principal" id="page-reviews">
     <!-- Navbar -->
     <div class="header">
         <div class="row align-items-center px-5">
@@ -35,7 +35,7 @@
                     <button class="navbar-toggler border-0 bg-white p-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-1"></i>
+                        <i class="bi bi-list fs-1" ></i> 
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav gap-4 me-auto mb-2 mb-lg-0">
@@ -70,7 +70,7 @@
                                     <img src="images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="profile.html">Mi Perfil</a></li>
+                                    <li><a class="dropdown-item" href="perfil.html">Mi Perfil</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -86,39 +86,9 @@
     </div>
 
     <!-- Page Content -->
-    <div class="content">
-        <div class="card p-4 generic-card rounded-4 border-0">
-            <h2 class="h3 mb-4 text-center text-white">Avatar</h2>
-            <div class="photo-evaluate">
-                <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
-                    onerror="this.src='https://via.placeholder.com/150x220?text=Pelicula'">
-            </div>
-            <form class="form-review">
-                <!-- Stars -->
-                <div class="d-flex flex-column gap-1">
-                    <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
-                    <div class="d-flex mt-0" id="stars">
-                        <i class="bi bi-star star" data-value="1"></i>
-                        <i class="bi bi-star star" data-value="2"></i>
-                        <i class="bi bi-star star" data-value="3"></i>
-                        <i class="bi bi-star star" data-value="4"></i>
-                        <i class="bi bi-star star" data-value="5"></i>
-                        <input type="hidden" id="rating" name="rating">
-                    </div>
-                </div>
-                <!-- Review -->
-                <div class="d-flex flex-column gap-2 ">
-                    <label class="fw-bold text-white fs-6">Reseña:</label>
-                    <textarea class="form-control bg-white text-dark" id="reviewInput" placeholder="Review"
-                        rows="4"> Es una maravilla de película, he aprendido mucho y me parece muy entretenida.</textarea>
-                </div>
-                <div class="d-flex gap-2">
-                    <a href="reseñas.html" class="btn btn-primary p-2 w-50">Guardar Reseña</a>
-                    <a href="reseñas.html" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
-
-                </div>
-            </form>
-        </div>
+    <div class="content px-5">
+        <h4 class="text-start mb-4">Reseñas de Avatar</h4>
+        <div class="row row-cols-1 row-cols-md-2 g-5" id="reviews-container"></div>
     </div>
 
     <!-- Footer -->
@@ -154,11 +124,9 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="js/reviews.js"></script>
     <script src="js/searchFunc.js"></script>
-    <script src="js/stars.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
