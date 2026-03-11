@@ -186,7 +186,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página con información sobre las políticas de cookies de la aplicación, explicando qué tipos de cookies se utilizan, su finalidad.
 
 #### **21. Aviso legal**
-![Aviso legal](images/legalAdvice.png)
+![Aviso legal](images/legalAdvise.png)
 
 > Página con información legal sobre la aplicación, incluyendo términos de uso, propiedad intelectual y responsabilidad.
 
