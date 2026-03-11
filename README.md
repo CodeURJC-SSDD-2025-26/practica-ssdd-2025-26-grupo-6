@@ -131,17 +131,21 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Raúl Sánchez López]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Creación del boceto inicial**: Responsable de la creación de los primeros diseños a mano para facilitar la creación de las páginas a partir de ellos.
+
+- **Encargado de la parte de las reseñas**: Responsable de las páginas de creación de reseñas y la página donde aparece una lista con las reseñas de una película/serie.
+
+- **Encargado de las películas de una lista**: Responsable de la página donde aparecen todas las películas de una lista.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Acabé de modificar la primera versión de crear una reseña, aunque más tarde hice algún que otro cambio, la tarjeta es la misma](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b43bfb4ccaa7e6fcfd1262b330a370347dc79f20)  | [includeReview.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/includeReview.html)   |
+|2| [Creación de la página con todas las reseñas y alguma modificación más en crear reseña](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/2f8bdf82526cd1b2cc613782a092b8c713d9768f#diff-fc1d1529408fbdebd756dd226f267317322dc3c5bc3ff8b7260d3027f4de3bee)  | [review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/review.html)   |
+|3| [Creación del javaScript para que funcionen las estrellas en la creación de reseñas y se acaba esta página por completo](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d482de94b1501d59c7b369e68cc04e98fb9f4dca#diff-10afc71f0751edab19c29f84d6f37c1c743eab2c2810c7775e07bb1db73e0ea6)  | [stars.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/stars.js)   |
+|4| [Creación del javaScript para que se pueda usar el modal de reseñas y modificación de la página de reseñas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/83137c9c862ffe687b5b56f6ca2041e4ed0222e1#diff-10afc71f0751edab19c29f84d6f37c1c743eab2c2810c7775e07bb1db73e0ea6)  | [reviews.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/reviews.js)   |
+|5| [Creación de la página de las películas de una lista](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4c61f1ca1a45ab413a7be55ccc3e1ca11026f4dc)  | [filmsLists](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/filmsLists.html)   |
 
 ---
 
