@@ -91,29 +91,29 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ![Diagrama de Navegación](images/navegationDiagram.jpg)
 
-> [Se puede entrar tanto por la página de Login como por la Principal (muestra las películas). Todas las páginas excepto Login y SignUp pueden navegar a través del header y footer. Las dos mencionadas solo por el footer.]
+> Se puede entrar tanto por la página de Login como por la Principal (muestra las películas). Todas las páginas excepto Login y SignUp pueden navegar a través del header y footer. Las dos mencionadas solo por el footer.
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 
 #### **1. Página Principal / Home**
 ![Página Principal](images/principal.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Es la página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
 
 #### **2. Series**
 ![Página Principal](images/series.jpg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Esta página es igual a la principal, pero con la diferencia que se ven series.
 
 #### **3. Listas del sistema**
 ![Página Principal](images/lists.jpg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> En esta página se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
-#### **4. Perfil**
+#### **6. Perfil**
 ![Página Principal](images/profile.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Aquí el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
 
 
 ### **Participación de Miembros en la Práctica 1**
@@ -133,7 +133,14 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ---
 
 #### **Alumno 2 - Matias Maccarrone**
+- **HTML (principal, series, lists, login, signUp)**
+Creé las páginas principales de la app: la pantalla de inicio con secciones de películas/series/listas, las páginas de login y registro con formularios validados, y la estructura de navegación común con navbar y footer.
 
+- **JavaScript (searchFunc, loadMoviesSeriesLists)**
+Implementé la búsqueda en tiempo real que filtra películas, series y listas mostrando resultados o un mensaje de error, y la carga dinámica de contenido que detecta en qué página está el usuario y rellena las tarjetas correspondientes.
+
+- **JavaScript (signUpLogin)**
+Desarrollé la lógica de login con validación de email y contraseña, y el registro de nuevos usuarios con verificación de campos, coincidencia de contraseñas y validación de fecha de nacimiento. 
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
