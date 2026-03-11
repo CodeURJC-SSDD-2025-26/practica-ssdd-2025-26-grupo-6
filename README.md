@@ -98,37 +98,37 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 #### **1. Página principal / Home**
 ![Página Principal](images/principal.png)
 
-> Es la página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
+> Página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
 
 #### **2. Series**
 ![Página Principal](images/series.jpeg)
 
-> Esta página es igual a la principal, pero con la diferencia que se ven series.
+> Página igual a la principal, pero con la diferencia que se ven series.
 
 #### **3. Listas del sistema**
 ![Página Principal](images/lists.jpeg)
 
-> En esta página se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
+> Página en la que se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
 #### **6. Perfil**
 ![Página Principal](images/profile.png)
 
-> Aquí el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
+> Página en la que el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
 
 #### **7. Detalles de las listas**
 ![Página Principal](images/filmsLists.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde se muestran todas las películas o series que componen una lista, con la posibilidad de acceder al detalle de cada una de ellas. 
 
 #### **8. Detalles de las películas**
 ![Página Principal](images/moviesDetails.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página de detalle de una película, donde se muestra toda la información de la película, como su sinopsis, año de estreno, duración, etc. Además, se muestran las valoraciones que tiene la película y el usuario puede añadir su propia valoración. También se encuentra un trailer, un botón para añadir la película a una lista y un botón para ver las reseñas de la película. 
 
 #### **9. Detalles de las series**
 ![Página Principal](images/seriesDetails.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página de detalle de una serie, con la misma información que la página de detalle de una película, pero con la diferencia de que se muestra el número de temporadas, en lugar de la duración. 
 
 #### **10. Añadir reseña**
 ![Página Principal](images/includeReview.png)
@@ -143,12 +143,12 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 #### **12. Mis listas**
 ![Página Principal](images/myLists.jpeg)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde los usuarios pueden ver las listas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido o eliminarla.
 
 #### **13. Mis reseñas**
 ![Página Principal](images/myReviews.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página donde los usuarios pueden ver las reseñas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido, modificarla o eliminarla.
 
 #### **14. Modificar reseña**
 ![Página Principal](images/modifyReview.png)
