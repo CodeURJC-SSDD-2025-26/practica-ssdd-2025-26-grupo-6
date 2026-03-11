@@ -1,6 +1,3 @@
-
-
-
 function cargarContenido(datos) {
     const containers = document.querySelectorAll('.films');
     let htmlContent = '';

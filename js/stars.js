@@ -32,12 +32,12 @@ function updateStars(value) {
         const v = parseFloat(star.dataset.value);
         if (v <= value) {
             star.classList.remove('bi-star', 'bi-star-half');
-            star.classList.add('bi-star-fill', 'activa');
+            star.classList.add('bi-star-fill', 'active');
         } else if (v - 0.5 === value) {
             star.classList.remove('bi-star', 'bi-star-fill');
-            star.classList.add('bi-star-half', 'activa');
+            star.classList.add('bi-star-half', 'active');
         } else {
-            star.classList.remove('bi-star-fill', 'bi-star-half', 'activa');
+            star.classList.remove('bi-star-fill', 'bi-star-half', 'active');
             star.classList.add('bi-star');
         }
     });

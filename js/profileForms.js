@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const parts= yearBirthElement.textContent.trim().split('-');
         const formatedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
 
-        usernameElement.innerHTML = `<input type="text" id="usernameInput" class="input-perfil-personalizado" value="${usernameElement.textContent.trim()}">`;
-        emailElement.innerHTML = `<input type="email" id="emailInput" class="input-perfil-personalizado" value="${emailElement.textContent.trim()}">`;
-        yearBirthElement.innerHTML = `<input type="date" id="yearBirthInput" class="input-perfil-personalizado" value="${formatedDate}">`;
+        usernameElement.innerHTML = `<input type="text" id="usernameInput" class="custom-profile-input" value="${usernameElement.textContent.trim()}">`;
+        emailElement.innerHTML = `<input type="email" id="emailInput" class="custom-profile-input" value="${emailElement.textContent.trim()}">`;
+        yearBirthElement.innerHTML = `<input type="date" id="yearBirthInput" class="custom-profile-input" value="${formatedDate}">`;
 
         btnEditProfile.style.display = 'none';
         btnSave.style.display = 'inline-block';
