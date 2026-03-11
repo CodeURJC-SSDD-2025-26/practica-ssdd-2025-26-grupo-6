@@ -118,8 +118,8 @@ html, body{
     cursor: pointer;
     color: gray;
 }
-.star.activa { color: gold; }
-.star.parcial {
+.star.active { color: gold; }
+.star.partial {
     background: linear-gradient(to right, gold 30%, gray 30%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -303,7 +303,7 @@ html, body{
 
 
 /* PROFILE */
-.botonProfile{
+.profile-btn{
     border: 1px solid black;
     background: var(--bs-secondary);
     color: var(--bs-text-color);
@@ -329,7 +329,7 @@ html, body{
     transform: translateY(-2px);
 }
 
-.input-perfil-personalizado{
+.custom-profile-input{
     width:100%;
     border:none;
     background:transparent;
@@ -365,7 +365,7 @@ html, body{
 }
 
 /* ADMINISTRATOR */
-.captionAdminister{ color: var(--bs-text-color); }
+.admin-caption{ color: var(--bs-text-color); }
 canvas{
     width:100% !important;
     height:auto !important;
