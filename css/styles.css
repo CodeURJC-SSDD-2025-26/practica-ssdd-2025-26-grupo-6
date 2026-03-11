@@ -139,6 +139,7 @@ html, body{
     aspect-ratio: 2/3;
     object-fit: cover;
 }
+/*Modal buttons*/
 .modal .btn-primary{
     border: none;
     padding: 7px;
