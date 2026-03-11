@@ -106,7 +106,14 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 
 #### **Alumno 1 - Matias Maccarrone**
+- **HTML (principal, series, lists, login, signUp)**
+Creé las páginas principales de la app: la pantalla de inicio con secciones de películas/series/listas, las páginas de login y registro con formularios validados, y la estructura de navegación común con navbar y footer.
 
+- **JavaScript (searchFunc, loadMoviesSeriesLists)**
+Implementé la búsqueda en tiempo real que filtra películas, series y listas mostrando resultados o un mensaje de error, y la carga dinámica de contenido que detecta en qué página está el usuario y rellena las tarjetas correspondientes.
+
+- **JavaScript (signUpLogin)**
+Desarrollé la lógica de login con validación de email y contraseña, y el registro de nuevos usuarios con verificación de campos, coincidencia de contraseñas y validación de fecha de nacimiento. 
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -120,30 +127,37 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Alumno 2 - [Alejandro Carretero Badorrey]**
 
-- **Desarrollo del Módulo Multimedia**: Responsable principal del perfil (profile), 
+- **Responsable del Perfil**: Responsable principal del perfil (profile), 
 administrador(administrator) y de mis listas (myLists).
+- **Responsable de hacer los gráficos**: Responsable de hacer todos los gráficos de la página web y de su funcionamiento.
+- **Responsable de hacer el JavaScript de editar perfil**: Responsable de hacer que en perfil le des al boton de editar y que con JavaScript te haga que sea un formulario.
+- **Responsable de hacer el JavaScript de foto del perfil**: Responsable de hacer que en perfil le des a la foto y que con JavaScript puedas elegir la foto que usar como avatar.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Hacer en una card todo el perfil, además de añadir en el boton de editar perfil que al pulsarle se combierte en un formulario](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d3d2355a1a59484d6f16bd0a35c57e93410c377c)  | [profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/profile.html)   |
-|2| [En este commit lo que hice fue añadir al adminstrador todas las tablas(Usuarios, películas, series, listas) ](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/2055de7fbdffecc0dc41de7f8affed152ff5a86d)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
-|3| [En este commit se hicieron todos los modales de las tablas, para ver un ampliado de las tablas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/70ebd9e13e9237c0b4211e9ce95e1238a70e22a1)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
-|4| [En este commit hice todos los gráficos de todas las páginas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3340fa52294c86cba4362b511cf158a1e9623e65)  | [filmsRatingBarChart.js / userRatingBarChart.js / pieChart.js ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/filmsRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/userRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/pieChart.js)   |
-|5| [En este commit se creo la página myLists que es una página en el perfil con la cual puedes ver todas tus listas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/34af3952fccf0b5c356cb6fc156016eb3c624d9d)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/myLists.html)   |
+|1| [Hacer en una card todo el perfil, además de añadir en el boton de editar perfil que al pulsarle se convierte en un formulario](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d3d2355a1a59484d6f16bd0a35c57e93410c377c)  | [profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/profile.html)   |
+|2| [En este commit lo que hice fue añadir al administrador todas las tablas(Usuarios, películas, series, listas) ](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/2055de7fbdffecc0dc41de7f8affed152ff5a86d)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
+|3| [En este commit se hicieron todos los modales de las tablas, para ver el detalle ampliado de cada tabla](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/70ebd9e13e9237c0b4211e9ce95e1238a70e22a1)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/administrator.html)   |
+|4| [En este commit implementé todos los gráficos de la aplicación web](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3340fa52294c86cba4362b511cf158a1e9623e65)  | [filmsRatingBarChart.js / userRatingBarChart.js / pieChart.js ](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/filmsRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/userRatingBarChart.js / https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/pieChart.js)   |
+|5| [En este commit se creó la página myLists que es una página en el perfil con la cual puedes ver todas tus listas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/34af3952fccf0b5c356cb6fc156016eb3c624d9d)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/myLists.html)   |
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Raúl Sánchez López]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Creación del boceto inicial**: Responsable de la creación de los primeros diseños a mano para facilitar la creación de las páginas a partir de ellos.
+
+- **Encargado de la parte de las reseñas**: Responsable de las páginas de creación de reseñas y la página donde aparece una lista con las reseñas de una película/serie.
+
+- **Encargado de las películas de una lista**: Responsable de la página donde aparecen todas las películas de una lista.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Acabé de modificar la primera versión de crear una reseña, aunque más tarde hice algún que otro cambio, la tarjeta es la misma](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b43bfb4ccaa7e6fcfd1262b330a370347dc79f20)  | [includeReview.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/includeReview.html)   |
+|2| [Creación de la página con todas las reseñas y alguma modificación más en crear reseña](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/2f8bdf82526cd1b2cc613782a092b8c713d9768f#diff-fc1d1529408fbdebd756dd226f267317322dc3c5bc3ff8b7260d3027f4de3bee)  | [review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/review.html)   |
+|3| [Creación del javaScript para que funcionen las estrellas en la creación de reseñas y se acaba esta página por completo](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/d482de94b1501d59c7b369e68cc04e98fb9f4dca#diff-10afc71f0751edab19c29f84d6f37c1c743eab2c2810c7775e07bb1db73e0ea6)  | [stars.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/stars.js)   |
+|4| [Creación del javaScript para que se pueda usar el modal de reseñas y modificación de la página de reseñas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/83137c9c862ffe687b5b56f6ca2041e4ed0222e1#diff-10afc71f0751edab19c29f84d6f37c1c743eab2c2810c7775e07bb1db73e0ea6)  | [reviews.js](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/js/reviews.js)   |
+|5| [Creación de la página de las películas de una lista](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4c61f1ca1a45ab413a7be55ccc3e1ca11026f4dc)  | [filmsLists](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/filmsLists.html)   |
 
 ---
 
