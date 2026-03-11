@@ -138,7 +138,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 #### **11. Reseñas**
 ![Reseñas](images/reviews.jpeg)
 
-> Página en la que se muestran una lista de todas las reseñas de una película/serie De cada reseña se tiene su valoración y su reseña escrita además del nombre del usuario que la escribió.
+> Página en la que se muestran una lista de todas las reseñas de una película/serie. De cada reseña se tiene su valoración y su reseña escrita además del nombre del usuario que la escribió.
 
 #### **12. Mis listas**
 ![Mis listas](images/myLists.jpeg)
@@ -247,9 +247,11 @@ administrador(administrator) y de mis listas (myLists).
 
 - **Creación del boceto inicial**: Responsable de la creación de los primeros diseños a mano para facilitar la creación de las páginas a partir de ellos.
 
-- **Encargado de la parte de las reseñas**: Responsable de las páginas de creación de reseñas y la página donde aparece una lista con las reseñas de una película/serie.
+- **Encargado de la parte de las reseñas**: Responsable de las páginas de creación de reseñas y la página donde aparece una lista con todas las reseñas de una película/serie.
 
 - **Encargado de las películas de una lista**: Responsable de la página donde aparecen todas las películas de una lista.
+
+- **Encargado de algunos JavaScript**: Responsable de los javaScript de las estrellas para valorar una reseña y de las reseñas.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
