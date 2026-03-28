@@ -1,6 +1,71 @@
 package es.code.urjc.practica2.model;
 
-//It's the user account, but to avoid problems later we call it account
-public class Account {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+//It's the user account, but to avoid problems later we call it account
+@Entity
+public class Account {
+    @Id
+    private Long accountId;
+
+    private String accountName;
+    private String accountBirthDate;
+    private String accountEmail;
+    private Role accountRole;
+
+    public enum Role {
+        USER,
+        ADMIN
+    }
+
+    public Account(){}
+
+    public Account(Long accountId, String accountName, String accountBirthDate, String accountEmail, Role accountRole) {
+        this.accountId = accountId;
+        this.accountName = accountName;
+        this.accountBirthDate = accountBirthDate;
+        this.accountEmail = accountEmail;
+        this.accountRole = accountRole;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getAccountBirthDate() {
+        return accountBirthDate;
+    }
+
+    public void setAccountBirthDate(String accountBirthDate) {
+        this.accountBirthDate = accountBirthDate;
+    }
+
+    public String getAccountEmail() {
+        return accountEmail;
+    }
+
+    public void setAccountEmail(String accountEmail) {
+        this.accountEmail = accountEmail;
+    }
+
+    public Role getAccountRole() {
+        return accountRole;
+    }
+
+    public void setAccountRole(Role accountRole) {
+        this.accountRole = accountRole;
+    }
 }
