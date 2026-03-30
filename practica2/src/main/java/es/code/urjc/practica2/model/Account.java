@@ -13,6 +13,7 @@ public class Account {
     private String accountBirthDate;
     private String accountEmail;
     private Role accountRole;
+    private String accountPassword;
 
     public enum Role {
         USER,
