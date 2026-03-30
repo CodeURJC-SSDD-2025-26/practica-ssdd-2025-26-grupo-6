@@ -10,6 +10,8 @@ public class Director {
 
     private String directorName;
     private String directorBirthDate;
+
+    public Director() {} //Default constructor for JPA
     
     public Director(Long directorId, String directorName, String birthDate) {
         this.directorId = directorId;

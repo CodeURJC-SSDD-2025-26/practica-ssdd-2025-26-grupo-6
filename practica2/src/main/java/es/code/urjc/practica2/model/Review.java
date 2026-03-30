@@ -10,6 +10,8 @@ public class Review {
 
     private Float reviewStars;
     private String review;
+
+    public Review() {} //Default constructor for JPA
     
     public Review(Long reviewId, Float stars, String review) {
         this.reviewId = reviewId;

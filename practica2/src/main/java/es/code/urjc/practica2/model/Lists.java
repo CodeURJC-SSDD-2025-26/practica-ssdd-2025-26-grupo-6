@@ -17,6 +17,8 @@ public class Lists {
     @ManyToMany
     private List<Filmography> filmographyList = new ArrayList<>();
 
+    public Lists() {} //Default constructor for JPA
+
     public Lists(Long listsId, String listName, List<Filmography> filmographyList) {
         this.listsId = listsId;
         this.listName = listName;

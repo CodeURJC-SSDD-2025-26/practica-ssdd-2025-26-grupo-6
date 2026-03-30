@@ -6,9 +6,11 @@ import jakarta.persistence.Entity;
 public class Movie extends Filmography{
     private int movieDuration; //minutes
 
-    public Movie(Long filmographyId, String filmographyName, float averageStars, Platforms platforms, String synopsis,
-            int filmographyYear, int movieDuration) {
-        super(filmographyId, filmographyName, averageStars, platforms, synopsis, filmographyYear);
+    public Movie() {} //Default constructor for JPA
+
+    public Movie(Long filmographyId, String filmographyName, float filmographyAverageStars, String filmographySynopsis, 
+        int filmographyYear, Director filmographyDirector, int movieDuration) {
+        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector);
         this.movieDuration = movieDuration;
     }
 

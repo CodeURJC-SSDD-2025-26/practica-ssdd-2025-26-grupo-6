@@ -1,18 +1,67 @@
 package es.code.urjc.practica2.model;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import es.code.urjc.practica2.model.Filmography.Platforms;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
+//This way we can have a table for movies and another for series, but they will share the common attributes in the filmography table
+@Inheritance(strategy = InheritanceType.JOINED) 
 public class Filmography {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long filmographyId;
 
     private String filmographyName;
     private float filmographyAverageStars;
-    private Platforms filmographyPlatforms;
     private String filmographySynopsis;
     private int filmographyYear;
+
+    //Image is yet not included
+
+    //We can have more than one platform for each filmography, so we use a list of platforms the rest is for SQL
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
+    @CollectionTable(name = "filmography_platforms", joinColumns = @JoinColumn(name = "filmography_id"))
+    @Column(name = "platform")
+    private List<Platforms> filmographyPlatforms = new ArrayList<>();
+
+    //A filmography can have only one director but a director can have many filmographies
+    @ManyToOne
+    @JoinColumn(name = "director_id")
+    private Director filmographyDirector;
+
+    //A filmography can have many genres and a genre can be in many filmographies
+    @ManyToMany
+    @JoinTable(
+        name = "filmography_genres",
+        joinColumns = @JoinColumn(name = "filmography_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> filmographyGenres = new ArrayList<>();
+
+    //A filmography can have many reviews but a review can only be for one filmography, if a filmography is deleted, its reviews are also deleted
+    @OneToMany(mappedBy = "filmography", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> filmographyReviews = new ArrayList<>();
 
     public enum Platforms{
         DISNEY,
@@ -22,16 +71,26 @@ public class Filmography {
         MOVISTARPLUS
     }
 
-    public Filmography(Long filmographyId, String filmographyName, float filmographyAverageStars,
-            Platforms filmographyPlatforms, String filmographySynopsis, int filmographyYear) {
-        this.filmographyId = filmographyId;
+    public Filmography() {} //Default constructor for JPA
+
+    public Filmography(String filmographyName, float filmographyAverageStars, String filmographySynopsis, int filmographyYear, Director filmographyDirector) {
         this.filmographyName = filmographyName;
         this.filmographyAverageStars = filmographyAverageStars;
-        this.filmographyPlatforms = filmographyPlatforms;
         this.filmographySynopsis = filmographySynopsis;
         this.filmographyYear = filmographyYear;
+        this.filmographyDirector = filmographyDirector;
     }
 
+    // Recalculating average rating when reviews change
+    public void updateAverageStars() {
+        if (filmographyReviews.isEmpty()) {
+            this.filmographyAverageStars = 0;
+        } else {
+            this.filmographyAverageStars = (float) filmographyReviews.stream().mapToInt(Review::getReviewStars).average().orElse(0.0);
+        }
+    }
+    
+    // Getters and setters
     public Long getFilmographyId() {
         return filmographyId;
     }
@@ -56,14 +115,6 @@ public class Filmography {
         this.filmographyAverageStars = filmographyAverageStars;
     }
 
-    public Platforms getFilmographyPlatforms() {
-        return filmographyPlatforms;
-    }
-
-    public void setFilmographyPlatforms(Platforms filmographyPlatforms) {
-        this.filmographyPlatforms = filmographyPlatforms;
-    }
-
     public String getFilmographySynopsis() {
         return filmographySynopsis;
     }
@@ -80,5 +131,35 @@ public class Filmography {
         this.filmographyYear = filmographyYear;
     }
 
-    
+    public List<Platforms> getFilmographyPlatforms() {
+        return filmographyPlatforms;
+    }
+
+    public void setFilmographyPlatforms(List<Platforms> filmographyPlatforms) {
+        this.filmographyPlatforms = filmographyPlatforms;
+    }
+
+    public Director getFilmographyDirector() {
+        return filmographyDirector;
+    }
+
+    public void setFilmographyDirector(Director filmographyDirector) {
+        this.filmographyDirector = filmographyDirector;
+    }
+
+    public List<Genre> getFilmographyGenres() {
+        return filmographyGenres;
+    }
+
+    public void setFilmographyGenres(List<Genre> filmographyGenres) {
+        this.filmographyGenres = filmographyGenres;
+    }
+
+    public List<Review> getFilmographyReviews() {
+        return filmographyReviews;
+    }
+
+    public void setFilmographyReviews(List<Review> filmographyReviews) {
+        this.filmographyReviews = filmographyReviews;
+    }    
 }

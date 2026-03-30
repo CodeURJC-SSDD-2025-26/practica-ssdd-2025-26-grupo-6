@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Añadir Película</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="primary principal">
+    <!-- Header -->
+    {{>header}}
+
+    <!-- Page content -->
+    <div class="container-fluid py-4 content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+
+                    <h3 class="mb-3 text-center text-white">
+                        {{#filmography.filmographyId}}Edit {{/filmography.filmographyId}}
+                        {{^filmography.filmographyId}}Add {{/filmography.filmographyId}}
+                        {{#isSeries}}Series{{/isSeries}}
+                        {{^isSeries}}Movie{{/isSeries}}
+                    </h3>
+
+                    <!-- Clikable Image -->
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <img id="posterPreview" src="images/administradorImagenFondoPelicula.webp"
+                            alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
+                        <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
+                    </div>
+                    <!-- Hidden Input file -->
+                    <input id="posterInput" type="file" accept="image/*" class="d-none">
+
+                    <!-- Form -->
+                    {{#filmography.id}}
+                        {{#isSeries}}
+                        <form action="/series/{{filmography.id}}/edit" enctype="multipart/form-data" method="post"
+                        class="d-flex flex-column gap-3 administer-form">
+                        {{/isSeries}}
+
+                        {{^isSeries}}
+                        <form action="/movies/{{filmography.id}}/edit" enctype="multipart/form-data" method="post"
+                            class="d-flex flex-column gap-3 administer-form">
+                        {{/isSeries}}
+                    {{/filmography.id}}
+
+                    {{^filmography.id}}
+                        {{#isSeries}}
+                        <form action="/series/new" enctype="multipart/form-data" method="post"
+                            class="d-flex flex-column gap-3 administer-form">
+                        {{/isSeries}}
+                        
+                        {{^isSeries}}
+                        <form action="/movies/new" enctype="multipart/form-data" method="post"
+                            class="d-flex flex-column gap-3 administer-form">
+                        {{/isSeries}}
+                    {{/filmography.id}}
+
+                        <!-- Title -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Title:</label>
+                            <input type="text" class="form-control" name="filmographyName"
+                                placeholder="Title" value="{{filmography.filmographyName}}">
+                        </div>
+                        <!-- Director -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" name="directorName"
+                                placeholder="Director" value="{{filmography.filmographyDirector.directorName}}">
+                        </div>
+                        <!-- Release Year & Duration/Seasons -->
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Año de lanzamiento:</label>
+                                    <input type="number" class="form-control" name="yearInput"
+                                        placeholder="Año de lanzamiento" min="1800" max="2026"
+                                        value="{{filmography.filmographyYear}}">
+                                </div>
+                            </div>
+                            {{#isSeries}}
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Número de temporadas:</label>
+                                    <input type="number" class="form-control" name="seasonsInput"
+                                        placeholder="Número de temporadas" min="1"
+                                        value="{{filmography.Serie.serieDuration}}">
+                                </div>
+                            </div>
+                            {{/isSeries}}
+                            {{^isSeries}}
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Duración:</label>
+                                    <input type="number" class="form-control" name="durationInput"
+                                        placeholder="Duración (minutos)" min="0"
+                                        value="{{filmography.Movie.movieDuration}}">
+                                </div>
+                            </div>
+                            {{/isSeries}}
+                        </div>
+                        <!-- Genres -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Géneros:</label>
+                            <select class="form-select" name="genreIds" multiple size="4">
+                                {{#allGenres}}
+                                <option value="{{genreId}}" {{#selected}}selected{{/selected}}>
+                                    {{genreDisplayName}}
+                                </option>
+                                {{/allGenres}}
+                            </select>
+                            <small class="text-white-50 mt-1">Pulsa Ctrl para seleccionar múltiples géneros</small>
+                        </div>
+                        <!-- Platforms -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Plataformas:</label>
+                            <select class="form-select" name="platforms" multiple size="3">
+                                {{#allPlatforms}}
+                                <option value="{{value}}" {{#selected}}selected{{/selected}}>
+                                    {{displayName}}
+                                </option>
+                                {{/allPlatforms}}
+                            </select>
+                            <small class="text-white-50 mt-1">Pulsa Ctrl para seleccionar múltiples plataformas</small>
+                        </div>
+                        <!-- Synopsis -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Synopsis:</label>
+                            <textarea class="form-control" name="filmographySynopsis"
+                                placeholder="Synopsis" rows="4">{{filmography.filmographySynopsis}}</textarea>
+                        </div>
+                        <!-- Submit & Cancel buttons -->
+                        <div class="d-flex gap-2">
+                            <a href="administrator" class="btn btn-primary w-50 py-2 " type="submit">
+                                {{#filmography.filmographyId}}Actualizar{{/filmography.filmographyId}}
+                                {{^filmography.filmographyId}}Añadir{{/filmography.filmographyId}}
+                            </a>
+                            <a href="administrator"
+                                class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {{>footer}}
+
+    <!-- Scripts -->
+    <script src="js/posterMoviesSeries.js"></script>
+
+</body>
+
+</html>

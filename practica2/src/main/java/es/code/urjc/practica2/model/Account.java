@@ -3,7 +3,7 @@ package es.code.urjc.practica2.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-//It's the user account, but to avoid problems later we call it account
+//It's the user account, but to avoid later problems we call it account
 @Entity
 public class Account {
     @Id
@@ -19,7 +19,7 @@ public class Account {
         ADMIN
     }
 
-    public Account(){}
+    public Account() {} //Default constructor for JPA
 
     public Account(Long accountId, String accountName, String accountBirthDate, String accountEmail, Role accountRole) {
         this.accountId = accountId;

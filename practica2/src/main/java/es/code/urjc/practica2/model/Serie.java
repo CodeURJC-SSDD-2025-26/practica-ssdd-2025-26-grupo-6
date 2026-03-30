@@ -6,9 +6,11 @@ import jakarta.persistence.Entity;
 public class Serie extends Filmography{
     private int serieDuration; //number of seasons
 
-    public Serie(Long filmographyId, String filmographyName, float averageStars, Platforms platforms, String synopsis,
-            int filmographyYear, int serieDuration) {
-        super(filmographyId, filmographyName, averageStars, platforms, synopsis, filmographyYear);
+    public Serie() {} //Default constructor for JPA
+
+    public Serie(Long filmographyId, String filmographyName, float filmographyAverageStars, String filmographySynopsis, 
+        int filmographyYear, Director filmographyDirector, int serieDuration) {
+        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector);
         this.serieDuration = serieDuration;
     }
 

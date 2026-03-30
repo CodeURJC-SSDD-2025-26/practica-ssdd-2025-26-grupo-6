@@ -1,6 +1,7 @@
 package es.code.urjc.practica2.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 
 @Entity
@@ -8,6 +9,7 @@ public class Genre {
     @Id
     private Long genreId;
 
+    @Enumerated(EnumType.STRING)
     private Genres genres;
 
     public enum Genres {
@@ -20,6 +22,8 @@ public class Genre {
         DRAMA,
         COMEDIA
     }
+
+    public Genre() {} //Default constructor for JPA
 
     public Genre(Long genreId, Genres genres) {
         this.genreId = genreId;
