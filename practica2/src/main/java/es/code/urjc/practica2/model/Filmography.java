@@ -86,7 +86,8 @@ public class Filmography {
         if (filmographyReviews.isEmpty()) {
             this.filmographyAverageStars = 0;
         } else {
-            this.filmographyAverageStars = (float) filmographyReviews.stream().mapToInt(Review::getReviewStars).average().orElse(0.0);
+
+            this.filmographyAverageStars = (float) filmographyReviews.stream().mapToDouble(Review::getReviewStars).average().orElse(0.0);
         }
     }
     
