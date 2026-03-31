@@ -13,17 +13,17 @@ public class Review {
     private Long reviewId;
 
     private Float reviewStars;
-    private String review;
+    private String reviewSynopsis;
 
     @ManyToOne
     private Filmography filmography;
 
     public Review() {} //Default constructor for JPA
     
-    public Review(Long reviewId, Float stars, String review) {
+    public Review(Long reviewId, Float stars, String reviewSynopsis) {
         this.reviewId = reviewId;
         this.reviewStars = stars;
-        this.review = review;
+        this.reviewSynopsis = reviewSynopsis;
     }
 
     public Long getReviewId() {
@@ -42,12 +42,12 @@ public class Review {
         this.reviewStars = reviewStars;
     }
 
-    public String getReview() {
-        return review;
+    public String getReviewSynopsis() {
+        return reviewSynopsis;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setReviewSynopsis(String reviewSynopsis) {
+        this.reviewSynopsis = reviewSynopsis;
     } 
     
     public Filmography getFilmography() {

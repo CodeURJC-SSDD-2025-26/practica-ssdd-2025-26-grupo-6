@@ -28,12 +28,17 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
-                    <h3 class="mb-3 text-center text-white fs-md-2">Avatar</h3>
+                    <h3 class="mb-3 text-center text-white fs-md-2">{{filmography.filmographyName}}</h3>
                     <!-- Poster -->
                     <img src="images/carteleraEjemploAvatar.webp" alt="Poster"
                         class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster">
 
-                    <form class="form-review">
+                    {{#review.reviewId}}
+                    <form action="/reviews/{{review.reviewId}}/edit" method="post" class="form-review">
+                    {{/review.reviewId}}
+                    {{^review.reviewId}}
+                    <form action="/filmographies/{{filmography.filmographyId}}/reviews/new" method="post" class="form-review">
+                    {{/review.reviewId}}
                         <!-- Stars -->
                         <div class="d-flex flex-column gap-1">
                             <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
@@ -43,18 +48,20 @@
                                 <i class="bi bi-star star" data-value="3"></i>
                                 <i class="bi bi-star star" data-value="4"></i>
                                 <i class="bi bi-star star" data-value="5"></i>
-                                <input type="hidden" id="rating" name="rating">
+                                <!-- Saves the selected rating to send with the form -->
+                                <input type="hidden" id="rating" name="stars" value="{{review.reviewStars}}">
                             </div>
                         </div>
                         <!-- Review -->
                         <div class="d-flex flex-column gap-2">
-                            <label class="fw-bold text-white fs-6">Reseña:</label>
-                            <textarea class="form-control bg-white text-dark"
-                                placeholder="Escribe tu reseña aquí..."></textarea>
+                            <textarea class="form-control bg-white text-dark" placeholder="Escribe tu reseña aquí...">{{review.reviewSynopsis}}</textarea>
                         </div>
                         <div class="d-flex gap-2">
-                            <a href="review" class="btn btn-primary p-2 w-50">Guardar Reseña</a>
-                            <a href="movieDetails" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                            <a href="review" class="btn btn-primary p-2 w-50">
+                                {{#review.reviewId}}Actualizar reseña{{/review.reviewId}}
+                                {{^review.reviewId}}Añadir reseña{{/review.reviewId}}
+                            </a>
+                            <a href="/filmographies/{{filmography.filmographyId}}" class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
                         </div>
                     </form>
                 </div>
@@ -67,6 +74,13 @@
 
     <!-- Scripts -->
     <script src="js/stars.js"></script>
+    <script>
+        // If editing an existing review, initialize stars with saved value
+        const savedRating = document.getElementById('rating').value;
+        if (savedRating) {
+            updateStars(parseFloat(savedRating));
+        }
+    </script>
     
 </body>
 
