@@ -1,6 +1,7 @@
 package es.code.urjc.practica2.model;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ public class Account {
     private Long accountId;
 
     private String accountName;
-    private String accountBirthDate;
+    private LocalDate accountBirthDate;
     private String accountEmail;
     private Role accountRole;
     private String accountPassword;
@@ -33,7 +34,7 @@ public class Account {
 
     public Account() {} //Default constructor for JPA
 
-    public Account(String accountName, String accountBirthDate, String accountEmail, Role accountRole, String accountPassword) {
+    public Account(String accountName, LocalDate accountBirthDate, String accountEmail, Role accountRole, String accountPassword) {
         this.accountName = accountName;
         this.accountBirthDate = accountBirthDate;
         this.accountEmail = accountEmail;
@@ -57,11 +58,11 @@ public class Account {
         this.accountName = accountName;
     }
 
-    public String getAccountBirthDate() {
+    public LocalDate getAccountBirthDate() {
         return accountBirthDate;
     }
 
-    public void setAccountBirthDate(String accountBirthDate) {
+    public void setAccountBirthDate(LocalDate accountBirthDate) {
         this.accountBirthDate = accountBirthDate;
     }
 

@@ -1,6 +1,11 @@
 package es.code.urjc.practica2.controller;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,29 +73,62 @@ public class AutenticationController {
     }
 
     // SIGN UP METHODS
+
+    // CUANDO LA BBDD SE HAGA CHEQUEAR QUE FUNCIONA BIEN
+    
     @GetMapping("/signUp")
     public String signUp(Model model) {
+        
         return "signUp";
     }
 
     @PostMapping("/signUp")
-    public String postSignUp(Account account, @RequestParam String confirmPassword, Model model) {
+    public String postSignUp(Model model, 
+            @RequestParam String email, 
+            @RequestParam String name, 
+            @RequestParam String password, 
+            @RequestParam String confirmPassword,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate,
+            @RequestParam(required = false) String role) {
 
-        // check passwords matches
-        if (!account.getAccountPassword().equals(confirmPassword)) {
-            model.addAttribute("error", "Las contraseñas no coinciden");
+        boolean hasError = false;
+
+        // Check if email is taken
+        if (accountService.existsAccountEmail(email)) {
+            model.addAttribute("errorE", "Este correo electrónico ya está registrado.");
+            hasError = true;
+        }
+
+        // Check if name is taken
+        if (accountService.existsAccountName(name)) {
+            model.addAttribute("errorN", "El nombre de usuario ya está en uso.");
+            hasError = true;
+        }
+
+        // Check passwords match
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("errorP", "Las contraseñas no coinciden.");
+            hasError = true;
+        }
+
+        // Validate date 
+        if (birthDate.isAfter(LocalDate.now())) {
+            model.addAttribute("errorD", "Fecha inválida");
+            hasError = true;
+        }
+
+        if (hasError) {
             return "signUp";
         }
 
-        // check if email is taken
-        if (accountService.existsAccount(account.getAccountEmail())) {
-            model.addAttribute("error", "El correo ya está registrado");
-            return "signUp";
-        }
+        
+        Account.Role userRole = (role != null) ? Account.Role.ADMIN : Account.Role.USER;
+        
+        Account newAccount = new Account(name,birthDate,email,userRole,password);
+        accountService.save(newAccount);
 
-        // save account
-        accountService.signUpAccount(account);
         return "redirect:/login";
     }
+    
 
 }

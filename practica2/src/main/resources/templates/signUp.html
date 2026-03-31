@@ -29,33 +29,38 @@
                 <h1 class="text-center text-light pb-4">Crear Cuenta</h1>
                 <form action="/signUp" method="post">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" placeholder="name@example.com"
-                            name="accountEmail" required />
+                        <input type="email" class="form-control" name="email" required />
                         <label for="email" class="text-dark">Correo Electrónico</label>
                     </div>
+                    {{#errorE}}<div class="alert alert-danger p-2">{{errorE}}</div>{{/errorE}}
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="user" placeholder="user123" name="accountName"
-                            required />
+                        <input type="text" class="form-control" name="name" required />
                         <label for="user" class="text-dark">Nombre de Usuario</label>
                     </div>
+                    {{#errorN}}<div class="alert alert-danger p-2">{{errorN}}</div>{{/errorN}}
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="password" placeholder="Password"
-                            name="accountPassword" required>
-                        <label for="password" class="text-dark">Contraseña</label>
+                        <input type="password" class="form-control" name="password" required />
+                        <label for="user" class="text-dark">Contraseña</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="confirmPassword" required />
+                        <label for="user" class="text-dark">Repetir Contraseña</label>
+                    </div>
+                    {{#errorP}}<div class="alert alert-danger p-2">{{errorP}}</div>{{/errorP}}
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="password2" placeholder="Password"
-                            name="confirmPassword" required>
-                        <label for="password2" class="text-dark">Repite la Contraseña</label>
+                        <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="dd-mm-aaaa" title="Formato requerido: dd-mm-aaaa" required />
+                        <label for="birthDate" class="text-dark">Fecha de Nacimiento (dd-mm-aaaa)</label>
+                    </div>
+                    {{#errorD}}<div class="alert alert-danger p-2">{{errorD}}</div>{{/errorD}}
+
+                    <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" id="checkDefault" name="role">
+                        <label class="form-check-label text-light" for="checkDefault">Admin?</label>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="birthDate" name="accountBirthDate" required />
-                        <label for="birthDate" class="text-dark">Fecha de Nacimiento</label>
-                    </div>
 
                     <div class="row">
                         <div class="col">

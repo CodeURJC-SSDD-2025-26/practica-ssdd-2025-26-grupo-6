@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,20 @@ public class AccountService {
         return null;
     }
 
-    public boolean existsAccount(String email){
+    public boolean existsAccountEmail(String email){
         return accountRepository.existsByAccountEmail(email);
     }
 
-    public Account signUpAccount(Account account){
+    public boolean existsAccountName(String name){
+        return accountRepository.existsByAccountName(name);
+    }
+
+    public Account save(Account account) {
         return accountRepository.save(account);
     }
 
     public Account getCurrentUser() {
         //When bbdd is implemented, we will get the current user from the session and return it, for now we return a dummy user
-        return new Account("dummy", "dummy", "dummy", Account.Role.USER, "dummy");
+        return new Account("dummy", LocalDate.now(), "dummy", Account.Role.USER, "dummy");
     }
 }
