@@ -13,7 +13,6 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-
     public Account loginAccount(String email, String password){
         Optional<Account> account = accountRepository.findByAccountEmail(email);
 
@@ -29,5 +28,10 @@ public class AccountService {
 
     public Account signUpAccount(Account account){
         return accountRepository.save(account);
+    }
+
+    public Account getCurrentUser() {
+        //When bbdd is implemented, we will get the current user from the session and return it, for now we return a dummy user
+        return new Account("dummy", "dummy", "dummy", Account.Role.USER, "dummy");
     }
 }

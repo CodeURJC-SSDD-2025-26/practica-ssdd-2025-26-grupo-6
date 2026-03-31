@@ -9,9 +9,27 @@ import es.code.urjc.practica2.repository.ReviewRepository;
 @Service
 public class ReviewService {
     @Autowired
-    private static ReviewRepository reviewRepository;
+    private ReviewRepository reviewRepository;
 
-    public static Review findById(Long id) {
-        return reviewRepository.findById(id).orElse(null);
+    public Review findById(Long reviewId) {
+        return reviewRepository.findById(reviewId).orElse(null);
+    }
+
+    public Review save(Review review) {
+        return reviewRepository.save(review);
+    }
+
+    public Review update(Long reviewId, Float reviewStars, String reviewDescription) {
+        Review review = reviewRepository.findById(reviewId).orElse(null);
+        if (review != null) {
+            review.setReviewStars(reviewStars);
+            review.setReviewDescription(reviewDescription);
+            return reviewRepository.save(review);
+        }
+        return null;
+    }
+
+    public void delete(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -13,17 +14,23 @@ public class Review {
     private Long reviewId;
 
     private Float reviewStars;
-    private String reviewSynopsis;
+    private String reviewDescription;
 
     @ManyToOne
+    @JoinColumn(name = "filmography_id")
     private Filmography filmography;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account reviewAuthor;
 
     public Review() {} //Default constructor for JPA
     
-    public Review(Long reviewId, Float stars, String reviewSynopsis) {
-        this.reviewId = reviewId;
-        this.reviewStars = stars;
-        this.reviewSynopsis = reviewSynopsis;
+    public Review(Float reviewStars, String reviewDescription, Account reviewAuthor, Filmography filmography) {
+        this.reviewStars = reviewStars;
+        this.reviewDescription = reviewDescription;
+        this.reviewAuthor = reviewAuthor;
+        this.filmography = filmography;
     }
 
     public Long getReviewId() {
@@ -42,14 +49,14 @@ public class Review {
         this.reviewStars = reviewStars;
     }
 
-    public String getReviewSynopsis() {
-        return reviewSynopsis;
+    public String getReviewDescription() {
+        return reviewDescription;
     }
 
-    public void setReviewSynopsis(String reviewSynopsis) {
-        this.reviewSynopsis = reviewSynopsis;
-    } 
-    
+    public void setReviewDescription(String reviewDescription) {
+        this.reviewDescription = reviewDescription;
+    }
+
     public Filmography getFilmography() {
         return filmography;
     }
@@ -57,4 +64,14 @@ public class Review {
     public void setFilmography(Filmography filmography) {
         this.filmography = filmography;
     }
+
+    public Account getReviewAuthor() {
+        return reviewAuthor;
+    }
+
+    public void setReviewAuthor(Account reviewAuthor) {
+        this.reviewAuthor = reviewAuthor;
+    }
+
+    
 }

@@ -1,11 +1,14 @@
 package es.code.urjc.practica2.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Director {
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long directorId;
 
     private String directorName;
@@ -13,8 +16,7 @@ public class Director {
 
     public Director() {} //Default constructor for JPA
     
-    public Director(Long directorId, String directorName, String birthDate) {
-        this.directorId = directorId;
+    public Director(String directorName, String birthDate) {
         this.directorName = directorName;
         this.directorBirthDate = birthDate;
     }

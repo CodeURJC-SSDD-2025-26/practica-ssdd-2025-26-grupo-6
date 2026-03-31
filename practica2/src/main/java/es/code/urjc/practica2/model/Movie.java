@@ -9,8 +9,8 @@ public class Movie extends Filmography{
     public Movie() {} //Default constructor for JPA
 
     public Movie(Long filmographyId, String filmographyName, float filmographyAverageStars, String filmographySynopsis, 
-        int filmographyYear, Director filmographyDirector, int movieDuration) {
-        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector);
+        int filmographyYear, Director filmographyDirector, String filmographyTrailerUrl, int movieDuration) {
+        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector, filmographyTrailerUrl);
         this.movieDuration = movieDuration;
     }
 

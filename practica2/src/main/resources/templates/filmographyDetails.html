@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Palomix" />
+    <meta name="author" content="Grupo 6" />
+    <title>Palomix - Detalles Películas</title>
+    <!-- Libraries-->
+    <!--Bootstrap Librarie-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!--Chart.js Librarie-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="primary principal">
+    
+    <!-- HEADER -->
+    {{>header}}
+
+    <!-- Page content -->
+    <div class="content">
+        <div class="px-5 mb-4 mt-3">
+            <div class="row align-items-stretch g-4">
+                <!-- Poster -->
+                <div class="col-12 col-md-3">
+                    <img src="images/carteleraEjemploAvatar.webp" alt="Poster de la película"
+                        class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
+                </div>
+
+                <!-- Details + Trailer + Graph -->
+                <div class="col-12 col-md-9">
+                    <div class="row g-4">
+                        <!-- Details -->
+                        <div class="col-12 col-lg-7 text-center text-md-start">
+                            <h2 class="fw-bold">{{filmography.filmographyName}}</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center justify-content-center justify-content-md-start w-100">
+                                {{#filmography.filmographyGenres}}
+                                <span class="text-white-50 fs-5">{{genres}}</span>
+                                <span class="text-white-50">•</span>
+                                {{/filmography.filmographyGenres}}
+                            </div>
+                            <p class="mt-1 mb-1 label-directed">DIRIGIDA POR <span class="text-white fs-6">{{filmography.filmographyDirector.directorName}}</span></p>
+                            <p class="mb-2 text-white-50">
+                                {{filmography.filmographyYear}}
+                                <span class="mx-1">•</span>
+                                {{#isSeries}}
+                                    {{serieDuration}} Temporadas
+                                {{/isSeries}}
+                                {{^isSeries}}
+                                    {{movieDuration}} mins
+                                {{/isSeries}}
+                            </p>
+                            <div class="d-flex gap-2 mb-3 align-items-center justify-content-center justify-content-md-start w-100 ">
+                                {{#filmography.filmographyPlatforms}}
+                                <span class="badge badge-custom rounded-pill text-white py-2 px-3">{{.}}</span>
+                                {{/filmography.filmographyPlatforms}}
+                            </div>
+                            <p class="mt-3 text-align-center text-align-md-justify">
+                                {{filmography.filmographySynopsis}}
+                            </p>
+                            <div
+                                class="d-flex d-flex flex-wrap gap-2 align-items-center justify-content-center justify-content-md-start w-100">
+                                <h4 class="m-0 me-3">{{filmography.filmographyAverageStars}}</h4>
+                                <div class="d-flex gap-2">
+                                    <i class="bi bi-star-fill star active"></i>
+                                    <i class="bi bi-star-fill star active"></i>
+                                    <i class="bi bi-star-fill star active"></i>
+                                    <i class="bi bi-star-fill star active"></i>
+                                    <i class="bi bi-star-fill star partial"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><a href="filmographies/{filmographyId}/reviews/new" class="btn btn-primary w-100 mt-3">Añadir Reseña</a></div>
+                                <div class="col"><a data-bs-toggle="modal" data-bs-target="#addToListModal" class="btn btn-primary mt-3">Añadir a Lista</a></div>
+                            </div>
+                        </div>
+
+                        <!-- Trailer + Graph -->
+                        <div class="col-12 col-lg-5">
+                            <h5 class="fw-semibold mb-2">Tráiler</h5>
+                            <div class="ratio ratio-16x9 rounded shadow overflow-hidden">
+                                <iframe src="{{filmography.filmographyTrailerUrl}}"
+                                    title="Tráiler" allowfullscreen></iframe>
+                            </div>
+                            <div class="me-3 mt-4">
+                                <canvas id="myReviewsBarFilm"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Review Movie Section-->
+        <div class="content px-5">
+            <div class="d-flex justify-content-start align-items-center gap-3 mb-2 view-more">
+                <h3 class="fw-bold mb-0">Reseñas:</h3>
+                <a class="btn btn-secondary" href="review">Ver más</a>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-5">
+                {{#filmography.filmographyReviews}}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title m-0">{{review.reviewAuthor.accountName}}</h5>
+                                <div class="rating d-flex align-items-center">
+                                    <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
+                                    <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3">{{reviewDescription}}</p>
+                            <hr class="m-0">
+                            <div class="d-flex justify-content-end">
+                                <div class="card-footer bg-transparent py-1 border-0">
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalReview1">
+                                        Ver más </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalReview1" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title m-0">{{review.reviewAuthor.accountName}}</h5>
+                                            <div class="rating d-flex align-item-center">
+                                                <h4 class="punctuation m-0 me-1">{{review.reviewStars}}</h4>
+                                                <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <p class="card-text mt-3">{{review.reviewDescription}}</p>
+                                        <hr class="m-2">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-secondary btn-small"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/filmography.filmographyReviews}}
+                {{^filmography.filmographyReviews}}
+                <p class="text-muted small">No hay reseñas para esta película. Sé el primero en escribir una!</p>
+                {{/filmography.filmographyReviews}}
+            </div>
+        </div>
+
+    <!-- Footer -->
+    {{>footer}}
+
+    <!-- Modal Add to List -->
+    <div class="modal fade" id="addToListModal" tabindex="-1" aria-labelledby="addToListLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addToListLabel">Añadir a Lista</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/lists/add" method="post">
+                    <input type="hidden" name="filmographyId" value="{{filmography.filmographyId}}">
+                    <div class="modal-body">
+                        <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>
+                        <!--Existing Lists-->
+                        <div class="d-flex flex-column gap-2">
+                            {{#userLists}}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="listIds" value="{{listsId}}" id="list-{{listsId}}">
+                                <label class="form-check-label" for="list-{{listsId}}">{{listName}}</label>
+                            </div>
+                            {{/userLists}}
+                            {{^userLists}}
+                            <p class="text-muted small">Sin listas. Cree una nueva debajo.</p>
+                            {{/userLists}}
+                        </div>
+                        <hr>
+                        <!--New List Creation-->
+                        <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
+                        <div class="d-flex gap-2 input-group">
+                            <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
+                            <button type="button" class="btn btn-outline-primary">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary btn-small"
+                            data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-small" data-bs-dismiss="modal">Guardar
+                            Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/filmsRatingBarChart.js" defer></script>
+</body>
+
+</html>

@@ -9,8 +9,8 @@ public class Serie extends Filmography{
     public Serie() {} //Default constructor for JPA
 
     public Serie(Long filmographyId, String filmographyName, float filmographyAverageStars, String filmographySynopsis, 
-        int filmographyYear, Director filmographyDirector, int serieDuration) {
-        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector);
+        int filmographyYear, Director filmographyDirector, String filmographyTrailerUrl, int serieDuration) {
+        super(filmographyName, filmographyAverageStars, filmographySynopsis, filmographyYear, filmographyDirector, filmographyTrailerUrl);
         this.serieDuration = serieDuration;
     }
 

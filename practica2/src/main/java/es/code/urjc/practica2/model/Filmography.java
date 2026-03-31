@@ -3,8 +3,6 @@ package es.code.urjc.practica2.model;
 import java.util.List;
 import java.util.ArrayList;
 
-import es.code.urjc.practica2.model.Filmography.Platforms;
-
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -35,6 +33,7 @@ public class Filmography {
     private float filmographyAverageStars;
     private String filmographySynopsis;
     private int filmographyYear;
+    private String filmographyTrailerUrl;
 
     //Image is yet not included
 
@@ -73,12 +72,13 @@ public class Filmography {
 
     public Filmography() {} //Default constructor for JPA
 
-    public Filmography(String filmographyName, float filmographyAverageStars, String filmographySynopsis, int filmographyYear, Director filmographyDirector) {
+    public Filmography(String filmographyName, float filmographyAverageStars, String filmographySynopsis, int filmographyYear, Director filmographyDirector, String filmographyTrailerUrl) {
         this.filmographyName = filmographyName;
         this.filmographyAverageStars = filmographyAverageStars;
         this.filmographySynopsis = filmographySynopsis;
         this.filmographyYear = filmographyYear;
         this.filmographyDirector = filmographyDirector;
+        this.filmographyTrailerUrl = filmographyTrailerUrl;
     }
 
     // Recalculating average rating when reviews change
@@ -161,5 +161,13 @@ public class Filmography {
 
     public void setFilmographyReviews(List<Review> filmographyReviews) {
         this.filmographyReviews = filmographyReviews;
-    }    
+    }
+
+    public String getFilmographyTrailerUrl() {
+        return filmographyTrailerUrl;
+    }
+
+    public void setFilmographyTrailerUrl(String filmographyTrailerUrl) {
+        this.filmographyTrailerUrl = filmographyTrailerUrl;
+    }
 }

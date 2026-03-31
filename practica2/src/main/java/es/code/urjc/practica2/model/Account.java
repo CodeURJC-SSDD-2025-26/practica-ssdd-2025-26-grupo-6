@@ -1,10 +1,14 @@
 package es.code.urjc.practica2.model;
 
-import jakarta.annotation.Generated;
+import java.util.List;
+import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 //It's the user account, but to avoid later problems we call it account
 @Entity
@@ -24,10 +28,12 @@ public class Account {
         ADMIN
     }
 
+    @OneToMany(mappedBy = "listOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lists> accountLists = new ArrayList<>();
+
     public Account() {} //Default constructor for JPA
 
-    public Account(Long accountId, String accountName, String accountBirthDate, String accountEmail, Role accountRole, String accountPassword) {
-        this.accountId = accountId;
+    public Account(String accountName, String accountBirthDate, String accountEmail, Role accountRole, String accountPassword) {
         this.accountName = accountName;
         this.accountBirthDate = accountBirthDate;
         this.accountEmail = accountEmail;
@@ -81,5 +87,14 @@ public class Account {
 
     public void setAccountPassword(String accountPassword) {
         this.accountPassword = accountPassword;
+    }
+
+    public List<Lists> getAccountLists() { 
+        return accountLists;
+    
+    }
+
+    public void setAccountLists(List<Lists> accountLists) {
+        this.accountLists = accountLists; 
     }
 }

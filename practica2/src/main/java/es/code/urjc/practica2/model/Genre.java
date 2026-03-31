@@ -3,11 +3,14 @@ package es.code.urjc.practica2.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Genre {
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long genreId;
 
     @Enumerated(EnumType.STRING)
@@ -26,8 +29,7 @@ public class Genre {
 
     public Genre() {} //Default constructor for JPA
 
-    public Genre(Long genreId, Genres genres) {
-        this.genreId = genreId;
+    public Genre(Genres genres) {
         this.genres = genres;
     }
 
