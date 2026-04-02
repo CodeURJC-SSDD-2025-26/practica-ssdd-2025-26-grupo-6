@@ -25,4 +25,8 @@ public class FilmographyService {
     public Serie findSeriesById(Long id) {
         return (Serie) filmographyRepository.findById(id).orElseThrow(() -> new RuntimeException("Serie no encontrada"));
     }
+
+    public Filmography save(Filmography filmography) {
+        return filmographyRepository.save(filmography);
+    }
 }

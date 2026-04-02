@@ -62,4 +62,12 @@ public class Lists {
     public void setFilmographyList(List<Filmography> filmographyList) {
         this.filmographyList = filmographyList;
     }
+
+    public Account getListOwner() {
+        return listOwner;
+    }
+
+    public void setListOwner(Account listOwner) {
+        this.listOwner = listOwner;
+    }
 }

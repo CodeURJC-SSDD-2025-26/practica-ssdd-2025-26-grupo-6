@@ -34,42 +34,65 @@ public class AccountController {
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model) {
+        Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
-        model.addAttribute("review", new Review());
-        return "review-form";
+
+        review.setReviewStars(0f);
+        review.setReviewDescription("");
+
+        model.addAttribute("review", review);
+
+        return "reviewForm";
     }
 
-    @PostMapping("/filmographies/{filmographyId}/reviews")
+    @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review) {
         Filmography filmography = filmographyService.findById(filmographyId); 
+        
         review.setFilmography(filmography);
         review.setReviewAuthor(accountService.getCurrentUser());
         reviewService.save(review);
+
+        filmography.getFilmographyReviews().add(review);
+        filmography.updateAverageStars();
+        filmographyService.save(filmography);
+
+
         return "redirect:/filmographies/" + filmographyId;
     }
 
     @GetMapping("/reviews/{reviewId}/edit")
     public String editReview(@PathVariable Long reviewId, Model model) {
         Review review = reviewService.findById(reviewId);
+
         model.addAttribute("filmography", review.getFilmography());
         model.addAttribute("review", review);
+
         return "review-form";
     }
 
     @PostMapping("/reviews/{reviewId}/edit") 
     public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
+        Filmography filmography = review.getFilmography();
+
+        filmography.updateAverageStars();
+        filmographyService.save(filmography);
+
         return "redirect:/filmographies/" + review.getFilmography().getFilmographyId();
     }
 
     @PostMapping("/reviews/{reviewId}/delete")
     public String deleteReview(@PathVariable Long reviewId) {
-        Long filmographyId = reviewService.findById(reviewId)
-            .getFilmography().getFilmographyId();
+        Review review = reviewService.findById(reviewId);
+        Filmography filmography = review.getFilmography();
 
-        reviewService.delete(reviewId);
+        filmography.getFilmographyReviews().remove(review);
 
-        return "redirect:/filmographies/" + filmographyId;
+        filmography.updateAverageStars();
+        filmographyService.save(filmography);
+
+        return "redirect:/filmographies/" + filmography.getFilmographyId();
     }
 
     @GetMapping("/myLists")

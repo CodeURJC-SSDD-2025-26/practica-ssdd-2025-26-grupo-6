@@ -1,44 +1,45 @@
-document.querySelectorAll('.star').forEach(star => {
-    
-    star.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const half = rect.width / 2;
-        const value = e.clientX - rect.left < half
-            ? parseFloat(this.dataset.value) - 0.5
-            : parseFloat(this.dataset.value);
+const stars = document.querySelectorAll('#starsContainer .star');
+const ratingInput = document.getElementById('ratingInput');
+
+function updateStarsVisual(value) {
+    stars.forEach(star => {
+        const starValue = parseFloat(star.getAttribute('data-value'));
         
-        updateStars(value);
-    });
-
-    star.addEventListener('click', function(e) {
-        const rect = this.getBoundingClientRect();
-        const half = rect.width / 2;
-        const selectedValue = e.clientX - rect.left < half
-            ? parseFloat(this.dataset.value) - 0.5
-            : parseFloat(this.dataset.value);
+        // Limpiamos clases de iconos de Bootstrap
+        star.classList.remove('bi-star', 'bi-star-fill', 'bi-star-half', 'active', 'partial');
         
-        document.getElementById('rating').value = selectedValue;
-        console.log("Selected rating:", selectedValue);
-    });
-});
-
-document.getElementById('stars').addEventListener('mouseleave', function() {
-    const savedValue = document.getElementById('rating').value;
-    updateStars(savedValue ? parseFloat(savedValue) : 0);
-});
-
-function updateStars(value) {
-    document.querySelectorAll('.star').forEach(star => {
-        const v = parseFloat(star.dataset.value);
-        if (v <= value) {
-            star.classList.remove('bi-star', 'bi-star-half');
+        if (starValue <= value) {
+            // Estrella completa
             star.classList.add('bi-star-fill', 'active');
-        } else if (v - 0.5 === value) {
-            star.classList.remove('bi-star', 'bi-star-fill');
+        } else if (starValue - 0.5 === value) {
+            // Media estrella
             star.classList.add('bi-star-half', 'active');
+            // Si quieres usar tu degradado CSS en lugar del icono "half":
+            // star.classList.add('bi-star-fill', 'partial'); 
         } else {
-            star.classList.remove('bi-star-fill', 'bi-star-half', 'active');
+            // Estrella vacía
             star.classList.add('bi-star');
         }
     });
+}
+
+stars.forEach(star => {
+    star.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left; // Posición X del clic dentro de la estrella
+        let val = parseFloat(this.getAttribute('data-value'));
+        
+        // Si el clic es en la mitad izquierda de la estrella, vale .5
+        if (x < rect.width / 2) {
+            val -= 0.5;
+        }
+        
+        ratingInput.value = val;
+        updateStarsVisual(val);
+    });
+});
+
+// Cargar estado inicial (para edición)
+if (ratingInput.value > 0) {
+    updateStarsVisual(parseFloat(ratingInput.value));
 }
