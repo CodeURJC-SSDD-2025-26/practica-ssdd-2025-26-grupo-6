@@ -83,10 +83,14 @@ public class Filmography {
 
     // Recalculating average rating when reviews change
     public void updateAverageStars() {
-        if (filmographyReviews.isEmpty()) {
-            this.filmographyAverageStars = 0;
+        if (this.filmographyReviews == null || this.filmographyReviews.isEmpty()) {
+            this.filmographyAverageStars = 0f;
         } else {
-            this.filmographyAverageStars = (float) filmographyReviews.stream().mapToDouble(Review::getReviewStars).average().orElse(0.0);
+            float sum = 0;
+            for (Review r : filmographyReviews) {
+                sum += r.getReviewStars();
+            }
+            this.filmographyAverageStars = sum / filmographyReviews.size();
         }
     }
     

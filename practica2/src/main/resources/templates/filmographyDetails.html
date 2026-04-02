@@ -17,7 +17,7 @@
     <!--Chart.js Librarie-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Our CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="primary principal">
@@ -31,7 +31,7 @@
             <div class="row align-items-stretch g-4">
                 <!-- Poster -->
                 <div class="col-12 col-md-3">
-                    <img src="images/carteleraEjemploAvatar.webp" alt="Poster de la película"
+                    <img src="/images/carteleraEjemploAvatar.webp" alt="Poster de la película"
                         class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
                 </div>
 
@@ -70,15 +70,13 @@
                                 class="d-flex d-flex flex-wrap gap-2 align-items-center justify-content-center justify-content-md-start w-100">
                                 <h4 class="m-0 me-3">{{filmography.filmographyAverageStars}}</h4>
                                 <div class="d-flex gap-2">
-                                    <i class="bi bi-star-fill star active"></i>
-                                    <i class="bi bi-star-fill star active"></i>
-                                    <i class="bi bi-star-fill star active"></i>
-                                    <i class="bi bi-star-fill star active"></i>
-                                    <i class="bi bi-star-fill star partial"></i>
+                                    {{#starsList}}
+                                        <i class="bi bi-star-fill star {{class}}"></i>
+                                    {{/starsList}}
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col"><a href="filmographies/{filmographyId}/reviews/new" class="btn btn-primary w-100 mt-3">Añadir Reseña</a></div>
+                                <div class="col"><a href="/filmographies/{{filmography.filmographyId}}/reviews/new" class="btn btn-primary w-100 mt-3">Añadir Reseña</a></div>
                                 <div class="col"><a data-bs-toggle="modal" data-bs-target="#addToListModal" class="btn btn-primary mt-3">Añadir a Lista</a></div>
                             </div>
                         </div>
@@ -111,7 +109,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title m-0">{{review.reviewAuthor.accountName}}</h5>
+                                <h5 class="card-title m-0">{{reviewAuthor.accountName}}</h5>
                                 <div class="rating d-flex align-items-center">
                                     <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
                                     <i class="bi bi-star-fill fs-4 text-warning"></i>
@@ -134,13 +132,13 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title m-0">{{review.reviewAuthor.accountName}}</h5>
+                                            <h5 class="card-title m-0">{{reviewAuthor.accountName}}</h5>
                                             <div class="rating d-flex align-item-center">
-                                                <h4 class="punctuation m-0 me-1">{{review.reviewStars}}</h4>
+                                                <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
                                                 <i class="bi bi-star-fill fs-4 text-warning"></i>
                                             </div>
                                         </div>
-                                        <p class="card-text mt-3">{{review.reviewDescription}}</p>
+                                        <p class="card-text mt-3">{{reviewDescription}}</p>
                                         <hr class="m-2">
                                         <div class="d-flex justify-content-end">
                                             <button class="btn btn-secondary btn-small"
@@ -154,10 +152,11 @@
                 </div>
                 {{/filmography.filmographyReviews}}
                 {{^filmography.filmographyReviews}}
-                <p class="text-muted small">No hay reseñas para esta película. Sé el primero en escribir una!</p>
+                <p class="text-light small">No hay reseñas para esta película.</p>
                 {{/filmography.filmographyReviews}}
             </div>
         </div>
+    </div>
 
     <!-- Footer -->
     {{>footer}}
@@ -210,7 +209,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/filmsRatingBarChart.js" defer></script>
+    <script src="/js/filmsRatingBarChart.js" defer></script>
 </body>
 
 </html>
