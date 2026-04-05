@@ -1,11 +1,10 @@
 package es.code.urjc.practica2.controller;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +17,15 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AutenticationController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     // LOGIN METHODS
     @GetMapping("/login")
@@ -54,15 +55,17 @@ public class AutenticationController {
 
         if (account != null) {
             session.setAttribute("user", account);
-            session.setMaxInactiveInterval(60 * 5); // 5 minutes inactive
+            session.setAttribute("isAdmin", account.getAccountRole() == Account.Role.ADMIN);
+
+            session.setMaxInactiveInterval(60 * 5);
 
             Cookie cookie = new Cookie("userEmail", email);
-            if (remember != null) { // If checkbox checked
-                cookie.setMaxAge(7 * 24 * 60 * 60); // Leasts 7 days
+            cookie.setPath("/");
+            if (remember != null) {
+                cookie.setMaxAge(7 * 24 * 60 * 60);
             } else {
-                cookie.setMaxAge(0); // If checkbox not marcked, then erase it
+                cookie.setMaxAge(0);
             }
-            cookie.setPath("/"); // Available in every URL
             response.addCookie(cookie);
 
             return "redirect:/principal";
@@ -72,21 +75,27 @@ public class AutenticationController {
         return "login";
     }
 
+    // LOGOUT
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect: /login";
+    }
+    
+
     // SIGN UP METHODS
 
-    // CUANDO LA BBDD SE HAGA CHEQUEAR QUE FUNCIONA BIEN
-    
     @GetMapping("/signUp")
     public String signUp(Model model) {
-        
+
         return "signUp";
     }
 
     @PostMapping("/signUp")
-    public String postSignUp(Model model, 
-            @RequestParam String email, 
-            @RequestParam String name, 
-            @RequestParam String password, 
+    public String postSignUp(Model model,
+            @RequestParam String email,
+            @RequestParam String name,
+            @RequestParam String password,
             @RequestParam String confirmPassword,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate,
             @RequestParam(required = false) String role) {
@@ -111,7 +120,7 @@ public class AutenticationController {
             hasError = true;
         }
 
-        // Validate date 
+        // Validate date
         if (birthDate.isAfter(LocalDate.now())) {
             model.addAttribute("errorD", "Fecha inválida");
             hasError = true;
@@ -121,14 +130,14 @@ public class AutenticationController {
             return "signUp";
         }
 
-        
         Account.Role userRole = (role != null) ? Account.Role.ADMIN : Account.Role.USER;
-        
-        Account newAccount = new Account(name,birthDate,email,userRole,password);
+
+        String encodedPassword = passwordEncoder.encode(password);
+
+        Account newAccount = new Account(name, birthDate, email, userRole, encodedPassword);
         accountService.save(newAccount);
 
         return "redirect:/login";
     }
-    
 
 }

@@ -1,8 +1,11 @@
 package es.code.urjc.practica2.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.repository.ReviewRepository;
 
@@ -31,5 +34,9 @@ public class ReviewService {
 
     public void delete(Long reviewId) {
         reviewRepository.deleteById(reviewId);
+    }
+
+    public List<Review> findByAuthor(Account author) {
+        return reviewRepository.findByReviewAuthor(author);
     }
 }

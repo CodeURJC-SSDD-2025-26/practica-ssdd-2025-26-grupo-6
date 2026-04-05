@@ -1,5 +1,6 @@
 package es.code.urjc.practica2;
 
+import java.time.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     public void run(String... args) {
 
         // Accounts
-        Account admin = new Account("admin", "1990-01-01", "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
-        Account alice = new Account("alice", "1995-06-15", "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
-        Account bob   = new Account("bob",   "1998-11-03", "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
+        Account admin = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
+        Account alice = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
+        Account bob   = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
         accountRepository.saveAll(List.of(admin, alice, bob));
 
         // Directors

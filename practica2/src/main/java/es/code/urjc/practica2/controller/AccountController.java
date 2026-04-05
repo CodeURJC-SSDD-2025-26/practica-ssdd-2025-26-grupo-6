@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.controller;
 
+import es.code.urjc.practica2.service.ListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import es.code.urjc.practica2.model.Review;
+import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.service.ReviewService;
+import jakarta.servlet.http.HttpSession;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 
-
 @Controller
 public class AccountController {
+
+    @Autowired
+    private ListsService listsService;
+
     @Autowired
     private AccountService accountService;
 
@@ -26,6 +32,9 @@ public class AccountController {
     @Autowired
     private ReviewService reviewService;
 
+    AccountController(ListsService listsService) {
+        this.listsService = listsService;
+    }
 
     @GetMapping("/includeReview")
     public String includeReview(Model model) {
@@ -47,8 +56,8 @@ public class AccountController {
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review) {
-        Filmography filmography = filmographyService.findById(filmographyId); 
-        
+        Filmography filmography = filmographyService.findById(filmographyId);
+
         review.setFilmography(filmography);
         review.setReviewAuthor(accountService.getCurrentUser());
         reviewService.save(review);
@@ -56,7 +65,6 @@ public class AccountController {
         filmography.getFilmographyReviews().add(review);
         filmography.updateAverageStars();
         filmographyService.save(filmography);
-
 
         return "redirect:/filmographies/" + filmographyId;
     }
@@ -71,8 +79,9 @@ public class AccountController {
         return "review-form";
     }
 
-    @PostMapping("/reviews/{reviewId}/edit") 
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
+    @PostMapping("/reviews/{reviewId}/edit")
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
+            @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Filmography filmography = review.getFilmography();
 
@@ -96,12 +105,27 @@ public class AccountController {
     }
 
     @GetMapping("/myLists")
-    public String myLists(Model model) {
+    public String myLists(Model model, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
+
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("lists", listsService.findByOwner(currentUser));
+
         return "myLists";
     }
 
     @GetMapping("/myReviews")
-    public String myReviews(Model model) {
+    public String myReviews(Model model, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
+
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
         return "myReviews";
     }
 

@@ -19,7 +19,7 @@
 </head>
 
 <body class="primary principal" id="page-reviews">
-    
+
     <!-- HEADER -->
     {{>header}}
 
@@ -35,17 +35,87 @@
             <a href="myLists" class="profile-btn text-decoration-none">
                 Mis Listas
             </a>
-            
+
         </div>
         <h4 class="text-start mb-4">Mis Reseñas</h4>
-        <div class="row row-cols-1 row-cols-md-2 g-5" id="reviews-container"></div>
+        <div class="row row-cols-1 row-cols-md-2 g-5">
+            {{#reviews}}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title m-0">{{filmography.filmographyName}}</h5>
+                            <div class="rating d-flex align-items-center">
+                                <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
+                                <i class="bi bi-star-fill fs-4 text-warning"></i>
+                            </div>
+                        </div>
+                        <p class="card-text mt-3" style="text-align: justify;">{{reviewDescription}}</p>
+                        <hr class="m-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="card-footer bg-transparent py-1 border-0 d-flex gap-2">
+                                <a href="/reviews/{{reviewId}}/edit" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form action="/reviews/{{reviewId}}/delete" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"
+                                        onclick="return confirm('¿Borrar reseña?')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="card-footer bg-transparent py-1 border-0">
+                                <a class="btn btn-primary btn-sm btn-small" data-bs-toggle="modal"
+                                    data-bs-target="#modal{{reviewId}}">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modal{{reviewId}}" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title m-0">{{filmography.filmographyName}}</h5>
+                                        <div class="rating d-flex align-items-center">
+                                            <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
+                                            <i class="bi bi-star-fill fs-4 text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text mt-3" style="text-align: justify;">{{reviewDescription}}</p>
+                                    <hr class="m-2">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/reviews}}
+
+            {{^reviews}}
+            <div class="container mt-5">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <img src="/images/searchError.png" class="img-fluid rounded" width="300" height="300">
+                    </div>
+
+                    <div class="col-auto">
+                        <h3 class="text-light m-0">No Tienes Ninguna Reseña</h3>
+                    </div>
+                </div>
+            </div>
+            {{/reviews}}
+        </div>
     </div>
 
     <!-- Footer -->
     {{>footer}}
 
-    <!-- Scripts -->
-    <script src="js/myReviewsCards.js"></script>
 </body>
 
 </html>

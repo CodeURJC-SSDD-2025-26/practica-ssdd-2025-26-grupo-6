@@ -1,9 +1,9 @@
 package es.code.urjc.practica2.service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.repository.AccountRepository;
@@ -14,20 +14,26 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account loginAccount(String email, String password){
-        Optional<Account> account = accountRepository.findByAccountEmail(email);
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-        if(account.isPresent() && account.get().getAccountPassword().equals(email)){
-            return account.get();
+    public Account loginAccount(String email, String password) {
+        // 1. Buscamos al usuario solo por email
+        Account account = accountRepository.findByAccountEmail(email).orElse(null);
+
+        // 2. Comparamos la contraseña usando matches()
+        if (account != null && passwordEncoder.matches(password, account.getAccountPassword())) {
+            return account;
         }
-        return null;
+
+        return null; // Fallo de autenticación
     }
 
-    public boolean existsAccountEmail(String email){
+    public boolean existsAccountEmail(String email) {
         return accountRepository.existsByAccountEmail(email);
     }
 
-    public boolean existsAccountName(String name){
+    public boolean existsAccountName(String name) {
         return accountRepository.existsByAccountName(name);
     }
 
@@ -36,7 +42,8 @@ public class AccountService {
     }
 
     public Account getCurrentUser() {
-        //When bbdd is implemented, we will get the current user from the session and return it, for now we return a dummy user
+        // When bbdd is implemented, we will get the current user from the session and
+        // return it, for now we return a dummy user
         return new Account("dummy", LocalDate.now(), "dummy", Account.Role.USER, "dummy");
     }
 }
