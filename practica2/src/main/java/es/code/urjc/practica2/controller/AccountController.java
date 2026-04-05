@@ -36,11 +36,6 @@ public class AccountController {
         this.listsService = listsService;
     }
 
-    @GetMapping("/includeReview")
-    public String includeReview(Model model) {
-        return "includeReview";
-    }
-
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model) {
         Review review = new Review();
@@ -55,16 +50,18 @@ public class AccountController {
     }
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
-    public String saveReview(@PathVariable Long filmographyId, Review review) {
+    public String saveReview(@PathVariable Long filmographyId, Review review, HttpSession session) {
         Filmography filmography = filmographyService.findById(filmographyId);
+        Account currentUser = (Account) session.getAttribute("user");
 
         review.setFilmography(filmography);
-        review.setReviewAuthor(accountService.getCurrentUser());
+        review.setReviewAuthor(currentUser);
         reviewService.save(review);
 
-        filmography.getFilmographyReviews().add(review);
-        filmography.updateAverageStars();
-        filmographyService.save(filmography);
+        // Reload from DB so the review list is complete before recalculating
+        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
+        updatedFilmography.updateAverageStars();
+        filmographyService.save(updatedFilmography);
 
         return "redirect:/filmographies/" + filmographyId;
     }
@@ -83,25 +80,29 @@ public class AccountController {
     public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
             @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
-        Filmography filmography = review.getFilmography();
+        Long filmographyId = review.getFilmography().getFilmographyId();
 
-        filmography.updateAverageStars();
-        filmographyService.save(filmography);
+        // Reload from DB to ensure the review list is complete
+        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
+        updatedFilmography.updateAverageStars();
+        filmographyService.save(updatedFilmography);
 
-        return "redirect:/filmographies/" + review.getFilmography().getFilmographyId();
+        return "redirect:/filmographies/" + filmographyId;
     }
 
     @PostMapping("/reviews/{reviewId}/delete")
     public String deleteReview(@PathVariable Long reviewId) {
         Review review = reviewService.findById(reviewId);
-        Filmography filmography = review.getFilmography();
+        Long filmographyId = review.getFilmography().getFilmographyId();
 
-        filmography.getFilmographyReviews().remove(review);
+        reviewService.delete(reviewId);
 
-        filmography.updateAverageStars();
-        filmographyService.save(filmography);
+        // Reload after deletion so the list reflects the removed review
+        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
+        updatedFilmography.updateAverageStars();
+        filmographyService.save(updatedFilmography);
 
-        return "redirect:/filmographies/" + filmography.getFilmographyId();
+        return "redirect:/filmographies/" + filmographyId;
     }
 
     @GetMapping("/myLists")

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Account.Role;
 import es.code.urjc.practica2.model.Director;
+import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Filmography.Platforms;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
@@ -62,7 +63,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         Genre aventura       = genreRepository.save(new Genre(Genres.AVENTURA));
 
         // Movies
-
         Movie inception = new Movie(
                 null,
                 "Inception",
@@ -111,7 +111,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
 
         // Series 
-
         Serie westworld = new Serie(
                 null,
                 "Westworld",
@@ -155,10 +154,17 @@ public class DatabaseInitializer implements CommandLineRunner {
                 new Review(3f, "Interesting premise but loses steam after season two.", alice, westworld)
         ));
 
-        // Recalculate average stars after reviews are saved
-        List.of(inception, dune, mulhollandDrive, westworld, breakingBad).forEach(f -> {
-            f.updateAverageStars();
-            filmographyRepository.save(f);
+        // Recalculate average stars — reload with reviews so the list is complete
+        List.of(
+                inception.getFilmographyId(),
+                dune.getFilmographyId(),
+                mulhollandDrive.getFilmographyId(),
+                westworld.getFilmographyId(),
+                breakingBad.getFilmographyId()
+        ).forEach(id -> {
+                Filmography f = filmographyRepository.findByIdWithReviews(id).orElseThrow();
+                f.updateAverageStars();
+                filmographyRepository.save(f);
         });
 
         // Lists

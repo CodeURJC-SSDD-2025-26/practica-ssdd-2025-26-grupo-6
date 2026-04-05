@@ -18,8 +18,12 @@ public class ListsService {
         return listsRepository.findByListOwner(owner);
     }
 
-    public void save(Lists list) {
-        listsRepository.save(list);
+    public Lists findById(Long id) {
+        return listsRepository.findById(id).orElseThrow(() -> new RuntimeException("List not found"));
+    }
+
+    public Lists save(Lists list) {
+        return listsRepository.save(list);
     }
 
     public void delete(Long id) {

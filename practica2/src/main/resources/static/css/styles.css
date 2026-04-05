@@ -124,15 +124,6 @@ html, body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.card-title{
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 /*Posters*/
 .poster{
     width: min(220px, 100%);
@@ -291,6 +282,7 @@ html, body{
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -299,6 +291,23 @@ html, body{
     justify-content: space-between;
     align-items: center;
     margin-top: 10px; 
+}
+.star-wrap {
+    position: relative;
+    display: inline-block;
+    font-size: 1.5rem;
+}   
+.star-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #f5c518;
+    white-space: nowrap;
+}
+.star-empty {
+     color: gray;
+     white-space: nowrap;
 }
 
 

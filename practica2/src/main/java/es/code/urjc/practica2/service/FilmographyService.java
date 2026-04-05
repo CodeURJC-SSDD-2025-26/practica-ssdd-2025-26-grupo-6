@@ -29,4 +29,9 @@ public class FilmographyService {
     public Filmography save(Filmography filmography) {
         return filmographyRepository.save(filmography);
     }
+
+    public Filmography findByIdWithReviews(Long id) {
+    return filmographyRepository.findByIdWithReviews(id)
+            .orElseThrow(() -> new RuntimeException("Filmography not found"));
+}
 }

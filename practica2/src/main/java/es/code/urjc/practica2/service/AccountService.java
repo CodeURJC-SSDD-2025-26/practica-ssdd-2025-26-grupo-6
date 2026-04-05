@@ -1,7 +1,5 @@
 package es.code.urjc.practica2.service;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,15 +16,15 @@ public class AccountService {
     private PasswordEncoder passwordEncoder;
 
     public Account loginAccount(String email, String password) {
-        // 1. Buscamos al usuario solo por email
+        // 1. Search for the account by email
         Account account = accountRepository.findByAccountEmail(email).orElse(null);
 
-        // 2. Comparamos la contraseña usando matches()
+        // 2. Compare the provided password with the stored hashed password
         if (account != null && passwordEncoder.matches(password, account.getAccountPassword())) {
             return account;
         }
 
-        return null; // Fallo de autenticación
+        return null; // Authentication failed
     }
 
     public boolean existsAccountEmail(String email) {
@@ -42,8 +40,8 @@ public class AccountService {
     }
 
     public Account getCurrentUser() {
-        // When bbdd is implemented, we will get the current user from the session and
-        // return it, for now we return a dummy user
-        return new Account("dummy", LocalDate.now(), "dummy", Account.Role.USER, "dummy");
+        // Temporary: return alice from the database until Spring Security is implemented
+        return accountRepository.findByAccountName("alice")
+                .orElseThrow(() -> new RuntimeException("Default user not found"));
     }
 }
