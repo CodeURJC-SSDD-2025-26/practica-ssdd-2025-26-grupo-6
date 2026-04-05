@@ -37,8 +37,6 @@ public class FilmographyService {
         return filmographyRepository.findTop10MoviesByYear();
     }
 
-
-
     public List<Serie> findSeriesByGenre(Genres genre) {
     return filmographyRepository.findByFilmographyGenres_Genres(genre)
             .stream()
@@ -55,12 +53,27 @@ public class FilmographyService {
                 .toList();
     }
 
+    public Filmography findByIdWithReviews(Long id) {
+        return filmographyRepository.findByIdWithReviews(id)
+                .orElseThrow(() -> new RuntimeException("Filmography not found"));
+    }
+
     public Filmography save(Filmography filmography) {
         return filmographyRepository.save(filmography);
     }
 
-    public Filmography findByIdWithReviews(Long id) {
-    return filmographyRepository.findByIdWithReviews(id)
-            .orElseThrow(() -> new RuntimeException("Filmography not found"));
-}
+    public Movie updateMovie(Long id, Filmography updatedMovie) {
+        Movie existingMovie = findMovieById(id);
+
+        existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
+        existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
+        existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
+        existingMovie.setMovieDuration(((Movie) updatedMovie).getMovieDuration());
+        existingMovie.setFilmographyGenres(updatedMovie.getFilmographyGenres());
+        existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
+        existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
+        existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
+
+        return filmographyRepository.save(existingMovie);
+    }
 }
