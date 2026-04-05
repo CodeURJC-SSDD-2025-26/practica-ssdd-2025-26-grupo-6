@@ -15,7 +15,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <!-- Our CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="primary principal">
@@ -27,17 +27,16 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
-
                     <h3 class="mb-3 text-center text-white">
-                        {{#filmography.filmographyId}}Edit {{/filmography.filmographyId}}
-                        {{^filmography.filmographyId}}Add {{/filmography.filmographyId}}
+                        {{#filmographyId}}Edit {{/filmographyId}}
+                        {{^filmographyId}}Add {{/filmographyId}}
                         {{#isSeries}}Series{{/isSeries}}
                         {{^isSeries}}Movie{{/isSeries}}
                     </h3>
 
                     <!-- Clikable Image -->
                     <div class="d-flex flex-column align-items-center mb-3">
-                        <img id="posterPreview" src="images/administradorImagenFondoPelicula.webp"
+                        <img id="posterPreview" src="/images/administradorImagenFondoPelicula.webp"
                             alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
                         <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
                     </div>
@@ -45,19 +44,19 @@
                     <input id="posterInput" type="file" accept="image/*" class="d-none">
 
                     <!-- Form -->
-                    {{#filmography.id}}
+                    {{#filmographyId}}
                     {{#isSeries}}
-                    <form action="/series/{{filmography.id}}/edit" enctype="multipart/form-data" method="post"
+                    <form action="/series/{{filmographyId}}/edit" enctype="multipart/form-data" method="post"
                     class="d-flex flex-column gap-3 administer-form">
                     {{/isSeries}}
 
                     {{^isSeries}}
-                    <form action="/movies/{{filmography.id}}/edit" enctype="multipart/form-data" method="post"
+                    <form action="/movies/{{filmographyId}}/edit" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
                     {{/isSeries}}
-                    {{/filmography.id}}
+                    {{/filmographyId}}
 
-                    {{^filmography.id}}
+                    {{^filmographyId}}
                     {{#isSeries}}
                     <form action="/series/new" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
@@ -67,101 +66,146 @@
                     <form action="/movies/new" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
                     {{/isSeries}}
-                    {{/filmography.id}}
+                    {{/filmographyId}}
 
-                    <!-- Title -->
-                    <div class="d-flex flex-column">
-                        <label class="fw-bold text-white">Title:</label>
-                        <input type="text" class="form-control" name="filmographyName"
-                            placeholder="Title" value="{{filmographyName}}">
-                    </div>
-                    <!-- Director -->
-                    <div class="d-flex flex-column">
-                        <label class="fw-bold text-white">Director:</label>
-                        <input type="text" class="form-control" name="directorName"
-                            placeholder="Director" value="{{filmography.filmographyDirector.directorName}}">
-                    </div>
-                    <!-- Release Year & Duration/Seasons -->
-                    <div class="row g-3">
-                        <div class="col-12 col-sm-6">
-                            <div class="d-flex flex-column">
-                                <label class="fw-bold text-white">Año de lanzamiento:</label>
-                                <input type="number" class="form-control" name="yearInput"
-                                    placeholder="Año de lanzamiento" min="1800" max="2026"
-                                    value="{{filmography.filmographyYear}}">
+                        <!-- Title -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Título:</label>
+                            <input type="text" class="form-control" name="filmographyName"
+                                placeholder="Título" value="{{filmographyName}}" required>
+                        </div>
+                        <!-- Director -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" name="directorName"
+                                placeholder="Director" value="{{filmographyDirector}}">
+                        </div>
+                        <!-- Release Year & Duration/Seasons -->
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Año de lanzamiento:</label>
+                                    <input type="number" class="form-control" name="filmographyYear"
+                                        placeholder="Año de lanzamiento" min="1800" max="2026"
+                                        value="{{filmographyYear}}" required>
+                                </div>
+                            </div>
+                            {{#isSeries}}
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Número de temporadas:</label>
+                                    <input type="number" class="form-control" name="serieDuration"
+                                        placeholder="Número de temporadas" min="1"
+                                        value="{{serieDuration}}" required>
+                                </div>
+                            </div>
+                            {{/isSeries}}
+                            {{^isSeries}}
+                            <div class="col-12 col-sm-6">
+                                <div class="d-flex flex-column">
+                                    <label class="fw-bold text-white">Duración:</label>
+                                    <input type="number" class="form-control" name="movieDuration"
+                                        placeholder="Duración (minutos)" min="0"
+                                        value="{{movieDuration}}" required>
+                                </div>
+                            </div>
+                            {{/isSeries}}
+                        </div>
+                        <!-- Genres -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Géneros:</label>
+                            <div class="d-flex flex-wrap gap-2 mt-1" id="genreContainer">
+                                {{#allGenres}}
+                                <span class="badge genre-badge rounded-pill py-2 px-3" 
+                                    data-value="{{value}}" 
+                                    style="cursor:pointer; background-color: {{#selected}}#0d6efd{{/selected}}{{^selected}}#6c757d{{/selected}}">
+                                    {{displayName}}
+                                </span>
+                                {{/allGenres}}
                             </div>
                         </div>
-                        {{#isSeries}}
-                        <div class="col-12 col-sm-6">
-                            <div class="d-flex flex-column">
-                                <label class="fw-bold text-white">Número de temporadas:</label>
-                                <input type="number" class="form-control" name="seasonsInput"
-                                    placeholder="Número de temporadas" min="1"
-                                    value="{{filmography.Serie.serieDuration}}">
+                        <!-- Platforms -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Plataformas:</label>
+                            <div class="d-flex flex-wrap gap-2 mt-1" id="platformContainer">
+                                {{#allPlatforms}}
+                                <span class="badge platform-badge rounded-pill py-2 px-3" 
+                                    data-value="{{value}}" 
+                                    style="cursor:pointer; background-color: {{#selected}}#0d6efd{{/selected}}{{^selected}}#6c757d{{/selected}}">
+                                    {{displayName}}
+                                </span>
+                                {{/allPlatforms}}
                             </div>
                         </div>
-                        {{/isSeries}}
-                        {{^isSeries}}
-                        <div class="col-12 col-sm-6">
-                            <div class="d-flex flex-column">
-                                <label class="fw-bold text-white">Duración:</label>
-                                <input type="number" class="form-control" name="durationInput"
-                                    placeholder="Duración (minutos)" min="0"
-                                    value="{{filmography.Movie.movieDuration}}">
-                            </div>
+                        <!-- Synopsis -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Sinopsis:</label>
+                            <textarea class="form-control" name="filmographySynopsis"
+                                placeholder="Sinopsis" rows="4" required>{{filmographySynopsis}}</textarea>
                         </div>
-                        {{/isSeries}}
-                    </div>
-                    <!-- Genres -->
-                    <div class="d-flex flex-column">
-                        <label class="fw-bold text-white">Géneros:</label>
-                        <select class="form-select" name="genreIds" multiple size="4">
-                            {{#allGenres}}
-                            <option value="{{genreId}}" {{#selected}}selected{{/selected}}>
-                                {{genreDisplayName}}
-                            </option>
-                            {{/allGenres}}
-                        </select>
-                        <small class="text-white-50 mt-1">Pulsa Ctrl para seleccionar múltiples géneros</small>
-                    </div>
-                    <!-- Platforms -->
-                    <div class="d-flex flex-column">
-                        <label class="fw-bold text-white">Plataformas:</label>
-                        <select class="form-select" name="platforms" multiple size="3">
-                            {{#allPlatforms}}
-                            <option value="{{value}}" {{#selected}}selected{{/selected}}>
-                                {{displayName}}
-                            </option>
-                            {{/allPlatforms}}
-                        </select>
-                        <small class="text-white-50 mt-1">Pulsa Ctrl para seleccionar múltiples plataformas</small>
-                    </div>
-                    <!-- Synopsis -->
-                    <div class="d-flex flex-column">
-                        <label class="fw-bold text-white">Synopsis:</label>
-                        <textarea class="form-control" name="filmographySynopsis"
-                            placeholder="Synopsis" rows="4">{{filmography.filmographySynopsis}}</textarea>
-                    </div>
-                    <!-- Submit & Cancel buttons -->
-                    <div class="d-flex gap-2">
-                        <a href="administrator" class="btn btn-primary w-50 py-2 " type="submit">
-                            {{#filmography.filmographyId}}Actualizar{{/filmography.filmographyId}}
-                            {{^filmography.filmographyId}}Añadir{{/filmography.filmographyId}}
-                        </a>
-                        <a href="administrator"
-                            class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
-                    </div>
-                </form>
+                        <!-- Trailer URL -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Trailer URL:</label>
+                            <input type="url" class="form-control" name="filmographyTrailerUrl"
+                                placeholder="Trailer URL" value="{{filmographyTrailerUrl}}" required>
+                        </div>
+                        <!-- Submit & Cancel buttons -->
+                        <div class="d-flex gap-2">
+                            <button href="/administrator" class="btn btn-primary w-50 py-2 " type="submit">
+                                {{#filmographyId}}Actualizar{{/filmographyId}}
+                                {{^filmographyId}}Añadir{{/filmographyId}}
+                            </button>
+                            <a href="/administrator"
+                                class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Footer -->
-{{>footer}}
+    <!-- Footer -->
+    {{>footer}}
 
-<!-- Scripts -->
-<script src="js/posterMoviesSeries.js"></script>
+    <!-- Scripts -->
+    <script src="/js/posterMoviesSeries.js"></script>
+    <script>
+        document.querySelectorAll('.genre-badge, .platform-badge').forEach(badge => {
+            // 1. Inicialización: Si Mustache ya lo marcó como azul, le ponemos la clase active
+            if (badge.style.backgroundColor.includes('rgb(13, 110, 253)') || 
+                badge.getAttribute('style').includes('#0d6efd')) {
+                badge.classList.add('active');
+            }
+
+            badge.addEventListener('click', function() {
+                // 2. Alternar clase visual
+                this.classList.toggle('active');
+                
+                const value = this.dataset.value;
+                const isPlatform = this.classList.contains('platform-badge');
+                const inputName = isPlatform ? 'platformIds' : 'genreIds';
+                
+                // 3. Lógica del Input Hidden
+                const existing = document.querySelector(`input[name="${inputName}"][value="${value}"]`);
+                if (existing) {
+                    existing.remove();
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = inputName;
+                    input.value = value;
+                    document.querySelector('.administer-form').appendChild(input);
+                }
+
+                // 4. Forzar el cambio de color manual si no quieres usar el CSS del paso 1:
+                if (this.classList.contains('active')) {
+                    this.style.backgroundColor = '#0d6efd';
+                } else {
+                    this.style.backgroundColor = '#6c757d';
+                }
+            });
+        });
+    </script>
 
 </body>
 

@@ -14,17 +14,12 @@ import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
-import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 
 @Controller
 public class AccountController {
-
     @Autowired
     private ListsService listsService;
-
-    @Autowired
-    private AccountService accountService;
 
     @Autowired
     private FilmographyService filmographyService;
@@ -77,8 +72,7 @@ public class AccountController {
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
-            @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 

@@ -93,6 +93,10 @@ public class Filmography {
             this.filmographyAverageStars = sum / filmographyReviews.size();
         }
     }
+
+    public String getDirectorName() {
+        return filmographyDirector != null ? filmographyDirector.getDirectorName() : "";
+    }
     
     // Getters and setters
     public Long getFilmographyId() {

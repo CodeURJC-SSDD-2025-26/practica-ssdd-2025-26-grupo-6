@@ -406,3 +406,15 @@ canvas{
 .film-list{
     background-color: var(--bs-secondary)
 }
+
+
+/* Color para badges desactivados (gris) */
+.genre-badge, .platform-badge {
+    background-color: #6c757d !important;
+    transition: background-color 0.2s;
+}
+
+/* Color para badges activos (azul) */
+.genre-badge.active, .platform-badge.active {
+    background-color: #0d6efd !important;
+}

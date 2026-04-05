@@ -56,11 +56,13 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         // Genres — saved first so they have an ID before being assigned
         Genre accion         = genreRepository.save(new Genre(Genres.ACCION));
+        Genre romance        = genreRepository.save(new Genre(Genres.ROMANCE));
         Genre cienciaFiccion = genreRepository.save(new Genre(Genres.CIENCIA_FICCION));
         Genre suspense       = genreRepository.save(new Genre(Genres.SUSPENSE));
         Genre drama          = genreRepository.save(new Genre(Genres.DRAMA));
         Genre miedo          = genreRepository.save(new Genre(Genres.MIEDO));
         Genre aventura       = genreRepository.save(new Genre(Genres.AVENTURA));
+        Genre comedia        = genreRepository.save(new Genre(Genres.COMEDIA));
 
         // Movies
         Movie inception = new Movie(
