@@ -43,6 +43,14 @@ public class Account {
         this.accountPassword = accountPassword;
     }
 
+    public Account(String accountName, String accountBirthDate, String accountEmail, Role accountRole, String accountPassword) {
+        this.accountName = accountName;
+        this.accountBirthDate = LocalDate.parse(accountBirthDate); // convertir String → LocalDate
+        this.accountEmail = accountEmail;
+        this.accountRole = accountRole;
+        this.accountPassword = accountPassword;
+    }
+
     public Long getAccountId() {
         return accountId;
     }

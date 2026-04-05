@@ -8,58 +8,92 @@
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
     <title>Palomix - Series</title>
-    <!-- Libraries-->
-    <!--Bootstrap Librarie-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- Our CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body class="primary principal" id="page-series">
-    
-    <!-- HEADER -->
+
     {{>header}}
 
-    <!-- Page Content -->
     <div class="content">
-        <div style="margin-top: 30px;"> <!-- First Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Series de Aventuras</h4>
-                <a class="btn btn-secondary" href="filmsLists">Ver más</a>
-            </div>
-            <!-- Films section-->
-            <div class="films"></div>
+
+    <!-- AVENTURA -->
+    <div style="margin-top: 30px;">
+        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
+            <h4>Series de Aventuras</h4>
+            <a class="btn btn-secondary" href="filmsLists">Ver más</a>
         </div>
-        <div style="margin-top: 30px;"> <!-- Second Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Series de Acción</h4>
-                <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
+
+        <div class="films">
+            {{#aventura}}
+            <div class="card">
+                <a href="/filmographies/{{filmographyId}}">
+                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                    <h5>{{filmographyName}}</h5>
+                </a>
             </div>
-            <!-- Films section-->
-            <div class="films"></div>
-        </div>
-        <div style="margin-top: 30px;"> <!-- Third Section -->
-            <!-- Section Title-->
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Series de Ciencia Ficción</h4>
-                <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
-            </div>
-            <!-- Films section-->
-            <div class="films"></div>
+            {{/aventura}}
+
+            {{^aventura}}
+            <p>No hay series de aventura disponibles.</p>
+            {{/aventura}}
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- ACCIÓN -->
+    <div style="margin-top: 30px;">
+        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
+            <h4>Series de Acción</h4>
+            <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
+        </div>
+
+        <div class="films">
+            {{#accion}}
+            <div class="card">
+                <a href="/filmographies/{{filmographyId}}">
+                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                    <h5>{{filmographyName}}</h5>
+                </a>
+            </div>
+            {{/accion}}
+
+            {{^accion}}
+            <p>No hay series de acción disponibles.</p>
+            {{/accion}}
+        </div>
+    </div>
+
+    <!-- CIENCIA FICCIÓN -->
+    <div style="margin-top: 30px;">
+        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
+            <h4>Series de Ciencia Ficción</h4>
+            <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
+        </div>
+
+        <div class="films">
+            {{#ciencia}}
+            <div class="card">
+                <a href="/filmographies/{{filmographyId}}">
+                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                    <h5>{{filmographyName}}</h5>
+                </a>
+            </div>
+            {{/ciencia}}
+
+            {{^ciencia}}
+            <p>No hay series de ciencia ficción disponibles.</p>
+            {{/ciencia}}
+        </div>
+    </div>
+
+</div>
+
+
     {{>footer}}
 
-    <!-- Scripts -->
-    <script src="js/loadMoviesSeriesLists.js"></script>
-    
 </body>
 
 </html>
+

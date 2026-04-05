@@ -178,5 +178,20 @@ public class DatabaseInitializer implements CommandLineRunner {
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(List.of(aliceFavourites, aliceWatchLater, bobMustSee));
+        inception.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg");
+        dune.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg");
+        mulhollandDrive.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qtRK5N2uDGqkV3x3yV2G6e0OQWw.jpg");
+
+        westworld.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg");
+        breakingBad.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg");
+
+        filmographyRepository.save(inception);
+        filmographyRepository.save(dune);
+        filmographyRepository.save(mulhollandDrive);
+
+        filmographyRepository.save(westworld);
+        filmographyRepository.save(breakingBad);
+
+
     }
 }
