@@ -60,10 +60,19 @@ public class FilmographyController {
     }
 
 
-    @GetMapping("/lists") //Header
-    public String lists(Model model) {
+    @GetMapping("/lists")
+    public String listsPage(Model model) {
+
+        model.addAttribute("bestRatedLists", listsService.getBestRatedLists());
+        model.addAttribute("worstRatedLists", listsService.getWorstRatedLists());
+        model.addAttribute("longestLists", listsService.getLongestLists());
+        model.addAttribute("longestMoviesLists", listsService.getLongestMoviesLists());
+        model.addAttribute("seriesMostSeasonsLists", listsService.getSeriesWithMostSeasons());
+
         return "lists";
     }
+
+
 
     @GetMapping("/review")
     public String review(Model model) {
