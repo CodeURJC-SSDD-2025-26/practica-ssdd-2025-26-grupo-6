@@ -10,14 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
+import es.code.urjc.practica2.service.ListsService;
 
 @Controller
 public class FilmographyController {
@@ -26,6 +31,9 @@ public class FilmographyController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private ListsService listsService;
 
     @GetMapping("/filmsLists")
     public String filmsLists(Model model) {
@@ -52,11 +60,13 @@ public class FilmographyController {
         return "series";
     }
 
-    @GetMapping("/filmographies/{id:[0-9]+}")
+    @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model) {
         Filmography filmography = filmographyService.findById(id);
-        
-        //Check if it's a movie or a serie to show the correct information in the template
+
+        model.addAttribute("filmography", filmography);
+ 
+        // Check if it's a movie or a serie to show the correct information
         if (filmography instanceof Serie serie) {
             model.addAttribute("isSeries", true);
             model.addAttribute("serieDuration", serie.getSerieDuration());
@@ -65,37 +75,83 @@ public class FilmographyController {
             model.addAttribute("isSeries", false);
             model.addAttribute("movieDuration", movie.getMovieDuration());
         }
-        
-        // STARS
-        List<Map<String, String>> stars = new ArrayList<>();
-        double average = filmography.getFilmographyAverageStars();
-        
+ 
+        // Stars
+        List<Map<String, Object>> starsList = new ArrayList<>();
+        float avg = filmography.getFilmographyAverageStars();
+        model.addAttribute("averageStars", Math.round(avg * 100.0f) / 100.0f);
         for (int i = 1; i <= 5; i++) {
-            Map<String, String> star = new HashMap<>();
-            if (average >= i) {
-                star.put("class", "active"); // Estrella llena
-            } else if (average > i - 1 && average < i) {
-                star.put("class", "partial"); // Estrella media (si tu CSS lo soporta)
+            Map<String, Object> star = new HashMap<>();
+            float fill;
+            if (avg >= i) {
+                fill = 100f;
+            } else if (avg > i - 1) {
+                fill = (avg - (i - 1)) * 100f;
             } else {
-                star.put("class", ""); // Estrella vacía
+                fill = 0f;
             }
-            stars.add(star);
+            star.put("fillPercent", Math.round(fill));
+            star.put("hasColor", fill > 0);
+            starsList.add(star);
         }
-        model.addAttribute("starsList", stars);
-
-        model.addAttribute("filmography", filmography);
-
-        //Review
+        model.addAttribute("starsList", starsList);
+ 
+        // Empty review
         model.addAttribute("review", new Review());
-
-        //Give user lists
+ 
+        // User lists
         Account currentUser = accountService.getCurrentUser();
-        if(currentUser != null) {
-            model.addAttribute("userLists", currentUser.getAccountLists());
-        } else {
-            model.addAttribute("userLists", new ArrayList<>());
+        List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
+        if (currentUser != null) {
+            for (Lists list : currentUser.getAccountLists()) {
+                Map<String, Object> listMap = new HashMap<>();
+                listMap.put("listsId", list.getListsId());
+                listMap.put("listName", list.getListName());
+                listMap.put("checked", list.getFilmographyList().contains(filmography));
+                userListsWithCheck.add(listMap);
+            }
         }
-
+        model.addAttribute("userLists", userListsWithCheck);
+ 
         return "filmographyDetails";
+    }
+ 
+    // Updates which lists contain this filmography (add or remove based on checkboxes)
+    @PostMapping("/filmographies/{id}/lists/update")
+    @ResponseBody
+    public void updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds) {
+        Account currentUser = accountService.getCurrentUser();
+        Filmography filmography = filmographyService.findById(id);
+ 
+        for (Lists list : currentUser.getAccountLists()) {
+            boolean isChecked = listIds != null && listIds.contains(list.getListsId());
+            boolean alreadyContains = list.getFilmographyList().contains(filmography);
+ 
+            if (isChecked && !alreadyContains) {
+                list.getFilmographyList().add(filmography);
+                listsService.save(list);
+            } else if (!isChecked && alreadyContains) {
+                list.getFilmographyList().remove(filmography);
+                listsService.save(list);
+            }
+        }
+    }
+ 
+    // Creates a new empty list for the current user and returns it as JSON
+    @PostMapping("/filmographies/{id}/lists/new")
+    @ResponseBody
+    public Map<String, Object> createFilmographyList(@PathVariable Long id, @RequestParam String newListName) {
+        Account currentUser = accountService.getCurrentUser();
+ 
+        Lists newList = new Lists(newListName.trim(), new ArrayList<>());
+        newList.setListOwner(currentUser);
+        listsService.save(newList);
+        currentUser.getAccountLists().add(newList);
+        accountService.save(currentUser);
+ 
+        Map<String, Object> result = new HashMap<>();
+        result.put("listsId", newList.getListsId());
+        result.put("listName", newList.getListName());
+        return result;
     }
 }

@@ -68,10 +68,13 @@
                             </p>
                             <div
                                 class="d-flex d-flex flex-wrap gap-2 align-items-center justify-content-center justify-content-md-start w-100">
-                                <h4 class="m-0 me-3">{{filmography.filmographyAverageStars}}</h4>
+                                <h4 class="m-0 me-3">{{averageStars}}</h4>
                                 <div class="d-flex gap-2">
                                     {{#starsList}}
-                                        <i class="bi bi-star-fill star {{class}}"></i>
+                                    <span class="star-wrap">
+                                        <i class="bi bi-star star-empty"></i>
+                                        <i class="bi bi-star-fill star-full" style="width: {{fillPercent}}%"></i>
+                                    </span>
                                     {{/starsList}}
                                 </div>
                             </div>
@@ -101,13 +104,13 @@
         <div class="content px-5">
             <div class="d-flex justify-content-start align-items-center gap-3 mb-2 view-more">
                 <h3 class="fw-bold mb-0">Reseñas:</h3>
-                <a class="btn btn-secondary" href="review">Ver más</a>
+                <a class="btn btn-secondary" href="/review">Ver más</a>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-5">
                 {{#filmography.filmographyReviews}}
                 <div class="col">
                     <div class="card h-100">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title m-0">{{reviewAuthor.accountName}}</h5>
                                 <div class="rating d-flex align-items-center">
@@ -116,17 +119,17 @@
                                 </div>
                             </div>
                             <p class="card-text mt-3">{{reviewDescription}}</p>
-                            <hr class="m-0">
+                            <hr class="m-0 mt-auto">
                             <div class="d-flex justify-content-end">
                                 <div class="card-footer bg-transparent py-1 border-0">
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modalReview1">
+                                        data-bs-target="#modalReview{{reviewId}}">
                                         Ver más </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="modalReview1" tabindex="-1">
+                    <div class="modal fade" id="modalReview{{reviewId}}" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="card">
@@ -169,15 +172,26 @@
                     <h1 class="modal-title fs-5" id="addToListLabel">Añadir a Lista</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/lists/add" method="post">
+                <!--New List Creation-->
+                <div class=" px-3 mt-3">
+                    <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
+                    <div class="d-flex gap-2 input-group">
+                        <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
+                        <button type="button" class="btn btn-outline-primary" id="createListBtn">
+                            <i class="bi bi-check2"></i>
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <form action="/filmographies/{{filmography.filmographyId}}/lists/add" method="post" id="addToListForm">
                     <input type="hidden" name="filmographyId" value="{{filmography.filmographyId}}">
                     <div class="modal-body">
                         <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>
                         <!--Existing Lists-->
-                        <div class="d-flex flex-column gap-2">
+                        <div class="d-flex flex-column gap-2" id="userListsContainer">
                             {{#userLists}}
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="listIds" value="{{listsId}}" id="list-{{listsId}}">
+                                <input class="form-check-input" type="checkbox" name="listIds" value="{{listsId}}" id="list-{{listsId}}" {{#checked}}checked{{/checked}}>
                                 <label class="form-check-label" for="list-{{listsId}}">{{listName}}</label>
                             </div>
                             {{/userLists}}
@@ -185,31 +199,70 @@
                             <p class="text-muted small">Sin listas. Cree una nueva debajo.</p>
                             {{/userLists}}
                         </div>
-                        <hr>
-                        <!--New List Creation-->
-                        <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
-                        <div class="d-flex gap-2 input-group">
-                            <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
-                            <button type="button" class="btn btn-outline-primary">
-                                <i class="bi bi-plus-lg"></i>
-                            </button>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex gap-2">
+                            <button type="button" id="saveListChanges" class="btn btn-primary btn-small">Guardar Cambios</button>
+                            <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </form>
-                <div class="modal-footer">
-                    <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-secondary btn-small"
-                            data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary btn-small" data-bs-dismiss="modal">Guardar
-                            Cambios</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="/js/filmsRatingBarChart.js" defer></script>
+    <script>
+        document.getElementById('saveListChanges').addEventListener('click', function() {
+            const form = document.getElementById('addToListForm');
+            const formData = new FormData(form);
+            const filmographyId = document.querySelector('input[name="filmographyId"]').value;
+
+            fetch('/filmographies/' + filmographyId + '/lists/update', {
+                method: 'POST',
+                body: formData
+            }).then(() => {
+                const btn = document.getElementById('saveListChanges');
+                btn.textContent = 'Guardado!';
+                setTimeout(() => btn.textContent = 'Guardar Cambios', 1500);
+            });
+        });
+
+        document.getElementById('createListBtn').addEventListener('click', function() {
+            const newListName = document.getElementById('newListName').value.trim();
+            if (newListName === '') return;
+
+            const filmographyId = document.querySelector('input[name="filmographyId"]').value;
+
+            fetch('/filmographies/' + filmographyId + '/lists/new', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `newListName=${encodeURIComponent(newListName)}`
+            }).then(r => r.json())
+            .then(list => {
+                const container = document.getElementById('userListsContainer');
+
+                // Remove "no lists" message if present
+                const emptyMsg = container.querySelector('p');
+                if (emptyMsg) emptyMsg.remove();
+
+                // Create the new element and APPEND it — don't use innerHTML +=
+                const div = document.createElement('div');
+                div.className = 'form-check';
+                div.innerHTML = `
+                    <input class="form-check-input" type="checkbox"
+                        name="listIds" value="${list.listsId}"
+                        id="list-${list.listsId}">
+                    <label class="form-check-label" for="list-${list.listsId}">
+                        ${list.listName}
+                    </label>`;
+                container.appendChild(div);
+
+                document.getElementById('newListName').value = '';
+            });
+        });
+    </script>
 </body>
 
 </html>

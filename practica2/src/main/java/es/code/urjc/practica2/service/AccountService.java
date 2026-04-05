@@ -14,20 +14,20 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account loginAccount(String email, String password){
+    public Account loginAccount(String email, String password) {
         Optional<Account> account = accountRepository.findByAccountEmail(email);
 
-        if(account.isPresent() && account.get().getAccountPassword().equals(email)){
+        if (account.isPresent() && account.get().getAccountPassword().equals(email)) {
             return account.get();
         }
         return null;
     }
 
-    public boolean existsAccountEmail(String email){
+    public boolean existsAccountEmail(String email) {
         return accountRepository.existsByAccountEmail(email);
     }
 
-    public boolean existsAccountName(String name){
+    public boolean existsAccountName(String name) {
         return accountRepository.existsByAccountName(name);
     }
 
@@ -36,7 +36,8 @@ public class AccountService {
     }
 
     public Account getCurrentUser() {
-        //When bbdd is implemented, we will get the current user from the session and return it, for now we return a dummy user
-        return new Account("dummy", LocalDate.now(), "dummy", Account.Role.USER, "dummy");
+        // Temporary: return alice from the database until Spring Security is implemented
+        return accountRepository.findByAccountName("alice")
+                .orElseThrow(() -> new RuntimeException("Default user not found"));
     }
 }

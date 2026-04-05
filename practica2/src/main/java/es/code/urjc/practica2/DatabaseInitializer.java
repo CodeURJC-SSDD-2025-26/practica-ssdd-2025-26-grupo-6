@@ -1,5 +1,7 @@
 package es.code.urjc.practica2;
 
+import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Account.Role;
 import es.code.urjc.practica2.model.Director;
+import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Filmography.Platforms;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
@@ -39,9 +42,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     public void run(String... args) {
 
         // Accounts
-        Account admin = new Account("admin", "1990-01-01", "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
-        Account alice = new Account("alice", "1995-06-15", "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
-        Account bob   = new Account("bob",   "1998-11-03", "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
+        Account admin = new Account("admin", LocalDate.of(1990, 1, 1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
+        Account alice = new Account("alice", LocalDate.of(1995, 6, 15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
+        Account bob   = new Account("bob",   LocalDate.of(1998, 11, 3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
         accountRepository.saveAll(List.of(admin, alice, bob));
 
         // Directors
@@ -61,7 +64,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         Genre aventura       = genreRepository.save(new Genre(Genres.AVENTURA));
 
         // Movies
-
         Movie inception = new Movie(
                 null,
                 "Inception",
@@ -110,7 +112,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
 
         // Series 
-
         Serie westworld = new Serie(
                 null,
                 "Westworld",
@@ -154,10 +155,17 @@ public class DatabaseInitializer implements CommandLineRunner {
                 new Review(3f, "Interesting premise but loses steam after season two.", alice, westworld)
         ));
 
-        // Recalculate average stars after reviews are saved
-        List.of(inception, dune, mulhollandDrive, westworld, breakingBad).forEach(f -> {
-            f.updateAverageStars();
-            filmographyRepository.save(f);
+        // Recalculate average stars — reload with reviews so the list is complete
+        List.of(
+                inception.getFilmographyId(),
+                dune.getFilmographyId(),
+                mulhollandDrive.getFilmographyId(),
+                westworld.getFilmographyId(),
+                breakingBad.getFilmographyId()
+        ).forEach(id -> {
+                Filmography f = filmographyRepository.findByIdWithReviews(id).orElseThrow();
+                f.updateAverageStars();
+                filmographyRepository.save(f);
         });
 
         // Lists

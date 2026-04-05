@@ -1,7 +1,8 @@
 package es.code.urjc.practica2.model;
 
-import java.util.List;
 import java.time.LocalDate;
+
+import java.util.List;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
