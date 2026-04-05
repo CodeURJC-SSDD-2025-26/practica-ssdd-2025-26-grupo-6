@@ -34,6 +34,7 @@ public class Filmography {
     private String filmographySynopsis;
     private int filmographyYear;
     private String filmographyTrailerUrl;
+    private String filmographyImageUrl;
 
     //Image is yet not included
 
@@ -173,5 +174,13 @@ public class Filmography {
 
     public void setFilmographyTrailerUrl(String filmographyTrailerUrl) {
         this.filmographyTrailerUrl = filmographyTrailerUrl;
+    }
+
+    public String getFilmographyImageUrl() {
+        return filmographyImageUrl;
+    }
+
+    public void setFilmographyImageUrl(String filmographyImageUrl) {
+        this.filmographyImageUrl = filmographyImageUrl;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
@@ -32,10 +33,22 @@ public class FilmographyController {
         return "filmsLists";
     }
 
-    @GetMapping("/principal") //Header
+    @GetMapping("/principal")
     public String principal(Model model) {
+
+    model.addAttribute("peliculasNuevas",
+        filmographyService.findTop10MoviesByYear());
+
+
+        model.addAttribute("peliculasAccion",
+            filmographyService.findByGenre(Genres.ACCION));
+
+        model.addAttribute("peliculasAventura",
+            filmographyService.findByGenre(Genres.AVENTURA));
+
         return "principal";
     }
+
 
     @GetMapping("/lists") //Header
     public String lists(Model model) {
@@ -47,10 +60,22 @@ public class FilmographyController {
         return "review";
     }
 
-    @GetMapping("/series") //Header
+    @GetMapping("/series")
     public String series(Model model) {
+
+        // Obtener series por género
+        List<Serie> aventura = filmographyService.findSeriesByGenre(Genres.AVENTURA);
+        List<Serie> accion = filmographyService.findSeriesByGenre(Genres.ACCION);
+        List<Serie> ciencia = filmographyService.findSeriesByGenre(Genres.CIENCIA_FICCION);
+
+        // Enviar al modelo
+        model.addAttribute("aventura", aventura);
+        model.addAttribute("accion", accion);
+        model.addAttribute("ciencia", ciencia);
+
         return "series";
     }
+
 
     @GetMapping("/filmographies/{id:[0-9]+}")
     public String detail(@PathVariable Long id, Model model) {
