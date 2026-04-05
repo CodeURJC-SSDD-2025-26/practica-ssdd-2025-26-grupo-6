@@ -33,6 +33,10 @@ public class Review {
         this.filmography = filmography;
     }
 
+    public String getReviewAuthorName() {
+        return reviewAuthor != null ? reviewAuthor.getAccountName() : "";
+    }
+
     public Long getReviewId() {
         return reviewId;
     }
