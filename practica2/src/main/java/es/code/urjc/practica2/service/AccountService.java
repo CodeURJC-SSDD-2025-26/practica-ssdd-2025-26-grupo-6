@@ -39,9 +39,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account getCurrentUser() {
-        // Temporary: return alice from the database until Spring Security is implemented
-        return accountRepository.findByAccountName("alice")
-                .orElseThrow(() -> new RuntimeException("Default user not found"));
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElse(null);
     }
 }

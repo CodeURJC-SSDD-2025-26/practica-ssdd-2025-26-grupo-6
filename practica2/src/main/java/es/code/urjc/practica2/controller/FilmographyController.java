@@ -24,6 +24,8 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class FilmographyController {
     @Autowired
@@ -61,8 +63,10 @@ public class FilmographyController {
     }
 
     @GetMapping("/filmographies/{id}")
-    public String detail(@PathVariable Long id, Model model) {
+    public String detail(@PathVariable Long id, Model model, HttpSession session) {
         Filmography filmography = filmographyService.findById(id);
+        Long userId = (Long) session.getAttribute("userId");
+        Account currentUser = userId != null ? accountService.findById(userId) : null;
 
         model.addAttribute("filmography", filmography);
  
@@ -100,7 +104,6 @@ public class FilmographyController {
         model.addAttribute("review", new Review());
  
         // User lists
-        Account currentUser = accountService.getCurrentUser();
         List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
         if (currentUser != null) {
             for (Lists list : currentUser.getAccountLists()) {
@@ -119,9 +122,10 @@ public class FilmographyController {
     // Updates which lists contain this filmography (add or remove based on checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
     @ResponseBody
-    public void updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds) {
-        Account currentUser = accountService.getCurrentUser();
+    public void updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, HttpSession session) {
         Filmography filmography = filmographyService.findById(id);
+        Long userId = (Long) session.getAttribute("userId");
+        Account currentUser = userId != null ? accountService.findById(userId) : null;
  
         for (Lists list : currentUser.getAccountLists()) {
             boolean isChecked = listIds != null && listIds.contains(list.getListsId());
@@ -140,8 +144,9 @@ public class FilmographyController {
     // Creates a new empty list for the current user and returns it as JSON
     @PostMapping("/filmographies/{id}/lists/new")
     @ResponseBody
-    public Map<String, Object> createFilmographyList(@PathVariable Long id, @RequestParam String newListName) {
-        Account currentUser = accountService.getCurrentUser();
+    public Map<String, Object> createFilmographyList(@PathVariable Long id, @RequestParam String newListName, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        Account currentUser = userId != null ? accountService.findById(userId) : null;
  
         Lists newList = new Lists(newListName.trim(), new ArrayList<>());
         newList.setListOwner(currentUser);

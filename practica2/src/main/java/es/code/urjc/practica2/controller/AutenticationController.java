@@ -55,6 +55,7 @@ public class AutenticationController {
 
         if (account != null) {
             session.setAttribute("user", account);
+            session.setAttribute("userId", account.getAccountId());
             session.setAttribute("isAdmin", account.getAccountRole() == Account.Role.ADMIN);
 
             session.setMaxInactiveInterval(60 * 5);
@@ -87,7 +88,6 @@ public class AutenticationController {
 
     @GetMapping("/signUp")
     public String signUp(Model model) {
-
         return "signUp";
     }
 

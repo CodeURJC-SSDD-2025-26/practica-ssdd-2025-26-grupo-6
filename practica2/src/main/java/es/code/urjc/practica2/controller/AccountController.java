@@ -73,7 +73,7 @@ public class AccountController {
         model.addAttribute("filmography", review.getFilmography());
         model.addAttribute("review", review);
 
-        return "review-form";
+        return "reviewForm";
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
@@ -87,7 +87,7 @@ public class AccountController {
         updatedFilmography.updateAverageStars();
         filmographyService.save(updatedFilmography);
 
-        return "redirect:/filmographies/" + filmographyId;
+        return "redirect:/myReviews";
     }
 
     @PostMapping("/reviews/{reviewId}/delete")
@@ -102,7 +102,7 @@ public class AccountController {
         updatedFilmography.updateAverageStars();
         filmographyService.save(updatedFilmography);
 
-        return "redirect:/filmographies/" + filmographyId;
+        return "redirect:/myReviews";
     }
 
     @GetMapping("/myLists")
