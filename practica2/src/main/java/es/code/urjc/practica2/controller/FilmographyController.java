@@ -183,4 +183,16 @@ public class FilmographyController {
         result.put("listName", newList.getListName());
         return result;
     }
+
+    @GetMapping("/filmographies/{id}/reviews")
+    public String filmographyReviews(@PathVariable Long id, Model model) {
+
+        Filmography filmography = filmographyService.findByIdWithReviews(id);
+
+        model.addAttribute("filmography", filmography);
+        model.addAttribute("reviews", filmography.getFilmographyReviews());
+
+        return "review";
+    }
+
 }
