@@ -76,4 +76,19 @@ public class FilmographyService {
 
         return filmographyRepository.save(existingMovie);
     }
+
+    public Serie updateSeries(Long id, Filmography updatedSerie) {
+        Serie existingSerie = findSeriesById(id);
+
+        existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
+        existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
+        existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
+        existingSerie.setSerieDuration(((Serie) updatedSerie).getSerieDuration());
+        existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
+        existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
+        existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
+        existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+
+        return filmographyRepository.save(existingSerie);
+    }
 }

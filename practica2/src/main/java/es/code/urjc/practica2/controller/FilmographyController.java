@@ -62,7 +62,6 @@ public class FilmographyController {
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
-
         model.addAttribute("bestRatedLists", listsService.getBestRatedLists());
         model.addAttribute("worstRatedLists", listsService.getWorstRatedLists());
         model.addAttribute("longestLists", listsService.getLongestLists());
@@ -95,9 +94,9 @@ public class FilmographyController {
         return "series";
     }
 
-    @GetMapping("/filmographies/{id:[0-9]+}")
+    @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
-        Filmography filmography = filmographyService.findById(id);
+        Filmography filmography = filmographyService.findByIdWithReviews(id);
         Long userId = (Long) session.getAttribute("userId");
         Account currentUser = userId != null ? accountService.findById(userId) : null;
 
@@ -195,7 +194,6 @@ public class FilmographyController {
 
     @GetMapping("/filmographies/{id}/reviews")
     public String filmographyReviews(@PathVariable Long id, Model model) {
-
         Filmography filmography = filmographyService.findByIdWithReviews(id);
 
         model.addAttribute("filmography", filmography);

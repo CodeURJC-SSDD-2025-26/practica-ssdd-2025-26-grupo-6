@@ -171,21 +171,22 @@
     <script src="/js/posterMoviesSeries.js"></script>
     <script>
         document.querySelectorAll('.genre-badge, .platform-badge').forEach(badge => {
-            // 1. Inicialización: Si Mustache ya lo marcó como azul, le ponemos la clase active
-            if (badge.style.backgroundColor.includes('rgb(13, 110, 253)') || 
-                badge.getAttribute('style').includes('#0d6efd')) {
+            const isPlatform = badge.classList.contains('platform-badge');
+            const inputName = isPlatform ? 'platformsIds' : 'genreIds';
+            const value = badge.dataset.value;
+            
+            if (badge.getAttribute('style').includes('#0d6efd')) {
                 badge.classList.add('active');
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = inputName;
+                input.value = value;
+                document.querySelector('.administer-form').appendChild(input);
             }
 
-            badge.addEventListener('click', function() {
-                // 2. Alternar clase visual
+            badge.addEventListener('click', function () {
                 this.classList.toggle('active');
-                
-                const value = this.dataset.value;
-                const isPlatform = this.classList.contains('platform-badge');
-                const inputName = isPlatform ? 'platformIds' : 'genreIds';
-                
-                // 3. Lógica del Input Hidden
+
                 const existing = document.querySelector(`input[name="${inputName}"][value="${value}"]`);
                 if (existing) {
                     existing.remove();
@@ -197,12 +198,7 @@
                     document.querySelector('.administer-form').appendChild(input);
                 }
 
-                // 4. Forzar el cambio de color manual si no quieres usar el CSS del paso 1:
-                if (this.classList.contains('active')) {
-                    this.style.backgroundColor = '#0d6efd';
-                } else {
-                    this.style.backgroundColor = '#6c757d';
-                }
+                this.style.backgroundColor = this.classList.contains('active') ? '#0d6efd' : '#6c757d';
             });
         });
     </script>

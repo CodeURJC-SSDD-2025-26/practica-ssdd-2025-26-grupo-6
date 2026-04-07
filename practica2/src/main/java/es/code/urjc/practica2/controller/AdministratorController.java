@@ -44,6 +44,7 @@ public class AdministratorController {
     public String newMovie(Model model) {
         model.addAttribute("filmography", new Movie());
         model.addAttribute("isSeries", false);
+        
         model.addAttribute("filmographyName", "");
         model.addAttribute("filmographyDirector", "");
         model.addAttribute("filmographyYear", "");
@@ -58,7 +59,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platforms) {
+    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
         List<Genre> genres = new ArrayList<>();
@@ -72,8 +73,8 @@ public class AdministratorController {
         }
 
         List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platforms != null) {
-            for (String platform : platforms) {
+        if (platformsIds != null) {
+            for (String platform : platformsIds) {
                 platformList.add(Filmography.Platforms.valueOf(platform));
             }
         }
@@ -92,6 +93,7 @@ public class AdministratorController {
         Movie movie = filmographyService.findMovieById(id);
         model.addAttribute("filmographyId", movie.getFilmographyId());
         model.addAttribute("isSeries", false);
+
         model.addAttribute("filmographyName", movie.getFilmographyName());
         model.addAttribute("filmographyDirector", movie.getDirectorName());
         model.addAttribute("filmographyYear", movie.getFilmographyYear());
@@ -106,12 +108,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/edit")
-    public String updateMovie(@PathVariable Long id,
-                            Movie movie,
-                            @RequestParam String directorName,
-                            @RequestParam(required = false) List<String> genreIds,
-                            @RequestParam(required = false) List<String> platforms) {
-
+    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName)
                 .orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
@@ -125,8 +122,8 @@ public class AdministratorController {
         }
 
         List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platforms != null) {
-            for (String platform : platforms) {
+        if (platformsIds != null) {
+            for (String platform : platformsIds) {
                 platformList.add(Filmography.Platforms.valueOf(platform));
             }
         }
@@ -158,7 +155,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/new")
-    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platforms) {
+    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
         List<Genre> genres = new ArrayList<>();
@@ -172,8 +169,8 @@ public class AdministratorController {
         }
 
         List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platforms != null) {
-            for (String platform : platforms) {
+        if (platformsIds != null) {
+            for (String platform : platformsIds) {
                 platformList.add(Filmography.Platforms.valueOf(platform));
             }
         }
@@ -190,7 +187,7 @@ public class AdministratorController {
     @GetMapping("/series/{id}/edit")
     public String editSeries(@PathVariable Long id, Model model) {
         Serie serie = filmographyService.findSeriesById(id);
-        model.addAttribute("filmography", filmographyService.findById(id));
+        model.addAttribute("filmographyId", serie.getFilmographyId());
         model.addAttribute("isSeries", true);
 
         model.addAttribute("filmographyName", serie.getFilmographyName());
@@ -206,7 +203,35 @@ public class AdministratorController {
         return "filmographyForm";
     }
 
-    
+    @PostMapping("/series/{id}/edit")
+    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
+        Director director = directorRepository.findByDirectorName(directorName)
+                .orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+
+        List<Genre> genres = new ArrayList<>();
+        if (genreIds != null) {
+            for (String genreName : genreIds) {
+                Genre genre = genreRepository.findByGenres(Genre.Genres.valueOf(genreName))
+                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreName));
+                genres.add(genre);
+            }
+        }
+
+        List<Filmography.Platforms> platformList = new ArrayList<>();
+        if (platformsIds != null) {
+            for (String platform : platformsIds) {
+                platformList.add(Filmography.Platforms.valueOf(platform));
+            }
+        }
+
+        serie.setFilmographyDirector(director);
+        serie.setFilmographyGenres(genres);
+        serie.setFilmographyPlatforms(platformList);
+
+        filmographyService.updateSeries(id, serie);
+
+        return "redirect:/administrator";
+    }
 
     private List<Map<String, Object>> buildGenreList(Filmography filmography) {
         List<Map<String, Object>> allGenres = new ArrayList<>();
