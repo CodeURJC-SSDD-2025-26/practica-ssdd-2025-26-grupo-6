@@ -59,7 +59,6 @@ public class FilmographyService {
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
     }
 
-    @Transactional
     public void recalculateAllAverages() {
         filmographyRepository.findAll().forEach(f -> {
             filmographyRepository.findByIdWithReviews(f.getFilmographyId()).ifPresent(loaded -> {

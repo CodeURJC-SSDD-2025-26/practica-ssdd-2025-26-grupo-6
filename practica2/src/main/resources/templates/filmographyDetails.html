@@ -222,7 +222,11 @@
             fetch('/filmographies/' + filmographyId + '/lists/update', {
                 method: 'POST',
                 body: formData
-            }).then(() => {
+            }).then(response => {
+                if (response.status === 401) {
+                    window.location.href = '/login';
+                    return;
+                }
                 const btn = document.getElementById('saveListChanges');
                 btn.textContent = 'Guardado!';
                 setTimeout(() => btn.textContent = 'Guardar Cambios', 1500);
@@ -239,15 +243,19 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `newListName=${encodeURIComponent(newListName)}`
-            }).then(r => r.json())
-            .then(list => {
+            }).then(r => {
+                if (r.status === 401) {
+                    window.location.href = '/login';
+                    return;
+                }
+                return r.json();
+            }).then(list => {
+                if (!list) return;
                 const container = document.getElementById('userListsContainer');
 
-                // Remove "no lists" message if present
                 const emptyMsg = container.querySelector('p');
                 if (emptyMsg) emptyMsg.remove();
 
-                // Create the new element and APPEND it — don't use innerHTML +=
                 const div = document.createElement('div');
                 div.className = 'form-check';
                 div.innerHTML = `
