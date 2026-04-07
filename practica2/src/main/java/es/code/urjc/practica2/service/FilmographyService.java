@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
@@ -56,6 +57,16 @@ public class FilmographyService {
     public Filmography findByIdWithReviews(Long id) {
         return filmographyRepository.findByIdWithReviews(id)
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
+    }
+
+    @Transactional
+    public void recalculateAllAverages() {
+        filmographyRepository.findAll().forEach(f -> {
+            filmographyRepository.findByIdWithReviews(f.getFilmographyId()).ifPresent(loaded -> {
+                loaded.updateAverageStars();
+                filmographyRepository.save(loaded);
+            });
+        });
     }
 
     public Filmography save(Filmography filmography) {

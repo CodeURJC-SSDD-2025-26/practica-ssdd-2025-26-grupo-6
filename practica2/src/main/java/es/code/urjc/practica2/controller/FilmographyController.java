@@ -96,7 +96,7 @@ public class FilmographyController {
 
     @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
-        Filmography filmography = filmographyService.findByIdWithReviews(id);
+        Filmography filmography = filmographyService.findById(id);
         Long userId = (Long) session.getAttribute("userId");
         Account currentUser = userId != null ? accountService.findById(userId) : null;
 

@@ -1,5 +1,6 @@
 package es.code.urjc.practica2;
 
+import es.code.urjc.practica2.service.FilmographyService;
 import java.time.*;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import es.code.urjc.practica2.repository.ReviewRepository;
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
 
+    private final FilmographyService filmographyService;
     @Autowired private AccountRepository accountRepository;
     @Autowired private FilmographyRepository filmographyRepository;
     @Autowired private ReviewRepository reviewRepository;
@@ -36,6 +38,10 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired private DirectorRepository directorRepository;
     @Autowired private GenreRepository genreRepository;
     @Autowired private PasswordEncoder passwordEncoder;
+
+    DatabaseInitializer(FilmographyService filmographyService) {
+        this.filmographyService = filmographyService;
+    }
 
     @Override
     public void run(String... args) {
@@ -156,19 +162,6 @@ public class DatabaseInitializer implements CommandLineRunner {
                 new Review(3f, "Interesting premise but loses steam after season two.", alice, westworld)
         ));
 
-        // Recalculate average stars — reload with reviews so the list is complete
-        List.of(
-                inception.getFilmographyId(),
-                dune.getFilmographyId(),
-                mulhollandDrive.getFilmographyId(),
-                westworld.getFilmographyId(),
-                breakingBad.getFilmographyId()
-        ).forEach(id -> {
-                Filmography f = filmographyRepository.findByIdWithReviews(id).orElseThrow();
-                f.updateAverageStars();
-                filmographyRepository.save(f);
-        });
-
         // Lists
         Lists aliceFavourites = new Lists("Favourites", List.of(inception, dune, breakingBad));
         aliceFavourites.setListOwner(alice);
@@ -194,6 +187,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         filmographyRepository.save(westworld);
         filmographyRepository.save(breakingBad);
 
-
+        // Recalculate average stars — reload with reviews so the list is complete
+        filmographyService.recalculateAllAverages();
     }
 }

@@ -26,6 +26,4 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
     List<Filmography> findByFilmographyGenres_Genres(Genres genre);
     @Query("SELECT m FROM Movie m ORDER BY m.filmographyYear DESC")
     List<Movie> findTop10MoviesByYear();
-
-
 }
