@@ -26,7 +26,7 @@ public class ListsService {
     }
 
     public Lists findById(Long id) {
-        return listsRepository.findById(id).orElseThrow(() -> new RuntimeException("List not found"));
+        return listsRepository.findById(id).orElse(null);
     }
 
     public Lists save(Lists list) {

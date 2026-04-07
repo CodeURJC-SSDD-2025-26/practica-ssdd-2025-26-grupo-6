@@ -8,7 +8,7 @@
     <meta name="description" content="Palomix" />
     <meta name="author" content="Grupo 6" />
     <title>Palomix - Mis Listas</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/styles.css">
@@ -19,7 +19,7 @@
     {{>header}}
 
     <div class="content">
-        
+
         <div class="d-flex justify-content-start gap-3 p-3">
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
@@ -44,9 +44,15 @@
             <div class="row align-items-center pb-2">
                 <div class="col-auto d-flex align-items-center gap-2">
                     <h4 class="text-white">{{listName}}</h4>
+                    <button class="btn btn-sm btn-secondary " data-bs-toggle="modal"
+                        data-bs-target="#editListModal{{listsId}}">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
                 </div>
-                <div class="col-auto ms-auto p-3">
-                    <form action="/lists/{{listsId}}/delete" method="post">
+
+                <div class="col-auto ms-auto p-3 d-flex gap-2">
+                    <form action="/lists/{{listsId}}/delete" method="post"
+                        onsubmit="return confirm('¿Estás seguro de que quieres borrar esta lista?');">
                         <button type="submit" class="btn btn-sm btn-secondary">
                             <i class="bi bi-trash fs-6"></i>
                         </button>
@@ -54,11 +60,32 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="editListModal{{listsId}}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="/lists/{{listsId}}/update" method="post" class="modal-content text-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Renombrar "{{listName}}"</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="newName{{listsId}}" class="form-label">Nuevo nombre de la lista</label>
+                            <input type="text" name="newName" class="form-control" id="newName{{listsId}}"
+                                value="{{listName}}" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-small"
+                                data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-small">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="films">
                 {{#filmographyList}}
                 <div class="card">
-                    <a href="/filmsLists">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                    <a href="/filmography/{{filmographyId}}"> <img src="{{filmographyImageUrl}}"
+                            alt="{{filmographyName}}">
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
@@ -66,7 +93,7 @@
 
                 {{^filmographyList}}
                 <div class="p-3">
-                    <p class="admin-caption">Esta lista no tiene contenido aún.</p>
+                    <p class="admin-caption">Esta Lista está vacía</p>
                 </div>
                 {{/filmographyList}}
             </div>
@@ -92,14 +119,16 @@
 
     <div class="modal fade" id="newListModal" tabindex="-1" aria-labelledby="newListLabel">
         <div class="modal-dialog">
-            <form action="/lists/new" method="post" class="modal-content">
+            <form action="/myLists/new" method="post" class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="newListLabel">Nueva Lista</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <label for="listName" class="for-label fw-semibold mb-2">Nombre de la lista</label>
-                    <input type="text" name="listName" class="form-control" id="listName" placeholder="Ej: Favoritas..." required>
+                    <input type="text" name="listName" class="form-control" id="listName" placeholder="Ej: Favoritas..."
+                        required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
@@ -110,6 +139,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
+
 </html>

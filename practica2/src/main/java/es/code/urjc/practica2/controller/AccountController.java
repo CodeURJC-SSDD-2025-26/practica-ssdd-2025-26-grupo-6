@@ -1,6 +1,9 @@
 package es.code.urjc.practica2.controller;
 
 import es.code.urjc.practica2.service.ListsService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import es.code.urjc.practica2.service.FilmographyService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AccountController {
@@ -72,7 +77,8 @@ public class AccountController {
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
+            @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 
@@ -110,6 +116,57 @@ public class AccountController {
         model.addAttribute("lists", listsService.findByOwner(currentUser));
 
         return "myLists";
+    }
+
+    @PostMapping("/myLists/new")
+    public String addOwnList(Model model, String listName, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+        // 1. Validar si ya existe una lista con ese nombre para ese usuario
+        List<Lists> userLists = listsService.findByOwner(currentUser);
+
+        for (Lists l : userLists) {
+            if (l.getListName().equals(listName)) {
+                model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
+                return "myLists";
+            }
+        }
+
+        if (!listName.isBlank()) {
+            Lists newList = new Lists();
+            newList.setListName(listName);
+            newList.setListOwner(currentUser);
+            listsService.save(newList);
+        }
+
+        return "redirect:/myLists";
+    }
+
+    @PostMapping("/lists/{id}/update")
+    public String updateListName(@PathVariable Long id, @RequestParam String newName, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
+        Lists list = listsService.findById(id);
+
+        if (list != null && currentUser != null
+                && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
+            list.setListName(newName);
+            listsService.save(list);
+        }
+        return "redirect:/myLists";
+    }
+
+    @PostMapping("/lists/{id}/delete")
+    public String deleteList(@PathVariable Long id, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
+        Lists list = listsService.findById(id);
+
+        // Seguridad: Solo el dueño puede borrar
+        if (list != null && currentUser != null && list.getListOwner().equals(currentUser)) {
+            listsService.delete(list.getListsId());
+        }
+        return "redirect:/myLists";
     }
 
     @GetMapping("/myReviews")

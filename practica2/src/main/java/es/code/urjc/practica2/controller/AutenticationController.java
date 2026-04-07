@@ -58,7 +58,7 @@ public class AutenticationController {
             session.setAttribute("userId", account.getAccountId());
             session.setAttribute("isAdmin", account.getAccountRole() == Account.Role.ADMIN);
 
-            session.setMaxInactiveInterval(60 * 5);
+            session.setMaxInactiveInterval(60*60);
 
             Cookie cookie = new Cookie("userEmail", email);
             cookie.setPath("/");
