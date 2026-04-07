@@ -20,7 +20,6 @@ import es.code.urjc.practica2.service.ReviewService;
 import es.code.urjc.practica2.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import es.code.urjc.practica2.service.FilmographyService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AccountController {

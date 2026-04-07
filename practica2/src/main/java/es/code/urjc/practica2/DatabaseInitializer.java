@@ -82,7 +82,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         inception.setFilmographyPlatforms(List.of(Platforms.NETFLIX, Platforms.HBOMAX));
         inception.setFilmographyGenres(List.of(accion, cienciaFiccion, suspense));
-        inception.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg");
+        inception.setFilmographyImageUrl("https://www.originalfilmart.com/cdn/shop/files/inception_2010_french_original_film_art_5000x.webp?v=1686692704");
 
         Movie dune = new Movie(
                 null,
@@ -114,7 +114,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
-        mulhollandDrive.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qtRK5N2uDGqkV3x3yV2G6e0OQWw.jpg");
+        mulhollandDrive.setFilmographyImageUrl("https://m.media-amazon.com/images/M/MV5BNjliY2UwMjQtYjVlNi00NzExLTg1MDMtMjE2OTYwYjI0NTcxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
 
 
         filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));

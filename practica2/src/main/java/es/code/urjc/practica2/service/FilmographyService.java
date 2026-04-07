@@ -75,6 +75,7 @@ public class FilmographyService {
     public Movie updateMovie(Long id, Filmography updatedMovie) {
         Movie existingMovie = findMovieById(id);
 
+        existingMovie.setFilmographyImageUrl(updatedMovie.getFilmographyImageUrl());
         existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
         existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
         existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
@@ -90,6 +91,7 @@ public class FilmographyService {
     public Serie updateSeries(Long id, Filmography updatedSerie) {
         Serie existingSerie = findSeriesById(id);
 
+        existingSerie.setFilmographyImageUrl(updatedSerie.getFilmographyImageUrl());
         existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
         existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
         existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());

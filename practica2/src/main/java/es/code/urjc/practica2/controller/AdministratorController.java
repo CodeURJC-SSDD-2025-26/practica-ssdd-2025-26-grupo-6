@@ -45,6 +45,7 @@ public class AdministratorController {
         model.addAttribute("filmography", new Movie());
         model.addAttribute("isSeries", false);
         
+        model.addAttribute("filmographyImageUrl", "");
         model.addAttribute("filmographyName", "");
         model.addAttribute("filmographyDirector", "");
         model.addAttribute("filmographyYear", "");
@@ -59,7 +60,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
+    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
         List<Genre> genres = new ArrayList<>();
@@ -79,6 +80,7 @@ public class AdministratorController {
             }
         }
 
+        movie.setFilmographyImageUrl(filmographyImageUrl);
         movie.setFilmographyDirector(director);
         movie.setFilmographyGenres(genres);
         movie.setFilmographyPlatforms(platformList);
@@ -94,6 +96,7 @@ public class AdministratorController {
         model.addAttribute("filmographyId", movie.getFilmographyId());
         model.addAttribute("isSeries", false);
 
+        model.addAttribute("filmographyImageUrl", movie.getFilmographyImageUrl());
         model.addAttribute("filmographyName", movie.getFilmographyName());
         model.addAttribute("filmographyDirector", movie.getDirectorName());
         model.addAttribute("filmographyYear", movie.getFilmographyYear());
@@ -108,7 +111,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/edit")
-    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
+    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName)
                 .orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
@@ -128,6 +131,7 @@ public class AdministratorController {
             }
         }
 
+        movie.setFilmographyImageUrl(filmographyImageUrl);
         movie.setFilmographyDirector(director);
         movie.setFilmographyGenres(genres);
         movie.setFilmographyPlatforms(platformList);
@@ -142,6 +146,7 @@ public class AdministratorController {
         model.addAttribute("filmography", new Serie());
         model.addAttribute("isSeries", true);
 
+        model.addAttribute("filmographyImageUrl", "");
         model.addAttribute("filmographyName", "");
         model.addAttribute("filmographyDirector", "");
         model.addAttribute("filmographyYear", "");
@@ -155,7 +160,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/new")
-    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
+    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
         Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
         List<Genre> genres = new ArrayList<>();
@@ -175,6 +180,7 @@ public class AdministratorController {
             }
         }
         
+        serie.setFilmographyImageUrl(filmographyImageUrl);
         serie.setFilmographyDirector(director);
         serie.setFilmographyGenres(genres);
         serie.setFilmographyPlatforms(platformList);
@@ -190,6 +196,7 @@ public class AdministratorController {
         model.addAttribute("filmographyId", serie.getFilmographyId());
         model.addAttribute("isSeries", true);
 
+        model.addAttribute("filmographyImageUrl", serie.getFilmographyImageUrl());
         model.addAttribute("filmographyName", serie.getFilmographyName());
         model.addAttribute("filmographyDirector", serie.getDirectorName());
         model.addAttribute("filmographyYear", serie.getFilmographyYear());
@@ -204,9 +211,8 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/{id}/edit")
-    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorRepository.findByDirectorName(directorName)
-                .orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
+        Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
 
         List<Genre> genres = new ArrayList<>();
         if (genreIds != null) {
@@ -224,6 +230,7 @@ public class AdministratorController {
             }
         }
 
+        serie.setFilmographyImageUrl(filmographyImageUrl);
         serie.setFilmographyDirector(director);
         serie.setFilmographyGenres(genres);
         serie.setFilmographyPlatforms(platformList);
