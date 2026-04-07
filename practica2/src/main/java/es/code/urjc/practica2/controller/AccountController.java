@@ -17,20 +17,17 @@ import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.ReviewService;
+import es.code.urjc.practica2.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import es.code.urjc.practica2.service.FilmographyService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AccountController {
-    @Autowired
-    private ListsService listsService;
-
-    @Autowired
-    private FilmographyService filmographyService;
-
-    @Autowired
-    private ReviewService reviewService;
+    @Autowired private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private ReviewService reviewService;
+    @Autowired private AccountService accountService;
 
     AccountController(ListsService listsService) {
         this.listsService = listsService;
@@ -51,8 +48,13 @@ public class AccountController {
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if(userId == null){
+            return "redirect:/login";
+        }
+
         Filmography filmography = filmographyService.findById(filmographyId);
-        Account currentUser = (Account) session.getAttribute("user");
+        Account currentUser = accountService.findById(userId);
 
         review.setFilmography(filmography);
         review.setReviewAuthor(currentUser);

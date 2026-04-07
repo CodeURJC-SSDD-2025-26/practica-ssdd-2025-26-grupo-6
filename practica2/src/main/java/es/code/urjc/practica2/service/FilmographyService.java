@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
@@ -58,6 +59,15 @@ public class FilmographyService {
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
     }
 
+    public void recalculateAllAverages() {
+        filmographyRepository.findAll().forEach(f -> {
+            filmographyRepository.findByIdWithReviews(f.getFilmographyId()).ifPresent(loaded -> {
+                loaded.updateAverageStars();
+                filmographyRepository.save(loaded);
+            });
+        });
+    }
+
     public Filmography save(Filmography filmography) {
         return filmographyRepository.save(filmography);
     }
@@ -75,5 +85,20 @@ public class FilmographyService {
         existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
 
         return filmographyRepository.save(existingMovie);
+    }
+
+    public Serie updateSeries(Long id, Filmography updatedSerie) {
+        Serie existingSerie = findSeriesById(id);
+
+        existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
+        existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
+        existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
+        existingSerie.setSerieDuration(((Serie) updatedSerie).getSerieDuration());
+        existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
+        existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
+        existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
+        existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+
+        return filmographyRepository.save(existingSerie);
     }
 }

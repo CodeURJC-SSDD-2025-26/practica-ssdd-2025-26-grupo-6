@@ -1,5 +1,6 @@
 package es.code.urjc.practica2;
 
+import es.code.urjc.practica2.service.FilmographyService;
 import java.time.*;
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired private DirectorRepository directorRepository;
     @Autowired private GenreRepository genreRepository;
     @Autowired private PasswordEncoder passwordEncoder;
+
+    @Autowired private FilmographyService filmographyService;
 
     @Override
     public void run(String... args) {
@@ -79,6 +82,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         inception.setFilmographyPlatforms(List.of(Platforms.NETFLIX, Platforms.HBOMAX));
         inception.setFilmographyGenres(List.of(accion, cienciaFiccion, suspense));
+        inception.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg");
 
         Movie dune = new Movie(
                 null,
@@ -93,7 +97,8 @@ public class DatabaseInitializer implements CommandLineRunner {
                 155
         );
         dune.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
-        dune.setFilmographyGenres(List.of(cienciaFiccion, aventura, drama));
+        dune.setFilmographyGenres(List.of(cienciaFiccion, aventura, drama, romance));
+        dune.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg");
 
         Movie mulhollandDrive = new Movie(
                 null,
@@ -109,6 +114,8 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
+        mulhollandDrive.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qtRK5N2uDGqkV3x3yV2G6e0OQWw.jpg");
+
 
         filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
 
@@ -127,6 +134,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         westworld.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         westworld.setFilmographyGenres(List.of(cienciaFiccion, drama, suspense));
+        westworld.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg");
 
         Serie breakingBad = new Serie(
                 null,
@@ -141,7 +149,9 @@ public class DatabaseInitializer implements CommandLineRunner {
                 5
         );
         breakingBad.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
-        breakingBad.setFilmographyGenres(List.of(drama, suspense, accion));
+        breakingBad.setFilmographyGenres(List.of(drama, suspense, accion, comedia));
+        breakingBad.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg");
+
 
         filmographyRepository.saveAll(List.of(westworld, breakingBad));
 
@@ -157,17 +167,8 @@ public class DatabaseInitializer implements CommandLineRunner {
         ));
 
         // Recalculate average stars — reload with reviews so the list is complete
-        List.of(
-                inception.getFilmographyId(),
-                dune.getFilmographyId(),
-                mulhollandDrive.getFilmographyId(),
-                westworld.getFilmographyId(),
-                breakingBad.getFilmographyId()
-        ).forEach(id -> {
-                Filmography f = filmographyRepository.findByIdWithReviews(id).orElseThrow();
-                f.updateAverageStars();
-                filmographyRepository.save(f);
-        });
+        filmographyService.recalculateAllAverages();
+
 
         // Lists
         Lists aliceFavourites = new Lists("Favourites", List.of(inception, dune, breakingBad));
@@ -180,20 +181,5 @@ public class DatabaseInitializer implements CommandLineRunner {
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(List.of(aliceFavourites, aliceWatchLater, bobMustSee));
-        inception.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg");
-        dune.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg");
-        mulhollandDrive.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/qtRK5N2uDGqkV3x3yV2G6e0OQWw.jpg");
-
-        westworld.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg");
-        breakingBad.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg");
-
-        filmographyRepository.save(inception);
-        filmographyRepository.save(dune);
-        filmographyRepository.save(mulhollandDrive);
-
-        filmographyRepository.save(westworld);
-        filmographyRepository.save(breakingBad);
-
-
     }
 }

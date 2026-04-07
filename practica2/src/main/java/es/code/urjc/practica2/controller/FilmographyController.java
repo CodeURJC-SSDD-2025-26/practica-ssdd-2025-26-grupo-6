@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +63,6 @@ public class FilmographyController {
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
-
         model.addAttribute("bestRatedLists", listsService.getBestRatedLists());
         model.addAttribute("worstRatedLists", listsService.getWorstRatedLists());
         model.addAttribute("longestLists", listsService.getLongestLists());
@@ -70,13 +70,6 @@ public class FilmographyController {
         model.addAttribute("seriesMostSeasonsLists", listsService.getSeriesWithMostSeasons());
 
         return "lists";
-    }
-
-
-
-    @GetMapping("/review")
-    public String review(Model model) {
-        return "review";
     }
 
     @GetMapping("/series")
@@ -95,7 +88,7 @@ public class FilmographyController {
         return "series";
     }
 
-    @GetMapping("/filmographies/{id:[0-9]+}")
+    @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
         Filmography filmography = filmographyService.findById(id);
         Long userId = (Long) session.getAttribute("userId");
@@ -155,9 +148,11 @@ public class FilmographyController {
     // Updates which lists contain this filmography (add or remove based on checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
     @ResponseBody
-    public void updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, HttpSession session) {
-        Filmography filmography = filmographyService.findById(id);
+    public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) return ResponseEntity.status(401).build();
+
+        Filmography filmography = filmographyService.findById(id);
         Account currentUser = userId != null ? accountService.findById(userId) : null;
  
         for (Lists list : currentUser.getAccountLists()) {
@@ -172,13 +167,16 @@ public class FilmographyController {
                 listsService.save(list);
             }
         }
+        return ResponseEntity.ok().build();
     }
  
     // Creates a new empty list for the current user and returns it as JSON
     @PostMapping("/filmographies/{id}/lists/new")
     @ResponseBody
-    public Map<String, Object> createFilmographyList(@PathVariable Long id, @RequestParam String newListName, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> createFilmographyList(@PathVariable Long id, @RequestParam String newListName, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) return ResponseEntity.status(401).build();
+
         Account currentUser = userId != null ? accountService.findById(userId) : null;
  
         Lists newList = new Lists(newListName.trim(), new ArrayList<>());
@@ -190,12 +188,11 @@ public class FilmographyController {
         Map<String, Object> result = new HashMap<>();
         result.put("listsId", newList.getListsId());
         result.put("listName", newList.getListName());
-        return result;
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/filmographies/{id}/reviews")
     public String filmographyReviews(@PathVariable Long id, Model model) {
-
         Filmography filmography = filmographyService.findByIdWithReviews(id);
 
         model.addAttribute("filmography", filmography);
@@ -203,5 +200,4 @@ public class FilmographyController {
 
         return "review";
     }
-
 }
