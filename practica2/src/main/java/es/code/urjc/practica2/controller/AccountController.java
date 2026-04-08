@@ -1,5 +1,7 @@
 package es.code.urjc.practica2.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.service.ReviewService;
@@ -107,6 +110,28 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String profile(Model model) {
+        Account account = accountService.getCurrentUser();
+        model.addAttribute("account",account);
+
+        boolean isAdmin = account.getAccountRole() == Account.Role.ADMIN;
+        model.addAttribute("isAdmin", isAdmin);
+
         return "profile";
+    }
+    @PostMapping("/profile/avatar")
+    public String saveAvatar(@RequestParam String avatarSrc){
+        Account account = accountService.getCurrentUser();
+        account.setAccountAvatar(avatarSrc);
+        accountService.save(account);
+        return "redirect:/profile";
+    }
+    @PostMapping("/profile/edit")
+    public String editProfile(@RequestParam String accountName , @RequestParam String accountEmail, @RequestParam LocalDate accountBirthDate ){
+        Account account = accountService.getCurrentUser();
+        account.setAccountName(accountName);
+        account.setAccountEmail(accountEmail);
+        account.setAccountBirthDate(accountBirthDate);
+        
+        return "redirect:/profile";
     }
 }
