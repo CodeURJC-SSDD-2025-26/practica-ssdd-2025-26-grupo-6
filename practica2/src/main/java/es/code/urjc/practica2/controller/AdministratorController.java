@@ -19,9 +19,9 @@ import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
-import es.code.urjc.practica2.repository.DirectorRepository;
 import es.code.urjc.practica2.repository.GenreRepository;
 import es.code.urjc.practica2.service.FilmographyService;
+import es.code.urjc.practica2.service.DirectorService;
 
 @Controller
 public class AdministratorController {
@@ -29,7 +29,7 @@ public class AdministratorController {
     private FilmographyService filmographyService;
 
     @Autowired
-    private DirectorRepository directorRepository;
+    private DirectorService directorSerivce;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -61,7 +61,7 @@ public class AdministratorController {
 
     @PostMapping("/movies/new")
     public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+        Director director = directorSerivce.getDirectorByName(directorName);
 
         List<Genre> genres = new ArrayList<>();
         if (genreIds != null) {
@@ -112,8 +112,7 @@ public class AdministratorController {
 
     @PostMapping("/movies/{id}/edit")
     public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorRepository.findByDirectorName(directorName)
-                .orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+        Director director = directorSerivce.getDirectorByName(directorName);
 
         List<Genre> genres = new ArrayList<>();
         if (genreIds != null) {
@@ -161,7 +160,7 @@ public class AdministratorController {
 
     @PostMapping("/series/new")
     public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+        Director director = directorSerivce.getDirectorByName(directorName);
 
         List<Genre> genres = new ArrayList<>();
         if (genreIds != null) {
@@ -212,7 +211,7 @@ public class AdministratorController {
 
     @PostMapping("/series/{id}/edit")
     public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorRepository.findByDirectorName(directorName).orElseGet(() -> directorRepository.save(new Director(directorName, "")));
+        Director director = directorSerivce.getDirectorByName(directorName);
 
         List<Genre> genres = new ArrayList<>();
         if (genreIds != null) {
