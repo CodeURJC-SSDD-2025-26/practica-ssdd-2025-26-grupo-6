@@ -24,6 +24,7 @@ public class Account {
     private String accountEmail;
     private Role accountRole;
     private String accountPassword;
+    private String accountAvatar = "images/perfilNoReg.jpg";
 
     public enum Role {
         USER,
@@ -106,5 +107,12 @@ public class Account {
 
     public void setAccountLists(List<Lists> accountLists) {
         this.accountLists = accountLists; 
+    }
+    public String getAccountAvatar() { 
+        return accountAvatar;
+    
+    }
+    public void setAccountAvatar(String accountAvatar) {
+        this.accountAvatar = accountAvatar; 
     }
 }
