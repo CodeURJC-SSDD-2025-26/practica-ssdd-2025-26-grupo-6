@@ -50,8 +50,8 @@
                     <div class="text-center mb-4">
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
                             data-bs-target="#modalAvatar">
-                            <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle" width="175"
-                                height="175">
+                            <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle"
+                                width="175" height="175">
                         </button>
                     </div>
                     <div class="mb-3 text-center">
@@ -129,10 +129,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="saveAvatar" class="btn btn-primary btn-small"
-                        data-bs-dismiss="modal">Guardar
-                        Cambios</button>
+                    <form id="avatarForm" action="/profile/avatar" method="post">
+
+                        <input type="hidden" id="avatarInput" name="avatarSrc" value="{{currentUser.accountAvatar}}">
+                        <button type="button" class="btn btn-secondary btn-small"
+                            data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="saveAvatar" class="btn btn-primary btn-small"
+                            data-bs-dismiss="modal">Guardar
+                            Cambios</button>
+                    </form>
                 </div>
             </div>
         </div>
