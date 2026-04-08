@@ -15,24 +15,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import es.code.urjc.practica2.model.Filmography;
-import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
-import es.code.urjc.practica2.repository.GenreRepository;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.DirectorService;
+import es.code.urjc.practica2.service.GenreService;
 
 @Controller
 public class AdministratorController {
-    @Autowired
-    private FilmographyService filmographyService;
-
-    @Autowired
-    private DirectorService directorSerivce;
-
-    @Autowired
-    private GenreRepository genreRepository;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private DirectorService directorService;
+    @Autowired private GenreService genreService;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -45,38 +39,16 @@ public class AdministratorController {
         addEmptyFilmographyAttributes(model);
         model.addAttribute("isSeries", false);
         model.addAttribute("movieDuration", "");
-
         return "filmographyForm";
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorSerivce.getDirectorByName(directorName);
-
-        List<Genre> genres = new ArrayList<>();
-        if (genreIds != null) {
-            for (String genreName : genreIds) {
-                Genre.Genres genreEnum = Genre.Genres.valueOf(genreName);
-                Genre genre = genreRepository.findByGenres(genreEnum)
-                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreName));
-                genres.add(genre);
-            }
-        }
-
-        List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platformsIds != null) {
-            for (String platform : platformsIds) {
-                platformList.add(Filmography.Platforms.valueOf(platform));
-            }
-        }
-
+    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {     
         movie.setFilmographyImageUrl(filmographyImageUrl);
-        movie.setFilmographyDirector(director);
-        movie.setFilmographyGenres(genres);
-        movie.setFilmographyPlatforms(platformList);
-
+        movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
+        movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(movie);
-
         return "redirect:/administrator";
     }
     
@@ -84,82 +56,36 @@ public class AdministratorController {
     public String editMovie(@PathVariable Long id, Model model) {
         Movie movie = filmographyService.findMovieById(id);
         addFilmographyAttributes(model, movie);
-
         model.addAttribute("isSeries", false);
         model.addAttribute("movieDuration", movie.getMovieDuration());
-
         return "filmographyForm";
     }
 
     @PostMapping("/movies/{id}/edit")
     public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorSerivce.getDirectorByName(directorName);
-
-        List<Genre> genres = new ArrayList<>();
-        if (genreIds != null) {
-            for (String genreName : genreIds) {
-                Genre genre = genreRepository.findByGenres(Genre.Genres.valueOf(genreName))
-                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreName));
-                genres.add(genre);
-            }
-        }
-
-        List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platformsIds != null) {
-            for (String platform : platformsIds) {
-                platformList.add(Filmography.Platforms.valueOf(platform));
-            }
-        }
-
         movie.setFilmographyImageUrl(filmographyImageUrl);
-        movie.setFilmographyDirector(director);
-        movie.setFilmographyGenres(genres);
-        movie.setFilmographyPlatforms(platformList);
-
+        movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
+        movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.updateMovie(id, movie);
-
         return "redirect:/administrator";
     }
 
     @GetMapping("/series/new")
     public String newSeries(Model model) {
-        model.addAttribute("filmography", new Serie());
         addEmptyFilmographyAttributes(model);
-
         model.addAttribute("isSeries", true);
         model.addAttribute("serieDuration", "");
-
         return "filmographyForm";
     }
 
     @PostMapping("/series/new")
     public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorSerivce.getDirectorByName(directorName);
-
-        List<Genre> genres = new ArrayList<>();
-        if (genreIds != null) {
-            for (String genreName : genreIds) {
-                Genre.Genres genreEnum = Genre.Genres.valueOf(genreName);
-                Genre genre = genreRepository.findByGenres(genreEnum)
-                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreName));
-                genres.add(genre);
-            }
-        }
-
-        List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platformsIds != null) {
-            for (String platform : platformsIds) {
-                platformList.add(Filmography.Platforms.valueOf(platform));
-            }
-        }
-        
         serie.setFilmographyImageUrl(filmographyImageUrl);
-        serie.setFilmographyDirector(director);
-        serie.setFilmographyGenres(genres);
-        serie.setFilmographyPlatforms(platformList);
-
+        serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
+        serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(serie);
-
         return "redirect:/administrator";
     }
 
@@ -167,40 +93,18 @@ public class AdministratorController {
     public String editSeries(@PathVariable Long id, Model model) {
         Serie serie = filmographyService.findSeriesById(id);
         addFilmographyAttributes(model, serie);
-
         model.addAttribute("isSeries", true);
         model.addAttribute("serieDuration", serie.getSerieDuration());
-
         return "filmographyForm";
     }
 
     @PostMapping("/series/{id}/edit")
     public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        Director director = directorSerivce.getDirectorByName(directorName);
-
-        List<Genre> genres = new ArrayList<>();
-        if (genreIds != null) {
-            for (String genreName : genreIds) {
-                Genre genre = genreRepository.findByGenres(Genre.Genres.valueOf(genreName))
-                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreName));
-                genres.add(genre);
-            }
-        }
-
-        List<Filmography.Platforms> platformList = new ArrayList<>();
-        if (platformsIds != null) {
-            for (String platform : platformsIds) {
-                platformList.add(Filmography.Platforms.valueOf(platform));
-            }
-        }
-
         serie.setFilmographyImageUrl(filmographyImageUrl);
-        serie.setFilmographyDirector(director);
-        serie.setFilmographyGenres(genres);
-        serie.setFilmographyPlatforms(platformList);
-
+        serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
+        serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.updateSeries(id, serie);
-
         return "redirect:/administrator";
     }
 
