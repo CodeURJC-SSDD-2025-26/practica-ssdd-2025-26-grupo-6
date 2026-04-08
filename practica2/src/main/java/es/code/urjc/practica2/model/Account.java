@@ -44,7 +44,6 @@ public class Account {
         this.accountPassword = accountPassword;
     }
 
-
     public Long getAccountId() {
         return accountId;
     }

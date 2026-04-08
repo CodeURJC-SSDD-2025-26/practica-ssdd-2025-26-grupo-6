@@ -2,10 +2,10 @@ package es.code.urjc.practica2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
@@ -15,8 +15,7 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 
 @Service
 public class FilmographyService {
-    @Autowired
-    private FilmographyRepository filmographyRepository;
+    @Autowired private FilmographyRepository filmographyRepository;
 
     public Filmography findById(Long id) {
         return filmographyRepository.findById(id).orElse(null);
@@ -66,6 +65,13 @@ public class FilmographyService {
                 filmographyRepository.save(loaded);
             });
         });
+    }
+
+    public List<Filmography.Platforms> toPlatformList(List<String> platformIds) {
+        if (platformIds == null) return new ArrayList<>();
+        return platformIds.stream()
+                .map(Filmography.Platforms::valueOf)
+                .collect(java.util.stream.Collectors.toList());
     }
 
     public Filmography save(Filmography filmography) {

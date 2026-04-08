@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Review;
-import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.ReviewService;
@@ -43,12 +42,9 @@ public class AccountController {
     public String newReview(@PathVariable Long filmographyId, Model model) {
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
-
         review.setReviewStars(0f);
         review.setReviewDescription("");
-
         model.addAttribute("review", review);
-
         return "reviewForm";
     }
 
@@ -77,16 +73,13 @@ public class AccountController {
     @GetMapping("/reviews/{reviewId}/edit")
     public String editReview(@PathVariable Long reviewId, Model model) {
         Review review = reviewService.findById(reviewId);
-
         model.addAttribute("filmography", review.getFilmography());
         model.addAttribute("review", review);
-
         return "reviewForm";
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
-            @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 
@@ -116,7 +109,6 @@ public class AccountController {
     @GetMapping("/myLists")
     public String myLists(Model model, HttpSession session) {
         Account currentUser = (Account) session.getAttribute("user");
-
         if (currentUser == null) {
             return "redirect:/login";
         }
@@ -124,7 +116,6 @@ public class AccountController {
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("lists", listsService.findByOwner(currentUser));
-
         return "myLists";
     }
 
@@ -134,7 +125,7 @@ public class AccountController {
         if (currentUser == null) {
             return "redirect:/login";
         }
-        // 1. Validar si ya existe una lista con ese nombre para ese usuario
+        // 1. Validate if the user has a list with the same name
         List<Lists> userLists = listsService.findByOwner(currentUser);
 
         for (Lists l : userLists) {

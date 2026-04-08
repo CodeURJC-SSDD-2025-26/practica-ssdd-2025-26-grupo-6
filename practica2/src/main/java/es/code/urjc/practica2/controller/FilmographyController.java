@@ -30,14 +30,9 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class FilmographyController {
-    @Autowired
-    private FilmographyService filmographyService;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
 
     @GetMapping("/filmsLists")
     public String filmsLists(Model model) {
@@ -213,10 +208,8 @@ public class FilmographyController {
     @GetMapping("/filmographies/{id}/reviews")
     public String filmographyReviews(@PathVariable Long id, Model model) {
         Filmography filmography = filmographyService.findByIdWithReviews(id);
-
         model.addAttribute("filmography", filmography);
         model.addAttribute("reviews", filmography.getFilmographyReviews());
-
         return "review";
     }
 }
