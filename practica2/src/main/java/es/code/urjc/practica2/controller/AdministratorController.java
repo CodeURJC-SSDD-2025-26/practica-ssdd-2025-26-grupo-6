@@ -5,8 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,17 +18,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.DirectorService;
 import es.code.urjc.practica2.service.GenreService;
+import es.code.urjc.practica2.service.ImageService;
 
 @Controller
 public class AdministratorController {
     @Autowired private FilmographyService filmographyService;
     @Autowired private DirectorService directorService;
     @Autowired private GenreService genreService;
+    @Autowired private ImageService imageService;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -43,8 +48,12 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {     
-        movie.setFilmographyImageUrl(filmographyImageUrl);
+    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+        if (imageFile != null && !imageFile.isEmpty()) {
+            Image image = imageService.createImage(imageFile.getInputStream());
+            movie.setFilmographyImage(image);
+        }
+
         movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
         movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
@@ -62,8 +71,12 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/edit")
-    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        movie.setFilmographyImageUrl(filmographyImageUrl);
+    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+        if (imageFile != null && !imageFile.isEmpty()) {
+            Image image = imageService.createImage(imageFile.getInputStream());
+            movie.setFilmographyImage(image);
+        }
+
         movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
         movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
@@ -80,8 +93,12 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/new")
-    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        serie.setFilmographyImageUrl(filmographyImageUrl);
+    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+        if (imageFile != null && !imageFile.isEmpty()) {
+            Image image = imageService.createImage(imageFile.getInputStream());
+            serie.setFilmographyImage(image);
+        }
+
         serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
@@ -99,8 +116,12 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/{id}/edit")
-    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam String filmographyImageUrl, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds) {
-        serie.setFilmographyImageUrl(filmographyImageUrl);
+    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+        if (imageFile != null && !imageFile.isEmpty()) {
+            Image image = imageService.createImage(imageFile.getInputStream());
+            serie.setFilmographyImage(image);
+        }
+
         serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
@@ -109,7 +130,6 @@ public class AdministratorController {
     }
 
     private void addEmptyFilmographyAttributes(Model model){
-        model.addAttribute("filmographyImageUrl", "");
         model.addAttribute("filmographyName", "");
         model.addAttribute("filmographyDirector", "");
         model.addAttribute("filmographyYear", "");
@@ -121,7 +141,6 @@ public class AdministratorController {
 
     private void addFilmographyAttributes(Model model, Filmography f){
         model.addAttribute("filmographyId", f.getFilmographyId());
-        model.addAttribute("filmographyImageUrl", f.getFilmographyImageUrl());
         model.addAttribute("filmographyName", f.getFilmographyName());
         model.addAttribute("filmographyDirector", f.getDirectorName());
         model.addAttribute("filmographyYear", f.getFilmographyYear());

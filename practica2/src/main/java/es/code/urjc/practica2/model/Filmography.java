@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -35,9 +37,9 @@ public class Filmography {
     private String filmographySynopsis;
     private int filmographyYear;
     private String filmographyTrailerUrl;
-    private String filmographyImageUrl;
 
-    //Image is yet not included
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Image filmographyImage;
 
     //We can have more than one platform for each filmography, so we use a list of platforms the rest is for SQL
     @Enumerated(EnumType.STRING)
@@ -181,11 +183,11 @@ public class Filmography {
         this.filmographyTrailerUrl = filmographyTrailerUrl;
     }
 
-    public String getFilmographyImageUrl() {
-        return filmographyImageUrl;
+    public Image getFilmographyImage() {
+        return filmographyImage;
     }
 
-    public void setFilmographyImageUrl(String filmographyImageUrl) {
-        this.filmographyImageUrl = filmographyImageUrl;
+    public void setFilmographyImage(Image filmographyImage) {
+        this.filmographyImage = filmographyImage;
     }
 }

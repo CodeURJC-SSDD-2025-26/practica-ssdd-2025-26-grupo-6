@@ -82,7 +82,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         inception.setFilmographyPlatforms(List.of(Platforms.NETFLIX, Platforms.HBOMAX));
         inception.setFilmographyGenres(List.of(accion, cienciaFiccion, suspense));
-        inception.setFilmographyImageUrl("https://www.originalfilmart.com/cdn/shop/files/inception_2010_french_original_film_art_5000x.webp?v=1686692704");
 
         Movie dune = new Movie(
                 null,
@@ -98,7 +97,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         dune.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         dune.setFilmographyGenres(List.of(cienciaFiccion, aventura, drama, romance));
-        dune.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg");
 
         Movie mulhollandDrive = new Movie(
                 null,
@@ -114,7 +112,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
-        mulhollandDrive.setFilmographyImageUrl("https://m.media-amazon.com/images/M/MV5BNjliY2UwMjQtYjVlNi00NzExLTg1MDMtMjE2OTYwYjI0NTcxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
 
 
         filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
@@ -134,7 +131,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         westworld.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         westworld.setFilmographyGenres(List.of(cienciaFiccion, drama, suspense));
-        westworld.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg");
 
         Serie breakingBad = new Serie(
                 null,
@@ -150,7 +146,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         );
         breakingBad.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
         breakingBad.setFilmographyGenres(List.of(drama, suspense, accion, comedia));
-        breakingBad.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg");
 
 
         filmographyRepository.saveAll(List.of(westworld, breakingBad));

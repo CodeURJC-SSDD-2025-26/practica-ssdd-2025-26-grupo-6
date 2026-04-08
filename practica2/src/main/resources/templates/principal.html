@@ -36,7 +36,7 @@
                 {{#peliculasNuevas}}
                 <div class="card">
                     <a href="/filmographies/{{filmographyId}}">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                        <img src="/images/{{imageId}}" alt="{{filmographyName}}">
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
@@ -59,8 +59,7 @@
             <div class="films">
                 {{#peliculas}}
                 <div class="card">
-                    <a href="/filmographies/{{filmographyId}}">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                    <a href="/filmographies/{{filmographyImage.imageId}}" alt="{{filmographyName}}">
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
