@@ -26,10 +26,14 @@ import es.code.urjc.practica2.service.FilmographyService;
 
 @Controller
 public class AccountController {
-    @Autowired private ListsService listsService;
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private ReviewService reviewService;
-    @Autowired private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private AccountService accountService;
 
     AccountController(ListsService listsService) {
         this.listsService = listsService;
@@ -51,7 +55,7 @@ public class AccountController {
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
-        if(userId == null){
+        if (userId == null) {
             return "redirect:/login";
         }
 
@@ -166,8 +170,9 @@ public class AccountController {
         Account currentUser = (Account) session.getAttribute("user");
         Lists list = listsService.findById(id);
 
-        // Seguridad: Solo el dueño puede borrar
-        if (list != null && currentUser != null && list.getListOwner().equals(currentUser)) {
+        // Cambia esto en deleteList para que sea infalible:
+        if (list != null && currentUser != null &&
+                list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
             listsService.delete(list.getListsId());
         }
         return "redirect:/myLists";
@@ -194,21 +199,24 @@ public class AccountController {
 
         return "profile";
     }
+
     @PostMapping("/profile/avatar")
-    public String saveAvatar(@RequestParam String avatarSrc, HttpSession session){
+    public String saveAvatar(@RequestParam String avatarSrc, HttpSession session) {
         Account currentUser = (Account) session.getAttribute("user");
 
         currentUser.setAccountAvatar(avatarSrc);
         accountService.save(currentUser);
         return "redirect:/profile";
     }
+
     @PostMapping("/profile/edit")
-    public String editProfile(@RequestParam String accountName , @RequestParam String accountEmail, @RequestParam LocalDate accountBirthDate, HttpSession session ){
+    public String editProfile(@RequestParam String accountName, @RequestParam String accountEmail,
+            @RequestParam LocalDate accountBirthDate, HttpSession session) {
         Account currentUser = (Account) session.getAttribute("user");
         currentUser.setAccountName(accountName);
         currentUser.setAccountEmail(accountEmail);
         currentUser.setAccountBirthDate(accountBirthDate);
-        
+
         return "redirect:/profile";
     }
 }
