@@ -42,19 +42,9 @@ public class AdministratorController {
     // INCLUDING/MODIFYING FILMOGRAPHIES
     @GetMapping("/movies/new")
     public String newMovie(Model model) {
-        model.addAttribute("filmography", new Movie());
+        addEmptyFilmographyAttributes(model);
         model.addAttribute("isSeries", false);
-        
-        model.addAttribute("filmographyImageUrl", "");
-        model.addAttribute("filmographyName", "");
-        model.addAttribute("filmographyDirector", "");
-        model.addAttribute("filmographyYear", "");
-        model.addAttribute("filmographySynopsis", "");
-        model.addAttribute("filmographyTrailerUrl", "");
         model.addAttribute("movieDuration", "");
-
-        model.addAttribute("allGenres", buildGenreList(null));
-        model.addAttribute("allPlatforms", buildPlatformList(null));
 
         return "filmographyForm";
     }
@@ -93,19 +83,10 @@ public class AdministratorController {
     @GetMapping("/movies/{id}/edit")
     public String editMovie(@PathVariable Long id, Model model) {
         Movie movie = filmographyService.findMovieById(id);
-        model.addAttribute("filmographyId", movie.getFilmographyId());
+        addFilmographyAttributes(model, movie);
+
         model.addAttribute("isSeries", false);
-
-        model.addAttribute("filmographyImageUrl", movie.getFilmographyImageUrl());
-        model.addAttribute("filmographyName", movie.getFilmographyName());
-        model.addAttribute("filmographyDirector", movie.getDirectorName());
-        model.addAttribute("filmographyYear", movie.getFilmographyYear());
-        model.addAttribute("filmographySynopsis", movie.getFilmographySynopsis());
-        model.addAttribute("filmographyTrailerUrl", movie.getFilmographyTrailerUrl());
         model.addAttribute("movieDuration", movie.getMovieDuration());
-
-        model.addAttribute("allGenres", buildGenreList(movie));
-        model.addAttribute("allPlatforms", buildPlatformList(movie));
 
         return "filmographyForm";
     }
@@ -143,18 +124,11 @@ public class AdministratorController {
     @GetMapping("/series/new")
     public String newSeries(Model model) {
         model.addAttribute("filmography", new Serie());
-        model.addAttribute("isSeries", true);
+        addEmptyFilmographyAttributes(model);
 
-        model.addAttribute("filmographyImageUrl", "");
-        model.addAttribute("filmographyName", "");
-        model.addAttribute("filmographyDirector", "");
-        model.addAttribute("filmographyYear", "");
-        model.addAttribute("filmographySynopsis", "");
-        model.addAttribute("filmographyTrailerUrl", "");
+        model.addAttribute("isSeries", true);
         model.addAttribute("serieDuration", "");
 
-        model.addAttribute("allGenres", buildGenreList(null));
-        model.addAttribute("allPlatforms", buildPlatformList(null));
         return "filmographyForm";
     }
 
@@ -192,19 +166,10 @@ public class AdministratorController {
     @GetMapping("/series/{id}/edit")
     public String editSeries(@PathVariable Long id, Model model) {
         Serie serie = filmographyService.findSeriesById(id);
-        model.addAttribute("filmographyId", serie.getFilmographyId());
+        addFilmographyAttributes(model, serie);
+
         model.addAttribute("isSeries", true);
-
-        model.addAttribute("filmographyImageUrl", serie.getFilmographyImageUrl());
-        model.addAttribute("filmographyName", serie.getFilmographyName());
-        model.addAttribute("filmographyDirector", serie.getDirectorName());
-        model.addAttribute("filmographyYear", serie.getFilmographyYear());
-        model.addAttribute("filmographySynopsis", serie.getFilmographySynopsis());
-        model.addAttribute("filmographyTrailerUrl", serie.getFilmographyTrailerUrl());
         model.addAttribute("serieDuration", serie.getSerieDuration());
-
-        model.addAttribute("allGenres", buildGenreList(serie));
-        model.addAttribute("allPlatforms", buildPlatformList(serie));
 
         return "filmographyForm";
     }
@@ -237,6 +202,29 @@ public class AdministratorController {
         filmographyService.updateSeries(id, serie);
 
         return "redirect:/administrator";
+    }
+
+    private void addEmptyFilmographyAttributes(Model model){
+        model.addAttribute("filmographyImageUrl", "");
+        model.addAttribute("filmographyName", "");
+        model.addAttribute("filmographyDirector", "");
+        model.addAttribute("filmographyYear", "");
+        model.addAttribute("filmographySynopsis", "");
+        model.addAttribute("filmographyTrailerUrl", "");
+        model.addAttribute("allGenres", buildGenreList(null));
+        model.addAttribute("allPlatforms", buildPlatformList(null));
+    }
+
+    private void addFilmographyAttributes(Model model, Filmography f){
+        model.addAttribute("filmographyId", f.getFilmographyId());
+        model.addAttribute("filmographyImageUrl", f.getFilmographyImageUrl());
+        model.addAttribute("filmographyName", f.getFilmographyName());
+        model.addAttribute("filmographyDirector", f.getDirectorName());
+        model.addAttribute("filmographyYear", f.getFilmographyYear());
+        model.addAttribute("filmographySynopsis", f.getFilmographySynopsis());
+        model.addAttribute("filmographyTrailerUrl", f.getFilmographyTrailerUrl());
+        model.addAttribute("allGenres", buildGenreList(f));
+        model.addAttribute("allPlatforms", buildPlatformList(f));
     }
 
     private List<Map<String, Object>> buildGenreList(Filmography filmography) {
