@@ -186,28 +186,28 @@ public class AccountController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model) {
-        Account account = accountService.getCurrentUser();
-        model.addAttribute("account",account);
+    public String profile(Model model, @PathVariable Long id, HttpSession session) {
+        Account currentUser = (Account) session.getAttribute("user");
 
-        boolean isAdmin = account.getAccountRole() == Account.Role.ADMIN;
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
 
         return "profile";
     }
     @PostMapping("/profile/avatar")
-    public String saveAvatar(@RequestParam String avatarSrc){
-        Account account = accountService.getCurrentUser();
-        account.setAccountAvatar(avatarSrc);
-        accountService.save(account);
+    public String saveAvatar(@RequestParam String avatarSrc, HttpSession session){
+        Account currentUser = (Account) session.getAttribute("user");
+
+        currentUser.setAccountAvatar(avatarSrc);
+        accountService.save(currentUser);
         return "redirect:/profile";
     }
     @PostMapping("/profile/edit")
-    public String editProfile(@RequestParam String accountName , @RequestParam String accountEmail, @RequestParam LocalDate accountBirthDate ){
-        Account account = accountService.getCurrentUser();
-        account.setAccountName(accountName);
-        account.setAccountEmail(accountEmail);
-        account.setAccountBirthDate(accountBirthDate);
+    public String editProfile(@RequestParam String accountName , @RequestParam String accountEmail, @RequestParam LocalDate accountBirthDate, HttpSession session ){
+        Account currentUser = (Account) session.getAttribute("user");
+        currentUser.setAccountName(accountName);
+        currentUser.setAccountEmail(accountEmail);
+        currentUser.setAccountBirthDate(accountBirthDate);
         
         return "redirect:/profile";
     }
