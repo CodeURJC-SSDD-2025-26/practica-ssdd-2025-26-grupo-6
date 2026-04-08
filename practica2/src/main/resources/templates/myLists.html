@@ -24,9 +24,11 @@
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
             </a>
+            {{#isAdmin}}
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
+            {{/isAdmin}}
             <a href="/myReviews" class="profile-btn text-decoration-none">
                 Mis Reseñas
             </a>

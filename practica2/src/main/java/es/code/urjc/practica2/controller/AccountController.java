@@ -117,6 +117,8 @@ public class AccountController {
             return "redirect:/login";
         }
 
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("lists", listsService.findByOwner(currentUser));
 
         return "myLists";
@@ -145,6 +147,7 @@ public class AccountController {
             listsService.save(newList);
         }
 
+        
         return "redirect:/myLists";
     }
 
@@ -181,6 +184,8 @@ public class AccountController {
             return "redirect:/login";
         }
 
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
         return "myReviews";
     }
@@ -192,8 +197,6 @@ public class AccountController {
         if(currentUser == null){
             return "redirect:/login";
         }
-
-
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
