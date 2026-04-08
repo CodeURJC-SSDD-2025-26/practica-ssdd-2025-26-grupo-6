@@ -186,11 +186,18 @@ public class AccountController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model, @PathVariable Long id, HttpSession session) {
+    public String profile(Model model,  HttpSession session) {
         Account currentUser = (Account) session.getAttribute("user");
+
+        if(currentUser == null){
+            return "redirect:/login";
+        }
+
+
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("currentUser",currentUser);
 
         return "profile";
     }

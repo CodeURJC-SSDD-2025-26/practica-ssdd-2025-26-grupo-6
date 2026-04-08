@@ -50,7 +50,7 @@
                     <div class="text-center mb-4">
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
                             data-bs-target="#modalAvatar">
-                            <img id="avatarProfile" src="{{account.accountAvatar}}" class="rounded-circle" width="175"
+                            <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle" width="175"
                                 height="175">
                         </button>
                     </div>
@@ -58,21 +58,21 @@
                         <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
                         <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
                             id="username">
-                            {{account.accountName}}
+                            {{currentUser.accountName}}
                         </div>
                     </div>
                     <div class="mb-3 text-center">
                         <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
                         <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
                             id="email">
-                            {{account.accountEmail}}
+                            {{currentUser.accountEmail}}
                         </div>
                     </div>
                     <div class="mb-3 text-center">
                         <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
                         <div class="profile-field rounded-3 py-3 px-4 mb-4 d-flex align-items-center justify-content-center fs-5"
                             id="yearBirth">
-                            {{account.accountBirthDate}}
+                            {{currentUser.accountBirthDate}}
                         </div>
                     </div>
                     <div class="mt-4">
@@ -101,7 +101,7 @@
                     <div class="container">
                         <div class="text-center mb-4">
                             <p>Seleccionado actualmente:</p>
-                            <img src="{{account.accountAvatar}}" id="previewAvatar"
+                            <img src="{{currentUser.accountAvatar}}" id="previewAvatar"
                                 class="rounded-circle border border-primary border-3" width="100" height="100">
                         </div>
                         <div class="row g-3 justify-content-center" id="avatarGallery">
