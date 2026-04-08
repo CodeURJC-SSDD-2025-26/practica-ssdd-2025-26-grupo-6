@@ -47,17 +47,34 @@ public class FilmographyController {
     @GetMapping("/principal")
     public String principal(Model model) {
 
-    model.addAttribute("peliculasNuevas",
-        filmographyService.findTop10MoviesByYear());
+        model.addAttribute("peliculasNuevas",
+            filmographyService.findTop10MoviesByYear());
 
+        List<Map<String, Object>> seccionesPeliculas = new ArrayList<>();
 
-        model.addAttribute("peliculasAccion",
-            filmographyService.findByGenre(Genres.ACCION));
+        for (Genres g : Genres.values()) {
+            Map<String, Object> sec = new HashMap<>();
+            sec.put("nombre", formatearGenero(g));
+            sec.put("peliculas", filmographyService.findMoviesByGenre(g));
+            seccionesPeliculas.add(sec);
+        }
 
-        model.addAttribute("peliculasAventura",
-            filmographyService.findByGenre(Genres.AVENTURA));
+        model.addAttribute("seccionesPeliculas", seccionesPeliculas);
 
         return "principal";
+    }
+
+    private String formatearGenero(Genres g) {
+        return switch (g) {
+            case ACCION -> "Acción";
+            case AVENTURA -> "Aventura";
+            case CIENCIA_FICCION -> "Ciencia Ficción";
+            case SUSPENSE -> "Suspense";
+            case DRAMA -> "Drama";
+            case MIEDO -> "Miedo";
+            case COMEDIA -> "Comedia";
+            case ROMANCE -> "Romance";
+        };
     }
 
 
@@ -75,18 +92,20 @@ public class FilmographyController {
     @GetMapping("/series")
     public String series(Model model) {
 
-        // Obtener series por género
-        List<Serie> aventura = filmographyService.findSeriesByGenre(Genres.AVENTURA);
-        List<Serie> accion = filmographyService.findSeriesByGenre(Genres.ACCION);
-        List<Serie> ciencia = filmographyService.findSeriesByGenre(Genres.CIENCIA_FICCION);
+        List<Map<String, Object>> seccionesSeries = new ArrayList<>();
 
-        // Enviar al modelo
-        model.addAttribute("aventura", aventura);
-        model.addAttribute("accion", accion);
-        model.addAttribute("ciencia", ciencia);
+        for (Genres g : Genres.values()) {
+            Map<String, Object> sec = new HashMap<>();
+            sec.put("nombre", formatearGenero(g));
+            sec.put("series", filmographyService.findSeriesByGenre(g));
+            seccionesSeries.add(sec);
+        }
+
+        model.addAttribute("seccionesSeries", seccionesSeries);
 
         return "series";
     }
+
 
     @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {

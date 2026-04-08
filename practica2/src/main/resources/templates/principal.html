@@ -26,7 +26,7 @@
     <!-- Page Content -->
     <div class="content">
         <!-- PELÍCULAS NUEVAS -->
-        <div class="mt-4">
+        <div class="mt-3 mb-3">
             <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
                 <h4>Películas recientemente añadidas</h4>
                 <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
@@ -48,52 +48,30 @@
             </div>
         </div>
 
-        <!-- PELÍCULAS DE ACCIÓN -->
-        <div class="mt-3">
+        <!-- PELÍCULAS DE LOS GENEROS -->
+        {{#seccionesPeliculas}}
+        <div class="mt-3 mb-3">
             <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Películas de Acción</h4>
+                <h4>Películas de {{nombre}}</h4>
                 <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
             </div>
 
             <div class="films">
-                {{#peliculasAccion}}
+                {{#peliculas}}
                 <div class="card">
                     <a href="/filmographies/{{filmographyId}}">
                         <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
-                {{/peliculasAccion}}
+                {{/peliculas}}
 
-                {{^peliculasAccion}}
-                <p>No hay películas de acción disponibles.</p>
-                {{/peliculasAccion}}
+                {{^peliculas}}
+                <p>No hay películas de {{nombre}} disponibles.</p>
+                {{/peliculas}}
             </div>
         </div>
-
-        <!-- PELÍCULAS DE AVENTURA -->
-        <div class="mt-3 mb-4">
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Películas de Aventura</h4>
-                <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
-            </div>
-
-            <div class="films">
-                {{#peliculasAventura}}
-                <div class="card">
-                    <a href="/filmographies/{{filmographyId}}">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
-                        <h5>{{filmographyName}}</h5>
-                    </a>
-                </div>
-                {{/peliculasAventura}}
-
-                {{^peliculasAventura}}
-                <p>No hay películas de aventura disponibles.</p>
-                {{/peliculasAventura}}
-            </div>
-        </div>
-    </div>
+        {{/seccionesPeliculas}}
 
     <!-- Footer -->
     {{>footer}}

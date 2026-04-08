@@ -19,76 +19,31 @@
 
     <div class="content">
 
-    <!-- AVENTURA -->
-    <div style="margin-top: 30px;">
-        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-            <h4>Series de Aventuras</h4>
-            <a class="btn btn-secondary" href="filmsLists">Ver más</a>
-        </div>
-
-        <div class="films">
-            {{#aventura}}
-            <div class="card">
-                <a href="/filmographies/{{filmographyId}}">
-                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
-                    <h5>{{filmographyName}}</h5>
-                </a>
+        {{#seccionesSeries}}
+        <div class="genre-section mb-5">
+            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
+                <h4>Series de {{nombre}}</h4>
+                <a class="btn btn-secondary btn-small" href="/series">Ver más</a>
             </div>
-            {{/aventura}}
 
-            {{^aventura}}
-            <p>No hay series de aventura disponibles.</p>
-            {{/aventura}}
-        </div>
-    </div>
+            <div class="films">
+                {{#series}}
+                <div class="card">
+                    <a href="/filmographies/{{filmographyId}}">
+                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                        <h5>{{filmographyName}}</h5>
+                    </a>
+                </div>
+                {{/series}}
 
-    <!-- ACCIÓN -->
-    <div style="margin-top: 30px;">
-        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-            <h4>Series de Acción</h4>
-            <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
-        </div>
-
-        <div class="films">
-            {{#accion}}
-            <div class="card">
-                <a href="/filmographies/{{filmographyId}}">
-                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
-                    <h5>{{filmographyName}}</h5>
-                </a>
+                {{^series}}
+                <p>No hay series de {{nombre}} disponibles.</p>
+                {{/series}}
             </div>
-            {{/accion}}
-
-            {{^accion}}
-            <p>No hay series de acción disponibles.</p>
-            {{/accion}}
         </div>
+        {{/seccionesSeries}}
+
     </div>
-
-    <!-- CIENCIA FICCIÓN -->
-    <div style="margin-top: 30px;">
-        <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-            <h4>Series de Ciencia Ficción</h4>
-            <a class="btn btn-secondary btn-small" href="filmsLists">Ver más</a>
-        </div>
-
-        <div class="films">
-            {{#ciencia}}
-            <div class="card">
-                <a href="/filmographies/{{filmographyId}}">
-                    <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
-                    <h5>{{filmographyName}}</h5>
-                </a>
-            </div>
-            {{/ciencia}}
-
-            {{^ciencia}}
-            <p>No hay series de ciencia ficción disponibles.</p>
-            {{/ciencia}}
-        </div>
-    </div>
-
-</div>
 
 
     {{>footer}}
