@@ -47,8 +47,7 @@ public class FilmographyController {
         for (Genres g : Genres.values()) {
             Map<String, Object> sec = new HashMap<>();
             sec.put("name", formatGenre(g));
-            sec.put("genreKey", g.name());
-            sec.put("genreKey", g.name());
+            sec.put("genreKey", toUrlKey(g));
             sec.put("movies", filmographyService.findMoviesByGenre(g));
             movieSections.add(sec);
         }
@@ -74,12 +73,34 @@ public class FilmographyController {
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
-        model.addAttribute("bestRatedLists", listsService.getBestRatedLists());
-        model.addAttribute("worstRatedLists", listsService.getWorstRatedLists());
-        model.addAttribute("longestLists", listsService.getLongestLists());
-        model.addAttribute("longestMoviesLists", listsService.getLongestMoviesLists());
-        model.addAttribute("seriesMostSeasonsLists", listsService.getSeriesWithMostSeasons());
+        List<Map<String, Object>> sections = new ArrayList<>();
 
+        Map<String, Object> sec1 = new HashMap<>();
+        sec1.put("sectionTitle", "Listas Mejor Valoradas");
+        sec1.put("lists", listsService.getBestRatedLists());
+        sections.add(sec1);
+
+        Map<String, Object> sec2 = new HashMap<>();
+        sec2.put("sectionTitle", "Listas Peor Valoradas");
+        sec2.put("lists", listsService.getWorstRatedLists());
+        sections.add(sec2);
+
+        Map<String, Object> sec3 = new HashMap<>();
+        sec3.put("sectionTitle", "Listas Más Largas");
+        sec3.put("lists", listsService.getLongestLists());
+        sections.add(sec3);
+
+        Map<String, Object> sec4 = new HashMap<>();
+        sec4.put("sectionTitle", "Listas Películas Más Largas");
+        sec4.put("lists", listsService.getLongestMoviesLists());
+        sections.add(sec4);
+
+        Map<String, Object> sec5 = new HashMap<>();
+        sec5.put("sectionTitle", "Listas Series con Más Temporadas");
+        sec5.put("lists", listsService.getSeriesWithMostSeasons());
+        sections.add(sec5);
+
+        model.addAttribute("sections", sections);
         return "lists";
     }
 
@@ -91,7 +112,7 @@ public class FilmographyController {
         for (Genres g : Genres.values()) {
             Map<String, Object> sec = new HashMap<>();
             sec.put("name", formatGenre(g));
-            sec.put("genreKey", g.name());
+            sec.put("genreKey", toUrlKey(g));
             sec.put("series", filmographyService.findSeriesByGenre(g));
             seriesSections.add(sec);
         }
@@ -251,5 +272,18 @@ public class FilmographyController {
         model.addAttribute("filmographyList", filmographyService.findSeriesByGenre(g));
         return "filmslists";
     }
+
+    private String toUrlKey(Genres g) {
+    return switch (g) {
+        case ACCION -> "accion";
+        case AVENTURA -> "aventura";
+        case CIENCIA_FICCION -> "ciencia_ficcion";
+        case SUSPENSE -> "suspense";
+        case DRAMA -> "drama";
+        case MIEDO -> "miedo";
+        case COMEDIA -> "comedia";
+        case ROMANCE -> "romance";
+    };
+}
 
 }

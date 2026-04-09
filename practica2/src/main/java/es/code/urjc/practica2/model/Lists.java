@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class Lists {
     private Long listsId;
 
     private String listName;
+
+    @OneToOne
+    private Image listImage;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -69,5 +73,17 @@ public class Lists {
 
     public void setListOwner(Account listOwner) {
         this.listOwner = listOwner;
+    }
+
+    public Image getListImage() { 
+        return listImage; 
+    }
+
+    public void setListImage(Image listImage) {
+        this.listImage = listImage;
+    }
+
+    public String getListImageUrl() {
+        return listImage != null ? "/img/" + listImage.getImageId() : null;
     }
 }

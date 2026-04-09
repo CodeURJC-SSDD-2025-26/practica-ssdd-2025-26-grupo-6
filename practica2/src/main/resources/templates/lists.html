@@ -24,108 +24,24 @@
 
     <div class="content">
 
-        <!-- Best Rated Lists -->
+        {{#sections}}
         <div style="margin-top: 30px;">
             <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Listas Mejor Valoradas</h4>
+                <h4>{{sectionTitle}}</h4>
             </div>
-
             <div class="films">
-                {{#bestRatedLists}}
+                {{#lists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        {{#filmographyImage}}
-                        <img src="/img/{{imageId}}" alt="{{listName}}">
-                        {{/filmographyImage}}
+                        <img src="{{firstImage}}" alt="{{listName}}">
                         <h5>{{listName}}</h5>
                         <p>{{size}} elementos</p>
                     </a>
                 </div>
-                {{/bestRatedLists}}
+                {{/lists}}
             </div>
         </div>
-
-        <!-- Worst Rated Lists -->
-        <div style="margin-top: 30px;">
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Listas Peor Valoradas</h4>
-            </div>
-
-            <div class="films">
-                {{#worstRatedLists}}
-                <div class="card">
-                    <a href="/lists/{{listsId}}">
-                        {{#filmographyImage}}
-                        <img src="/img/{{imageId}}" alt="{{listName}}">
-                        {{/filmographyImage}}
-                        <h5>{{listName}}</h5>
-                        <p>{{size}} elementos</p>
-                    </a>
-                </div>
-                {{/worstRatedLists}}
-            </div>
-        </div>
-
-        <!-- Longest Lists -->
-        <div style="margin-top: 30px;">
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Listas Más Largas</h4>
-            </div>
-
-            <div class="films">
-                {{#longestLists}}
-                <div class="card">
-                    <a href="/lists/{{listsId}}">
-                        {{#filmographyImage}}
-                        <img src="/img/{{imageId}}" alt="{{listName}}">
-                        {{/filmographyImage}}
-                        <h5>{{listName}}</h5>
-                        <p>{{size}} elementos</p>
-                    </a>
-                </div>
-                {{/longestLists}}
-            </div>
-        </div>
-
-        <!-- Lists with Longest Movies -->
-        <div style="margin-top: 30px;">
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Listas Películas Más Largas</h4>
-            </div>
-
-            <div class="films">
-                {{#longestMoviesLists}}
-                <div class="card">
-                    <a href="/lists/{{listsId}}">
-                        {{#filmographyImage}}
-                        <img src="/img/{{imageId}}" alt="{{listName}}">
-                        {{/filmographyImage}} <h5>{{listName}}</h5>
-                        <p>{{filmographyList.size}} elementos</p>
-                    </a>
-                </div>
-                {{/longestMoviesLists}}
-            </div>
-        </div>
-
-        <!-- Lists with Series with Most Seasons -->
-        <div style="margin-top: 30px;">
-            <div class="d-flex justify-content-start align-items-center gap-3 mb-3 view-more">
-                <h4>Listas Series con Más Temporadas</h4>
-            </div>
-
-            <div class="films">
-                {{#seriesMostSeasonsLists}}
-                <div class="card">
-                    <a href="/lists/{{listsId}}">
-                        {{#filmographyImage}}
-                        <img src="/img/{{imageId}}" alt="{{listName}}">
-                        {{/filmographyImage}} <h5>{{listName}}</h5>
-                        <p>{{filmographyList.size}} elementos</p>
-                    </a>
-                </div>
-                {{/seriesMostSeasonsLists}}
-            </div>
-        </div>
+        {{/sections}}
 
     </div>
 
