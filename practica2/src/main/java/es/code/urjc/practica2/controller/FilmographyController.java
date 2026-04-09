@@ -32,9 +32,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class FilmographyController {
 
-    @Autowired
-    private FilmographyRepository filmographyRepository;
-
     @Autowired private FilmographyService filmographyService;
     @Autowired private AccountService accountService;
     @Autowired private ListsService listsService;
@@ -49,7 +46,7 @@ public class FilmographyController {
 
         for (Genres g : Genres.values()) {
             Map<String, Object> sec = new HashMap<>();
-            sec.put("name", formatearGenero(g));
+            sec.put("name", formatGenre(g));
             sec.put("genreKey", g.name());
             sec.put("genreKey", g.name());
             sec.put("movies", filmographyService.findMoviesByGenre(g));
@@ -61,7 +58,7 @@ public class FilmographyController {
         return "principal";
     }
 
-    private String formatearGenero(Genres g) {
+    private String formatGenre(Genres g) {
         return switch (g) {
             case ACCION -> "Acción";
             case AVENTURA -> "Aventura";
@@ -93,7 +90,7 @@ public class FilmographyController {
 
         for (Genres g : Genres.values()) {
             Map<String, Object> sec = new HashMap<>();
-            sec.put("name", formatearGenero(g));
+            sec.put("name", formatGenre(g));
             sec.put("genreKey", g.name());
             sec.put("series", filmographyService.findSeriesByGenre(g));
             seriesSections.add(sec);
@@ -243,14 +240,14 @@ public class FilmographyController {
     public String filmsByGenre(@PathVariable String genre, Model model) {
         Genres g = Genres.valueOf(genre.toUpperCase());
         model.addAttribute("filmographyList", filmographyService.getFilmsByGenre(genre));
-        model.addAttribute("listName", "Películas de " + formatearGenero(g));
+        model.addAttribute("listName", "Películas de " + formatGenre(g));
         return "filmslists";
     }
 
     @GetMapping("/series/genre/{genre}")
     public String seriesByGenre(@PathVariable String genre, Model model) {
         Genres g = Genres.valueOf(genre.toUpperCase());
-        model.addAttribute("listName", "Series de " + formatearGenero(g));
+        model.addAttribute("listName", "Series de " + formatGenre(g));
         model.addAttribute("filmographyList", filmographyService.findSeriesByGenre(g));
         return "filmslists";
     }
