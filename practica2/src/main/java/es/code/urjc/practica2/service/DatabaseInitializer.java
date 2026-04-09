@@ -1,11 +1,13 @@
-package es.code.urjc.practica2;
+package es.code.urjc.practica2.service;
 
-import es.code.urjc.practica2.service.FilmographyService;
+import java.io.IOException;
 import java.time.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,7 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Filmography.Platforms;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
@@ -37,6 +40,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired private DirectorRepository directorRepository;
     @Autowired private GenreRepository genreRepository;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private ImageService imageService;
 
     @Autowired private FilmographyService filmographyService;
 
@@ -80,8 +84,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/YoHD9XEInc0",
                 148
         );
+        filmographyRepository.save(inception);
         inception.setFilmographyPlatforms(List.of(Platforms.NETFLIX, Platforms.HBOMAX));
         inception.setFilmographyGenres(List.of(accion, cienciaFiccion, suspense));
+        try {
+                setFilmographyImage(inception,"posters/inception.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Movie dune = new Movie(
                 null,
@@ -114,7 +124,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
 
 
-        filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
+        filmographyRepository.saveAll(List.of(dune, mulhollandDrive));
 
         // Series 
         Serie westworld = new Serie(
@@ -176,5 +186,15 @@ public class DatabaseInitializer implements CommandLineRunner {
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(List.of(aliceFavourites, aliceWatchLater, bobMustSee));
+    }
+
+    public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{
+
+        Resource image = new ClassPathResource(classPathResource);
+
+        Image createdImage = imageService.createImage(image.getInputStream());
+        film.setFilmographyImage(createdImage);
+
+        filmographyRepository.save(film);
     }
 }
