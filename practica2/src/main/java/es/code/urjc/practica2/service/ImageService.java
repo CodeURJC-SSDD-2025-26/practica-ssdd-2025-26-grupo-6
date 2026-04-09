@@ -3,6 +3,7 @@ package es.code.urjc.practica2.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -44,7 +45,7 @@ public class ImageService {
         Image image = imageRepository.findById(id).orElseThrow();
 
         if (image.getImageFile() != null) {
-            return new InputStreamResource(image.getImageFile().getBinaryStream());
+            return new InputStreamResource(Objects.requireNonNull(image.getImageFile().getBinaryStream()));
         } else {
             throw new RuntimeException("Image file not found");
         }

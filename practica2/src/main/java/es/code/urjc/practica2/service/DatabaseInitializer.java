@@ -3,6 +3,7 @@ package es.code.urjc.practica2.service;
 import java.io.IOException;
 import java.time.*;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -51,7 +52,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         Account admin = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
         Account alice = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
         Account bob   = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
-        accountRepository.saveAll(List.of(admin, alice, bob));
+        accountRepository.saveAll(Objects.requireNonNull(List.of(admin, alice, bob)));
 
         // Directors
         Director nolan      = new Director("Christopher Nolan", "1970-07-30");
@@ -59,7 +60,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         Director lynch      = new Director("David Lynch",       "1946-01-20");
         Director nolanJ     = new Director("Jonathan Nolan",    "1976-06-06");
         Director gilligan   = new Director("Vince Gilligan",    "1967-02-10");
-        directorRepository.saveAll(List.of(nolan, villeneuve, lynch, nolanJ, gilligan));
+        directorRepository.saveAll(Objects.requireNonNull(List.of(nolan, villeneuve, lynch, nolanJ, gilligan)));
 
         // Genres — saved first so they have an ID before being assigned
         Genre accion         = genreRepository.save(new Genre(Genres.ACCION));
@@ -179,7 +180,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         }
 
         // Reviews
-        reviewRepository.saveAll(List.of(
+        reviewRepository.saveAll(Objects.requireNonNull(List.of(
                 new Review(5f, "An absolute masterpiece. Nolan at his very best.", alice, inception),
                 new Review(4f, "Mind-bending and thrilling. Rewards repeated viewings.", bob, inception),
                 new Review(5f, "Visually stunning. A breathtaking adaptation of the novel.", alice, dune),
@@ -187,7 +188,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 new Review(5f, "Television at its finest. Walter White's arc is unmatched.", alice, breakingBad),
                 new Review(4f, "Gripping from start to finish.", bob, breakingBad),
                 new Review(3f, "Interesting premise but loses steam after season two.", alice, westworld)
-        ));
+        )));
 
         // Recalculate average stars — reload with reviews so the list is complete
         filmographyService.recalculateAllAverages();
@@ -203,7 +204,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         Lists bobMustSee = new Lists("Must see", List.of(inception, breakingBad));
         bobMustSee.setListOwner(bob);
 
-        listsRepository.saveAll(List.of(aliceFavourites, aliceWatchLater, bobMustSee));
+        listsRepository.saveAll(Objects.requireNonNull(List.of(aliceFavourites, aliceWatchLater, bobMustSee)));
     }
 
     public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{

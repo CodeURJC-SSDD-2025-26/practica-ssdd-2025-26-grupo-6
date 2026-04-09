@@ -2,6 +2,9 @@ package es.code.urjc.practica2.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,8 +23,8 @@ public class EmailService {
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            helper.setTo(destiny);
-            helper.setSubject(subject);
+            helper.setTo(Objects.requireNonNull(destiny));
+            helper.setSubject(Objects.requireNonNull(subject));
             helper.setFrom("palomixnoreply@gmail.com");
 
             String body = "<html>" +

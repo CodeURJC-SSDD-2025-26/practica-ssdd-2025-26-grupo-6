@@ -24,7 +24,6 @@ import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
-import es.code.urjc.practica2.repository.FilmographyRepository;
 import es.code.urjc.practica2.service.ListsService;
 
 import jakarta.servlet.http.HttpSession;

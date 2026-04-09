@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Objects;
 
 import es.code.urjc.practica2.service.ImageService;
 
@@ -31,7 +32,7 @@ public class ImageController {
 
         return ResponseEntity
                 .ok()
-                .contentType(mediaType)
+                .contentType(Objects.requireNonNull(mediaType))
                 .body(imageFile);
     }
 }

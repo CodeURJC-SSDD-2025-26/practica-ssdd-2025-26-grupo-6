@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,6 @@ import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.FilmographyRepository;
 
-import java.util.Comparator;
 
 
 @Service
@@ -22,15 +21,15 @@ public class FilmographyService {
     @Autowired private FilmographyRepository filmographyRepository;
 
     public Filmography findById(Long id) {
-        return filmographyRepository.findById(id).orElse(null);
+        return filmographyRepository.findById(Objects.requireNonNull(id)).orElse(null);
     }
 
     public Movie findMovieById(Long id) {
-        return (Movie) filmographyRepository.findById(id).orElseThrow(() -> new RuntimeException("Película no encontrada"));
+        return (Movie) filmographyRepository.findById(Objects.requireNonNull(id)).orElseThrow(() -> new RuntimeException("Película no encontrada"));
     }
 
     public Serie findSeriesById(Long id) {
-        return (Serie) filmographyRepository.findById(id).orElseThrow(() -> new RuntimeException("Serie no encontrada"));
+        return (Serie) filmographyRepository.findById(Objects.requireNonNull(id)).orElseThrow(() -> new RuntimeException("Serie no encontrada"));
     }
 
     public List<Filmography> findByGenre(Genres genre) {
@@ -79,7 +78,7 @@ public class FilmographyService {
     }
 
     public Filmography save(Filmography filmography) {
-        return filmographyRepository.save(filmography);
+        return filmographyRepository.save(Objects.requireNonNull(filmography));
     }
 
     public Movie updateMovie(Long id, Filmography updatedMovie) {

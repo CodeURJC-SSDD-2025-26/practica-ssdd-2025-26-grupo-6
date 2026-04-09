@@ -1,6 +1,7 @@
 package es.code.urjc.practica2.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,11 @@ public class ReviewService {
     private FilmographyRepository filmographyRepository;
 
     public Review findById(Long reviewId) {
-        return reviewRepository.findById(reviewId).orElse(null);
+        return reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
     }
 
     public Review save(Review review) {
-        Review saved = reviewRepository.save(review);
+        Review saved = reviewRepository.save(Objects.requireNonNull(review));
         // Actualizar el promedio en la filmografía
         Filmography filmography = saved.getFilmography();
         filmography.updateAverageStars();
@@ -33,7 +34,7 @@ public class ReviewService {
     }
 
     public Review update(Long reviewId, Float reviewStars, String reviewDescription) {
-        Review review = reviewRepository.findById(reviewId).orElse(null);
+        Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             review.setReviewStars(reviewStars);
             review.setReviewDescription(reviewDescription);
@@ -43,7 +44,7 @@ public class ReviewService {
     }
 
     public void delete(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId).orElse(null);
+        Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             Filmography filmography = review.getFilmography();
             reviewRepository.deleteById(reviewId);
