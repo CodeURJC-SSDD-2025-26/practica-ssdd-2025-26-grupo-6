@@ -3,7 +3,8 @@ package es.code.urjc.practica2.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Comparator;
-
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,45 +38,68 @@ public class ListsService {
         listsRepository.deleteById(id);
     }
 
+    private Map<String, Object> convertToMap(Lists list) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("listsId", list.getListsId());
+        map.put("listName", list.getListName());
+        map.put("size", list.getFilmographyList().size());
+
+        if (!list.getFilmographyList().isEmpty()) {
+            Filmography first = list.getFilmographyList().get(0);
+            map.put("firstImage", first.getFilmographyImageUrl());
+        } else {
+            map.put("firstImage", "/images/placeholder.png"); // opcional
+        }
+
+        return map;
+    }
+
+
    // 1. Best rated lists
-    public List<Lists> getBestRatedLists() {
+    public List<Map<String, Object>> getBestRatedLists() {
         return listsRepository.findAll().stream()
                 .sorted(Comparator.comparingDouble(this::getListAverageRating).reversed())
                 .limit(10)
+                .map(this::convertToMap)
                 .collect(Collectors.toList());
     }
 
     // 2. Worst rated lists
-    public List<Lists> getWorstRatedLists() {
+    public List<Map<String, Object>> getWorstRatedLists() {
         return listsRepository.findAll().stream()
                 .sorted(Comparator.comparingDouble(this::getListAverageRating))
                 .limit(10)
+                .map(this::convertToMap)
                 .collect(Collectors.toList());
     }
 
     // 3. Longest lists (most items)
-    public List<Lists> getLongestLists() {
+    public List<Map<String, Object>> getLongestLists() {
         return listsRepository.findAll().stream()
                 .sorted((a, b) -> Integer.compare(
                         b.getFilmographyList().size(),
                         a.getFilmographyList().size()))
                 .limit(10)
+                .map(this::convertToMap)
                 .collect(Collectors.toList());
     }
 
     // 4. Lists with longest movies (average duration)
-    public List<Lists> getLongestMoviesLists() {
+    public List<Map<String, Object>> getLongestMoviesLists() {
         return listsRepository.findAll().stream()
                 .sorted(Comparator.comparingDouble(this::getAverageMovieDuration).reversed())
                 .limit(10)
+                .map(this::convertToMap)
                 .collect(Collectors.toList());
     }
 
     // 5. Lists with series with most seasons
-    public List<Lists> getSeriesWithMostSeasons() {
+    public List<Map<String, Object>> getSeriesWithMostSeasons() {
         return listsRepository.findAll().stream()
                 .sorted(Comparator.comparingInt(this::getAverageSeriesSeasons).reversed())
                 .limit(10)
+                .map(this::convertToMap)
                 .collect(Collectors.toList());
     }
 

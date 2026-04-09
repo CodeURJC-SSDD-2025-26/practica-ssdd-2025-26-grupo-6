@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.FilmographyRepository;
+
+import java.util.Comparator;
+
 
 @Service
 public class FilmographyService {
@@ -109,4 +113,17 @@ public class FilmographyService {
 
         return filmographyRepository.save(existingSerie);
     }
+
+    public List<Movie> getRecentFilms(int limit) {
+        return filmographyRepository.findTop10MoviesByYear()
+                .stream()
+                .limit(limit)
+                .toList();
+    }
+
+    public List<Filmography> getFilmsByGenre(String genre) {
+        Genres g = Genres.valueOf(genre.toUpperCase());
+        return filmographyRepository.findByFilmographyGenres_Genres(g);
+    }
+
 }

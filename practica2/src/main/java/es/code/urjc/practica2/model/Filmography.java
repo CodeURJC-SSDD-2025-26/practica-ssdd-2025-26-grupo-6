@@ -188,4 +188,13 @@ public class Filmography {
     public void setFilmographyImageUrl(String filmographyImageUrl) {
         this.filmographyImageUrl = filmographyImageUrl;
     }
+
+    public String getFilmographyGenre() {
+        if (filmographyGenres == null || filmographyGenres.isEmpty()) {
+            return null;
+        }
+        // Devuelve el nombre del primer género como String
+        return filmographyGenres.get(0).getGenres().name();
+    }
+
 }

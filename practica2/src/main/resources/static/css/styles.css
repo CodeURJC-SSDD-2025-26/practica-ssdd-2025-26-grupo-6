@@ -418,3 +418,12 @@ canvas{
 .genre-badge.active, .platform-badge.active {
     background-color: #0d6efd !important;
 }
+
+.film-list {
+    width: 100%;
+}
+
+.film-list .card-img-top {
+    height: 370px;
+    object-fit: cover;
+}
