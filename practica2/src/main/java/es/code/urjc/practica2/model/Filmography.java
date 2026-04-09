@@ -199,4 +199,11 @@ public class Filmography {
         return filmographyGenres.get(0).getGenres().name();
     }
 
+    public String getFilmographyImageUrl() {
+        if (filmographyImage == null || filmographyImage.getImageId() == null) {
+            return null;
+        }
+        return "/img/" + filmographyImage.getImageId();
+    }
+
 }

@@ -44,6 +44,7 @@ public class ListsService {
         map.put("listsId", list.getListsId());
         map.put("listName", list.getListName());
         map.put("size", list.getFilmographyList().size());
+        map.put("listImageUrl", list.getListImageUrl());
 
         if (!list.getFilmographyList().isEmpty()) {
             Filmography first = list.getFilmographyList().get(0);
