@@ -1,11 +1,13 @@
-package es.code.urjc.practica2;
+package es.code.urjc.practica2.service;
 
-import es.code.urjc.practica2.service.FilmographyService;
+import java.io.IOException;
 import java.time.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,7 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Filmography.Platforms;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
@@ -37,6 +40,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired private DirectorRepository directorRepository;
     @Autowired private GenreRepository genreRepository;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private ImageService imageService;
 
     @Autowired private FilmographyService filmographyService;
 
@@ -80,9 +84,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/YoHD9XEInc0",
                 148
         );
+        filmographyRepository.save(inception);
         inception.setFilmographyPlatforms(List.of(Platforms.NETFLIX, Platforms.HBOMAX));
         inception.setFilmographyGenres(List.of(accion, cienciaFiccion, suspense));
-        inception.setFilmographyImageUrl("https://www.originalfilmart.com/cdn/shop/files/inception_2010_french_original_film_art_5000x.webp?v=1686692704");
+        try {
+                setFilmographyImage(inception,"posters/inception.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Movie dune = new Movie(
                 null,
@@ -96,9 +105,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/8g18jFHCLXk",
                 155
         );
+        filmographyRepository.save(dune);
         dune.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         dune.setFilmographyGenres(List.of(cienciaFiccion, aventura, drama, romance));
-        dune.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg");
+        try {
+                setFilmographyImage(dune,"posters/dune.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Movie mulhollandDrive = new Movie(
                 null,
@@ -112,12 +126,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/2RKOQUqBxFM",
                 147
         );
+        filmographyRepository.save(mulhollandDrive);
         mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
-        mulhollandDrive.setFilmographyImageUrl("https://m.media-amazon.com/images/M/MV5BNjliY2UwMjQtYjVlNi00NzExLTg1MDMtMjE2OTYwYjI0NTcxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
-
-
-        filmographyRepository.saveAll(List.of(inception, dune, mulhollandDrive));
+        try {
+                setFilmographyImage(mulhollandDrive,"posters/mulholland.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         // Series 
         Serie westworld = new Serie(
@@ -132,9 +148,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/bqMg4crFP5g",
                 4
         );
+        filmographyRepository.save(westworld);
         westworld.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         westworld.setFilmographyGenres(List.of(cienciaFiccion, drama, suspense));
-        westworld.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg");
+        try {
+                setFilmographyImage(westworld,"posters/westworld.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Serie breakingBad = new Serie(
                 null,
@@ -148,12 +169,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/HhesaQXLuRY",
                 5
         );
+        filmographyRepository.save(breakingBad);
         breakingBad.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
         breakingBad.setFilmographyGenres(List.of(drama, suspense, accion, comedia));
-        breakingBad.setFilmographyImageUrl("https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg");
-
-
-        filmographyRepository.saveAll(List.of(westworld, breakingBad));
+        try {
+                setFilmographyImage(breakingBad,"posters/breakingBad.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         // Reviews
         reviewRepository.saveAll(List.of(
@@ -181,5 +204,18 @@ public class DatabaseInitializer implements CommandLineRunner {
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(List.of(aliceFavourites, aliceWatchLater, bobMustSee));
+    }
+
+    public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{
+        if (classPathResource == null) {
+            throw new IllegalArgumentException("classPathResource cannot be null");
+        }
+
+        Resource image = new ClassPathResource(classPathResource);
+
+        Image createdImage = imageService.createImage(image.getInputStream());
+        film.setFilmographyImage(createdImage);
+
+        filmographyRepository.save(film);
     }
 }

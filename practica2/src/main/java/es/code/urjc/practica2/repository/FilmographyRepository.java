@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import es.code.urjc.practica2.model.Filmography;
-import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;

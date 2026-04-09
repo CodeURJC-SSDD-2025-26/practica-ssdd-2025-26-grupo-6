@@ -34,7 +34,9 @@
                 {{#bestRatedLists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        <img src="{{firstImage}}" alt="{{listName}}"> 
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{listName}}">
+                        {{/filmographyImage}}
                         <h5>{{listName}}</h5>
                         <p>{{size}} elementos</p>
                     </a>
@@ -53,7 +55,9 @@
                 {{#worstRatedLists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        <img src="{{firstImage}}" alt="{{listName}}"> 
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{listName}}">
+                        {{/filmographyImage}}
                         <h5>{{listName}}</h5>
                         <p>{{size}} elementos</p>
                     </a>
@@ -72,7 +76,9 @@
                 {{#longestLists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        <img src="{{firstImage}}" alt="{{listName}}"> 
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{listName}}">
+                        {{/filmographyImage}}
                         <h5>{{listName}}</h5>
                         <p>{{size}} elementos</p>
                     </a>
@@ -91,9 +97,10 @@
                 {{#longestMoviesLists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        <img src="{{firstImage}}" alt="{{listName}}"> 
-                        <h5>{{listName}}</h5>
-                        <p>{{size}} elementos</p>
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{listName}}">
+                        {{/filmographyImage}} <h5>{{listName}}</h5>
+                        <p>{{filmographyList.size}} elementos</p>
                     </a>
                 </div>
                 {{/longestMoviesLists}}
@@ -110,9 +117,10 @@
                 {{#seriesMostSeasonsLists}}
                 <div class="card">
                     <a href="/lists/{{listsId}}">
-                        <img src="{{firstImage}}" alt="{{listName}}"> 
-                        <h5>{{listName}}</h5>
-                        <p>{{size}} elementos</p>
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{listName}}">
+                        {{/filmographyImage}} <h5>{{listName}}</h5>
+                        <p>{{filmographyList.size}} elementos</p>
                     </a>
                 </div>
                 {{/seriesMostSeasonsLists}}

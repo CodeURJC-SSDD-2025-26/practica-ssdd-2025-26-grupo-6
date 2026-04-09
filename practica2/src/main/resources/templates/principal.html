@@ -19,7 +19,7 @@
 </head>
 
 <body class="primary principal" id="page-peliculas">
-    
+
     <!-- HEADER -->
     {{>header}}
 
@@ -36,7 +36,9 @@
                 {{#newMovies}}
                 <div class="card">
                     <a href="/filmographies/{{filmographyId}}">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
@@ -60,7 +62,10 @@
                 {{#movies}}
                 <div class="card">
                     <a href="/filmographies/{{filmographyId}}">
-                        <img src="{{filmographyImageUrl}}" alt="{{filmographyName}}">
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
+
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>
@@ -73,8 +78,8 @@
         </div>
         {{/movieSections}}
 
-    <!-- Footer -->
-    {{>footer}}
+        <!-- Footer -->
+        {{>footer}}
 </body>
 
 </html>
