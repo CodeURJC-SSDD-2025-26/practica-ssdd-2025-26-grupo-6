@@ -93,6 +93,9 @@ public class FilmographyService {
         existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
         existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
         existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
+        if (updatedMovie.getFilmographyImage() != null) {
+            existingMovie.setFilmographyImage(updatedMovie.getFilmographyImage());
+        }
 
         return filmographyRepository.save(existingMovie);
     }
@@ -108,6 +111,9 @@ public class FilmographyService {
         existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
         existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
         existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+        if (updatedSerie.getFilmographyImage() != null) {
+            existingSerie.setFilmographyImage(updatedSerie.getFilmographyImage());
+        }
 
         return filmographyRepository.save(existingSerie);
     }

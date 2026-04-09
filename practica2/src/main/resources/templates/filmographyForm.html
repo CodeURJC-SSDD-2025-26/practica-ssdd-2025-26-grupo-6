@@ -65,6 +65,7 @@
                                 alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
                             <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
                         </div>
+                        <input type="file" name="imageFile" id="posterInput" class="d-none" accept=".jpg,.jpeg">
                         {{/filmographyImage}}
                         {{^filmographyImage}}
                         <div class="d-flex flex-column align-items-center mb-3">
@@ -72,10 +73,8 @@
                                 alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
                             <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
                         </div>
+                        <input type="file" name="imageFile" id="posterInput" class="d-none" accept=".jpg,.jpeg">
                         {{/filmographyImage}}
-
-                        <!-- Hidden Input file -->
-                        <input type="file" name="imageFile" id="posterInput" class="d-none" accept=".jpg,.jpeg,.png,.webp">
 
                         <!-- Title -->
                         <div class="d-flex flex-column">
