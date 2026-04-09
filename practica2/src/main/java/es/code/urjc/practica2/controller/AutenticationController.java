@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.service.AccountService;
+import es.code.urjc.practica2.service.EmailService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +27,9 @@ public class AutenticationController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    EmailService emailService;
 
     // LOGIN METHODS
     @GetMapping("/login")
@@ -58,7 +62,7 @@ public class AutenticationController {
             session.setAttribute("userId", account.getAccountId());
             session.setAttribute("isAdmin", account.getAccountRole() == Account.Role.ADMIN);
 
-            session.setMaxInactiveInterval(60*60);
+            session.setMaxInactiveInterval(60 * 60);
 
             Cookie cookie = new Cookie("userEmail", email);
             cookie.setPath("/");
@@ -82,7 +86,6 @@ public class AutenticationController {
         session.invalidate();
         return "redirect: /login";
     }
-    
 
     // SIGN UP METHODS
 
@@ -136,6 +139,10 @@ public class AutenticationController {
 
         Account newAccount = new Account(name, birthDate, email, userRole, encodedPassword);
         accountService.save(newAccount);
+
+        emailService.sendMail(email,
+                "Bienvenido a Palomix",
+                "¡Hola! <br> Tu cuenta ha sido <b>creada con éxito</b>. A partir de ahora, podrás calificar todas las series y películas de nuestro catálogo, al igual, de crear listas con la filmografía que quieras. \nTe esperamos.");
 
         return "redirect:/login";
     }
