@@ -29,5 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(avatarProfile){
             avatarProfile.src = selectedSrc;
         }
+        document.getElementById('avatarInput').value = selectedSrc;
+        document.getElementById('avatarForm').submit();
         });
 });

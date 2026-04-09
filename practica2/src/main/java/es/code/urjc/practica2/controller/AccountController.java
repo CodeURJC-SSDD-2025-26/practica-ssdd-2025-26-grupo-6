@@ -218,6 +218,10 @@ public class AccountController {
         currentUser.setAccountEmail(accountEmail);
         currentUser.setAccountBirthDate(accountBirthDate);
 
+        accountService.save(currentUser);
+
+        session.setAttribute("currentUser", currentUser);
+        
         return "redirect:/profile";
     }
 }
