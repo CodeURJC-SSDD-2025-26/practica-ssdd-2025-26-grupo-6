@@ -28,10 +28,10 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
                     <h3 class="mb-3 text-center text-white">
-                        {{#filmographyId}}Edit {{/filmographyId}}
-                        {{^filmographyId}}Add {{/filmographyId}}
-                        {{#isSeries}}Series{{/isSeries}}
-                        {{^isSeries}}Movie{{/isSeries}}
+                        {{#filmographyId}}Editar {{/filmographyId}}
+                        {{^filmographyId}}Añadir {{/filmographyId}}
+                        {{#isSeries}}Serie{{/isSeries}}
+                        {{^isSeries}}Pelicula{{/isSeries}}
                     </h3>
                     
                     <!-- Form -->
@@ -59,11 +59,20 @@
                     {{/isSeries}}
                     {{/filmographyId}}
                         <!-- Clikable Image -->
+                         {{#filmographyImage}}
                         <div class="d-flex flex-column align-items-center mb-3">
-                            <img id="posterPreview" src="/images/carteleraEjemploAvatar.jpg"
+                            <img id="posterPreview" src="/img/{{imageId}}"
                                 alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
                             <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
                         </div>
+                        {{/filmographyImage}}
+                        {{^filmographyImage}}
+                        <div class="d-flex flex-column align-items-center mb-3">
+                            <img id="posterPreview" src="/images/prePoster.jpg"
+                                alt="Seleccionar imagen" class="border rounded-3 img-fluid poster" style="cursor: pointer;">
+                            <p class="mt-2 mb-0 text-white-50 small">Pulsa la imagen para cargar una portada</p>
+                        </div>
+                        {{/filmographyImage}}
 
                         <!-- Hidden Input file -->
                         <input type="file" name="imageFile" id="posterInput" class="d-none" accept=".jpg,.jpeg,.png,.webp">

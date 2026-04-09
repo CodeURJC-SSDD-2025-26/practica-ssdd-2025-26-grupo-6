@@ -105,8 +105,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/8g18jFHCLXk",
                 155
         );
+        filmographyRepository.save(dune);
         dune.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         dune.setFilmographyGenres(List.of(cienciaFiccion, aventura, drama, romance));
+        try {
+                setFilmographyImage(dune,"posters/dune.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Movie mulhollandDrive = new Movie(
                 null,
@@ -120,11 +126,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/2RKOQUqBxFM",
                 147
         );
+        filmographyRepository.save(mulhollandDrive);
         mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
         mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
-
-
-        filmographyRepository.saveAll(List.of(dune, mulhollandDrive));
+        try {
+                setFilmographyImage(mulhollandDrive,"posters/mulholland.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         // Series 
         Serie westworld = new Serie(
@@ -139,8 +148,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/bqMg4crFP5g",
                 4
         );
+        filmographyRepository.save(westworld);
         westworld.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
         westworld.setFilmographyGenres(List.of(cienciaFiccion, drama, suspense));
+        try {
+                setFilmographyImage(westworld,"posters/westworld.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         Serie breakingBad = new Serie(
                 null,
@@ -154,11 +169,14 @@ public class DatabaseInitializer implements CommandLineRunner {
                 "https://www.youtube.com/embed/HhesaQXLuRY",
                 5
         );
+        filmographyRepository.save(breakingBad);
         breakingBad.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
         breakingBad.setFilmographyGenres(List.of(drama, suspense, accion, comedia));
-
-
-        filmographyRepository.saveAll(List.of(westworld, breakingBad));
+        try {
+                setFilmographyImage(breakingBad,"posters/breakingBad.jpg");
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
 
         // Reviews
         reviewRepository.saveAll(List.of(
@@ -189,6 +207,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     }
 
     public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{
+        if (classPathResource == null) {
+            throw new IllegalArgumentException("classPathResource cannot be null");
+        }
 
         Resource image = new ClassPathResource(classPathResource);
 
