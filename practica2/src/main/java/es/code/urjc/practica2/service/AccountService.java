@@ -43,4 +43,8 @@ public class AccountService {
     public Account findById(Long id) {
         return accountRepository.findById(Objects.requireNonNull(id)).orElse(null);
     }
+
+    public Account findByName(String name) {
+        return accountRepository.findByAccountName(name).orElse(null);
+    }
 }

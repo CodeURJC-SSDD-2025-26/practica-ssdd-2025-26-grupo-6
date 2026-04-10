@@ -2,6 +2,7 @@ package es.code.urjc.practica2.service;
 
 import java.io.IOException;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -205,6 +206,51 @@ public class DatabaseInitializer implements CommandLineRunner {
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(aliceFavourites, aliceWatchLater, bobMustSee)));
+
+        // System lists (owned by admin)
+        Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, breakingBad)));
+        actionList.setListOwner(admin);
+
+        Lists adventureList = new Lists("Aventura", new ArrayList<>(List.of(dune)));
+        adventureList.setListOwner(admin);
+
+        Lists sciFiList = new Lists("Ciencia Ficción", new ArrayList<>(List.of(inception, dune, westworld)));
+        sciFiList.setListOwner(admin);
+
+        Lists dramaList = new Lists("Drama", new ArrayList<>(List.of(dune, breakingBad, westworld)));
+        dramaList.setListOwner(admin);
+
+        Lists suspenseList = new Lists("Suspense", new ArrayList<>(List.of(inception, mulhollandDrive, westworld, breakingBad)));
+        suspenseList.setListOwner(admin);
+
+        Lists horrorList = new Lists("Miedo", new ArrayList<>(List.of(mulhollandDrive)));
+        horrorList.setListOwner(admin);
+
+        Lists comedyList = new Lists("Comedia", new ArrayList<>(List.of(breakingBad)));
+        comedyList.setListOwner(admin);
+
+        Lists romanceList = new Lists("Romance", new ArrayList<>(List.of(dune)));
+        romanceList.setListOwner(admin);
+
+        listsRepository.saveAll(List.of(actionList, adventureList, sciFiList, dramaList, suspenseList, horrorList, comedyList, romanceList));
+
+        // System lists for series (owned by admin)
+        Lists sciFiSeriesList = new Lists("Ciencia Ficción - Series", new ArrayList<>(List.of(westworld)));
+        sciFiSeriesList.setListOwner(admin);
+
+        Lists dramaSeriesList = new Lists("Drama - Series", new ArrayList<>(List.of(westworld, breakingBad)));
+        dramaSeriesList.setListOwner(admin);
+
+        Lists suspenseSeriesList = new Lists("Suspense - Series", new ArrayList<>(List.of(westworld, breakingBad)));
+        suspenseSeriesList.setListOwner(admin);
+
+        Lists actionSeriesList = new Lists("Acción - Series", new ArrayList<>(List.of(breakingBad)));
+        actionSeriesList.setListOwner(admin);
+
+        Lists comedySeriesList = new Lists("Comedia - Series", new ArrayList<>(List.of(breakingBad)));
+        comedySeriesList.setListOwner(admin);
+
+        listsRepository.saveAll(List.of(sciFiSeriesList, dramaSeriesList, suspenseSeriesList, actionSeriesList, comedySeriesList));
     }
 
     public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{

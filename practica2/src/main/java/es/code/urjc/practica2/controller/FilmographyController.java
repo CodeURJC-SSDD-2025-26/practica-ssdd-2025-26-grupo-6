@@ -38,21 +38,30 @@ public class FilmographyController {
     @GetMapping("/principal")
     public String principal(Model model) {
 
-        model.addAttribute("newMovies",
-            filmographyService.findTop10MoviesByYear());
+        model.addAttribute("newMovies", filmographyService.findTop10MoviesByYear());
+
+        Account admin = accountService.findByName("admin");
+        List<Lists> systemLists = listsService.findByOwner(admin);
 
         List<Map<String, Object>> movieSections = new ArrayList<>();
 
-        for (Genres g : Genres.values()) {
-            Map<String, Object> sec = new HashMap<>();
-            sec.put("name", formatGenre(g));
-            sec.put("genreKey", toUrlKey(g));
-            sec.put("movies", filmographyService.findMoviesByGenre(g));
-            movieSections.add(sec);
+        for (Lists list : systemLists) {
+            if (list.getListName().endsWith("- Series")) continue;
+            List<Movie> movies = list.getFilmographyList().stream()
+                .filter(f -> f instanceof Movie)
+                .map(f -> (Movie) f)
+                .toList();
+
+            if (!movies.isEmpty()) {
+                Map<String, Object> sec = new HashMap<>();
+                sec.put("name", list.getListName());
+                sec.put("listsId", list.getListsId());
+                sec.put("movies", movies);
+                movieSections.add(sec);
+            }
         }
 
         model.addAttribute("movieSections", movieSections);
-
         return "principal";
     }
 
@@ -106,18 +115,29 @@ public class FilmographyController {
     @GetMapping("/series")
     public String series(Model model) {
 
+        Account admin = accountService.findByName("admin");
+        List<Lists> systemLists = listsService.findByOwner(admin);
+
         List<Map<String, Object>> seriesSections = new ArrayList<>();
 
-        for (Genres g : Genres.values()) {
-            Map<String, Object> sec = new HashMap<>();
-            sec.put("name", formatGenre(g));
-            sec.put("genreKey", toUrlKey(g));
-            sec.put("series", filmographyService.findSeriesByGenre(g));
-            seriesSections.add(sec);
+        for (Lists list : systemLists) {
+            if (!list.getListName().endsWith("- Series")) continue;
+
+            List<Serie> seriesList = list.getFilmographyList().stream()
+                .filter(f -> f instanceof Serie)
+                .map(f -> (Serie) f)
+                .toList();
+
+            if (!seriesList.isEmpty()) {
+                Map<String, Object> sec = new HashMap<>();
+                sec.put("name", list.getListName().replace(" - Series", ""));
+                sec.put("listsId", list.getListsId());
+                sec.put("series", seriesList);
+                seriesSections.add(sec);
+            }
         }
 
         model.addAttribute("seriesSections", seriesSections);
-
         return "series";
     }
 
@@ -242,7 +262,7 @@ public class FilmographyController {
             return "redirect:/lists"; // o página de error si quieres
         }
 
-        model.addAttribute("listName", list.getListName());
+        model.addAttribute("listName", list.getListName().replace(" - Series", ""));
         model.addAttribute("filmographyList", list.getFilmographyList());
 
         return "filmslists";
