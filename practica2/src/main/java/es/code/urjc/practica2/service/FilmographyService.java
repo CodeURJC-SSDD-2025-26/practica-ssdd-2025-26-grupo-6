@@ -14,22 +14,23 @@ import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.FilmographyRepository;
 
-
-
 @Service
 public class FilmographyService {
-    @Autowired private FilmographyRepository filmographyRepository;
+    @Autowired
+    private FilmographyRepository filmographyRepository;
 
     public Filmography findById(Long id) {
         return filmographyRepository.findById(Objects.requireNonNull(id)).orElse(null);
     }
 
     public Movie findMovieById(Long id) {
-        return (Movie) filmographyRepository.findById(Objects.requireNonNull(id)).orElseThrow(() -> new RuntimeException("Película no encontrada"));
+        return (Movie) filmographyRepository.findById(Objects.requireNonNull(id))
+                .orElseThrow(() -> new RuntimeException("Película no encontrada"));
     }
 
     public Serie findSeriesById(Long id) {
-        return (Serie) filmographyRepository.findById(Objects.requireNonNull(id)).orElseThrow(() -> new RuntimeException("Serie no encontrada"));
+        return (Serie) filmographyRepository.findById(Objects.requireNonNull(id))
+                .orElseThrow(() -> new RuntimeException("Serie no encontrada"));
     }
 
     public List<Filmography> findByGenre(Genres genre) {
@@ -41,11 +42,11 @@ public class FilmographyService {
     }
 
     public List<Serie> findSeriesByGenre(Genres genre) {
-    return filmographyRepository.findByFilmographyGenres_Genres(genre)
-            .stream()
-            .filter(f -> f instanceof Serie)
-            .map(f -> (Serie) f)
-            .toList();
+        return filmographyRepository.findByFilmographyGenres_Genres(genre)
+                .stream()
+                .filter(f -> f instanceof Serie)
+                .map(f -> (Serie) f)
+                .toList();
     }
 
     public List<Movie> findMoviesByGenre(Genres genre) {
@@ -71,7 +72,8 @@ public class FilmographyService {
     }
 
     public List<Filmography.Platforms> toPlatformList(List<String> platformIds) {
-        if (platformIds == null) return new ArrayList<>();
+        if (platformIds == null)
+            return new ArrayList<>();
         return platformIds.stream()
                 .map(Filmography.Platforms::valueOf)
                 .collect(java.util.stream.Collectors.toList());
@@ -129,4 +131,14 @@ public class FilmographyService {
         return filmographyRepository.findByFilmographyGenres_Genres(g);
     }
 
+    public List<Filmography> findByTitleContaining(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return new ArrayList<>();
+        }
+        return filmographyRepository.findByTitleContaining(name);
+    }
+
+    public List<Filmography> findFilmographyRelatedByTitleOrGenre(String query){
+        return filmographyRepository.findFilmographyRelatedByTitleOrGenre(query);
+    }
 }

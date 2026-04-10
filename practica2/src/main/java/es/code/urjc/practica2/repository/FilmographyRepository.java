@@ -23,6 +23,16 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
     Optional<Filmography> findByIdWithReviews(@Param("id") Long id);
 
     List<Filmography> findByFilmographyGenres_Genres(Genres genre);
+
     @Query("SELECT m FROM Movie m ORDER BY m.filmographyYear DESC")
     List<Movie> findTop10MoviesByYear();
+
+    @Query("SELECT f FROM Filmography f WHERE LOWER(f.filmographyName) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Filmography> findByTitleContaining(@Param("name") String filmographyName);
+
+    @Query("SELECT DISTINCT f FROM Filmography f " +
+            "LEFT JOIN f.filmographyGenres g " +
+            "WHERE LOWER(f.filmographyName) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(g.genres) LIKE LOWER(CONCAT('%', :query, '%'))")
+    List<Filmography> findFilmographyRelatedByTitleOrGenre(@Param("query") String query);
 }

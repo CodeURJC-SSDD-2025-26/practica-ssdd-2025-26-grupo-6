@@ -36,12 +36,12 @@
                     </ul>
                     <div class="d-flex flex-column flex-lg-row gap-3 align-items-center">
                         <div class="search">
-                            <div class="input-group">
-                                <button class="btn btn-outline-primary" type="button" id="searchBtn">
+                            <form class="input-group" action="/searchBar" method="post">
+                                <button class="btn btn-outline-primary" type="submit" id="searchBtn">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
-                            </div>
+                                <input type="text" class="form-control" placeholder="Buscar" name="search">
+                            </form>
                         </div>
 
                         <div class="col-1 profile dropdown text-end">

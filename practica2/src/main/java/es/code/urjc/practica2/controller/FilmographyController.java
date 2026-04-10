@@ -3,7 +3,9 @@ package es.code.urjc.practica2.controller;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
@@ -31,9 +34,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class FilmographyController {
 
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private AccountService accountService;
-    @Autowired private ListsService listsService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
 
     @GetMapping("/principal")
     public String principal(Model model) {
@@ -46,11 +52,12 @@ public class FilmographyController {
         List<Map<String, Object>> movieSections = new ArrayList<>();
 
         for (Lists list : systemLists) {
-            if (list.getListName().endsWith("- Series")) continue;
+            if (list.getListName().endsWith("- Series"))
+                continue;
             List<Movie> movies = list.getFilmographyList().stream()
-                .filter(f -> f instanceof Movie)
-                .map(f -> (Movie) f)
-                .toList();
+                    .filter(f -> f instanceof Movie)
+                    .map(f -> (Movie) f)
+                    .toList();
 
             if (!movies.isEmpty()) {
                 Map<String, Object> sec = new HashMap<>();
@@ -77,7 +84,6 @@ public class FilmographyController {
             case ROMANCE -> "Romance";
         };
     }
-
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
@@ -121,12 +127,13 @@ public class FilmographyController {
         List<Map<String, Object>> seriesSections = new ArrayList<>();
 
         for (Lists list : systemLists) {
-            if (!list.getListName().endsWith("- Series")) continue;
+            if (!list.getListName().endsWith("- Series"))
+                continue;
 
             List<Serie> seriesList = list.getFilmographyList().stream()
-                .filter(f -> f instanceof Serie)
-                .map(f -> (Serie) f)
-                .toList();
+                    .filter(f -> f instanceof Serie)
+                    .map(f -> (Serie) f)
+                    .toList();
 
             if (!seriesList.isEmpty()) {
                 Map<String, Object> sec = new HashMap<>();
@@ -141,7 +148,6 @@ public class FilmographyController {
         return "series";
     }
 
-
     @GetMapping("/filmographies/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
         Filmography filmography = filmographyService.findById(id);
@@ -149,7 +155,7 @@ public class FilmographyController {
         Account currentUser = userId != null ? accountService.findById(userId) : null;
 
         model.addAttribute("filmography", filmography);
- 
+
         // Check if it's a movie or a serie to show the correct information
         if (filmography instanceof Serie serie) {
             model.addAttribute("isSeries", true);
@@ -159,7 +165,7 @@ public class FilmographyController {
             model.addAttribute("isSeries", false);
             model.addAttribute("movieDuration", movie.getMovieDuration());
         }
- 
+
         // Stars
         List<Map<String, Object>> starsList = new ArrayList<>();
         float avg = filmography.getFilmographyAverageStars();
@@ -179,10 +185,10 @@ public class FilmographyController {
             starsList.add(star);
         }
         model.addAttribute("starsList", starsList);
- 
+
         // Empty review
         model.addAttribute("review", new Review());
- 
+
         // User lists
         List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
         if (currentUser != null) {
@@ -195,24 +201,27 @@ public class FilmographyController {
             }
         }
         model.addAttribute("userLists", userListsWithCheck);
- 
+
         return "filmographyDetails";
     }
- 
-    // Updates which lists contain this filmography (add or remove based on checkboxes)
+
+    // Updates which lists contain this filmography (add or remove based on
+    // checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
     @ResponseBody
-    public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, HttpSession session) {
+    public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id,
+            @RequestParam(required = false) List<Long> listIds, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) return ResponseEntity.status(401).build();
+        if (userId == null)
+            return ResponseEntity.status(401).build();
 
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = userId != null ? accountService.findById(userId) : null;
- 
+
         for (Lists list : currentUser.getAccountLists()) {
             boolean isChecked = listIds != null && listIds.contains(list.getListsId());
             boolean alreadyContains = list.getFilmographyList().contains(filmography);
- 
+
             if (isChecked && !alreadyContains) {
                 list.getFilmographyList().add(filmography);
                 listsService.save(list);
@@ -223,22 +232,24 @@ public class FilmographyController {
         }
         return ResponseEntity.ok().build();
     }
- 
+
     // Creates a new empty list for the current user and returns it as JSON
     @PostMapping("/filmographies/{id}/lists/new")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> createFilmographyList(@PathVariable Long id, @RequestParam String newListName, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> createFilmographyList(@PathVariable Long id,
+            @RequestParam String newListName, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) return ResponseEntity.status(401).build();
+        if (userId == null)
+            return ResponseEntity.status(401).build();
 
         Account currentUser = userId != null ? accountService.findById(userId) : null;
- 
+
         Lists newList = new Lists(newListName.trim(), new ArrayList<>());
         newList.setListOwner(currentUser);
         listsService.save(newList);
         currentUser.getAccountLists().add(newList);
         accountService.save(currentUser);
- 
+
         Map<String, Object> result = new HashMap<>();
         result.put("listsId", newList.getListsId());
         result.put("listName", newList.getListName());
@@ -293,16 +304,71 @@ public class FilmographyController {
     }
 
     private String toUrlKey(Genres g) {
-    return switch (g) {
-        case ACCION -> "accion";
-        case AVENTURA -> "aventura";
-        case CIENCIA_FICCION -> "ciencia_ficcion";
-        case SUSPENSE -> "suspense";
-        case DRAMA -> "drama";
-        case MIEDO -> "miedo";
-        case COMEDIA -> "comedia";
-        case ROMANCE -> "romance";
-    };
-}
+        return switch (g) {
+            case ACCION -> "accion";
+            case AVENTURA -> "aventura";
+            case CIENCIA_FICCION -> "ciencia_ficcion";
+            case SUSPENSE -> "suspense";
+            case DRAMA -> "drama";
+            case MIEDO -> "miedo";
+            case COMEDIA -> "comedia";
+            case ROMANCE -> "romance";
+        };
+    }
 
+    @PostMapping("/searchBar")
+    public String searchBar(Model model, @RequestParam String search) {
+        String query = (search != null) ? search.trim() : "";
+
+        if (query.isEmpty()) {
+            return "redirect:/principal";
+        }
+
+        // 1. Search by title
+        List<Filmography> byTitle = filmographyService.findByTitleContaining(query);
+
+        // 2. Search by genre (normalized for Enum comparison)
+        List<Filmography> byGenre = new ArrayList<>();
+        try {
+            // Replaces spaces with underscores and removes common Spanish accents to match Enum constants
+            String enumQuery = query.toUpperCase().replace(" ", "_")
+                                    .replace("Ó", "O").replace("É", "E")
+                                    .replace("Í", "I").replace("Á", "A");
+            
+            Genres genreSearched = Genres.valueOf(enumQuery);
+            byGenre = filmographyService.findByGenre(genreSearched);
+        } catch (IllegalArgumentException e) {
+            // Not a valid genre, list remains empty
+        }
+
+        Set<Filmography> relatedFilms = new HashSet<>(); 
+        relatedFilms.addAll(filmographyService.findFilmographyRelatedByTitleOrGenre(query));
+
+        // 3. Combine results using a Set to avoid duplicates
+        Set<Filmography> uniqueResults = new HashSet<>(byTitle);
+        uniqueResults.addAll(byGenre);
+
+        // 4. Split into Movies and Series
+        List<Movie> movies = uniqueResults.stream()
+                .filter(f -> f instanceof Movie)
+                .map(f -> (Movie) f)
+                .toList();
+
+        List<Serie> series = uniqueResults.stream()
+                .filter(f -> f instanceof Serie)
+                .map(f -> (Serie) f)
+                .toList();
+
+        // 5. Check if both categories are empty
+        boolean noResults = movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty();
+
+        // 6. Add attributes to the model
+        model.addAttribute("query", query);
+        model.addAttribute("movies", movies);
+        model.addAttribute("series", series);
+        model.addAttribute("noResults", noResults);
+        model.addAttribute("related", relatedFilms);
+
+        return "searchBar"; 
+    }
 }
