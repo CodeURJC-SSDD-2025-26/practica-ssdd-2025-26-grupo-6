@@ -55,6 +55,10 @@ public class AccountController {
             return "redirect:/login";
         }
 
+        if (review.getReviewStars() == null || review.getReviewStars() <= 0) {
+            return "redirect:/filmographies/" + filmographyId + "/reviews/new?error=stars";
+        }
+
         Filmography filmography = filmographyService.findById(filmographyId);
         Account currentUser = accountService.findById(userId);
 
