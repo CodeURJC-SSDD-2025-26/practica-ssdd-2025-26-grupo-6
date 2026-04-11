@@ -14,21 +14,25 @@
                 <div class="container-login">
                     <h1 class="mb-3 text-center text-light">Iniciar Sesión</h1>
                     <form action="/login" method="post">
-                        <div class="form-floating mb-3" id="fEmail">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com"
-                                name="email" />
+                        <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}" />
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" name="username"
+                                placeholder="name@example.com" required />
                             <label for="email" class="text-dark">Correo Electrónico</label>
                         </div>
-                        <div class="form-floating mb-3" id="fPass">
-                            <input type="password" class="form-control" id="password" placeholder="Password"
-                                name="password">
-                            <label for="floatingPassword" class="text-dark">Contraseña</label>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" required>
+                            <label for="password" class="text-dark">Contraseña</label>
                         </div>
-                        {{#error}}
+
+                        {{#param.error}}
                         <div class="alert alert-danger p-2" role="alert">
-                            {{error}}
+                            Email o Contraseña incorrecta
                         </div>
-                        {{/error}}
+                        {{/param.error}}
+
                         <div class="container">
                             <div class="row my-3">
                                 <div class="col">
@@ -38,27 +42,9 @@
                                         <label class="form-check-label text-light" for="checkDefault">Recordarme</label>
                                     </div>
                                 </div>
-                                <div class="col offset-sm-3">
-                                    <a class="btn-invisible text-decoration-underline bg-none" type="button"
-                                        id="resetPass" data-bs-toggle="modal" data-bs-target="#modalRecuperar">
-                                        <h6>Me olvidé la contraseña</h6>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row my-3">
-                                <div class="col">
-                                    <a href="signUp">
-                                        <h6>Crear Cuenta</h6>
-                                    </a>
-                                </div>
-                                <div class="col offset-sm-3">
-                                    <a href="principal">
-                                        <h6> No quiero iniciar sesión</h6>
-                                    </a>
-                                </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-100 py-2" id="loginButton" type="submit">Acceder</button>
+                        <button class="btn btn-primary w-100 py-2" type="submit">Acceder</button>
                     </form>
                 </div>
             </div>
@@ -119,7 +105,7 @@
             </div>
         </div>
     </div>
-    
+
     {{>footer}}
 </body>
 

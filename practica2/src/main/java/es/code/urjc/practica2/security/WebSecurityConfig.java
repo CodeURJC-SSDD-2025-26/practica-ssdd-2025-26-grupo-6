@@ -33,31 +33,39 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-		http.authenticationProvider(authenticationProvider());
-
 		http
-				.authorizeHttpRequests(authorize -> authorize
-						// PUBLIC PAGES
-						.requestMatchers("/").permitAll()
-						.requestMatchers("/images/**").permitAll()
-						.requestMatchers("/books/**").permitAll()
-						.requestMatchers("/assets/**").permitAll() // Allow access to static resources
-						.requestMatchers("/favicon.ico").permitAll()
-						// PRIVATE PAGES
-						.requestMatchers("/newbook").hasAnyRole("USER")
-						.requestMatchers("/editbook").hasAnyRole("USER")
-						.requestMatchers("/editbook/*").hasAnyRole("USER")
-						.requestMatchers("/administrator").hasAnyRole("ADMIN"))
-				.formLogin(formLogin -> formLogin
+				.requiresChannel(channel -> channel.anyRequest().requiresSecure())
+				.authorizeHttpRequests(auth -> auth
+						// Public pages
+						.requestMatchers("/", "/css/**", "/js/**", "/images/**", "/posters/**", "/login", "/signUp",
+								"/logout", "/principal", "/lists", "/series", "/films/recent",
+								"/films/genre/**", "/series/genre/**", "/searchBar", "/filmographies/{id}",
+								"/filmographies/{id}/reviews", "/lists/{id}", "/img/**", "/aboutUs", "/cookies",
+								"/frequentlyAskedQuestions", "/legalAdvise", "/error")
+						.permitAll()
+
+						// Roles específicos
+						.requestMatchers("/administrator/**", "/movies/**", "/series/**").hasRole("ADMIN")
+
+						.requestMatchers("/profile/**", "/myReviews", "/reviews/**", "/myLists/**", "/lists/**",
+								"/filmographies/*/reviews/new",
+								"/filmographies/*/lists/update", "/filmographies/*/lists/new").hasAnyRole("USER", "ADMIN")
+
+						.anyRequest().authenticated())
+				.formLogin(form -> form
 						.loginPage("/login")
-						.failureUrl("/loginerror")
-						.defaultSuccessUrl("/")
+						.loginProcessingUrl("/login")
+						.defaultSuccessUrl("/principal", true)
+						.failureUrl("/login")
 						.permitAll())
 				.logout(logout -> logout
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/")
+						.logoutUrl("/logout") 
+						.logoutSuccessUrl("/login?logout") 
+						.invalidateHttpSession(true)
+						.deleteCookies("JSESSIONID")
 						.permitAll());
+
+		http.userDetailsService(userDetailsService);
 
 		return http.build();
 	}

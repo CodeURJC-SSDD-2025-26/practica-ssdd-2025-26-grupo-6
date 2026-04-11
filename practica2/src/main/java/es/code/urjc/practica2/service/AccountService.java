@@ -71,4 +71,8 @@ public class AccountService {
 
         accountRepository.deleteById(id);
     }
+
+    public Account findByEmail(String email) {
+        return accountRepository.findByAccountEmail(email).orElse(null);
+    }
 }

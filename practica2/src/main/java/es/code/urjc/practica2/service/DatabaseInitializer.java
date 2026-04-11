@@ -50,9 +50,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     public void run(String... args) {
 
         // Accounts
-        Account admin = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
-        Account alice = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
-        Account bob   = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
+        Account admin = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ROLE_ADMIN, passwordEncoder.encode("admin"));
+        Account alice = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.ROLE_USER, passwordEncoder.encode("alice123"));
+        Account bob   = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.ROLE_USER, passwordEncoder.encode("bob123"));
         accountRepository.saveAll(Objects.requireNonNull(List.of(admin, alice, bob)));
 
         // Directors

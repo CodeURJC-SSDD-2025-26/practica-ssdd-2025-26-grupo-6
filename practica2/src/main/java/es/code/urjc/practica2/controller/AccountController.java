@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 
 import es.code.urjc.practica2.service.ListsService;
@@ -83,7 +84,8 @@ public class AccountController {
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
+            @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 
@@ -117,7 +119,7 @@ public class AccountController {
             return "redirect:/login";
         }
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("lists", listsService.findByOwner(currentUser));
         return "myLists";
@@ -146,7 +148,6 @@ public class AccountController {
             listsService.save(newList);
         }
 
-        
         return "redirect:/myLists";
     }
 
@@ -184,23 +185,27 @@ public class AccountController {
             return "redirect:/login";
         }
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
         return "myReviews";
     }
 
     @GetMapping("/profile")
-    public String profile(Model model,  HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
+    public String profile(Model model, Principal principal) {
 
-        if(currentUser == null){
+        // Si principal es null, es que no hay sesión (Spring Security se encarga)
+        if (principal == null) {
             return "redirect:/login";
         }
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
+        // Buscamos los datos reales del usuario usando su email (que es el "name" en Principal)
+        String email = principal.getName();
+        Account currentUser = accountService.findByEmail(email);
+
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
         model.addAttribute("isAdmin", isAdmin);
-        model.addAttribute("currentUser",currentUser);
+        model.addAttribute("currentUser", currentUser);
 
         return "profile";
     }
@@ -225,7 +230,7 @@ public class AccountController {
         accountService.save(currentUser);
 
         session.setAttribute("currentUser", currentUser);
-        
+
         return "redirect:/profile";
     }
 }
