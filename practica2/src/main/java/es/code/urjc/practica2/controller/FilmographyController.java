@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -201,6 +205,21 @@ public class FilmographyController {
             }
         }
         model.addAttribute("userLists", userListsWithCheck);
+
+        //Chart
+        List<Review> reviews = filmography.getFilmographyReviews();
+
+        float[] starValues = {0f, 0.5f , 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f};
+        long[] counts = new long[starValues.length];
+
+        for(int i = 0; i < starValues.length; i++){
+            final float star= starValues[i];
+            counts[i] = reviews.stream().filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) ==0 ).count();
+        }
+
+        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(","))+ "]";
+
+        model.addAttribute("chartData", chartData);
 
         return "filmographyDetails";
     }

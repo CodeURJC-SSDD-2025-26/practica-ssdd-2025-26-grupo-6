@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,6 +50,15 @@ public class AdministratorController {
         model.addAttribute("systemLists", listsService.findAllSistemLists());
         model.addAttribute("usersLists", listsService.findAllUserList());
 
+
+        //Chart
+        Map <String, Long> genreCount = filmographyService.countByGenre();
+        String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"" ).collect(Collectors.joining(","))+ "]";
+        String data = "[" + genreCount.values().stream().map(String::valueOf).collect(Collectors.joining(","))+ "]";
+
+
+        model.addAttribute("chartLabels",labels);
+        model.addAttribute("chartData",data);
 
         return "administrator";
     }
@@ -241,7 +251,7 @@ public class AdministratorController {
     }
 
 
-    @PostMapping("/administrator/lists/{id}/delete")
+    @PostMapping("/administrator/userLists/{id}/delete")
     public String deleteUserLists(@PathVariable Long id) {
         listsService.delete(id);
         

@@ -4,11 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('myPie');
     if (ctx) {
 
+        const chartLabels = JSON.parse(ctx.dataset.labels);
+        const chartData = JSON.parse(ctx.dataset.values);
+
         /* Chart Data */
         const data = {
-            labels: ['Terrror', 'Romance', 'Aventuras', 'Ciencia ficcón'],
+            labels: chartLabels,
             datasets: [{
-                data: [10, 20, 30, 25],
+                data: chartData,
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#589245']
             }]
         };

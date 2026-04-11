@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import es.code.urjc.practica2.service.ListsService;
 
 import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -201,6 +203,21 @@ public class AccountController {
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("currentUser",currentUser);
+
+        //Chart
+        List<Review> reviews = reviewService.findByAuthor(currentUser);
+
+        float[] starValues = {0f, 0.5f , 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f};
+        long[] counts = new long[starValues.length];
+
+        for(int i = 0; i<starValues.length; i++){
+            final float star= starValues[i];
+            counts[i] = reviews.stream().filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) ==0 ).count();
+        }
+
+        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(","))+ "]";
+
+        model.addAttribute("chartData", chartData);
 
         return "profile";
     }

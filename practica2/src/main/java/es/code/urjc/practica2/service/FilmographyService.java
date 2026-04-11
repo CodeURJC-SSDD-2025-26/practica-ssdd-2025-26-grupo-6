@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
+import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.FilmographyRepository;
@@ -166,5 +170,24 @@ public class FilmographyService {
             listsRepository.save(list);
         });
         filmographyRepository.deleteById(id);
+    }
+    public Map<String,Long> countByGenre(){
+        Map<String,Long> result = new LinkedHashMap<>();
+
+        List<Filmography> all = filmographyRepository.findAll();
+
+        for(Filmography f : all){
+            for (Genre g : f.getFilmographyGenres()){
+                String name = g.getGenres().name();
+                if(result.containsKey(name)){
+                    result.put(name, result.get(name) +1);
+                }else{
+                    result.put(name, 1L);
+                }
+            }
+
+        }
+        return result;
+
     }
 }
