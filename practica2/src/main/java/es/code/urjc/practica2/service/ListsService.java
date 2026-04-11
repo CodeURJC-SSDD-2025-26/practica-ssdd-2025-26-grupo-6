@@ -1,7 +1,6 @@
 package es.code.urjc.practica2.service;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 import java.util.Map;
@@ -150,9 +149,9 @@ public class ListsService {
     }
 
     public List<Lists> findAllSistemLists(){
-        return listsRepository.findAll().stream().filter(l -> l.getListOwner() == null).toList();
+        return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() == Account.Role.ADMIN).toList();
     }
     public List<Lists> findAllUserList(){
-       return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null).toList();
+       return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN).toList();
     }
 }

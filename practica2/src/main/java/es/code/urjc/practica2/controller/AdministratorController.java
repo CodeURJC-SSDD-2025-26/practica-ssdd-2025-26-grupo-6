@@ -233,6 +233,13 @@ public class AdministratorController {
         }
         return allPlatforms;
     }
+    @PostMapping("/administrator/systemLists/{id}/delete")
+    public String deleteSystemList(@PathVariable Long id) {
+        listsService.delete(id);
+        
+        return "redirect:/administrator";
+    }
+
 
     @PostMapping("/administrator/lists/{id}/delete")
     public String deleteUserLists(@PathVariable Long id) {
