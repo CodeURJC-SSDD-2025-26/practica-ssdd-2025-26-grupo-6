@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,24 +15,69 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.service.FilmographyService;
+import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.DirectorService;
 import es.code.urjc.practica2.service.GenreService;
+import es.code.urjc.practica2.service.ListsService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class AdministratorController {
     @Autowired private FilmographyService filmographyService;
     @Autowired private DirectorService directorService;
     @Autowired private GenreService genreService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
+        model.addAttribute("users", accountService.findAll());
+        model.addAttribute("movies", filmographyService.findAllMovies());
+        model.addAttribute("series", filmographyService.findAllSeries());
+        model.addAttribute("systemLists", listsService.findAllSistemLists());
+        model.addAttribute("usersLists", listsService.findAllUserList());
+
+
         return "administrator";
     }
+
+
+    @GetMapping("/administrator/profile/{id}/editProfile")
+    public String editUserFromAdmin(@PathVariable Long id,Model model) {
+        Account user = accountService.findById(id);
+        model.addAttribute("currentUser",user);
+        model.addAttribute("isAdmin",true);
+        model.addAttribute("editMode",true);
+        model.addAttribute("fromAdmin",true);
+
+        return "profile";
+    }
+
+    @PostMapping("/administrator/profile/{id}/editProfile")
+    public String updateUserFromAdmin(@PathVariable Long id, @RequestParam String accountName,@RequestParam String accountEmail,@RequestParam LocalDate accountBirthDate){
+        Account user = accountService.findById(id);
+        user.setAccountName(accountName);
+        user.setAccountEmail(accountEmail);
+        user.setAccountBirthDate(accountBirthDate);
+        accountService.save(user);
+        
+        return"redirect:/administrator";
+    }
+    
+    @PostMapping("/administrator/account/{id}/delete")
+    public String deleteUsers(@PathVariable Long id) {
+       
+        accountService.delete(id);
+        return "redirect:/administrator";
+    }
+    
 
     // INCLUDING/MODIFYING FILMOGRAPHIES
     @GetMapping("/movies/new")
@@ -71,6 +117,12 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
+    @PostMapping("/movies/{id}/delete")
+    public String deleteMovie(@PathVariable Long id){
+        filmographyService.deleteMovie(id);
+        return "redirect:/administrator";
+    }
+
     @GetMapping("/series/new")
     public String newSeries(Model model) {
         addEmptyFilmographyAttributes(model);
@@ -105,6 +157,11 @@ public class AdministratorController {
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.updateSeries(id, serie);
+        return "redirect:/administrator";
+    }
+    @PostMapping("/series/{id}/delete")
+    public String deleteSerie(@PathVariable Long id){
+        filmographyService.deleteMovie(id);
         return "redirect:/administrator";
     }
 
@@ -157,4 +214,12 @@ public class AdministratorController {
         }
         return allPlatforms;
     }
+
+    @PostMapping("/administrator/lists/{id}/delete")
+    public String deleteUserLists(@PathVariable Long id) {
+        listsService.delete(id);
+        
+        return "redirect:/administrator";
+    }
+    
 }

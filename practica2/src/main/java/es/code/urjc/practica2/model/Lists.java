@@ -70,4 +70,7 @@ public class Lists {
     public void setListOwner(Account listOwner) {
         this.listOwner = listOwner;
     }
+    public int getListSize(){
+        return filmographyList !=null ?  filmographyList.size() : 0; 
+    }
 }

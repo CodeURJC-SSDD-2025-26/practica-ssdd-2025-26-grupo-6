@@ -47,6 +47,39 @@
             <div class="col-12 col-lg-7">
                 <div class="card p-4 generic-card rounded-4 border-0 mb-5">
                     <h1 class="h3 mb-4 text-center text-white">Mi Perfil</h1>
+
+                    {{#fromAdmin}}
+                    <form action="/administrator/profile/{{currentUser.accountId}}/editProfile" method="post">
+                        <div class="text-center mb-4">
+                            <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
+                                data-bs-target="#modalAvatar">
+                                <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle"
+                                    width="175" height="175">
+                            </button>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Usuario</label>
+                            <input type="text" name="accountName" value="{{currentUser.accountName}}"
+                                class="profile-field rounded-3 py-3 px-4 mb-4 w-100 fs-5 text-center">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Correo electrónico</label>
+                            <input type="email" name="accountEmail" value="{{currentUser.accountEmail}}"
+                                class="profile-field rounded-3 py-3 px-4 mb-4 w-100 fs-5 text-center">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <label class="small text-uppercase opacity-50 mb-1">Fecha de nacimiento</label>
+                            <input type="date" name="accountBirthDate" value="{{currentUser.accountBirthDate}}"
+                                class="profile-field rounded-3 py-3 px-4 mb-4 w-100 fs-5 text-center">
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                    {{/fromAdmin}}
+
+                    {{^fromAdmin}}
                     <div class="text-center mb-4">
                         <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
                             data-bs-target="#modalAvatar">
@@ -78,6 +111,7 @@
                     <div class="mt-4">
                         <button type="submit" id="editProfileBtn" class="btn btn-primary">Editar Perfil</button>
                     </div>
+                    {{/fromAdmin}}
                 </div>
             </div>
             <div class="col-10 col-lg-5 pe-lg-5 mb-5">
@@ -106,24 +140,24 @@
                         </div>
                         <div class="row g-3 justify-content-center" id="avatarGallery">
                             <div class="col-4 text-center">
-                                <img src="images/perfilNoReg.jpg"
+                                <img src="/images/perfilNoReg.jpg"
                                     class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/perfilNoReg.jpg">
+                                    data-value="/images/perfilNoReg.jpg">
                             </div>
                             <div class="col-4 text-center">
-                                <img src="images/Palomix.jpg"
+                                <img src="/images/Palomix.jpg"
                                     class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/Palomix.jpg">
+                                    data-value="/images/Palomix.jpg">
                             </div>
                             <div class="col-4 text-center">
-                                <img src="images/filmix1.jpg"
+                                <img src="/images/filmix1.jpg"
                                     class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/filmix1.jpg">
+                                    data-value="/images/filmix1.jpg">
                             </div>
                             <div class="col-4 text-center">
-                                <img src="images/filmixGafas1.jpg"
+                                <img src="/images/filmixGafas1.jpg"
                                     class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="images/filmixGafas1.jpg">
+                                    data-value="/images/filmixGafas1.jpg">
                             </div>
                         </div>
                     </div>
@@ -142,9 +176,9 @@
             </div>
         </div>
     </div>
-    <script src="js/avatar.js"></script>
-    <script src="js/profileForms.js"></script>
-    <script src="js/userRatingBarChart.js" defer></script>
+    <script src="/js/avatar.js"></script>
+    <script src="/js/profileForms.js"></script>
+    <script src="/js/userRatingBarChart.js" defer></script>
 
 </body>
 

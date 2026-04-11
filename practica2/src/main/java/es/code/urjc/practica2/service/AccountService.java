@@ -1,16 +1,26 @@
 package es.code.urjc.practica2.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.repository.AccountRepository;
+import es.code.urjc.practica2.repository.ListsRepository;
+import es.code.urjc.practica2.repository.ReviewRepository;
 import es.code.urjc.practica2.model.Account;
 
 @Service
 public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private ListsRepository listsRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -41,5 +51,19 @@ public class AccountService {
 
     public Account findById(Long id) {
         return accountRepository.findById(id).orElse(null);
+    }
+
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    public void delete(Long id) {
+        Account user = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        reviewRepository.deleteAll(reviewRepository.findByReviewAuthor(user));
+
+        listsRepository.deleteAll(listsRepository.findByListOwner(user));
+
+        accountRepository.deleteById(id);
     }
 }
