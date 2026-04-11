@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Declare Variable */
     const btnEditProfile = document.getElementById('editProfileBtn');
+
+    if(!btnEditProfile) return;
+
     const usernameElement = document.getElementById('username');
     const emailElement = document.getElementById('email');
     const yearBirthElement = document.getElementById('yearBirth');

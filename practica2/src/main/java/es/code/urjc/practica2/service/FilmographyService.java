@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.service;
 
+import es.code.urjc.practica2.repository.ListsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -16,8 +17,13 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 
 @Service
 public class FilmographyService {
+    private final ListsRepository listsRepository;
     @Autowired
     private FilmographyRepository filmographyRepository;
+
+    FilmographyService(ListsRepository listsRepository) {
+        this.listsRepository = listsRepository;
+    }
 
     public Filmography findById(Long id) {
         return filmographyRepository.findById(Objects.requireNonNull(id)).orElse(null);
@@ -140,5 +146,25 @@ public class FilmographyService {
 
     public List<Filmography> findFilmographyRelatedByTitleOrGenre(String query){
         return filmographyRepository.findFilmographyRelatedByTitleOrGenre(query);
+    }
+    public List<Movie> findAllMovies(){
+        return filmographyRepository.findAll().stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
+    }
+    public List<Serie> findAllSeries(){
+        return filmographyRepository.findAll().stream().filter(f -> f instanceof Serie).map(f -> (Serie) f).toList();
+    }
+    public void deleteMovie(Long id){
+        listsRepository.findAll().forEach(list -> {
+            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
+            listsRepository.save(list);
+        });
+        filmographyRepository.deleteById(id);
+    }
+    public void deleteSerie(Long id){
+        listsRepository.findAll().forEach(list -> {
+            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
+            listsRepository.save(list);
+        });
+        filmographyRepository.deleteById(id);
     }
 }

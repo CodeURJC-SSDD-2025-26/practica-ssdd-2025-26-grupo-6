@@ -86,4 +86,7 @@ public class Lists {
     public String getListImageUrl() {
         return listImage != null ? "/img/" + listImage.getImageId() : null;
     }
+    public int getListSize(){
+        return filmographyList !=null ?  filmographyList.size() : 0; 
+    }
 }
