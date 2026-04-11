@@ -8,7 +8,6 @@ import es.code.urjc.practica2.model.Account;
 
 
 public interface AccountRepository extends JpaRepository<Account, Long>{
-
     Optional<Account> findByAccountEmail(String accountEmail);
 
     Optional<Account> findByAccountName(String accountName);
