@@ -44,13 +44,28 @@ public class AdministratorController {
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
-        model.addAttribute("users", accountService.findAll());
-        model.addAttribute("movies", filmographyService.findAllMovies());
-        model.addAttribute("series", filmographyService.findAllSeries());
-        model.addAttribute("systemLists", listsService.findAllSistemLists());
-        model.addAttribute("usersLists", listsService.findAllUserList());
 
+        List<Account> allUsers = accountService.findAll();
+        model.addAttribute("usersPreview", allUsers.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("users", allUsers);
 
+        List<Movie> allMovies = filmographyService.findAllMovies();
+        model.addAttribute("moviesPreview", allMovies.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("movies", allMovies);
+
+        List<Serie> allSeries = filmographyService.findAllSeries();
+        model.addAttribute("seriesPreview", allSeries.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("series", allSeries);
+       
+        var allSystemLists = listsService.findAllSistemLists();
+        model.addAttribute("systemListsPreview", allSystemLists.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("systemLists", allSystemLists);
+
+        var allUsersLists = listsService.findAllUserList();
+        model.addAttribute("usersListsPreview", allUsersLists.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("usersLists", allUsersLists);
+
+        
         //Chart
         Map <String, Long> genreCount = filmographyService.countByGenre();
         String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"" ).collect(Collectors.joining(","))+ "]";
