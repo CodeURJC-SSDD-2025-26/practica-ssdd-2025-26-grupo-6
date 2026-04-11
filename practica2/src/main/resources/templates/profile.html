@@ -1,12 +1,13 @@
 {{>head}}
 
 <body class="primary principal pageProfile">
-    
+
     {{>header}}
 
     <!-- Page Content -->
     <div class="content">
         <!-- Profile Buttons -->
+        {{^fromAdmin}}
         <div class="d-flex justify-content-start gap-3 p-3">
             {{#isAdmin}}
             <a href="administrator" class="profile-btn text-decoration-none">
@@ -20,6 +21,7 @@
                 Mis Reseñas
             </a>
         </div>
+        {{/fromAdmin}}
 
         <!-- Profile Information -->
         <div class="row align-items-center justify-content-center">
@@ -30,11 +32,8 @@
                     {{#fromAdmin}}
                     <form action="/administrator/profile/{{currentUser.accountId}}/editProfile" method="post">
                         <div class="text-center mb-4">
-                            <button type="button" class="btn p-0 border-0" data-bs-toggle="modal"
-                                data-bs-target="#modalAvatar">
-                                <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle"
-                                    width="175" height="175">
-                            </button>
+                            <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle"
+                                width="175" height="175">
                         </div>
 
                         <div class="mb-3 text-center">
@@ -99,7 +98,7 @@
             </div>
         </div>
     </div>
-    
+
     {{>footer}}
 
     <!-- Avatar Modal -->

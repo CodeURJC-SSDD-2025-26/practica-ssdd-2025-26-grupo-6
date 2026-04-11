@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,12 +25,14 @@ import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
+import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.DirectorService;
 import es.code.urjc.practica2.service.GenreService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.ListsService;
+import es.code.urjc.practica2.service.ReviewService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -41,6 +44,7 @@ public class AdministratorController {
     @Autowired private ImageService imageService;
     @Autowired private AccountService accountService;
     @Autowired private ListsService listsService;
+    @Autowired private ReviewService reviewService;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -65,7 +69,7 @@ public class AdministratorController {
         model.addAttribute("usersListsPreview", allUsersLists.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("usersLists", allUsersLists);
 
-        
+
         //Chart
         Map <String, Long> genreCount = filmographyService.countByGenre();
         String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"" ).collect(Collectors.joining(","))+ "]";
@@ -86,6 +90,22 @@ public class AdministratorController {
         model.addAttribute("isAdmin",true);
         model.addAttribute("editMode",true);
         model.addAttribute("fromAdmin",true);
+
+        //Chart
+        List<Review> reviews = reviewService.findByAuthor(user);
+
+        float[] starValues = {0f, 0.5f , 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f};
+        long[] counts = new long[starValues.length];
+
+        for(int i = 0; i < starValues.length; i++){
+            final float star= starValues[i];
+            counts[i] = reviews.stream().filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) ==0 ).count();
+        }
+
+        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(","))+ "]";
+
+        model.addAttribute("chartData", chartData);
+
 
         return "profile";
     }

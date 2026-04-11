@@ -24,7 +24,7 @@ public class Account {
     private String accountEmail;
     private Role accountRole;
     private String accountPassword;
-    private String accountAvatar = "images/perfilNoReg.jpg";
+    private String accountAvatar = "/images/perfilNoReg.jpg";
 
     public enum Role {
         USER,
