@@ -1,5 +1,7 @@
 package es.code.urjc.practica2.controller;
 
+import java.security.Principal;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
-import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
@@ -33,17 +34,12 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
 
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class FilmographyController {
-
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
 
     @GetMapping("/principal")
     public String principal(Model model) {
@@ -153,10 +149,12 @@ public class FilmographyController {
     }
 
     @GetMapping("/filmographies/{id}")
-    public String detail(@PathVariable Long id, Model model, HttpSession session) {
+    public String detail(@PathVariable Long id, Model model, Principal principal) {
         Filmography filmography = filmographyService.findById(id);
-        Long userId = (Long) session.getAttribute("userId");
-        Account currentUser = userId != null ? accountService.findById(userId) : null;
+        Account currentUser = null;
+        if (principal != null){
+            currentUser = accountService.findByEmail(principal.getName());
+        }
 
         model.addAttribute("filmography", filmography);
 
@@ -224,18 +222,16 @@ public class FilmographyController {
         return "filmographyDetails";
     }
 
-    // Updates which lists contain this filmography (add or remove based on
-    // checkboxes)
+    // Updates which lists contain this filmography (add or remove based on checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
     @ResponseBody
     public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id,
-            @RequestParam(required = false) List<Long> listIds, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null)
+            @RequestParam(required = false) List<Long> listIds, Principal principal) {
+        if (principal == null)
             return ResponseEntity.status(401).build();
 
         Filmography filmography = filmographyService.findById(id);
-        Account currentUser = userId != null ? accountService.findById(userId) : null;
+        Account currentUser = accountService.findByEmail(principal.getName());
 
         for (Lists list : currentUser.getAccountLists()) {
             boolean isChecked = listIds != null && listIds.contains(list.getListsId());
@@ -252,16 +248,14 @@ public class FilmographyController {
         return ResponseEntity.ok().build();
     }
 
-    // Creates a new empty list for the current user and returns it as JSON
     @PostMapping("/filmographies/{id}/lists/new")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createFilmographyList(@PathVariable Long id,
-            @RequestParam String newListName, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null)
+            @RequestParam String newListName, Principal principal) {
+        if (principal == null)
             return ResponseEntity.status(401).build();
 
-        Account currentUser = userId != null ? accountService.findById(userId) : null;
+        Account currentUser = accountService.findByEmail(principal.getName());
 
         Lists newList = new Lists(newListName.trim(), new ArrayList<>());
         newList.setListOwner(currentUser);

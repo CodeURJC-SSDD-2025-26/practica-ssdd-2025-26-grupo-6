@@ -33,7 +33,6 @@ import es.code.urjc.practica2.service.GenreService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller

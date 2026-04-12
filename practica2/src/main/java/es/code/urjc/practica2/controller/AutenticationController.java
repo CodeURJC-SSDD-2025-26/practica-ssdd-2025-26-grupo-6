@@ -14,81 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.EmailService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class AutenticationController {
-
-    @Autowired
-    AccountService accountService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    EmailService emailService;
-
-    // LOGIN METHODS
+    @Autowired AccountService accountService;
+    @Autowired PasswordEncoder passwordEncoder;
+    @Autowired EmailService emailService;
+    
     @GetMapping("/login")
-    public String login(Model model, HttpServletRequest request) {
-        // Search for userEmail cookie
-        String rememberedEmail = "";
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if ("userEmail".equals(cookie.getName())) {
-                    rememberedEmail = cookie.getValue();
-                }
-            }
-        }
-        model.addAttribute("rememberedEmail", rememberedEmail);
+    public String login(Model model) {
         return "login";
-    }
-
-    @PostMapping("/login")
-    public String postLogin(@RequestParam String email,
-            @RequestParam String password,
-            @RequestParam(required = false) String remember,
-            HttpSession session,
-            HttpServletResponse response,
-            Model model) {
-
-        Account account = accountService.loginAccount(email, password);
-
-        if (account != null) {
-            session.setAttribute("user", account);
-            session.setAttribute("userId", account.getAccountId());
-            session.setAttribute("isAdmin", account.getAccountRole() == Account.Role.ADMIN);
-
-            session.setMaxInactiveInterval(60 * 60);
-
-            Cookie cookie = new Cookie("userEmail", email);
-            cookie.setPath("/");
-            if (remember != null) {
-                cookie.setMaxAge(7 * 24 * 60 * 60);
-            } else {
-                cookie.setMaxAge(0);
-            }
-            response.addCookie(cookie);
-
-            return "redirect:/principal";
-        }
-
-        model.addAttribute("error", "Email o Contraseña incorrecta");
-        return "login";
-    }
-
-    // LOGOUT
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect: /login";
     }
 
     // SIGN UP METHODS
-
     @GetMapping("/signUp")
     public String signUp(Model model) {
         return "signUp";

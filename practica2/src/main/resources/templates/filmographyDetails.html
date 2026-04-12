@@ -167,6 +167,7 @@
                 </div>
                 <hr>
                 <form action="/filmographies/{{filmography.filmographyId}}/lists/add" method="post" id="addToListForm">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     <input type="hidden" name="filmographyId" value="{{filmography.filmographyId}}">
                     <div class="modal-body">
                         <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>

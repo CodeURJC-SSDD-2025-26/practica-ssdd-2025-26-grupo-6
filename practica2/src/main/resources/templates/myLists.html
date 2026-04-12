@@ -107,6 +107,7 @@
     <div class="modal fade" id="newListModal" tabindex="-1" aria-labelledby="newListLabel">
         <div class="modal-dialog">
             <form action="/myLists/new" method="post" class="modal-content">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="newListLabel">Nueva Lista</h1>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"

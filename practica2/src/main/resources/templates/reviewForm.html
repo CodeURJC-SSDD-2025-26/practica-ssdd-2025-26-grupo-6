@@ -18,6 +18,7 @@
                     {{/review.reviewId}}
                     {{^review.reviewId}}
                     <form action="/filmographies/{{filmography.filmographyId}}/reviews/new" method="post" class="form-review">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     {{/review.reviewId}}
                         <!-- Stars -->
                         <div class="d-flex flex-column gap-1 mb-3">

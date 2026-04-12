@@ -11,24 +11,19 @@ import java.util.Objects;
 import es.code.urjc.practica2.repository.ListsRepository;
 import es.code.urjc.practica2.repository.ReviewRepository;
 import es.code.urjc.practica2.model.Account;
+import es.code.urjc.practica2.model.Lists;
+import es.code.urjc.practica2.model.Review;
 
 @Service
 public class AccountService {
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private ReviewRepository reviewRepository;
-
-    @Autowired
-    private ListsRepository listsRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @Autowired private AccountRepository accountRepository;
+    @Autowired private ReviewRepository reviewRepository;
+    @Autowired private ListsRepository listsRepository;
+    @Autowired private PasswordEncoder passwordEncoder;
 
     public Account loginAccount(String email, String password) {
         // 1. Search for the account by email
-        Account account = accountRepository.findByAccountEmail(email).orElse(null);
+        Account account = findByEmail(email);
 
         // 2. Compare the provided password with the stored hashed password
         if (account != null && passwordEncoder.matches(password, account.getAccountPassword())) {
@@ -65,10 +60,20 @@ public class AccountService {
     public void delete(Long id) {
         Account user = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        reviewRepository.deleteAll(reviewRepository.findByReviewAuthor(user));
+        List<Review> reviews = reviewRepository.findByReviewAuthor(user);
+        if (reviews != null) {
+            reviewRepository.deleteAll(reviews);
+        }
 
-        listsRepository.deleteAll(listsRepository.findByListOwner(user));
+        List<Lists> lists = listsRepository.findByListOwner(user);
+        if (lists != null) {
+            listsRepository.deleteAll(lists);
+        }
 
         accountRepository.deleteById(id);
+    }
+
+    public Account findByEmail(String email) {
+        return accountRepository.findByAccountEmail(email).orElse(null);
     }
 }
