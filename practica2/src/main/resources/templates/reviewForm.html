@@ -15,42 +15,46 @@
 
                     {{#review.reviewId}}
                     <form action="/reviews/{{review.reviewId}}/edit" method="post" class="form-review">
-                    {{/review.reviewId}}
-                    {{^review.reviewId}}
-                    <form action="/filmographies/{{filmography.filmographyId}}/reviews/new" method="post" class="form-review">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                    {{/review.reviewId}}
-                        <!-- Stars -->
-                        <div class="d-flex flex-column gap-1 mb-3">
-                            <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
-                            <div class="d-flex mt-0" id="starsContainer">
-                                <i class="bi bi-star star" data-value="1"></i>
-                                <i class="bi bi-star star" data-value="2"></i>
-                                <i class="bi bi-star star" data-value="3"></i>
-                                <i class="bi bi-star star" data-value="4"></i>
-                                <i class="bi bi-star star" data-value="5"></i>
-                                
-                                <input type="hidden" id="ratingInput" name="reviewStars" value="{{#review.reviewStars}}{{review.reviewStars}}{{/review.reviewStars}}{{^review.reviewStars}}0{{/review.reviewStars}}">
-                            </div>
-                        </div>
-                        <!-- Review -->
-                        <div class="d-flex flex-column gap-2 mb-4">
-                            <textarea name="reviewDescription" class="form-control bg-white text-dark" rows="4" placeholder="Escribe tu reseña aquí (opcional)...">{{review.reviewDescription}}</textarea>
-                        </div>
+                        {{/review.reviewId}}
+                        {{^review.reviewId}}
+                        <form action="/filmographies/{{filmography.filmographyId}}/reviews/new" method="post"
+                            class="form-review">
+                            {{/review.reviewId}}
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                            <!-- Stars -->
+                            <div class="d-flex flex-column gap-1 mb-3">
+                                <label class="fw-bold text-white fs-6 mb-0">Valoración:</label>
+                                <div class="d-flex mt-0" id="starsContainer">
+                                    <i class="bi bi-star star" data-value="1"></i>
+                                    <i class="bi bi-star star" data-value="2"></i>
+                                    <i class="bi bi-star star" data-value="3"></i>
+                                    <i class="bi bi-star star" data-value="4"></i>
+                                    <i class="bi bi-star star" data-value="5"></i>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary p-2 w-50">
-                                {{#review.reviewId}}Actualizar reseña{{/review.reviewId}}
-                                {{^review.reviewId}}Añadir reseña{{/review.reviewId}}
-                            </button>
-                            <a href="/filmographies/{{filmography.filmographyId}}" class="btn btn-danger p-2 w-50 d-flex align-items-center justify-content-center"><strong>Cancelar</strong></a>
-                        </div>
-                    </form>
+                                    <input type="hidden" id="ratingInput" name="reviewStars"
+                                        value="{{#review.reviewStars}}{{review.reviewStars}}{{/review.reviewStars}}{{^review.reviewStars}}0{{/review.reviewStars}}">
+                                </div>
+                            </div>
+                            <!-- Review -->
+                            <div class="d-flex flex-column gap-2 mb-4">
+                                <textarea name="reviewDescription" class="form-control bg-white text-dark" rows="4"
+                                    placeholder="Escribe tu reseña aquí (opcional)...">{{review.reviewDescription}}</textarea>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary p-2 w-50">
+                                    {{#review.reviewId}}Actualizar reseña{{/review.reviewId}}
+                                    {{^review.reviewId}}Añadir reseña{{/review.reviewId}}
+                                </button>
+                                <a href="/filmographies/{{filmography.filmographyId}}"
+                                    class="btn btn-danger p-2 w-50 d-flex align-items-center justify-content-center"><strong>Cancelar</strong></a>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
     </div>
-    
+
     {{>footer}}
 
     <!-- Scripts -->
