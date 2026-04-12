@@ -227,7 +227,11 @@ public class AccountController {
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
-        model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
+        if (isAdmin) {
+            model.addAttribute("reviews", reviewService.findAll());
+        } else {
+            model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
+        }
         return "myReviews";
     }
 

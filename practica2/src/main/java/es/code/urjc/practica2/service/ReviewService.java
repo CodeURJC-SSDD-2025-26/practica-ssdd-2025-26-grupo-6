@@ -59,4 +59,8 @@ public class ReviewService {
     public List<Review> findByAuthor(Account author) {
         return reviewRepository.findByReviewAuthor(author);
     }
+
+    public List<Review> findAll(){
+        return reviewRepository.findAll();
+    }
 }
