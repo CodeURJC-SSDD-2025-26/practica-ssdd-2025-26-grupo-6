@@ -300,7 +300,7 @@ public class FilmographyController {
         return "filmslists"; // Usaremos un HTML genérico
     }
 
-    @PostMapping("/searchBar")
+    @GetMapping("/searchBar")
     public String searchBar(Model model, @RequestParam String search) {
         String query = (search != null) ? search.trim() : "";
 
