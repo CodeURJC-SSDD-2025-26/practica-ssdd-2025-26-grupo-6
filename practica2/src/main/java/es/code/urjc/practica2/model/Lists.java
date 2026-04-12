@@ -21,9 +21,6 @@ public class Lists {
 
     private String listName;
 
-    @OneToOne
-    private Image listImage;
-
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account listOwner;
@@ -75,17 +72,6 @@ public class Lists {
         this.listOwner = listOwner;
     }
 
-    public Image getListImage() { 
-        return listImage; 
-    }
-
-    public void setListImage(Image listImage) {
-        this.listImage = listImage;
-    }
-
-    public String getListImageUrl() {
-        return listImage != null ? "/img/" + listImage.getImageId() : null;
-    }
     public int getListSize(){
         return filmographyList !=null ?  filmographyList.size() : 0; 
     }

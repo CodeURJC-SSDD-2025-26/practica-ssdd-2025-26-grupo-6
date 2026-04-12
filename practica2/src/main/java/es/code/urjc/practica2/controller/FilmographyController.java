@@ -300,35 +300,6 @@ public class FilmographyController {
         return "filmslists"; // Usaremos un HTML genérico
     }
 
-    @GetMapping("/films/genre/{genre}")
-    public String filmsByGenre(@PathVariable String genre, Model model) {
-        Genres g = Genres.valueOf(genre.toUpperCase());
-        model.addAttribute("filmographyList", filmographyService.getFilmsByGenre(genre));
-        model.addAttribute("listName", "Películas de " + formatGenre(g));
-        return "filmslists";
-    }
-
-    @GetMapping("/series/genre/{genre}")
-    public String seriesByGenre(@PathVariable String genre, Model model) {
-        Genres g = Genres.valueOf(genre.toUpperCase());
-        model.addAttribute("listName", "Series de " + formatGenre(g));
-        model.addAttribute("filmographyList", filmographyService.findSeriesByGenre(g));
-        return "filmslists";
-    }
-
-    private String toUrlKey(Genres g) {
-        return switch (g) {
-            case ACCION -> "accion";
-            case AVENTURA -> "aventura";
-            case CIENCIA_FICCION -> "ciencia_ficcion";
-            case SUSPENSE -> "suspense";
-            case DRAMA -> "drama";
-            case MIEDO -> "miedo";
-            case COMEDIA -> "comedia";
-            case ROMANCE -> "romance";
-        };
-    }
-
     @PostMapping("/searchBar")
     public String searchBar(Model model, @RequestParam String search) {
         String query = (search != null) ? search.trim() : "";
