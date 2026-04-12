@@ -6,7 +6,11 @@ import java.time.LocalDate;
 import es.code.urjc.practica2.service.ListsService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +39,6 @@ public class AccountController {
     private ReviewService reviewService;
     @Autowired
     private AccountService accountService;
-
-    AccountController(ListsService listsService) {
-        this.listsService = listsService;
-    }
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model) {
@@ -150,15 +150,54 @@ public class AccountController {
         return "redirect:/myLists";
     }
 
+    @GetMapping("/lists/{id}/edit")
+    public String editList(@PathVariable Long id, Model model, Principal principal) {
+        Lists list = listsService.findById(id);
+        Account currentUser = accountService.findByEmail(principal.getName());
+
+        // Todas las filmografías disponibles
+        List<Filmography> allFilmographies = filmographyService.findAllFilmography();
+
+        // Marcamos cuáles ya están en la lista
+        List<Map<String, Object>> filmographiesWithCheck = new ArrayList<>();
+        for (Filmography f : allFilmographies) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("filmographyId", f.getFilmographyId());
+            item.put("filmographyName", f.getFilmographyName());
+            item.put("checked", list.getFilmographyList().contains(f));
+            filmographiesWithCheck.add(item);
+        }
+
+        model.addAttribute("list", list);
+        model.addAttribute("filmographies", filmographiesWithCheck);
+        return "editList";
+    }
+
     @PostMapping("/lists/{id}/update")
-    public String updateListName(@PathVariable Long id, @RequestParam String newName, Principal principal) {
-        if (principal == null) return "redirect:/login";
-        
+    public String updateListName(@PathVariable Long id,
+            @RequestParam String newName,
+            @RequestParam(required = false) List<Long> filmographyIds,
+            Principal principal) {
+        if (principal == null)
+            return "redirect:/login";
+
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
         if (list != null && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
             list.setListName(newName);
+
+            // Actualizar el contenido de la lista
+            if (filmographyIds != null) {
+                List<Filmography> selectedFilms = filmographyIds.stream()
+                        .map(fId -> filmographyService.findById(fId))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+                list.setFilmographyList(selectedFilms);
+            } else {
+                list.getFilmographyList().clear();
+            }
+
             listsService.save(list);
         }
         return "redirect:/myLists";
@@ -166,8 +205,9 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/delete")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal == null) return "redirect:/login";
-        
+        if (principal == null)
+            return "redirect:/login";
+
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
@@ -204,18 +244,19 @@ public class AccountController {
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("currentUser", currentUser);
 
-        //Chart
+        // Chart
         List<Review> reviews = reviewService.findByAuthor(currentUser);
 
-        float[] starValues = {0f, 0.5f , 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f};
+        float[] starValues = { 0f, 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
         long[] counts = new long[starValues.length];
 
-        for(int i = 0; i<starValues.length; i++){
-            final float star= starValues[i];
-            counts[i] = reviews.stream().filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) ==0 ).count();
+        for (int i = 0; i < starValues.length; i++) {
+            final float star = starValues[i];
+            counts[i] = reviews.stream()
+                    .filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) == 0).count();
         }
 
-        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(","))+ "]";
+        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]";
 
         model.addAttribute("chartData", chartData);
 

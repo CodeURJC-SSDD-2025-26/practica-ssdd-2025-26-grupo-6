@@ -151,6 +151,11 @@ public class FilmographyService {
     public List<Filmography> findFilmographyRelatedByTitleOrGenre(String query){
         return filmographyRepository.findFilmographyRelatedByTitleOrGenre(query);
     }
+
+    public List<Filmography> findAllFilmography(){
+        return filmographyRepository.findAll();
+    }
+
     public List<Movie> findAllMovies(){
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
     }

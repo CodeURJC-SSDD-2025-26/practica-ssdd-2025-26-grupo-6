@@ -11,8 +11,6 @@ import java.util.HashSet;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,12 +32,14 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
 
-
 @Controller
 public class FilmographyController {
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private AccountService accountService;
-    @Autowired private ListsService listsService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
 
     @GetMapping("/principal")
     public String principal(Model model) {
@@ -152,7 +152,7 @@ public class FilmographyController {
     public String detail(@PathVariable Long id, Model model, Principal principal) {
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = null;
-        if (principal != null){
+        if (principal != null) {
             currentUser = accountService.findByEmail(principal.getName());
         }
 
@@ -204,25 +204,27 @@ public class FilmographyController {
         }
         model.addAttribute("userLists", userListsWithCheck);
 
-        //Chart
+        // Chart
         List<Review> reviews = filmography.getFilmographyReviews();
 
-        float[] starValues = {0f, 0.5f , 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f};
+        float[] starValues = { 0f, 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
         long[] counts = new long[starValues.length];
 
-        for(int i = 0; i < starValues.length; i++){
-            final float star= starValues[i];
-            counts[i] = reviews.stream().filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) ==0 ).count();
+        for (int i = 0; i < starValues.length; i++) {
+            final float star = starValues[i];
+            counts[i] = reviews.stream()
+                    .filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) == 0).count();
         }
 
-        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(","))+ "]";
+        String chartData = "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]";
 
         model.addAttribute("chartData", chartData);
 
         return "filmographyDetails";
     }
 
-    // Updates which lists contain this filmography (add or remove based on checkboxes)
+    // Updates which lists contain this filmography (add or remove based on
+    // checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
     @ResponseBody
     public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id,
@@ -314,18 +316,19 @@ public class FilmographyController {
         // 2. Search by genre (normalized for Enum comparison)
         List<Filmography> byGenre = new ArrayList<>();
         try {
-            // Replaces spaces with underscores and removes common Spanish accents to match Enum constants
+            // Replaces spaces with underscores and removes common Spanish accents to match
+            // Enum constants
             String enumQuery = query.toUpperCase().replace(" ", "_")
-                                    .replace("Ó", "O").replace("É", "E")
-                                    .replace("Í", "I").replace("Á", "A");
-            
+                    .replace("Ó", "O").replace("É", "E")
+                    .replace("Í", "I").replace("Á", "A");
+
             Genres genreSearched = Genres.valueOf(enumQuery);
             byGenre = filmographyService.findByGenre(genreSearched);
         } catch (IllegalArgumentException e) {
             // Not a valid genre, list remains empty
         }
 
-        Set<Filmography> relatedFilms = new HashSet<>(); 
+        Set<Filmography> relatedFilms = new HashSet<>();
         relatedFilms.addAll(filmographyService.findFilmographyRelatedByTitleOrGenre(query));
 
         // 3. Combine results using a Set to avoid duplicates
@@ -353,6 +356,19 @@ public class FilmographyController {
         model.addAttribute("noResults", noResults);
         model.addAttribute("related", relatedFilms);
 
-        return "searchBar"; 
+        return "searchBar";
+    }
+
+    @GetMapping("/api/search")
+    @ResponseBody
+    public List<Map<String, Object>> searchApi(@RequestParam String query) {
+        List<Filmography> results = filmographyService.findByTitleContaining(query);
+        return results.stream().map(f -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", f.getFilmographyId());
+            map.put("name", f.getFilmographyName());
+            map.put("type", (f instanceof Movie) ? "Película" : "Serie");
+            return map;
+        }).collect(Collectors.toList());
     }
 }
