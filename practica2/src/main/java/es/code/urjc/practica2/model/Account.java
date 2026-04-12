@@ -27,8 +27,8 @@ public class Account {
     private String accountAvatar = "images/perfilNoReg.jpg";
 
     public enum Role {
-        ROLE_USER,
-        ROLE_ADMIN
+        USER,
+        ADMIN
     }
 
     @OneToMany(mappedBy = "listOwner", cascade = CascadeType.ALL, orphanRemoval = true)

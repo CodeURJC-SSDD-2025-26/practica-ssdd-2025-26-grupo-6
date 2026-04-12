@@ -12,25 +12,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Account;
-import es.code.urjc.practica2.repository.AccountRepository;;
+import es.code.urjc.practica2.repository.AccountRepository;
 
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {
-
-	@Autowired
-	private AccountRepository accountRepository;
+	@Autowired private AccountRepository accountRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-		Account account = accountRepository.findByAccountEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Account account = accountRepository.findByAccountEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 		List<GrantedAuthority> roles = new ArrayList<>();
-		roles.add(new SimpleGrantedAuthority(account.getAccountRole().name()));
+		roles.add(new SimpleGrantedAuthority("ROLE_" + account.getAccountRole().name()));
 
-		return new org.springframework.security.core.userdetails.User(account.getAccountEmail(), 
-				account.getAccountPassword(), roles);
-
+		return new org.springframework.security.core.userdetails.User(account.getAccountEmail(), account.getAccountPassword(), roles);
 	}
 }

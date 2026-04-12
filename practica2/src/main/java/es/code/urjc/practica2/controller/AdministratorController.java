@@ -29,7 +29,6 @@ import es.code.urjc.practica2.service.DirectorService;
 import es.code.urjc.practica2.service.GenreService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.ListsService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -48,7 +47,6 @@ public class AdministratorController {
         model.addAttribute("series", filmographyService.findAllSeries());
         model.addAttribute("systemLists", listsService.findAllSistemLists());
         model.addAttribute("usersLists", listsService.findAllUserList());
-
 
         return "administrator";
     }

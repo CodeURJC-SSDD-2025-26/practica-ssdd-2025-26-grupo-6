@@ -21,7 +21,6 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.ReviewService;
 import es.code.urjc.practica2.service.AccountService;
-import jakarta.servlet.http.HttpSession;
 import es.code.urjc.practica2.service.FilmographyService;
 
 @Controller
@@ -50,18 +49,13 @@ public class AccountController {
     }
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
-    public String saveReview(@PathVariable Long filmographyId, Review review, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
+    public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
 
-        if (review.getReviewStars() == null || review.getReviewStars() <= 0) {
-            return "redirect:/filmographies/" + filmographyId + "/reviews/new?error=stars";
-        }
-
         Filmography filmography = filmographyService.findById(filmographyId);
-        Account currentUser = accountService.findById(userId);
+        Account currentUser = accountService.findByEmail(principal.getName());
 
         review.setFilmography(filmography);
         review.setReviewAuthor(currentUser);
@@ -113,24 +107,27 @@ public class AccountController {
     }
 
     @GetMapping("/myLists")
-    public String myLists(Model model, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
-        if (currentUser == null) {
+    public String myLists(Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
+        Account currentUser = accountService.findByEmail(principal.getName());
+
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("lists", listsService.findByOwner(currentUser));
         return "myLists";
     }
 
     @PostMapping("/myLists/new")
-    public String addOwnList(Model model, String listName, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
-        if (currentUser == null) {
+    public String addOwnList(Model model, String listName, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
+
+        Account currentUser = accountService.findByEmail(principal.getName());
+
         // 1. Validate if the user has a list with the same name
         List<Lists> userLists = listsService.findByOwner(currentUser);
 
@@ -152,12 +149,13 @@ public class AccountController {
     }
 
     @PostMapping("/lists/{id}/update")
-    public String updateListName(@PathVariable Long id, @RequestParam String newName, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
+    public String updateListName(@PathVariable Long id, @RequestParam String newName, Principal principal) {
+        if (principal == null) return "redirect:/login";
+        
+        Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
-        if (list != null && currentUser != null
-                && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
+        if (list != null && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
             list.setListName(newName);
             listsService.save(list);
         }
@@ -165,27 +163,27 @@ public class AccountController {
     }
 
     @PostMapping("/lists/{id}/delete")
-    public String deleteList(@PathVariable Long id, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
+    public String deleteList(@PathVariable Long id, Principal principal) {
+        if (principal == null) return "redirect:/login";
+        
+        Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
-        // Cambia esto en deleteList para que sea infalible:
-        if (list != null && currentUser != null &&
-                list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
+        if (list != null && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
             listsService.delete(list.getListsId());
         }
         return "redirect:/myLists";
     }
 
     @GetMapping("/myReviews")
-    public String myReviews(Model model, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
-
-        if (currentUser == null) {
+    public String myReviews(Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
+        Account currentUser = accountService.findByEmail(principal.getName());
+
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
         return "myReviews";
@@ -193,17 +191,14 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
-
-        // Si principal es null, es que no hay sesión (Spring Security se encarga)
         if (principal == null) {
             return "redirect:/login";
         }
 
-        // Buscamos los datos reales del usuario usando su email (que es el "name" en Principal)
         String email = principal.getName();
         Account currentUser = accountService.findByEmail(email);
 
-        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ROLE_ADMIN;
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("currentUser", currentUser);
 
@@ -211,8 +206,8 @@ public class AccountController {
     }
 
     @PostMapping("/profile/avatar")
-    public String saveAvatar(@RequestParam String avatarSrc, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
+    public String saveAvatar(@RequestParam String avatarSrc, Principal principal) {
+        Account currentUser = accountService.findByEmail(principal.getName());
 
         currentUser.setAccountAvatar(avatarSrc);
         accountService.save(currentUser);
@@ -221,15 +216,13 @@ public class AccountController {
 
     @PostMapping("/profile/edit")
     public String editProfile(@RequestParam String accountName, @RequestParam String accountEmail,
-            @RequestParam LocalDate accountBirthDate, HttpSession session) {
-        Account currentUser = (Account) session.getAttribute("user");
+            @RequestParam LocalDate accountBirthDate, Principal principal) {
+        Account currentUser = accountService.findByEmail(principal.getName());
         currentUser.setAccountName(accountName);
         currentUser.setAccountEmail(accountEmail);
         currentUser.setAccountBirthDate(accountBirthDate);
 
         accountService.save(currentUser);
-
-        session.setAttribute("currentUser", currentUser);
 
         return "redirect:/profile";
     }

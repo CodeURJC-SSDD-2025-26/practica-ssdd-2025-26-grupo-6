@@ -54,8 +54,21 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="/logout">Cerrar Sesión/ Iniciar
-                                        Sesión</a></li>
+                                {{#isLoggedIn}}
+                                <li>
+                                    <form action="/logout" method="post" class="p-0 m-0">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                        <button type="submit" class="btn btn-link text-danger dropdown-item">
+                                            Cerrar Sesión
+                                        </button>
+                                    </form>
+                                </li>
+                                {{/isLoggedIn}}
+                                {{^isLoggedIn}}
+                                <li>
+                                    <a class="dropdown-item text-danger" href="/login">Iniciar Sesión</a>
+                                </li>
+                                {{/isLoggedIn}}
                             </ul>
                         </div>
                     </div>

@@ -18,16 +18,9 @@ import es.code.urjc.practica2.service.EmailService;
 
 @Controller
 public class AutenticationController {
-
-    @Autowired
-    AccountService accountService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    EmailService emailService;
-    
+    @Autowired AccountService accountService;
+    @Autowired PasswordEncoder passwordEncoder;
+    @Autowired EmailService emailService;
     
     @GetMapping("/login")
     public String login(Model model) {
@@ -79,7 +72,7 @@ public class AutenticationController {
             return "signUp";
         }
 
-        Account.Role userRole = (role != null) ? Account.Role.ROLE_ADMIN : Account.Role.ROLE_USER;
+        Account.Role userRole = (role != null) ? Account.Role.ADMIN : Account.Role.USER;
 
         String encodedPassword = passwordEncoder.encode(password);
 
