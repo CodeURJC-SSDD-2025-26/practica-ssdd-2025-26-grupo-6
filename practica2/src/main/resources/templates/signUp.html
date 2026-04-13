@@ -10,6 +10,7 @@
             <div class="container-login">
                 <h1 class="text-center text-light pb-4">Crear Cuenta</h1>
                 <form action="/signUp" method="post">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" name="email" required />
                         <label for="email" class="text-dark">Correo Electrónico</label>

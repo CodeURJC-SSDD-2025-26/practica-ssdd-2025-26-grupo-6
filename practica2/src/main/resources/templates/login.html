@@ -41,8 +41,19 @@
                                             name="remember-me">
                                         <label class="form-check-label text-light" for="checkDefault">Recordarme</label>
                                     </div>
+                                    <a href="/principal">No quiero iniciar sesión</a>
+                                </div>
+                                <div class="col">
+                                    <div class="text-end">
+                                        <a href="/signUp">Crear cuenta</a>
+                                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                            data-bs-target="#modalRecuperar">
+                                            ¿Olvidaste tu contraseña?
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                         <button class="btn btn-primary w-100 py-2" type="submit">Acceder</button>
                     </form>
@@ -83,23 +94,51 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal" tabindex="-1" id="modalRecuperar">
+        <div class="modal fade" id="modalRecuperar" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Reiniciar Contraseña</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title text-dark">Recuperar Contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
+
                     <div class="modal-body">
-                        <p>Introduce tu correo electrónico para enviar el código de recuperación.</p>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com"
-                                required />
-                            <label for="floatingInput" class="text-dark">Correo Electrónico</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Enviar correo</button>
+                        <form action="/sendRecoveryEmail" method="post" class="border-bottom pb-3 mb-3">
+                            <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}" />
+                            <p class="small text-muted text-start">1. Introduce tu correo para recibir un código de
+                                seguridad.</p>
+                            <div class="input-group ">
+                                <input type="email" name="email" class="form-control mb-3" placeholder="tu@email.com"
+                                    required>
+                                <button class="btn btn-primary" type="submit">Enviar Código</button>
+                            </div>
+                        </form>
+
+                        <form action="/restartPassword" method="post">
+                            <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}" />
+                            <p class="small text-muted text-start">2. Una vez recibido, introduce los datos para cambiar
+                                tu clave.</p>
+
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" id="resetEmail"
+                                    placeholder="Email" required>
+                                <label for="resetEmail" class="text-dark">Email del que quieres cambiar clave</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" name="code" class="form-control" id="resetCode" placeholder="Código"
+                                    required>
+                                <label for="resetCode" class="text-dark">Código de 6 dígitos</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" name="newPassword" class="form-control" id="newPassword"
+                                    placeholder="Nueva Contraseña" required>
+                                <label for="newPassword" class="text-dark">Nueva Contraseña</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Actualizar Contraseña</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -41,7 +41,7 @@ public class WebSecurityConfig {
 								"/logout", "/principal", "/lists", "/series", "/films/recent",
 								"/films/genre/**", "/series/genre/**", "/searchBar", "/filmographies/{id}",
 								"/filmographies/{id}/reviews", "/lists/{id}", "/img/**", "/aboutUs", "/cookies",
-								"/frequentlyAskedQuestions", "/legalAdvise", "/error", "/searchBar")
+								"/frequentlyAskedQuestions", "/legalAdvise", "/error", "/searchBar","/sendRecoveryEmail", "/restartPassword")
 						.permitAll()
 
 						// Roles específicos
