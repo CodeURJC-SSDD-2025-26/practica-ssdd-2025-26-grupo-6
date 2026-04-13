@@ -20,13 +20,11 @@
                     {{#isSeries}}
                     <form action="/series/{{filmographyId}}/edit" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     {{/isSeries}}
 
                     {{^isSeries}}
                     <form action="/movies/{{filmographyId}}/edit" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     {{/isSeries}}
                     {{/filmographyId}}
 
@@ -34,15 +32,14 @@
                     {{#isSeries}}
                     <form action="/series/new" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     {{/isSeries}}
                     
                     {{^isSeries}}
                     <form action="/movies/new" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     {{/isSeries}}
                     {{/filmographyId}}
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <!-- Clikable Image -->
                          {{#filmographyImage}}
                         <div class="d-flex flex-column align-items-center mb-3">
