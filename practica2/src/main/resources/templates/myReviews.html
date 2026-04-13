@@ -42,6 +42,7 @@
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <form action="/reviews/{{reviewId}}/delete" method="post" class="d-inline">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                     <button type="submit" class="btn btn-outline-danger btn-sm"
                                         onclick="return confirm('¿Borrar reseña?')">
                                         <i class="bi bi-trash"></i>
