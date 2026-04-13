@@ -305,38 +305,37 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(aliceFavourites, aliceWatchLater, bobMustSee)));
 
-        // Systems lists
-        Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, breakingBad, pulpFiction, squidGame)));
+        // System lists for MOVIES only (owned by admin)
+        Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, pulpFiction)));
         actionList.setListOwner(admin);
 
         Lists adventureList = new Lists("Aventura", new ArrayList<>(List.of(dune, interstellar, odiseaEspacio)));
         adventureList.setListOwner(admin);
 
-        Lists sciFiList = new Lists("Ciencia Ficción", new ArrayList<>(List.of(inception, dune, westworld, interstellar, odiseaEspacio)));
+        Lists sciFiList = new Lists("Ciencia Ficción", new ArrayList<>(List.of(inception, dune, interstellar, odiseaEspacio)));
         sciFiList.setListOwner(admin);
 
-        Lists dramaList = new Lists("Drama", new ArrayList<>(List.of(dune, breakingBad, westworld, mulhollandDrive, pulpFiction, parasitos, succession, theWire, interstellar, betterCallSaul)));
+        Lists dramaList = new Lists("Drama", new ArrayList<>(List.of(dune, mulhollandDrive, pulpFiction, parasitos, interstellar)));
         dramaList.setListOwner(admin);
 
-        Lists suspenseList = new Lists("Suspense", new ArrayList<>(List.of(inception, mulhollandDrive, westworld, breakingBad, parasitos, theWire, squidGame)));
+        Lists suspenseList = new Lists("Suspense", new ArrayList<>(List.of(inception, mulhollandDrive, parasitos)));
         suspenseList.setListOwner(admin);
 
         Lists horrorList = new Lists("Miedo", new ArrayList<>(List.of(mulhollandDrive)));
         horrorList.setListOwner(admin);
 
-        Lists comedyList = new Lists("Comedia", new ArrayList<>(List.of(breakingBad, succession)));
+        Lists comedyList = new Lists("Comedia", new ArrayList<>());
         comedyList.setListOwner(admin);
 
-        Lists romanceList = new Lists("Romance", new ArrayList<>(List.of()));
+        Lists romanceList = new Lists("Romance", new ArrayList<>());
         romanceList.setListOwner(admin);
 
-        // Nueva lista de Crimen para aprovechar los nuevos directores
-        Lists crimeList = new Lists("Crimen", new ArrayList<>(List.of(pulpFiction, theWire, betterCallSaul)));
+        Lists crimeList = new Lists("Crimen", new ArrayList<>(List.of(pulpFiction)));
         crimeList.setListOwner(admin);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(actionList, adventureList, sciFiList, dramaList, suspenseList, horrorList, comedyList, romanceList, crimeList)));
 
-        // Listas de sistema específicas para Series (Propiedad del administrador)
+        // System lists for SERIES only (owned by admin)
         Lists sciFiSeriesList = new Lists("Ciencia Ficción - Series", new ArrayList<>(List.of(westworld)));
         sciFiSeriesList.setListOwner(admin);
 
@@ -352,7 +351,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         Lists comedySeriesList = new Lists("Comedia - Series", new ArrayList<>(List.of(breakingBad, succession)));
         comedySeriesList.setListOwner(admin);
 
-        listsRepository.saveAll(Objects.requireNonNull(List.of(sciFiSeriesList, dramaSeriesList, suspenseSeriesList, actionSeriesList, comedySeriesList)));
+        Lists crimeSeriesList = new Lists("Crimen - Series", new ArrayList<>(List.of(theWire, betterCallSaul)));
+        crimeSeriesList.setListOwner(admin);
+
+        listsRepository.saveAll(Objects.requireNonNull(List.of(sciFiSeriesList, dramaSeriesList, suspenseSeriesList, actionSeriesList, comedySeriesList, crimeSeriesList)));
     }
 
     public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{

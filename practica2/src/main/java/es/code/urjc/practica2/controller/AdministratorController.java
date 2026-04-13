@@ -147,6 +147,19 @@ public class AdministratorController {
         movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(movie);
+
+        // Add movie to system lists that match its genres
+        Account admin = accountService.findByName("admin");
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findByOwner(admin);
+        for (es.code.urjc.practica2.model.Lists list : systemLists) {
+            if (list.getListName().endsWith("- Series")) continue;
+            boolean matches = movie.getFilmographyGenres().stream()
+                .anyMatch(g -> formatGenre(g.getGenres()).equals(list.getListName()));
+            if (matches) {
+                list.getFilmographyList().add(movie);
+                listsService.save(list);
+            }
+        }
         return "redirect:/administrator";
     }
     
@@ -198,6 +211,20 @@ public class AdministratorController {
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(serie);
+
+        // Add serie to system lists that match its genres
+        Account admin = accountService.findByName("admin");
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findByOwner(admin);
+        for (es.code.urjc.practica2.model.Lists list : systemLists) {
+            if (!list.getListName().endsWith("- Series")) continue;
+            String listGenre = list.getListName().replace(" - Series", "");
+            boolean matches = serie.getFilmographyGenres().stream()
+                .anyMatch(g -> formatGenre(g.getGenres()).equals(listGenre));
+            if (matches) {
+                list.getFilmographyList().add(serie);
+                listsService.save(list);
+            }
+        }
         return "redirect:/administrator";
     }
 
@@ -290,6 +317,20 @@ public class AdministratorController {
         listsService.delete(id);
         
         return "redirect:/administrator";
+    }
+
+    private String formatGenre(Genre.Genres g) {
+        return switch (g) {
+            case ACCION -> "Acción";
+            case AVENTURA -> "Aventura";
+            case CIENCIA_FICCION -> "Ciencia Ficción";
+            case SUSPENSE -> "Suspense";
+            case DRAMA -> "Drama";
+            case MIEDO -> "Miedo";
+            case COMEDIA -> "Comedia";
+            case ROMANCE -> "Romance";
+            case CRIMEN -> "Crimen";
+        };
     }
     
 }
