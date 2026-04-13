@@ -121,8 +121,8 @@ public class AdministratorController {
     
     @PostMapping("/administrator/account/{id}/delete")
     public String deleteUsers(@PathVariable Long id) {
-       
         accountService.delete(id);
+        
         return "redirect:/administrator";
     }
     
