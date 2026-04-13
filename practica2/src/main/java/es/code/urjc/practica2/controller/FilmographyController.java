@@ -34,12 +34,9 @@ import es.code.urjc.practica2.service.ListsService;
 
 @Controller
 public class FilmographyController {
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
 
     @GetMapping("/principal")
     public String principal(Model model) {

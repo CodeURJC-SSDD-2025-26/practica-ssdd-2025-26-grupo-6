@@ -17,12 +17,9 @@
 
     @Controller
     public class AutenticationController {
-        @Autowired
-        AccountService accountService;
-        @Autowired
-        PasswordEncoder passwordEncoder;
-        @Autowired
-        EmailService emailService;
+        @Autowired private AccountService accountService;
+        @Autowired private PasswordEncoder passwordEncoder;
+        @Autowired private EmailService emailService;
 
         @GetMapping("/login")
         public String login(Model model, @RequestParam(value = "error", required = false) String error) {

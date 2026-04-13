@@ -31,42 +31,40 @@ import es.code.urjc.practica2.service.FilmographyService;
 
 @Controller
 public class AccountController {
-    @Autowired
-    private ListsService listsService;
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private ReviewService reviewService;
-    @Autowired
-    private AccountService accountService;
+    @Autowired private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private ReviewService reviewService;
+    @Autowired private AccountService accountService;
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
-    public String newReview(@PathVariable Long filmographyId, Model model) {
+    public String newReview(@PathVariable Long filmographyId, Model model, @RequestParam(required = false) String error) {
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
+        model.addAttribute("review", review);
         review.setReviewStars(0f);
         review.setReviewDescription("");
-        model.addAttribute("review", review);
         return "reviewForm";
     }
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
-    public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+    public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(filmographyId);
         Account currentUser = accountService.findByEmail(principal.getName());
+
+        if (review.getReviewStars() == null || review.getReviewStars() <= 0) {
+            model.addAttribute("filmography", filmographyService.findById(filmographyId));
+            model.addAttribute("review", review);
+            model.addAttribute("starsError", "Estrellas no seleccionadas.");
+            return "reviewForm";
+        }
 
         review.setFilmography(filmography);
         review.setReviewAuthor(currentUser);
         reviewService.save(review);
 
-        // Reload from DB so the review list is complete before recalculating
-        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
-        updatedFilmography.updateAverageStars();
-        filmographyService.save(updatedFilmography);
+        reloadReviewsToCalculateAverage(filmographyId);
 
         return "redirect:/filmographies/" + filmographyId;
     }
@@ -80,15 +78,11 @@ public class AccountController {
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
-            @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 
-        // Reload from DB to ensure the review list is complete
-        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
-        updatedFilmography.updateAverageStars();
-        filmographyService.save(updatedFilmography);
+        reloadReviewsToCalculateAverage(filmographyId);
 
         return "redirect:/myReviews";
     }
@@ -100,19 +94,14 @@ public class AccountController {
 
         reviewService.delete(reviewId);
 
-        // Reload after deletion so the list reflects the removed review
-        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
-        updatedFilmography.updateAverageStars();
-        filmographyService.save(updatedFilmography);
+        reloadReviewsToCalculateAverage(filmographyId);
 
         return "redirect:/myReviews";
     }
 
     @GetMapping("/myLists")
     public String myLists(Model model, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
@@ -124,9 +113,7 @@ public class AccountController {
 
     @PostMapping("/myLists/new")
     public String addOwnList(Model model, String listName, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
@@ -178,8 +165,8 @@ public class AccountController {
             @RequestParam String newName,
             @RequestParam(required = false) List<Long> filmographyIds,
             Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
+
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
@@ -205,8 +192,7 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/delete")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
@@ -219,9 +205,7 @@ public class AccountController {
 
     @GetMapping("/myReviews")
     public String myReviews(Model model, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
@@ -237,9 +221,7 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         String email = principal.getName();
         Account currentUser = accountService.findByEmail(email);
@@ -287,5 +269,11 @@ public class AccountController {
         accountService.save(currentUser);
 
         return "redirect:/profile";
+    }
+
+    private void reloadReviewsToCalculateAverage(Long filmographyId){
+        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
+        updatedFilmography.updateAverageStars();
+        filmographyService.save(updatedFilmography);
     }
 }
