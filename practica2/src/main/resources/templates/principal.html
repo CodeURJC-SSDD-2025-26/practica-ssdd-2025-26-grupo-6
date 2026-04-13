@@ -19,6 +19,9 @@
                         {{#filmographyImage}}
                         <img src="/img/{{imageId}}" alt="{{filmographyName}}">
                         {{/filmographyImage}}
+                        {{^filmographyImage}}
+                        <img src="images/posterNotAvailable.jpg" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>

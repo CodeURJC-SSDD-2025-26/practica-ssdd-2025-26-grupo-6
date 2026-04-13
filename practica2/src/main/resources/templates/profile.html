@@ -31,6 +31,7 @@
 
                     {{#fromAdmin}}
                     <form action="/administrator/profile/{{currentUser.accountId}}/editProfile" method="post">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <div class="text-center mb-4">
                             <img id="avatarProfile" src="{{currentUser.accountAvatar}}" class="rounded-circle"
                                 width="175" height="175">
@@ -142,8 +143,8 @@
                 </div>
                 <div class="modal-footer">
                     <form id="avatarForm" action="/profile/avatar" method="post">
-
                         <input type="hidden" id="avatarInput" name="avatarSrc" value="{{currentUser.accountAvatar}}">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <button type="button" class="btn btn-secondary btn-small"
                             data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" id="saveAvatar" class="btn btn-primary btn-small"

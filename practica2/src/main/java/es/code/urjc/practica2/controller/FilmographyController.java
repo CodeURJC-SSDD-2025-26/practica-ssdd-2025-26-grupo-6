@@ -34,16 +34,12 @@ import es.code.urjc.practica2.service.ListsService;
 
 @Controller
 public class FilmographyController {
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
 
     @GetMapping("/principal")
     public String principal(Model model) {
-
         model.addAttribute("newMovies", filmographyService.findTop10MoviesByYear());
 
         Account admin = accountService.findByName("admin");
@@ -70,19 +66,6 @@ public class FilmographyController {
 
         model.addAttribute("movieSections", movieSections);
         return "principal";
-    }
-
-    private String formatGenre(Genres g) {
-        return switch (g) {
-            case ACCION -> "Acción";
-            case AVENTURA -> "Aventura";
-            case CIENCIA_FICCION -> "Ciencia Ficción";
-            case SUSPENSE -> "Suspense";
-            case DRAMA -> "Drama";
-            case MIEDO -> "Miedo";
-            case COMEDIA -> "Comedia";
-            case ROMANCE -> "Romance";
-        };
     }
 
     @GetMapping("/lists")
@@ -120,7 +103,6 @@ public class FilmographyController {
 
     @GetMapping("/series")
     public String series(Model model) {
-
         Account admin = accountService.findByName("admin");
         List<Lists> systemLists = listsService.findByOwner(admin);
 
@@ -223,14 +205,10 @@ public class FilmographyController {
         return "filmographyDetails";
     }
 
-    // Updates which lists contain this filmography (add or remove based on
-    // checkboxes)
+    // Updates which lists contain this filmography (add or remove based on checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
-    @ResponseBody
-    public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id,
-            @RequestParam(required = false) List<Long> listIds, Principal principal) {
-        if (principal == null)
-            return ResponseEntity.status(401).build();
+    public String updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, Principal principal) {
+        if (principal == null) return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = accountService.findByEmail(principal.getName());
@@ -247,28 +225,7 @@ public class FilmographyController {
                 listsService.save(list);
             }
         }
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/filmographies/{id}/lists/new")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> createFilmographyList(@PathVariable Long id,
-            @RequestParam String newListName, Principal principal) {
-        if (principal == null)
-            return ResponseEntity.status(401).build();
-
-        Account currentUser = accountService.findByEmail(principal.getName());
-
-        Lists newList = new Lists(newListName.trim(), new ArrayList<>());
-        newList.setListOwner(currentUser);
-        listsService.save(newList);
-        currentUser.getAccountLists().add(newList);
-        accountService.save(currentUser);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("listsId", newList.getListsId());
-        result.put("listName", newList.getListName());
-        return ResponseEntity.ok(result);
+        return "redirect:/filmographies/" + id;
     }
 
     @GetMapping("/filmographies/{id}/reviews")

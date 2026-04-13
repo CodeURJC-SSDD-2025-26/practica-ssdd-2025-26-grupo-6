@@ -24,7 +24,8 @@ public class Genre {
         CIENCIA_FICCION,
         SUSPENSE,
         DRAMA,
-        COMEDIA
+        COMEDIA,
+        CRIMEN
     }
 
     public Genre() {} //Default constructor for JPA

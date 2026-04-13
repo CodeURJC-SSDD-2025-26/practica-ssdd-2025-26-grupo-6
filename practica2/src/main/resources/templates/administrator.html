@@ -56,6 +56,7 @@
                                 </td>
                                 <td class="text-center">
                                     <form action="/administrator/account/{{accountId}}/delete" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
@@ -117,6 +118,7 @@
                                 </td>
                                 <td class="text-center">
                                     <form action="/movies/{{filmographyId}}/delete" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
@@ -184,6 +186,7 @@
                                 </td>
                                 <td class="text-center">
                                     <form action="/series/{{filmographyId}}/delete" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
@@ -242,6 +245,7 @@
                                 </td>
                                 <td class="text-center">
                                     <form action="administrator/systemLists/{{listsId}}/delete" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
@@ -299,6 +303,7 @@
                                 </td>
                                 <td class="text-center">
                                     <form action="/administrator/userLists/{{listsId}}/delete" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
@@ -375,6 +380,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="/administrator/account/{{accountId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                                 <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                         class="bi bi-trash3 fs-5 text-danger"></i></button>
                                             </form>
@@ -446,6 +452,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="/movies/{{filmographyId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                                 <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                         class="bi bi-trash3 fs-5 text-danger"></i></button>
                                             </form>
@@ -517,6 +524,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="/series/{{filmographyId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                                 <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                         class="bi bi-trash3 fs-5 text-danger"></i></button>
                                             </form>
@@ -582,6 +590,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="administrator/systemLists/{{listsId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                                 <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                         class="bi bi-trash3 fs-5 text-danger"></i></button>
                                             </form>
@@ -649,6 +658,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="/administrator/userLists/{{listsId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                                 <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                         class="bi bi-trash3 fs-5 text-danger"></i></button>
                                             </form>

@@ -1,17 +1,23 @@
 {{>head}}
 
-<div class="principal primary text-center text-info align-items-center">
+<body class="primary principal">
     {{>header}}
-
-    <h1>Error 403 : {{error}}</h1>
-    <h2>¡Vaya! Solo personal autorizado</h2>
-    <h4>No tienes los permisos necesarios para acceder a esta página</h4>
-    <div class="w-3 m-5">
-        <a href="/principal" class="btn-primary btn-sm text-light text-decoration-none ">
-            Volver al Inicio
-        </a>
+    <div class="content d-flex flex-column align-items-center justify-content-center">
+        <div class="container ">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-8 col-sm-6 col-md-4 col-lg-3">
+                    <img class="img-fluid" src="/images/searchError.png" alt="Imagen Error">
+                </div>
+                <div class="col-12 col-sm-auto text-center text-md-start mt-3 mt-sm-0">
+                    <h1 class="m-0">Error 403 : {{error}}</h1>
+                    <h2 class="m-0">¡Vaya! Solo personal autorizado</h2>
+                    <h4 class="mt-2">No tienes los permisos necesarios para acceder a esta página</h4>
+                </div>
+            </div>
+        </div>
+        <a href="/principal" class="btn btn-primary p-2 px-4 text-decoration-none" style="width: auto;">Volver al Inicio</a>
     </div>
-
-
+    
     {{>footer}}
-</div>
+</body>
+</html>

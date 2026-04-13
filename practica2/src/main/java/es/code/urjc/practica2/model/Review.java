@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PostRemove;
 
 @Entity
 public class Review {
@@ -31,6 +32,13 @@ public class Review {
         this.reviewDescription = reviewDescription;
         this.reviewAuthor = reviewAuthor;
         this.filmography = filmography;
+    }
+
+    @PostRemove
+    public void onPostRemove() {
+        if (this.filmography != null) {
+            this.filmography.updateAverageStars();
+        }
     }
 
     public String getReviewAuthorName() {
@@ -75,7 +83,5 @@ public class Review {
 
     public void setReviewAuthor(Account reviewAuthor) {
         this.reviewAuthor = reviewAuthor;
-    }
-
-    
+    }    
 }

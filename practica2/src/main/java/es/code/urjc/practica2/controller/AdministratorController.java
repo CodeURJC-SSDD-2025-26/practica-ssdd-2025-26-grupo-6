@@ -68,7 +68,6 @@ public class AdministratorController {
         model.addAttribute("usersListsPreview", allUsersLists.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("usersLists", allUsersLists);
 
-
         //Chart
         Map <String, Long> genreCount = filmographyService.countByGenre();
         String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"" ).collect(Collectors.joining(","))+ "]";
@@ -122,8 +121,8 @@ public class AdministratorController {
     
     @PostMapping("/administrator/account/{id}/delete")
     public String deleteUsers(@PathVariable Long id) {
-       
         accountService.delete(id);
+        
         return "redirect:/administrator";
     }
     
@@ -242,6 +241,7 @@ public class AdministratorController {
 
     private void addFilmographyAttributes(Model model, Filmography f){
         model.addAttribute("filmographyId", f.getFilmographyId());
+        model.addAttribute("filmographyImage", f.getFilmographyImage());
         model.addAttribute("filmographyName", f.getFilmographyName());
         model.addAttribute("filmographyDirector", f.getDirectorName());
         model.addAttribute("filmographyYear", f.getFilmographyYear());

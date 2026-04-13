@@ -14,7 +14,7 @@
                         alt="Poster" class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
                     {{/filmography.filmographyImage}}
                     {{^filmography.filmographyImage}}
-                    <img src="/img/administradorImagenFondoPelicula.webp" 
+                    <img src="/images/posterNotAvailable.jpg" 
                         alt="Poster" class="img-fluid rounded shadow w-100 h-100" style="object-fit: cover;">
                     {{/filmography.filmographyImage}}
                 </div>
@@ -157,21 +157,23 @@
                 </div>
                 <!--New List Creation-->
                 <div class=" px-3 mt-3">
-                    <label for="newListName" class="form-label fw-semibold">Nueva lista</label>
-                    <div class="d-flex gap-2 input-group">
-                        <input type="text" class="form-control" id="newListName" placeholder="Nombre de la lista...">
-                        <button type="button" class="btn btn-outline-primary" id="createListBtn">
+                    <label class="form-label fw-semibold">Nueva lista</label>
+                    <form action="/myLists/new" method="post" class="d-flex gap-2 input-group" id="createListForm">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                        <input type="hidden" name="redirectTo" value="/filmographies/{{filmography.filmographyId}}">
+                        <input type="hidden" name="returnJson" value="true">
+                        <input type="text" class="form-control" name="listName" id="newListNameInput" placeholder="Nombre de la lista...">
+                        <button type="submit" class="btn btn-outline-primary">
                             <i class="bi bi-check2"></i>
                         </button>
-                    </div>
+                    </form>
                 </div>
                 <hr>
-                <form action="/filmographies/{{filmography.filmographyId}}/lists/add" method="post" id="addToListForm">
+                <!-- Existing lists-->
+                <form action="/filmographies/{{filmography.filmographyId}}/lists/update" method="post">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                    <input type="hidden" name="filmographyId" value="{{filmography.filmographyId}}">
                     <div class="modal-body">
                         <p class="text-muted small mb-3">Selecciona las listas donde quieres añadir esta película</p>
-                        <!--Existing Lists-->
                         <div class="d-flex flex-column gap-2" id="userListsContainer">
                             {{#userLists}}
                             <div class="form-check">
@@ -186,7 +188,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="d-flex gap-2">
-                            <button type="button" id="saveListChanges" class="btn btn-primary btn-small">Guardar Cambios</button>
+                            <button type="submit" class="btn btn-primary btn-small">Guardar Cambios</button>
                             <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
@@ -198,63 +200,36 @@
     <!-- Scripts -->
     <script src="/js/filmsRatingBarChart.js" defer></script>
     <script>
-        document.getElementById('saveListChanges').addEventListener('click', function() {
-            const form = document.getElementById('addToListForm');
-            const formData = new FormData(form);
-            const filmographyId = document.querySelector('input[name="filmographyId"]').value;
+        document.getElementById('createListForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-            fetch('/filmographies/' + filmographyId + '/lists/update', {
+            const formData = new FormData(this);
+
+            fetch('/myLists/new', {
                 method: 'POST',
                 body: formData
-            }).then(response => {
-                if (response.status === 401) {
-                    window.location.href = '/login';
-                    return;
-                }
-                const btn = document.getElementById('saveListChanges');
-                btn.textContent = 'Guardado!';
-                setTimeout(() => btn.textContent = 'Guardar Cambios', 1500);
-            });
-        });
-
-        document.getElementById('createListBtn').addEventListener('click', function() {
-            const newListName = document.getElementById('newListName').value.trim();
-            if (newListName === '') return;
-
-            const filmographyId = document.querySelector('input[name="filmographyId"]').value;
-
-            fetch('/filmographies/' + filmographyId + '/lists/new', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `newListName=${encodeURIComponent(newListName)}`
-            }).then(r => {
-                if (r.status === 401) {
-                    window.location.href = '/login';
-                    return;
-                }
-                return r.json();
-            }).then(list => {
-                if (!list) return;
+            }).then(r => r.json())
+            .then(list => {
                 const container = document.getElementById('userListsContainer');
-
                 const emptyMsg = container.querySelector('p');
                 if (emptyMsg) emptyMsg.remove();
 
                 const div = document.createElement('div');
                 div.className = 'form-check';
                 div.innerHTML = `
-                    <input class="form-check-input" type="checkbox"
-                        name="listIds" value="${list.listsId}"
-                        id="list-${list.listsId}">
+                    <input class="form-check-input" type="checkbox" 
+                        name="listIds" value="${list.listsId}" 
+                        id="list-${list.listsId}" checked>
                     <label class="form-check-label" for="list-${list.listsId}">
                         ${list.listName}
                     </label>`;
                 container.appendChild(div);
 
-                document.getElementById('newListName').value = '';
+                document.getElementById('newListNameInput').value = '';
             });
         });
     </script>
+     
 </body>
 
 </html>

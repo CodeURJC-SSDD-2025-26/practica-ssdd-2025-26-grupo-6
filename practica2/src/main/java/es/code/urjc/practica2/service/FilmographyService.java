@@ -22,8 +22,7 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 @Service
 public class FilmographyService {
     private final ListsRepository listsRepository;
-    @Autowired
-    private FilmographyRepository filmographyRepository;
+    @Autowired private FilmographyRepository filmographyRepository;
 
     FilmographyService(ListsRepository listsRepository) {
         this.listsRepository = listsRepository;
