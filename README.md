@@ -317,23 +317,25 @@ Solo si han cambiado.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6.git
+   cd practica-ssdd-2025-26-grupo-6
    ```
 
 2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `admin@palomix.com`, contraseña: `admin`
+- **Usuario Registrado 1**: usuario: `alice@palomix.com`, contraseña: `alice123`
+- **Usuario Registrado 2**: usuario: `bob@palomix.com`, contraseña: `bob123`
+
 
 ### **Diagrama de Entidades de Base de Datos**
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](readMe_Images\database_diagram.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> En el diagrama se ven las entidades principales (filmography, account y review) con sus respectivas relaciones, tanto las de herencia entre filmography con movie y serie, como las relaciones debido a las claves ajenas, como lists con account.
 
 ### **Diagrama de Clases y Templates**
 
@@ -345,7 +347,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Alejandro Carretero Badorrey**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -359,7 +361,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Carla García Romer**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -373,9 +375,11 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Matias Maccarrone**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Mis responsabilidades principales consistieron en poner en funcionamiento las páginas de login y signUp, implementando el servicio de correo para el caso de que el usuario olvide la contraseña o cuando se registre un nuevo usuario. 
+Además, estuve encargado de las páginas de myLists y myReviews, tanto para el caso de los usuarios (ven solo sus reseñas y listas, y pueden modificarlas), como para el administrador (ve las listas del sistema y todas las reseñas de la página, pudiendo editarlas). 
+Y por último, implementé la barra de búsqueda que se encuentra en la cabecera de la página.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -387,7 +391,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Raúl Sánchez López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
