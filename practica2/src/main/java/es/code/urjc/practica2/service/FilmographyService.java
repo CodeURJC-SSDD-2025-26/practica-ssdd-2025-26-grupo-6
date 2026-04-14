@@ -129,8 +129,11 @@ public class FilmographyService {
     }
 
     public List<Movie> getRecentFilms(int limit) {
-        return filmographyRepository.findTop10MoviesByYear()
-                .stream()
+        return filmographyRepository.findAll().stream()
+                .filter(f -> f instanceof Movie)
+                .map(f -> (Movie) f)
+                // Ordenamos por ID de mayor a menor
+                .sorted((m1, m2) -> Long.compare(m2.getFilmographyId(), m1.getFilmographyId()))
                 .limit(limit)
                 .toList();
     }

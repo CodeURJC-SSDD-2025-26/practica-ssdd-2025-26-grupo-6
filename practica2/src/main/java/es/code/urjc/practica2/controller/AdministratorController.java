@@ -149,8 +149,7 @@ public class AdministratorController {
         filmographyService.save(movie);
 
         // Add movie to system lists that match its genres
-        Account admin = accountService.findByName("admin");
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findByOwner(admin);
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSistemLists();
         for (es.code.urjc.practica2.model.Lists list : systemLists) {
             if (list.getListName().endsWith("- Series")) continue;
             boolean matches = movie.getFilmographyGenres().stream()
@@ -213,8 +212,8 @@ public class AdministratorController {
         filmographyService.save(serie);
 
         // Add serie to system lists that match its genres
-        Account admin = accountService.findByName("admin");
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findByOwner(admin);
+        // ESTO ES LO CORRECTO AHORA
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSistemLists();
         for (es.code.urjc.practica2.model.Lists list : systemLists) {
             if (!list.getListName().endsWith("- Series")) continue;
             String listGenre = list.getListName().replace(" - Series", "");
