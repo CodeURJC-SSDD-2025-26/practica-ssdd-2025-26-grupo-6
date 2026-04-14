@@ -254,7 +254,7 @@ public class AccountController {
         // Chart
         List<Review> reviews = reviewService.findByAuthor(currentUser);
 
-        float[] starValues = { 0f, 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
+        float[] starValues = {  0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
         long[] counts = new long[starValues.length];
 
         for (int i = 0; i < starValues.length; i++) {
