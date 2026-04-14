@@ -96,116 +96,116 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ### **Capturas de Pantalla y Descripción de Páginas**
 
 #### **1. Página principal / Home**
-![Página Principal](images/principal.png)
+![Página Principal](readMe_Images/principal.png)
 
 > Página de inicio, en la cual se podrán ver una serie de películas seleccionadas por el sistema, dividas por categorias, con la posibilidad de ver más peliculas de ese tipo y el detalle de cada una. 
 
 #### **2. Series**
-![Series](images/series.jpeg)
+![Series](readMe_Images/series.jpeg)
 
 > Página igual a la principal, pero con la diferencia que se ven series.
 
 #### **3. Listas del sistema**
-![Listas del sistemas](images/lists.jpeg)
+![Listas del sistemas](readMe_Images/lists.jpeg)
 
 > Página en la que se muestran las listas generadas por el sistema, dando la posibilidad de ver en detalle cada lista, es decir, ver las peliculas o series que la componen.
 
 #### **4. Iniciar Sesión**
-![Login](images/login.jpeg)
+![Login](readMe_Images/login.jpeg)
 
 > Página dedicada a que el usuario inicie sesión en su cuenta, también puede entrar como anónimo, crearse una cuenta o seleccionar la opción de "Olvidé la contraseña".
 #### **5. Crear Cuenta**
-![Crear Cuenta](images/signup.jpeg)
+![Crear Cuenta](readMe_Images/signup.jpeg)
 
 > Página dedicada a que el usuario se cree una cuenta, obligándolo a completar todos los campos, con los formatos correctos.
 
 #### **6. Perfil**
-![Perfil](images/profile.png)
+![Perfil](readMe_Images/profile.png)
 
 > Página en la que el usuario podrá ver o editar su perfil, es decir, sus datos, además de que puede ver sus listas, hechas por él, y en el caso de que tenga permisos de administrador, acceder a dicha sección.
 
 #### **7. Detalles de las listas**
-![Detalles de las listas](images/filmsLists.png)
+![Detalles de las listas](readMe_Images/filmsLists.png)
 
 > Página donde se muestran todas las películas o series que componen una lista, con la posibilidad de acceder al detalle de cada una de ellas. 
 
 #### **8. Detalles de las películas**
-![Detalles de las películas](images/moviesDetails.jpeg)
+![Detalles de las películas](readMe_Images/moviesDetails.jpeg)
 
 > Página de detalle de una película, donde se muestra toda la información de la película, como su sinopsis, año de estreno, duración, etc. Además, se muestran las valoraciones que tiene la película y el usuario puede añadir su propia valoración. También se encuentra un trailer, un botón para añadir la película a una lista y un botón para ver las reseñas de la película. 
 
 #### **9. Detalles de las series**
-![Detalles de las series](images/seriesDetails.jpeg)
+![Detalles de las series](readMe_Images/seriesDetails.jpeg)
 
 > Página de detalle de una serie, con la misma información que la página de detalle de una película, pero con la diferencia de que se muestra el número de temporadas, en lugar de la duración. 
 
 #### **10. Añadir reseña**
-![Añadir reseña](images/includeReview.png)
+![Añadir reseña](readMe_Images/includeReview.png)
 
 > Página en la que se muestra la cartelera de la película/serie y se puede añadir una valoración y una reseña escrita.
 
 #### **11. Reseñas**
-![Reseñas](images/reviews.jpeg)
+![Reseñas](readMe_Images/reviews.jpeg)
 
 > Página en la que se muestran una lista de todas las reseñas de una película/serie. De cada reseña se tiene su valoración y su reseña escrita además del nombre del usuario que la escribió.
 
 #### **12. Mis listas**
-![Mis listas](images/myLists.jpeg)
+![Mis listas](readMe_Images/myLists.jpeg)
 
 > Página donde los usuarios pueden ver las listas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido o eliminarla.
 
 #### **13. Mis reseñas**
-![Mis reseñas](images/myReviews.png)
+![Mis reseñas](readMe_Images/myReviews.png)
 
 > Página donde los usuarios pueden ver las reseñas que han creado, con la posibilidad de acceder a cada una de ellas para ver su contenido, modificarla o eliminarla.
 
 #### **14. Modificar reseña**
-![Modificar reseña](images/modifyReview.png)
+![Modificar reseña](readMe_Images/modifyReview.png)
 
 > Página donde se muestra una reseña que ya ha sido escrita y que el usuario quiere modificar. Se puede modificar tanto la puntuación como la parte escrita.
 
 #### **15. Administrador**
-![Administrador](images/administrator.jpeg)
+![Administrador](readMe_Images/administrator.jpeg)
 
 > Página donde el administrador puede editar y eliminar usuarios, películas, series, y listas tanto del sistema como de cada usuario. Además se pueden añadir series y películas. En la parte inferior, se encuentra un gráfico con los géneros.
 
 #### **16. Añadir película**
-![Añadir película](images/includeMovies.jpeg)
+![Añadir película](readMe_Images/includeMovies.jpeg)
 
 > Página de creación de películas, con un formulario para introducir los datos de la película, como el título, la sinopsis, el año de estreno, etc.
 
 #### **17. Modificar película**
-![Modificar película](images/modifyMovies.jpeg)
+![Modificar película](readMe_Images/modifyMovies.jpeg)
 
 > Página de modificación de películas, con un formulario para editar los mismos datos que se añaden en la página de creación de películas, pero con los campos ya rellenados con la información actual de la película que se va a modificar.
 
 #### **18. Añadir serie**
-![Añadir serie](images/includeSeries.jpeg)
+![Añadir serie](readMe_Images/includeSeries.jpeg)
 
 > Página de creación de series, con un formulario para introducir los datos de la serie, como el título, la sinopsis, el año de estreno, etc.
 
 #### **19. Modificar series**
-![Modificar series](images/modifySeries.jpeg)
+![Modificar series](readMe_Images/modifySeries.jpeg)
 
 > Página de modificación de series, funciona igual que la de las películas, pero con los campos correspondientes a las series, como el número de temporadas.
 
 #### **20. Políticas de cookies**
-![Políticas de cookies](images/cookies.png)
+![Políticas de cookies](readMe_Images/cookies.png)
 
 > Página con información sobre las políticas de cookies de la aplicación, explicando qué tipos de cookies se utilizan, su finalidad.
 
 #### **21. Aviso legal**
-![Aviso legal](images/legalAdvise.png)
+![Aviso legal](readMe_Images/legalAdvise.png)
 
 > Página con información legal sobre la aplicación, incluyendo términos de uso, propiedad intelectual y responsabilidad.
 
 #### **22. Preguntas Frecuentes**
-![Preguntas Frecuentes](images/frequentlyAskedQuestions.png)
+![Preguntas Frecuentes](readMe_Images/frequentlyAskedQuestions.png)
 
 > Página en la que se muestran las preguntas frecuentes de los usuarios, con su respuesta correspondiente, para resolver dudas comunes sobre el funcionamiento de la aplicación.
 
 #### **23. Sobre nosotros**
-![Sobre nosotros](images/aboutUs.png)
+![Sobre nosotros](readMe_Images/aboutUs.png)
 
 > Página en la que se explica quiénes somos y qué hacemos.
 
@@ -299,11 +299,22 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
 
 #### **Diagrama de Navegación**
 
-Solo si ha cambiado.
+![Diagrama de Navegación](readMe_Images/navigationDiagram.jpg)
+
+> El diagrama es el mismo, es decir, la forma de navegar dentro de la aplicación no cambió respecto a la parte anterior.
 
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+![Login Actualizado](readMe_Images/loginNew.png)
+> Se le agregó una tabla debajo para tener un mejor acceso a los datos mínimos para probar la aplicación
+
+![Perfil Usuario](readMe_Images/profileUser.png)
+> La diferencia es que el usuario no puede ver el botón de Administrador,
+
+![Perfil Administrador](readMe_Images/profileAdmin.png)
+> La diferencia es que el administrador, puede acceder al apartado de administración, y que los otros botones muestran las listas del sistema y todas las reseñas de la aplicación.
+
+
 
 ### **Instrucciones de Ejecución**
 
@@ -317,35 +328,37 @@ Solo si han cambiado.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6.git
+   cd practica-ssdd-2025-26-grupo-6
    ```
 
 2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `admin@palomix.com`, contraseña: `admin`
+- **Usuario Registrado 1**: usuario: `alice@palomix.com`, contraseña: `alice123`
+- **Usuario Registrado 2**: usuario: `bob@palomix.com`, contraseña: `bob123`
+
 
 ### **Diagrama de Entidades de Base de Datos**
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](readMe_Images/database_diagram.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> En el diagrama se ven las entidades principales (filmography, account y review) con sus respectivas relaciones, tanto las de herencia entre filmography con movie y serie, como las relaciones debido a las claves ajenas, como lists con account.
 
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](readMe_Images/classesDiagram.png)
 
-> [Descripción opcional del diagrama y relaciones principales]
+> Este diagrama representa la arquitectura de nuestra aplicación, siguiendo el patrón de diseño por capas. Teniendo una capa de controladores, repositorios, servicios y modelos. Al igual de la sección de seguridad e inicializadores de la app. 
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Alejandro Carretero Badorrey**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -359,7 +372,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Carla García Romer**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -373,9 +386,11 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Matias Maccarrone**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Mis responsabilidades principales consistieron en poner en funcionamiento las páginas de login y signUp, implementando el servicio de correo para el caso de que el usuario olvide la contraseña o cuando se registre un nuevo usuario. 
+Además, estuve encargado de las páginas de myLists y myReviews, tanto para el caso de los usuarios (ven solo sus reseñas y listas, y pueden modificarlas), como para el administrador (ve las listas del sistema y todas las reseñas de la página, pudiendo editarlas). 
+Y por último, implementé la barra de búsqueda que se encuentra en la cabecera de la página.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -387,7 +402,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Raúl Sánchez López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
