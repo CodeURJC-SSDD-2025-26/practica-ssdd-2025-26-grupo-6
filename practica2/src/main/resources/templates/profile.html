@@ -98,13 +98,16 @@
                     </div>
                     <div class="mt-4">
                         <button type="submit" id="editProfileBtn" class="btn btn-primary">Editar Perfil</button>
+                        <input type="hidden" id="csrfToken" name="_csrf" value="{{_csrf.token}}">
                     </div>
                     {{/fromAdmin}}
                 </div>
             </div>
             <!-- Chart -->
             <div class="col-10 col-lg-5 pe-lg-5 mb-5">
-                <canvas id="myReviewsBarUser" data-values="{{{chartData}}}"></canvas>
+                <canvas id="myReviewsBarUser" 
+                data-values="{{{chartData}}}" 
+                data-username="{{{currentUser.accountName}}}"></canvas>
             </div>
         </div>
     </div>

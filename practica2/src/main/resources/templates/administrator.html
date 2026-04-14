@@ -31,7 +31,7 @@
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="admin-caption">Usuarios del sistema</caption>
+                        <caption class="admin-caption">Usuarios del Sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -90,7 +90,7 @@
                             <col style="width:8%;">
                             <col style="width:8%;">
                         </colgroup>
-                        <caption class="admin-caption">Peliculas del sistema</caption>
+                        <caption class="admin-caption">Peliculas del Sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -158,7 +158,7 @@
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="admin-caption">Series del sistema</caption>
+                        <caption class="admin-caption">Series del Sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -240,7 +240,7 @@
                                 <td>{{listName}}</td>
                                 <td class="text-center">{{listSize}}</td>
                                 <td class="text-center">
-                                    <a href="filmsLists" class="btn btn-sm border-0 p-0 text-dark"><i
+                                    <a href="/lists/{{listsId}}/edit" class="btn btn-sm border-0 p-0 text-dark"><i
                                             class="bi bi-pencil-square fs-5"></i></a>
                                 </td>
                                 <td class="text-center">
@@ -274,19 +274,17 @@
                             <col style="width:8%;">
                             <col style="width:34%;">
                             <col style="width:8%;">
-                            <col style="width:34%;">
-                            <col style="width:8%;">
+                            <col style="width:42%;">
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="admin-caption">Listas del Usario</caption>
+                        <caption class="admin-caption">Listas del Usuario</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">N.Peliculas</th>
                                 <th scope="col">Usuario</th>
-                                <th scope="col" class="text-center">Editar</th>
                                 <th scope="col" class="text-center">Borrar</th>
                             </tr>
                         </thead>
@@ -297,10 +295,6 @@
                                 <td>{{listName}}</td>
                                 <td class="text-center">{{listSize}}</td>
                                 <td>{{listOwner.accountName}}</td>
-                                <td class="text-center">
-                                    <a href="filmsLists" class="btn btn-sm border-0 p-0 text-dark"><i
-                                            class="bi bi-pencil-square fs-5"></i></a>
-                                </td>
                                 <td class="text-center">
                                     <form action="/administrator/userLists/{{listsId}}/delete" method="post">
                                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
@@ -326,9 +320,7 @@
         <!-- Chart -->
         <div class="row justify-content-md-center justify-content-start">
             <div class="col-8 col-lg-5 mb-5 ">
-                <canvas id="myPie"
-                    data-labels='{{{chartLabels}}}'
-                    data-values='{{{chartData}}}'></canvas>
+                <canvas id="myPie" data-labels='{{{chartLabels}}}' data-values='{{{chartData}}}'></canvas>
             </div>
         </div>
     </div>
@@ -340,7 +332,7 @@
         <div class="modal-dialog modal-xl table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalUsersTitleLabel">Todos los usuarios</h1>
+                    <h1 class="modal-title fs-5" id="modalUsersTitleLabel">Todos los Usuarios</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -478,7 +470,7 @@
         <div class="modal-dialog modal-xl table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todas las series</h1>
+                    <h1 class="modal-title fs-5" id="SeriesTitleLabel">Todas las Series</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -552,7 +544,7 @@
         <div class="modal-dialog modal-xl table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ListModalSistemLabel">Todas las Listas</h1>
+                    <h1 class="modal-title fs-5" id="ListModalSistemLabel">Todas las Listas del Sitema</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -616,7 +608,7 @@
         <div class="modal-dialog modal-xl table-admin">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ListUserTitleLabel">Todas las Listas</h1>
+                    <h1 class="modal-title fs-5" id="ListUserTitleLabel">Todas las Listas de Usuarios</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -627,8 +619,7 @@
                                     <col style="width:8%;">
                                     <col style="width:34%;">
                                     <col style="width:8%;">
-                                    <col style="width:34%;">
-                                    <col style="width:8%;">
+                                    <col style="width:42%;">
                                     <col style="width:8%;">
 
                                 </colgroup>
@@ -640,7 +631,6 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">N.Peliculas</th>
                                         <th scope="col">Usuario</th>
-                                        <th scope="col" class="text-center">Editar</th>
                                         <th scope="col" class="text-center">Borrar</th>
                                     </tr>
 
@@ -652,10 +642,6 @@
                                         <td>{{listName}}</td>
                                         <td class="text-center">{{listSize}}</td>
                                         <td>{{listOwner.accountName}}</td>
-                                        <td class="text-center">
-                                            <a href="filmsLists" class="btn btn-sm border-0 p-0 text-dark"><i
-                                                    class="bi bi-pencil-square fs-5"></i></a>
-                                        </td>
                                         <td class="text-center">
                                             <form action="/administrator/userLists/{{listsId}}/delete" method="post">
                                                 <input type="hidden" name="_csrf" value="{{_csrf.token}}">

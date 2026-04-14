@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const avatarLogo = document.getElementById('avatarLogo');
     const avatarProfile = document.getElementById('avatarProfile');
-    let selectedSrc = "images/perfilNoReg.jpg";
+    let selectedSrc = "/images/perfilNoReg.jpg";
 
     /* Select Avatar */
     galleryImages.forEach(IMG => {

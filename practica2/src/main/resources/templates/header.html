@@ -47,7 +47,10 @@
                         <div class="col-1 profile dropdown text-end">
                             <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/images/perfilNoReg.jpg" class="rounded-circle" width="50" height="50">
+                                <img id="avatarLogo" 
+                                src="{{#currentUser}}{{currentUser.accountAvatar}}{{/currentUser}}
+                                {{^currentUser}}/images/perfilNoReg.jpg{{/currentUser}}"
+                                class="rounded-circle" width="50" height="50">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="/profile">Mi Perfil</a></li>
