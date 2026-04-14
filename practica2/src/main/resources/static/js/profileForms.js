@@ -31,9 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
     inputBirth.type = 'hidden';
     inputBirth.name = 'accountBirthDate';
 
+    const inputCsrf = document.createElement('input');
+    inputCsrf.type ='hidden';
+    inputCsrf.name='_csrf';
+    inputCsrf.value = document.getElementById('csrfToken').value;
+
     profileForm.appendChild(inputName);
     profileForm.appendChild(inputEmail);
     profileForm.appendChild(inputBirth);
+    profileForm.appendChild(inputCsrf);
     document.body.appendChild(profileForm);
 
 
