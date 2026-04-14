@@ -60,7 +60,7 @@ public class AdministratorController {
         model.addAttribute("seriesPreview", allSeries.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("series", allSeries);
        
-        var allSystemLists = listsService.findAllSistemLists();
+        var allSystemLists = listsService.findAllSystemLists();
         model.addAttribute("systemListsPreview", allSystemLists.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("systemLists", allSystemLists);
 
@@ -149,7 +149,7 @@ public class AdministratorController {
         filmographyService.save(movie);
 
         // Add movie to system lists that match its genres
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSistemLists();
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSystemLists();
         for (es.code.urjc.practica2.model.Lists list : systemLists) {
             if (list.getListName().endsWith("- Series")) continue;
             boolean matches = movie.getFilmographyGenres().stream()
@@ -213,7 +213,7 @@ public class AdministratorController {
 
         // Add serie to system lists that match its genres
         // ESTO ES LO CORRECTO AHORA
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSistemLists();
+        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSystemLists();
         for (es.code.urjc.practica2.model.Lists list : systemLists) {
             if (!list.getListName().endsWith("- Series")) continue;
             String listGenre = list.getListName().replace(" - Series", "");

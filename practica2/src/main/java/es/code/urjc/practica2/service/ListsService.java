@@ -147,7 +147,7 @@ public class ListsService {
                 .orElse(0);
     }
 
-    public List<Lists> findAllSistemLists(){
+    public List<Lists> findAllSystemLists(){
         return listsRepository.findByListOwnerIsNull();
     }
     public List<Lists> findAllUserList(){

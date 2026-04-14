@@ -42,7 +42,7 @@ public class FilmographyController {
     public String principal(Model model) {
         model.addAttribute("newMovies", filmographyService.findTop10MoviesByYear());
 
-        List<Lists> systemLists = listsService.findAllSistemLists();
+        List<Lists> systemLists = listsService.findAllSystemLists();
 
         List<Map<String, Object>> movieSections = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public class FilmographyController {
 
     @GetMapping("/series")
     public String series(Model model) {
-        List<Lists> systemLists = listsService.findAllSistemLists();
+        List<Lists> systemLists = listsService.findAllSystemLists();
 
         List<Map<String, Object>> seriesSections = new ArrayList<>();
 
@@ -176,7 +176,7 @@ public class FilmographyController {
         if (currentUser != null) {
             List<Lists> listsToShow;
             if(currentUser.getAccountRole() == Account.Role.ADMIN){
-                listsToShow = listsService.findAllSistemLists();
+                listsToShow = listsService.findAllSystemLists();
             }else{
                 listsToShow = currentUser.getAccountLists();
             }
@@ -220,7 +220,7 @@ public class FilmographyController {
 
         List<Lists> listsToUpdate;
         if(currentUser.getAccountRole() == Account.Role.ADMIN){
-            listsToUpdate = listsService.findAllSistemLists();
+            listsToUpdate = listsService.findAllSystemLists();
         }else{
             listsToUpdate = currentUser.getAccountLists();
         }

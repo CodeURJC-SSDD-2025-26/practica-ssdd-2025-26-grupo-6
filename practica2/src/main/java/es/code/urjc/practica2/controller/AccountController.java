@@ -110,7 +110,7 @@ public class AccountController {
         
         
         if(isAdmin){
-            model.addAttribute("lists",listsService.findAllSistemLists());
+            model.addAttribute("lists",listsService.findAllSystemLists());
         }else{
             model.addAttribute("lists", listsService.findByOwner(currentUser));
         }
@@ -130,7 +130,7 @@ public class AccountController {
         boolean isAdmin =currentUser.getAccountRole() == Account.Role.ADMIN;
         String redirect = (redirectTo != null && !redirectTo.isBlank()) ? redirectTo : "/myLists";
 
-        List<Lists> userLists = isAdmin ? listsService.findAllSistemLists() : listsService.findByOwner(currentUser);
+        List<Lists> userLists = isAdmin ? listsService.findAllSystemLists() : listsService.findByOwner(currentUser);
         for (Lists l : userLists) {
             if (l.getListName().equals(listName)) {
                 model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
@@ -189,10 +189,12 @@ public class AccountController {
 
         if (principal == null) return "redirect:/login";
 
+       
+
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
-        if (list != null && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
+        if (list != null) {
             list.setListName(newName);
 
             // Actualizar el contenido de la lista
@@ -218,7 +220,7 @@ public class AccountController {
         Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
-        if (list != null && list.getListOwner().getAccountId().equals(currentUser.getAccountId())) {
+        if (list != null) {
             listsService.delete(list.getListsId());
         }
         return "redirect:/myLists";
