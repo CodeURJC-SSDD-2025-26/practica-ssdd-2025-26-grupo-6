@@ -333,7 +333,7 @@ Solo si han cambiado.
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](readMe_Images\database_diagram.png)
+![Diagrama Entidad-Relación](readMe_Images/database_diagram.png)
 
 > En el diagrama se ven las entidades principales (filmography, account y review) con sus respectivas relaciones, tanto las de herencia entre filmography con movie y serie, como las relaciones debido a las claves ajenas, como lists con account.
 
