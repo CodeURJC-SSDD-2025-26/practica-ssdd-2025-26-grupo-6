@@ -13,13 +13,22 @@
             <a href="administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
+            <a href="myLists" class="profile-btn text-decoration-none">
+                Todas las Listas
+            </a>
+            <a href="myReviews" class="profile-btn text-decoration-none">
+                Todas las Reseñas
+            </a>
             {{/isAdmin}}
+            {{^isAdmin}}
             <a href="myLists" class="profile-btn text-decoration-none">
                 Mis Listas
             </a>
             <a href="myReviews" class="profile-btn text-decoration-none">
                 Mis Reseñas
             </a>
+            {{/isAdmin}}
+
         </div>
         {{/fromAdmin}}
 

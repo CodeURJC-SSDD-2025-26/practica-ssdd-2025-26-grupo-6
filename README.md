@@ -299,11 +299,22 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
 
 #### **Diagrama de Navegación**
 
-Solo si ha cambiado.
+![Diagrama de Navegación](readMe_Images/navigationDiagram.jpg)
+
+> El diagrama es el mismo, es decir, la forma de navegar dentro de la aplicación no cambió respecto a la parte anterior.
 
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+![Login Actualizado](readMe_Images/loginNew.png)
+> Se le agregó una tabla debajo para tener un mejor acceso a los datos mínimos para probar la aplicación
+
+![Perfil Usuario](readMe_Images/profileUser.png)
+> La diferencia es que el usuario no puede ver el botón de Administrador,
+
+![Perfil Administrador](readMe_Images/profileAdmin.png)
+> La diferencia es que el administrador, puede acceder al apartado de administración, y que los otros botones muestran las listas del sistema y todas las reseñas de la aplicación.
+
+
 
 ### **Instrucciones de Ejecución**
 
@@ -341,9 +352,9 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](readMe_Images/classesDiagram.png)
 
-> [Descripción opcional del diagrama y relaciones principales]
+> Este diagrama representa la arquitectura de nuestra aplicación, siguiendo el patrón de diseño por capas. Teniendo una capa de controladores, repositorios, servicios y modelos. Al igual de la sección de seguridad e inicializadores de la app. 
 
 ### **Participación de Miembros en la Práctica 2**
 
