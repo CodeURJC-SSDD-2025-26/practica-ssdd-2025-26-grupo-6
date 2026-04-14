@@ -107,7 +107,14 @@ public class AccountController {
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
-        model.addAttribute("lists", listsService.findByOwner(currentUser));
+        
+        
+        if(isAdmin){
+            model.addAttribute("lists",listsService.findAllSistemLists());
+        }else{
+            model.addAttribute("lists", listsService.findByOwner(currentUser));
+        }
+        
         return "myLists";
     }
 
@@ -120,12 +127,16 @@ public class AccountController {
         if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
+        boolean isAdmin =currentUser.getAccountRole() == Account.Role.ADMIN;
         String redirect = (redirectTo != null && !redirectTo.isBlank()) ? redirectTo : "/myLists";
 
-        List<Lists> userLists = listsService.findByOwner(currentUser);
+        List<Lists> userLists = isAdmin ? listsService.findAllSistemLists() : listsService.findByOwner(currentUser);
         for (Lists l : userLists) {
             if (l.getListName().equals(listName)) {
                 model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
+                model.addAttribute("isAdmin", isAdmin);
+                model.addAttribute("lists",userLists);
+                
                 return "myLists";
             }
         }
@@ -133,7 +144,7 @@ public class AccountController {
         if (listName != null && !listName.isBlank()) {
             Lists newList = new Lists();
             newList.setListName(listName);
-            newList.setListOwner(currentUser);
+            newList.setListOwner(isAdmin ? null : currentUser);
             listsService.save(newList);
 
             if ("true".equals(returnJson)) {

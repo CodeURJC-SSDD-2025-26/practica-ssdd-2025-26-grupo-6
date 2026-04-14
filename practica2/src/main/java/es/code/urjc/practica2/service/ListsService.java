@@ -148,7 +148,7 @@ public class ListsService {
     }
 
     public List<Lists> findAllSistemLists(){
-        return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() == Account.Role.ADMIN).toList();
+        return listsRepository.findAll().stream().filter(l -> l.getListOwner() == null ).toList();
     }
     public List<Lists> findAllUserList(){
        return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN).toList();

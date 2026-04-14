@@ -176,7 +176,14 @@ public class FilmographyController {
         // User lists
         List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
         if (currentUser != null) {
-            for (Lists list : currentUser.getAccountLists()) {
+            List<Lists> listsToShow;
+            if(currentUser.getAccountRole() == Account.Role.ADMIN){
+                listsToShow = listsService.findAllSistemLists();
+            }else{
+                listsToShow = currentUser.getAccountLists();
+            }
+
+            for (Lists list : listsToShow) {
                 Map<String, Object> listMap = new HashMap<>();
                 listMap.put("listsId", list.getListsId());
                 listMap.put("listName", list.getListName());
@@ -213,7 +220,14 @@ public class FilmographyController {
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = accountService.findByEmail(principal.getName());
 
-        for (Lists list : currentUser.getAccountLists()) {
+        List<Lists> listsToUpdate;
+        if(currentUser.getAccountRole() == Account.Role.ADMIN){
+            listsToUpdate = listsService.findAllSistemLists();
+        }else{
+            listsToUpdate = currentUser.getAccountLists();
+        }
+
+        for (Lists list : listsToUpdate) {
             boolean isChecked = listIds != null && listIds.contains(list.getListsId());
             boolean alreadyContains = list.getFilmographyList().contains(filmography);
 
