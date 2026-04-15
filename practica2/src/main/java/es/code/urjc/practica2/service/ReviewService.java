@@ -1,7 +1,9 @@
 package es.code.urjc.practica2.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,27 @@ public class ReviewService {
 
     public Review findById(Long reviewId) {
         return reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
+    }
+
+    public List<Review> findByAuthor(Account author) {
+        return reviewRepository.findByReviewAuthor(author);
+    }
+
+    public List<Review> findAll(){
+        return reviewRepository.findAll();
+    }
+
+    public String getChartData(List<Review> reviews){
+        float[] starValues = { 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
+        long[] counts = new long[starValues.length];
+
+        for (int i = 0; i < starValues.length; i++) {
+            final float star = starValues[i];
+            counts[i] = reviews.stream()
+                    .filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) == 0).count();
+        }
+
+        return "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]";
     }
 
     public Review save(Review review) {
@@ -54,13 +77,5 @@ public class ReviewService {
             filmography.updateAverageStars();
             filmographyRepository.save(filmography);
         }
-    }
-
-    public List<Review> findByAuthor(Account author) {
-        return reviewRepository.findByReviewAuthor(author);
-    }
-
-    public List<Review> findAll(){
-        return reviewRepository.findAll();
     }
 }
