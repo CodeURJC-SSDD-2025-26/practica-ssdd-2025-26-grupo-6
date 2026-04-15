@@ -6,6 +6,8 @@
     <!-- Page content -->
     <div class="content">
         <div class="d-flex justify-content-start gap-3 p-3">
+
+
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
             </a>
@@ -13,10 +15,15 @@
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
+            <a href="/myReviews" class="profile-btn text-decoration-none">
+                Todas las Reseñas
+            </a>
             {{/isAdmin}}
+            {{^isAdmin}}
             <a href="/myReviews" class="profile-btn text-decoration-none">
                 Mis Reseñas
             </a>
+            {{/isAdmin}}
         </div>
 
         <div class="d-flex justify-content-start gap-3 p-3 add-list mb-0">
