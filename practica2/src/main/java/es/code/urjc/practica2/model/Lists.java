@@ -1,6 +1,8 @@
 package es.code.urjc.practica2.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +23,16 @@ public class Lists {
 
     private String listName;
 
+    @Enumerated(EnumType.STRING)
+    private Types type;
+
+    public enum Types {
+        MOVIE,
+        SERIE,
+        USER,
+        LIST;
+    }
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account listOwner;
@@ -35,9 +47,10 @@ public class Lists {
 
     public Lists() {} //Default constructor for JPA
 
-    public Lists(String listName, List<Filmography> filmographyList) {
+    public Lists(String listName, List<Filmography> filmographyList, Types type) {
         this.listName = listName;
         this.filmographyList = filmographyList;
+        this.type = type;
     }
 
     public Long getListsId() {
@@ -74,5 +87,13 @@ public class Lists {
 
     public int getListSize(){
         return filmographyList !=null ?  filmographyList.size() : 0; 
+    }
+
+    public Types getType() {
+        return type;
+    }
+
+    public void setType(Types type) {
+        this.type = type;
     }
 }

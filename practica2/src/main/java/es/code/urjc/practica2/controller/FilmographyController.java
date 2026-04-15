@@ -35,10 +35,14 @@ import es.code.urjc.practica2.service.ReviewService;
 
 @Controller
 public class FilmographyController {
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private AccountService accountService;
-    @Autowired private ListsService listsService;
-    @Autowired private ReviewService reviewService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/principal")
     public String principal(Model model) {
@@ -71,6 +75,7 @@ public class FilmographyController {
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
+
         List<Map<String, Object>> sections = new ArrayList<>();
 
         Map<String, Object> sec1 = new HashMap<>();
@@ -178,9 +183,9 @@ public class FilmographyController {
         List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
         if (currentUser != null) {
             List<Lists> listsToShow;
-            if(currentUser.getAccountRole() == Account.Role.ADMIN){
+            if (currentUser.getAccountRole() == Account.Role.ADMIN) {
                 listsToShow = listsService.findAllSystemLists();
-            }else{
+            } else {
                 listsToShow = currentUser.getAccountLists();
             }
 
@@ -201,18 +206,21 @@ public class FilmographyController {
         return "filmographyDetails";
     }
 
-    // Updates which lists contain this filmography (add or remove based on checkboxes)
+    // Updates which lists contain this filmography (add or remove based on
+    // checkboxes)
     @PostMapping("/filmographies/{id}/lists/update")
-    public String updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, Principal principal) {
-        if (principal == null) return "redirect:/login";
+    public String updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds,
+            Principal principal) {
+        if (principal == null)
+            return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = accountService.findByEmail(principal.getName());
 
         List<Lists> listsToUpdate;
-        if(currentUser.getAccountRole() == Account.Role.ADMIN){
+        if (currentUser.getAccountRole() == Account.Role.ADMIN) {
             listsToUpdate = listsService.findAllSystemLists();
-        }else{
+        } else {
             listsToUpdate = currentUser.getAccountLists();
         }
 
@@ -244,7 +252,7 @@ public class FilmographyController {
         Lists list = listsService.findById(id);
 
         if (list == null) {
-            return "redirect:/lists"; 
+            return "redirect:/lists";
         }
 
         model.addAttribute("listName", list.getListName().replace(" - Series", ""));
@@ -274,7 +282,8 @@ public class FilmographyController {
         // Search by genre (normalized for Enum comparison)
         List<Filmography> byGenre = new ArrayList<>();
         try {
-            // Replaces spaces with underscores and removes common Spanish accents to match Enum constants
+            // Replaces spaces with underscores and removes common Spanish accents to match
+            // Enum constants
             String enumQuery = query.toUpperCase().replace(" ", "_")
                     .replace("Ó", "O").replace("É", "E")
                     .replace("Í", "I").replace("Á", "A");

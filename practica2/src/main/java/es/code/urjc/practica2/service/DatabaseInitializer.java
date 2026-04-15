@@ -20,6 +20,7 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Filmography.Platforms;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Genre.Genres;
+import es.code.urjc.practica2.model.Lists.Types;
 import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
@@ -294,68 +295,71 @@ public class DatabaseInitializer implements CommandLineRunner {
         filmographyService.recalculateAllAverages();
 
         // Lists
-        Lists aliceFavourites = new Lists("Favourites", List.of(inception, dune, breakingBad));
+        Lists aliceFavourites = new Lists("Favourites", List.of(inception, dune, breakingBad),Types.USER);
         aliceFavourites.setListOwner(alice);
 
-        Lists aliceWatchLater = new Lists("Watch later", List.of(mulhollandDrive, westworld));
+        Lists aliceWatchLater = new Lists("Watch later", List.of(mulhollandDrive, westworld),Types.USER);
         aliceWatchLater.setListOwner(alice);
 
-        Lists bobMustSee = new Lists("Must see", List.of(inception, breakingBad));
+        Lists bobMustSee = new Lists("Must see", List.of(inception, breakingBad),Types.USER);
         bobMustSee.setListOwner(bob);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(aliceFavourites, aliceWatchLater, bobMustSee)));
 
         // System lists for MOVIES only 
-        Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, pulpFiction)));
+        Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, pulpFiction)),Types.MOVIE);
         actionList.setListOwner(null);
 
-        Lists adventureList = new Lists("Aventura", new ArrayList<>(List.of(dune, interstellar, odiseaEspacio)));
+        Lists adventureList = new Lists("Aventura", new ArrayList<>(List.of(dune, interstellar, odiseaEspacio)),Types.MOVIE);
         adventureList.setListOwner(null);
 
-        Lists sciFiList = new Lists("Ciencia Ficción", new ArrayList<>(List.of(inception, dune, interstellar, odiseaEspacio)));
+        Lists sciFiList = new Lists("Ciencia Ficción", new ArrayList<>(List.of(inception, dune, interstellar, odiseaEspacio)),Types.MOVIE);
         sciFiList.setListOwner(null);
 
-        Lists dramaList = new Lists("Drama", new ArrayList<>(List.of(dune, mulhollandDrive, pulpFiction, parasitos, interstellar)));
+        Lists dramaList = new Lists("Drama", new ArrayList<>(List.of(dune, mulhollandDrive, pulpFiction, parasitos, interstellar)),Types.MOVIE);
         dramaList.setListOwner(null);
 
-        Lists suspenseList = new Lists("Suspense", new ArrayList<>(List.of(inception, mulhollandDrive, parasitos)));
+        Lists suspenseList = new Lists("Suspense", new ArrayList<>(List.of(inception, mulhollandDrive, parasitos)),Types.MOVIE);
         suspenseList.setListOwner(null);
 
-        Lists horrorList = new Lists("Miedo", new ArrayList<>(List.of(mulhollandDrive)));
+        Lists horrorList = new Lists("Miedo", new ArrayList<>(List.of(mulhollandDrive)),Types.MOVIE);
         horrorList.setListOwner(null);
 
-        Lists comedyList = new Lists("Comedia", new ArrayList<>());
+        Lists comedyList = new Lists("Comedia", new ArrayList<>(),Types.MOVIE);
         comedyList.setListOwner(null);
 
-        Lists romanceList = new Lists("Romance", new ArrayList<>());
+        Lists romanceList = new Lists("Romance", new ArrayList<>(),Types.MOVIE);
         romanceList.setListOwner(null);
 
-        Lists crimeList = new Lists("Crimen", new ArrayList<>(List.of(pulpFiction)));
+        Lists crimeList = new Lists("Crimen", new ArrayList<>(List.of(pulpFiction)),Types.MOVIE);
         crimeList.setListOwner(null);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(actionList, adventureList, sciFiList, dramaList, suspenseList, horrorList, comedyList, romanceList, crimeList)));
 
         // System lists for SERIES only 
-        Lists sciFiSeriesList = new Lists("Ciencia Ficción - Series", new ArrayList<>(List.of(westworld)));
+        Lists sciFiSeriesList = new Lists("Ciencia Ficción - Series", new ArrayList<>(List.of(westworld)),Types.SERIE);
         sciFiSeriesList.setListOwner(null);
 
-        Lists dramaSeriesList = new Lists("Drama - Series", new ArrayList<>(List.of(westworld, breakingBad, succession, theWire, betterCallSaul, squidGame)));
+        Lists dramaSeriesList = new Lists("Drama - Series", new ArrayList<>(List.of(westworld, breakingBad, succession, theWire, betterCallSaul, squidGame)),Types.SERIE);
         dramaSeriesList.setListOwner(null);
 
-        Lists suspenseSeriesList = new Lists("Suspense - Series", new ArrayList<>(List.of(westworld, breakingBad, theWire, squidGame)));
+        Lists suspenseSeriesList = new Lists("Suspense - Series", new ArrayList<>(List.of(westworld, breakingBad, theWire, squidGame)),Types.SERIE);
         suspenseSeriesList.setListOwner(null);
 
-        Lists actionSeriesList = new Lists("Acción - Series", new ArrayList<>(List.of(breakingBad, squidGame)));
+        Lists actionSeriesList = new Lists("Acción - Series", new ArrayList<>(List.of(breakingBad, squidGame)),Types.SERIE);
         actionSeriesList.setListOwner(null);
 
-        Lists comedySeriesList = new Lists("Comedia - Series", new ArrayList<>(List.of(breakingBad, succession)));
+        Lists comedySeriesList = new Lists("Comedia - Series", new ArrayList<>(List.of(breakingBad, succession)),Types.SERIE);
         comedySeriesList.setListOwner(null);
 
-        Lists crimeSeriesList = new Lists("Crimen - Series", new ArrayList<>(List.of(theWire, betterCallSaul)));
+        Lists crimeSeriesList = new Lists("Crimen - Series", new ArrayList<>(List.of(theWire, betterCallSaul)),Types.SERIE);
         crimeSeriesList.setListOwner(null);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(sciFiSeriesList, dramaSeriesList, suspenseSeriesList, actionSeriesList, comedySeriesList, crimeSeriesList)));
-    }
+        
+        
+
+}
 
     public void setFilmographyImage(Filmography film, String classPathResource) throws IOException{
         if (classPathResource == null) {
