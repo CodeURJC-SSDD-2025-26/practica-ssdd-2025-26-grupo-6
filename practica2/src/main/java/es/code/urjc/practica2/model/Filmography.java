@@ -33,8 +33,10 @@ public class Filmography {
 
     private String filmographyName;
     private float filmographyAverageStars;
+
     @Column(columnDefinition = "TEXT")
     private String filmographySynopsis;
+    
     private int filmographyYear;
     private String filmographyTrailerUrl;
 

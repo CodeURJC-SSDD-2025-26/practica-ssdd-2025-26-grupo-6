@@ -17,15 +17,29 @@ public class Genre {
     private Genres genres;
 
     public enum Genres {
-        ACCION,
-        ROMANCE,
+        ACCIÓN,
+        ANIMACIÓN,
         AVENTURA,
-        MIEDO,
-        CIENCIA_FICCION,
-        SUSPENSE,
-        DRAMA,
+        BÉLICO,
+        BIOGRÁFICO,   
+        CIENCIA_FICCIÓN,
+        CINE_NEGRO,   
         COMEDIA,
-        CRIMEN;
+        CRIMEN,
+        DEPORTE,    
+        DOCUMENTAL,
+        DRAMA,
+        FAMILIAR,
+        FANTASÍA,
+        HISTORIA,
+        INDEPENDIENTE,
+        MIEDO,
+        MISTERIO,
+        MUSICAL,
+        OESTE,
+        REALITY,
+        ROMANCE,
+        SUSPENSE;
 
         public String getDisplayName() {
             String name = this.name().replace("_", " ").toLowerCase();

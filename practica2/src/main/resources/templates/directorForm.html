@@ -1,0 +1,59 @@
+{{>head}}
+
+<body class="primary principal">
+    {{>header}}
+
+    <!-- Page content -->
+    <div class="container-fluid py-4 content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
+                    <h3 class="mb-3 text-center text-white">
+                        {{#filmographyId}}Editar {{/filmographyId}}
+                        {{^filmographyId}}Añadir {{/filmographyId}}
+                        Director
+                    </h3>
+                    
+                    <!-- Form -->
+                    {{#filmographyId}}
+                    <form action="" enctype="multipart/form-data" method="post"
+                        class="d-flex flex-column gap-3 administer-form">
+                    {{/filmographyId}}
+
+                    {{^filmographyId}}
+                    <form action="" enctype="multipart/form-data" method="post"
+                        class="d-flex flex-column gap-3 administer-form">
+                    {{/filmographyId}}
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                        <!-- Name -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Director:</label>
+                            <input type="text" class="form-control" name="filmographyName"
+                                placeholder="Título" value="{{filmographyName}}" required>
+                        </div>
+                        <!-- Birth date -->
+                        <div class="d-flex flex-column">
+                            <label class="fw-bold text-white">Año de nacimiento:</label>
+                            <input type="number" class="form-control" name="directoBirthDate"
+                                placeholder="Año de nacimiento" min="1900" max="2026"
+                                value="" required>
+                        </div>
+                        <!-- Submit & Cancel buttons -->
+                        <div class="d-flex gap-2">
+                            <button href="/administrator" class="btn btn-primary w-50 py-2 " type="submit">
+                                {{#filmographyId}}Actualizar{{/filmographyId}}
+                                {{^filmographyId}}Añadir{{/filmographyId}}
+                            </button>
+                            <a href="/administrator"
+                                class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{>footer}}
+</body>
+
+</html>
