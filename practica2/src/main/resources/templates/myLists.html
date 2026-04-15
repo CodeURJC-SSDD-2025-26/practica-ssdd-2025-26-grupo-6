@@ -7,7 +7,7 @@
     <div class="content">
         <div class="d-flex justify-content-start gap-3 p-3">
 
-
+            {{^fromAdmin}}
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
             </a>
@@ -19,7 +19,8 @@
             <a href="/myReviews" class="profile-btn text-decoration-none">
                 {{#isAdmin}} Todas las Reseñas {{/isAdmin}} {{^isAdmin}} Mis Reseñas {{/isAdmin}}
             </a>
-            
+            {{/fromAdmin}}
+
         </div>
 
         <div class="d-flex justify-content-start gap-3 p-3 add-list mb-0">

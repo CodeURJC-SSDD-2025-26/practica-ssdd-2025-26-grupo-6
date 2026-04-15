@@ -25,6 +25,8 @@ import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
+import es.code.urjc.practica2.model.Lists;
+import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.AccountService;
@@ -64,9 +66,9 @@ public class AdministratorController {
         model.addAttribute("systemListsPreview", allSystemLists.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("systemLists", allSystemLists);
 
-        var allUsersLists = listsService.findAllUserList();
-        model.addAttribute("usersListsPreview", allUsersLists.stream().limit(5).collect(Collectors.toList()));
-        model.addAttribute("usersLists", allUsersLists);
+        List<Director> allDirectors = directorService.findAll();
+        model.addAttribute("directorPreview", allDirectors.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("director", allDirectors);
 
         //Chart
         Map <String, Long> genreCount = filmographyService.countByGenre();
@@ -79,6 +81,8 @@ public class AdministratorController {
 
         return "administrator";
     }
+    //@GetMapping("/director/new")
+    //public String
 
 
     @GetMapping("/administrator/profile/{id}/editProfile")
@@ -124,6 +128,40 @@ public class AdministratorController {
         accountService.delete(id);
         
         return "redirect:/administrator";
+    }
+
+    @GetMapping("/administrator/profile/{id}/review")
+    public String editUsersReviewFromAdmin(@PathVariable Long id,Model model) {
+        Account user = accountService.findById(id);
+        model.addAttribute("currentUser",user);
+        
+        boolean isAdmin = user.getAccountRole() == Account.Role.ADMIN;
+        List<Review> reviews;
+        if (isAdmin) {
+
+            reviews = reviewService.findAll();
+        }else{
+            reviews = reviewService.findByAuthor(user);
+        }
+
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("isAdmin", true);
+        model.addAttribute("fromAdmin",true);
+
+        return "myReviews";
+    }
+
+    @GetMapping("/administrator/profile/{id}/userlist")
+    public String editUsersListsFromAdmin(@PathVariable Long id,Model model) {
+        Account user = accountService.findById(id);
+        model.addAttribute("currentUser",user);
+        List<Lists> list = listsService.findAllListsByAuthor(user);
+
+        model.addAttribute("lists", list);
+        model.addAttribute("isAdmin", true);
+        model.addAttribute("fromAdmin",true);
+
+        return "myLists";
     }
     
 
