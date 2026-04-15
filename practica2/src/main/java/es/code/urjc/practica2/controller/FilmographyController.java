@@ -139,6 +139,7 @@ public class FilmographyController {
         }
 
         model.addAttribute("filmography", filmography);
+        model.addAttribute("logged", currentUser != null);
 
         // Check if it's a movie or a serie to show the correct information
         if (filmography instanceof Serie serie) {
@@ -240,7 +241,6 @@ public class FilmographyController {
 
     @GetMapping("/lists/{id}")
     public String showList(@PathVariable Long id, Model model) {
-
         Lists list = listsService.findById(id);
 
         if (list == null) {
@@ -257,7 +257,7 @@ public class FilmographyController {
     public String recentFilms(Model model) {
         model.addAttribute("filmographyList", filmographyService.getRecentFilms(20));
         model.addAttribute("listName", "Películas Recientes");
-        return "filmslists"; // Usaremos un HTML genérico
+        return "filmslists";
     }
 
     @GetMapping("/searchBar")
