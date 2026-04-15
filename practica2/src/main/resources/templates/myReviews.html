@@ -14,15 +14,10 @@
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
-            <a href="/myLists" class="profile-btn text-decoration-none">
-                Todas las Listas
-            </a>
             {{/isAdmin}}
-            {{^isAdmin}}
             <a href="/myLists" class="profile-btn text-decoration-none">
-                Mis Listas
+                {{#isAdmin}} Todas las Listas{{/isAdmin}} {{^isAdmin}} Mis Listas {{/isAdmin}}
             </a>
-            {{/isAdmin}}
 
         </div>
         <h4 class="text-start mb-4">Mis Reseñas</h4>
