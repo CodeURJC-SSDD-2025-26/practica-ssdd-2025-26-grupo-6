@@ -47,9 +47,9 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         // Accounts
-        Account admin = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
-        Account alice = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
-        Account bob   = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
+        Account admin   = new Account("admin", LocalDate.of(1990,1,1), "admin@palomix.com", Role.ADMIN, passwordEncoder.encode("admin"));
+        Account alice   = new Account("alice",  LocalDate.of(1995,6,15), "alice@palomix.com", Role.USER, passwordEncoder.encode("alice123"));
+        Account bob     = new Account("bob", LocalDate.of(1998,11,3), "bob@palomix.com",   Role.USER, passwordEncoder.encode("bob123"));
         Account carla   = new Account("carla", LocalDate.of(2005,07,15), "carlagrsmm@gmail.com",   Role.USER, passwordEncoder.encode("carla"));
         Account charlie = new Account("charlie", LocalDate.of(1992, 3, 20), "charlie@palomix.com", Role.USER, passwordEncoder.encode("charlie123"));
         Account diana   = new Account("diana",   LocalDate.of(1994, 8, 12), "diana@palomix.com",   Role.USER, passwordEncoder.encode("diana123"));
@@ -83,7 +83,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         directorRepository.saveAll(Objects.requireNonNull(List.of(nolan, villeneuve, lynch, nolanJ, gilligan, scorsese, tarantino, spielberg, hitchcock, kubrick, greta, bong, armstrong, simon, hwang)));
 
-        // Genres — saved first so they have an ID before being assigned
+        // Genres
         Genre accion         = genreRepository.save(new Genre(Genres.ACCION));
         Genre romance        = genreRepository.save(new Genre(Genres.ROMANCE));
         Genre cienciaFiccion = genreRepository.save(new Genre(Genres.CIENCIA_FICCION));

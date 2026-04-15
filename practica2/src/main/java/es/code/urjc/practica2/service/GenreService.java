@@ -16,9 +16,13 @@ public class GenreService {
     public List<Genre> getGenresByName(List<String> genreNames){
         if (genreNames == null) return new ArrayList<>();
         
-    return genreNames.stream().map(name -> genreRepository.findByGenres(Genre.Genres.valueOf(name))
+        return genreNames.stream().map(name -> genreRepository.findByGenres(Genre.Genres.valueOf(name))
                     .orElseThrow(() -> new RuntimeException("Genre not found: " + name)))
             .collect(java.util.stream.Collectors.toList());
         
+    }
+
+    public String getDisplayNameWithoutUnderscore(Genre genre) {
+        return genre.getGenres().getDisplayName();
     }
 }

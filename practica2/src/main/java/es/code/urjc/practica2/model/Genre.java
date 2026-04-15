@@ -25,7 +25,12 @@ public class Genre {
         SUSPENSE,
         DRAMA,
         COMEDIA,
-        CRIMEN
+        CRIMEN;
+
+        public String getDisplayName() {
+            String name = this.name().replace("_", " ").toLowerCase();
+            return name.substring(0, 1).toUpperCase() + name.substring(1);
+        }
     }
 
     public Genre() {} //Default constructor for JPA
