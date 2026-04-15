@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.model.Review;
+import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.DirectorService;
@@ -97,7 +97,8 @@ public class AdministratorController {
     }
 
     @PostMapping("/administrator/profile/{id}/editProfile")
-    public String updateUserFromAdmin(@PathVariable Long id, @RequestParam String accountName,@RequestParam String accountEmail,@RequestParam LocalDate accountBirthDate){
+    public String updateUserFromAdmin(@PathVariable Long id, @RequestParam String accountName,
+        @RequestParam String accountEmail,@RequestParam LocalDate accountBirthDate){
         Account user = accountService.findById(id);
         user.setAccountName(accountName);
         user.setAccountEmail(accountEmail);
@@ -125,7 +126,11 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String saveMovie(Movie movie, @RequestParam String directorName, 
+        @RequestParam(required = false) List<String> genreIds, 
+        @RequestParam(required = false) List<String> platformsIds, 
+        @RequestParam(required = false) MultipartFile imageFile) throws IOException {  
+
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             movie.setFilmographyImage(image);
@@ -160,7 +165,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/edit")
-    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, 
+        @RequestParam(required = false) List<String> genreIds, 
+        @RequestParam(required = false) List<String> platformsIds, 
+        @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             movie.setFilmographyImage(image);
@@ -200,9 +208,8 @@ public class AdministratorController {
         filmographyService.save(serie);
 
         // Add serie to system lists that match its genres
-        // ESTO ES LO CORRECTO AHORA
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSystemLists();
-        for (es.code.urjc.practica2.model.Lists list : systemLists) {
+        List<Lists> systemLists = listsService.findAllSystemLists();
+        for (Lists list : systemLists) {
             if (!list.getListName().endsWith("- Series")) continue;
             String listGenre = list.getListName().replace(" - Series", "");
             boolean matches = serie.getFilmographyGenres().stream()
@@ -225,7 +232,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/{id}/edit")
-    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, 
+        @RequestParam(required = false) List<String> genreIds, 
+        @RequestParam(required = false) List<String> platformsIds, 
+        @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             serie.setFilmographyImage(image);
@@ -298,7 +308,6 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-
     @PostMapping("/administrator/userLists/{id}/delete")
     public String deleteUserLists(@PathVariable Long id) {
         listsService.delete(id);
@@ -319,5 +328,4 @@ public class AdministratorController {
             case CRIMEN -> "Crimen";
         };
     }
-    
 }

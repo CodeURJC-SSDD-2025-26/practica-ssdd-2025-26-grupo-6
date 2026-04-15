@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -161,12 +160,11 @@ public class AccountController {
     @GetMapping("/lists/{id}/edit")
     public String editList(@PathVariable Long id, Model model, Principal principal) {
         Lists list = listsService.findById(id);
-        Account currentUser = accountService.findByEmail(principal.getName());
 
-        // Todas las filmografías disponibles
+        // All filmographies available
         List<Filmography> allFilmographies = filmographyService.findAllFilmography();
 
-        // Marcamos cuáles ya están en la lista
+        // Mark which ones are in the list
         List<Map<String, Object>> filmographiesWithCheck = new ArrayList<>();
         for (Filmography f : allFilmographies) {
             Map<String, Object> item = new HashMap<>();
@@ -182,22 +180,17 @@ public class AccountController {
     }
 
     @PostMapping("/lists/{id}/update")
-    public String updateListName(@PathVariable Long id,
-            @RequestParam String newName,
-            @RequestParam(required = false) List<Long> filmographyIds,
-            Principal principal) {
+    public String updateListName(@PathVariable Long id, @RequestParam String newName,
+        @RequestParam(required = false) List<Long> filmographyIds, Principal principal) {
 
         if (principal == null) return "redirect:/login";
 
-       
-
-        Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
         if (list != null) {
             list.setListName(newName);
 
-            // Actualizar el contenido de la lista
+            // Update the list content
             if (filmographyIds != null) {
                 List<Filmography> selectedFilms = filmographyIds.stream()
                         .map(fId -> filmographyService.findById(fId))
@@ -217,7 +210,6 @@ public class AccountController {
     public String deleteList(@PathVariable Long id, Principal principal) {
         if (principal == null) return "redirect:/login";
 
-        Account currentUser = accountService.findByEmail(principal.getName());
         Lists list = listsService.findById(id);
 
         if (list != null) {
