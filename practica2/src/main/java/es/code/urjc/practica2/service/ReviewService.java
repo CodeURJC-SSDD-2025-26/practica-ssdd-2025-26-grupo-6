@@ -49,7 +49,6 @@ public class ReviewService {
 
     public Review save(Review review) {
         Review saved = reviewRepository.save(Objects.requireNonNull(review));
-        // Actualizar el promedio en la filmografía
         Filmography filmography = saved.getFilmography();
         filmography.updateAverageStars();
         filmographyRepository.save(filmography);
@@ -71,7 +70,6 @@ public class ReviewService {
         if (review != null) {
             Filmography filmography = review.getFilmography();
             reviewRepository.deleteById(reviewId);
-            // Recargar para que las reviews estén actualizadas antes de recalcular
             filmography = filmographyRepository.findByIdWithReviews(filmography.getFilmographyId())
                     .orElse(filmography);
             filmography.updateAverageStars();

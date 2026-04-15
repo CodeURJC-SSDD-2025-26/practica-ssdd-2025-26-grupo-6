@@ -408,13 +408,13 @@ canvas{
 }
 
 
-/* Color para badges desactivados (gris) */
+/* Color for deactivated badges (gray) */
 .genre-badge, .platform-badge {
     background-color: #6c757d !important;
     transition: background-color 0.2s;
 }
 
-/* Color para badges activos (azul) */
+/* Color for active badges (blue) */
 .genre-badge.active, .platform-badge.active {
     background-color: #0d6efd !important;
 }

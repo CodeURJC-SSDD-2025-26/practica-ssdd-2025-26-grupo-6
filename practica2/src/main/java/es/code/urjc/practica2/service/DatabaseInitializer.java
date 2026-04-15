@@ -305,7 +305,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(aliceFavourites, aliceWatchLater, bobMustSee)));
 
-        // System lists for MOVIES only (owned by admin)
+        // System lists for MOVIES only 
         Lists actionList = new Lists("Acción", new ArrayList<>(List.of(inception, pulpFiction)));
         actionList.setListOwner(null);
 
@@ -335,7 +335,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(actionList, adventureList, sciFiList, dramaList, suspenseList, horrorList, comedyList, romanceList, crimeList)));
 
-        // System lists for SERIES only (owned by admin)
+        // System lists for SERIES only 
         Lists sciFiSeriesList = new Lists("Ciencia Ficción - Series", new ArrayList<>(List.of(westworld)));
         sciFiSeriesList.setListOwner(null);
 

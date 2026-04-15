@@ -86,7 +86,7 @@ public class EmailService {
 
             helper.setText(body, true);
             ClassPathResource res = new ClassPathResource("static/images/logo.png");
-            helper.addInline("logoImage", res); // El ID debe coincidir con el del src
+            helper.addInline("logoImage", res); 
 
             mailSender.send(message);
 

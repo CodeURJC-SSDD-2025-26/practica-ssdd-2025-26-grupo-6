@@ -244,7 +244,7 @@ public class FilmographyController {
         Lists list = listsService.findById(id);
 
         if (list == null) {
-            return "redirect:/lists"; // o página de error si quieres
+            return "redirect:/lists"; 
         }
 
         model.addAttribute("listName", list.getListName().replace(" - Series", ""));
@@ -253,7 +253,6 @@ public class FilmographyController {
         return "filmslists";
     }
 
-    // 20 movies more recent add
     @GetMapping("/films/recent")
     public String recentFilms(Model model) {
         model.addAttribute("filmographyList", filmographyService.getRecentFilms(20));
@@ -269,14 +268,13 @@ public class FilmographyController {
             return "redirect:/principal";
         }
 
-        // 1. Search by title
+        // Search by title
         List<Filmography> byTitle = filmographyService.findByTitleContaining(query);
 
-        // 2. Search by genre (normalized for Enum comparison)
+        // Search by genre (normalized for Enum comparison)
         List<Filmography> byGenre = new ArrayList<>();
         try {
-            // Replaces spaces with underscores and removes common Spanish accents to match
-            // Enum constants
+            // Replaces spaces with underscores and removes common Spanish accents to match Enum constants
             String enumQuery = query.toUpperCase().replace(" ", "_")
                     .replace("Ó", "O").replace("É", "E")
                     .replace("Í", "I").replace("Á", "A");
@@ -290,11 +288,11 @@ public class FilmographyController {
         Set<Filmography> relatedFilms = new HashSet<>();
         relatedFilms.addAll(filmographyService.findFilmographyRelatedByTitleOrGenre(query));
 
-        // 3. Combine results using a Set to avoid duplicates
+        // Combine results using a Set to avoid duplicates
         Set<Filmography> uniqueResults = new HashSet<>(byTitle);
         uniqueResults.addAll(byGenre);
 
-        // 4. Split into Movies and Series
+        // Split into Movies and Series
         List<Movie> movies = uniqueResults.stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
@@ -305,10 +303,10 @@ public class FilmographyController {
                 .map(f -> (Serie) f)
                 .toList();
 
-        // 5. Check if both categories are empty
+        // Check if both categories are empty
         boolean noResults = movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty();
 
-        // 6. Add attributes to the model
+        // Add attributes to the model
         model.addAttribute("query", query);
         model.addAttribute("movies", movies);
         model.addAttribute("series", series);

@@ -27,7 +27,6 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
         if (modelAndView != null) {
             CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
             if (token != null) {
-                // Cambia "token" por "_csrf" para que coincida con tu HTML
                 modelAndView.addObject("_csrf", token);
             }
         }

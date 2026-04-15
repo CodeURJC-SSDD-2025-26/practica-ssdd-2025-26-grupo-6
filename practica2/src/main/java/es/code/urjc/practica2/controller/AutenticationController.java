@@ -36,8 +36,6 @@ public class AutenticationController {
         return "login";
     }
 
-    // restarPassword
-    // 1. Acción para generar el código y enviar el correo (Se mantiene similar)
     @PostMapping("/sendRecoveryEmail")
     public String sendRecoveryEmail(@RequestParam String email, HttpSession session, Model model) {
 
@@ -48,24 +46,23 @@ public class AutenticationController {
             return "login";
         }
 
-        // Generamos el código de 6 dígitos
+        
         String recoveryCode = String.format("%06d", new Random().nextInt(1000000));
 
-        // Guardamos en la SESIÓN el código y el email asociado
+        
         session.setAttribute("recoveryCode", recoveryCode);
         session.setAttribute("recoveryEmail", email);
-        session.setMaxInactiveInterval(300); // 5 minutos de validez
+        session.setMaxInactiveInterval(300); 
 
         emailService.sendMail(email, "Código de recuperación - Palomix",
                 "<h3>Tu código de recuperación es:</h3><h1>" + recoveryCode + "</h1>" +
                         "<p>Introduce este código junto a tu nueva contraseña en la web.</p>");
                         
         model.addAttribute("message", "Código enviado con éxito.");
-        System.out.println("Código enviado con éxito."); // <--- AÑADE ESTO
+        System.out.println("Código enviado con éxito."); 
         return "login";
     }
 
-    // 2. Acción que VALIDA el código y CAMBIA la contraseña a la vez
     @PostMapping("/restartPassword")
     public String restartPassword(@RequestParam String email,
             @RequestParam String code,
@@ -76,18 +73,14 @@ public class AutenticationController {
         String sessionCode = (String) session.getAttribute("recoveryCode");
         String sessionEmail = (String) session.getAttribute("recoveryEmail");
 
-        // Validamos: 1. Que haya código en sesión, 2. Que coincida el código, 3. Que
-        // coincida el email
         if (sessionCode != null && sessionCode.equals(code) && sessionEmail.equals(email)) {
 
-            // Buscamos la cuenta
             Account account = accountService.findByEmail(email);
             if (account != null) {
-                // Encriptamos y guardamos la nueva contraseña
+                
                 account.setAccountPassword(passwordEncoder.encode(newPassword));
                 accountService.save(account);
 
-                // Limpiamos la sesión por seguridad
                 session.removeAttribute("recoveryCode");
                 session.removeAttribute("recoveryEmail");
 

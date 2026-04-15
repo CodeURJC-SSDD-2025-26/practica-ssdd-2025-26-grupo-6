@@ -195,7 +195,6 @@ public class Filmography {
         if (filmographyGenres == null || filmographyGenres.isEmpty()) {
             return null;
         }
-        // Devuelve el nombre del primer género como String
         return filmographyGenres.get(0).getGenres().name();
     }
 

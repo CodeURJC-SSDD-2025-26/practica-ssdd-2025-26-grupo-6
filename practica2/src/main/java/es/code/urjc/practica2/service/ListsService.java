@@ -56,7 +56,7 @@ public class ListsService {
     }
 
 
-   // 1. Best rated lists
+   // Best rated lists
     public List<Map<String, Object>> getBestRatedLists() {
         return findAllUserList().stream()
                 .sorted(Comparator.comparingDouble(this::getListAverageRating).reversed())
@@ -65,7 +65,7 @@ public class ListsService {
                 .collect(Collectors.toList());
     }
 
-    // 2. Worst rated lists
+    // Worst rated lists
     public List<Map<String, Object>> getWorstRatedLists() {
         return findAllUserList().stream()
                 .sorted(Comparator.comparingDouble(this::getListAverageRating))
@@ -74,7 +74,7 @@ public class ListsService {
                 .collect(Collectors.toList());
     }
 
-    // 3. Longest lists (most items)
+    // Longest lists (most items)
     public List<Map<String, Object>> getLongestLists() {
         return findAllUserList().stream()
                 .sorted((a, b) -> Integer.compare(
@@ -85,7 +85,7 @@ public class ListsService {
                 .collect(Collectors.toList());
     }
 
-    // 4. Lists with longest movies (average duration)
+    // Lists with longest movies (average duration)
     public List<Map<String, Object>> getLongestMoviesLists() {
         return findAllUserList().stream()
                 .sorted(Comparator.comparingDouble(this::getAverageMovieDuration).reversed())
@@ -94,7 +94,7 @@ public class ListsService {
                 .collect(Collectors.toList());
     }
 
-    // 5. Lists with series with most seasons
+    // Lists with series with most seasons
     public List<Map<String, Object>> getSeriesWithMostSeasons() {
         return findAllUserList().stream()
                 .sorted(Comparator.comparingInt(this::getAverageSeriesSeasons).reversed())

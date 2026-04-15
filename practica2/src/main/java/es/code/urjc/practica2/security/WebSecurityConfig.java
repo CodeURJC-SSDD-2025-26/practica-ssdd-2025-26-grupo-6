@@ -44,7 +44,7 @@ public class WebSecurityConfig {
 								"/frequentlyAskedQuestions", "/legalAdvise", "/error", "/searchBar","/sendRecoveryEmail", "/restartPassword")
 						.permitAll()
 
-						// Roles específicos
+						// Specific roles
 						.requestMatchers("/administrator/**", "/movies/**", "/series/**").hasRole("ADMIN")
 
 						.requestMatchers("/profile/**", "/myReviews", "/reviews/**", "/myLists/**", "/lists/**",
