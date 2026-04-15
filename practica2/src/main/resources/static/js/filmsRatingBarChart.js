@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (ctx) {
 
         const chartData = JSON.parse(ctx.dataset.values);
+        const chartName = ctx.dataset.name;
 
         /* Chart Data */
         const data = {
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     title: {
                         display: true,
-                        text: 'Grafico de valoraciones de películas'
+                        text: 'Grafico de valoraciones de ' + chartName
                     }
                 }
             },
