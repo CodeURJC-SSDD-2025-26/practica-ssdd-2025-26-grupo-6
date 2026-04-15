@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import javax.lang.model.util.Types;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,13 +35,18 @@ import es.code.urjc.practica2.service.FilmographyService;
 
 @Controller
 public class AccountController {
-    @Autowired private ListsService listsService;
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private ReviewService reviewService;
-    @Autowired private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
-    public String newReview(@PathVariable Long filmographyId, Model model, @RequestParam(required = false) String error) {
+    public String newReview(@PathVariable Long filmographyId, Model model,
+            @RequestParam(required = false) String error) {
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
         model.addAttribute("review", review);
@@ -50,7 +57,8 @@ public class AccountController {
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(filmographyId);
         Account currentUser = accountService.findByEmail(principal.getName());
@@ -80,7 +88,8 @@ public class AccountController {
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
-    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars, @RequestParam String reviewDescription) {
+    public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
+            @RequestParam String reviewDescription) {
         Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
 
@@ -100,20 +109,20 @@ public class AccountController {
 
     @GetMapping("/myLists")
     public String myLists(Model model, Principal principal) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
-        
-        
-        if(isAdmin){
-            model.addAttribute("lists",listsService.findAllSystemLists());
-        }else{
+
+        if (isAdmin) {
+            model.addAttribute("lists", listsService.findAllSystemLists());
+        } else {
             model.addAttribute("lists", listsService.findByOwner(currentUser));
         }
-        
+
         return "myLists";
     }
 
@@ -122,11 +131,13 @@ public class AccountController {
             @RequestParam(required = false) String redirectTo,
             @RequestParam(required = false) String returnJson,
             Principal principal,
-            HttpServletResponse response) throws IOException {
-        if (principal == null) return "redirect:/login";
+            HttpServletResponse response,
+            @RequestParam(required = false) String type) throws IOException {
+        if (principal == null)
+            return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
-        boolean isAdmin =currentUser.getAccountRole() == Account.Role.ADMIN;
+        boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         String redirect = (redirectTo != null && !redirectTo.isBlank()) ? redirectTo : "/myLists";
 
         List<Lists> userLists = isAdmin ? listsService.findAllSystemLists() : listsService.findByOwner(currentUser);
@@ -134,8 +145,8 @@ public class AccountController {
             if (l.getListName().equals(listName)) {
                 model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
                 model.addAttribute("isAdmin", isAdmin);
-                model.addAttribute("lists",userLists);
-                
+                model.addAttribute("lists", userLists);
+
                 return "myLists";
             }
         }
@@ -144,6 +155,11 @@ public class AccountController {
             Lists newList = new Lists();
             newList.setListName(listName);
             newList.setListOwner(isAdmin ? null : currentUser);
+            if (!isAdmin) {
+                newList.setType(Lists.getTypeString("USER"));
+            } else {
+                newList.setType(Lists.getTypeString(type));
+            }
             listsService.save(newList);
 
             if ("true".equals(returnJson)) {
@@ -181,9 +197,10 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/update")
     public String updateListName(@PathVariable Long id, @RequestParam String newName,
-        @RequestParam(required = false) List<Long> filmographyIds, Principal principal) {
+            @RequestParam(required = false) List<Long> filmographyIds, Principal principal) {
 
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Lists list = listsService.findById(id);
 
@@ -208,7 +225,8 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/delete")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Lists list = listsService.findById(id);
 
@@ -220,7 +238,8 @@ public class AccountController {
 
     @GetMapping("/myReviews")
     public String myReviews(Model model, Principal principal) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
@@ -236,7 +255,8 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         String email = principal.getName();
         Account currentUser = accountService.findByEmail(email);
@@ -274,7 +294,7 @@ public class AccountController {
         return "redirect:/profile";
     }
 
-    private void reloadReviewsToCalculateAverage(Long filmographyId){
+    private void reloadReviewsToCalculateAverage(Long filmographyId) {
         Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
         updatedFilmography.updateAverageStars();
         filmographyService.save(updatedFilmography);

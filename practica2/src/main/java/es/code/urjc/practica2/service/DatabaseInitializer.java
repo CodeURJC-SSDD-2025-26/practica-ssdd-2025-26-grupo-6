@@ -44,6 +44,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private ImageService imageService;
     @Autowired private FilmographyService filmographyService;
+    @Autowired private ListsService listsService;
 
     @Override
     public void run(String... args) {
@@ -356,7 +357,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         crimeSeriesList.setListOwner(null);
 
         listsRepository.saveAll(Objects.requireNonNull(List.of(sciFiSeriesList, dramaSeriesList, suspenseSeriesList, actionSeriesList, comedySeriesList, crimeSeriesList)));
-        
         
 
 }

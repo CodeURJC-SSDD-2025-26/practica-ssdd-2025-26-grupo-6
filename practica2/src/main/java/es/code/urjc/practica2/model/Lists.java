@@ -29,8 +29,7 @@ public class Lists {
     public enum Types {
         MOVIE,
         SERIE,
-        USER,
-        LIST;
+        USER;
     }
 
     @ManyToOne
@@ -38,14 +37,11 @@ public class Lists {
     private Account listOwner;
 
     @ManyToMany
-    @JoinTable(
-        name = "list_filmographies",
-        joinColumns = @JoinColumn(name = "list_id"),
-        inverseJoinColumns = @JoinColumn(name = "filmography_id")
-    )
+    @JoinTable(name = "list_filmographies", joinColumns = @JoinColumn(name = "list_id"), inverseJoinColumns = @JoinColumn(name = "filmography_id"))
     private List<Filmography> filmographyList = new ArrayList<>();
 
-    public Lists() {} //Default constructor for JPA
+    public Lists() {
+    } // Default constructor for JPA
 
     public Lists(String listName, List<Filmography> filmographyList, Types type) {
         this.listName = listName;
@@ -85,8 +81,8 @@ public class Lists {
         this.listOwner = listOwner;
     }
 
-    public int getListSize(){
-        return filmographyList !=null ?  filmographyList.size() : 0; 
+    public int getListSize() {
+        return filmographyList != null ? filmographyList.size() : 0;
     }
 
     public Types getType() {
@@ -95,5 +91,17 @@ public class Lists {
 
     public void setType(Types type) {
         this.type = type;
+    }
+
+    
+    public static Types getTypeString(String type) {
+        if (type.equals("MOVIE")) {
+            return Types.MOVIE;
+        } else if (type.equals("SERIE")) {
+            return Types.SERIE;
+
+        }
+        return Types.USER;
+
     }
 }

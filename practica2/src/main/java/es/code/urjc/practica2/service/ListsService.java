@@ -56,7 +56,7 @@ public class ListsService {
     }
 
 
-   // Best rated lists
+    // Best rated lists
     public List<Map<String, Object>> getBestRatedLists() {
         return findAllUserList().stream()
                 .sorted(Comparator.comparingDouble(this::getListAverageRating).reversed())

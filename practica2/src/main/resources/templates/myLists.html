@@ -154,6 +154,19 @@
                     <label for="listName" class="for-label fw-semibold mb-2">Nombre de la lista</label>
                     <input type="text" name="listName" class="form-control" id="listName" placeholder="Ej: Favoritas..."
                         required>
+                    {{#isAdmin}}
+                        <h6 class="m-3">Incluir en:</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="typeMovie" value="MOVIE" required>
+                        <label class="form-check-label" for="typeMovie">Películas</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="typeSerie" value="SERIE">
+                        <label class="form-check-label" for="typeSerie">Series</label>
+                    </div>
+                    {{/isAdmin}}
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
@@ -174,7 +187,7 @@
             fetch('/api/search?query=' + encodeURIComponent(query))
                 .then(response => response.json())
                 .then(data => {
-                    resultsContainer.innerHTML = ''; 
+                    resultsContainer.innerHTML = '';
                     resultsContainer.style.display = 'block';
 
                     if (data.length === 0) {
@@ -198,9 +211,9 @@
                             <input class="form-check-input" type="checkbox" name="filmographyIds" value="${item.id}" checked>
                             <label class="form-check-label">${item.name}</label>
                         `;
-                                finalContainer.prepend(newFilm); 
+                                finalContainer.prepend(newFilm);
                             }
-                            div.remove(); 
+                            div.remove();
                             if (resultsContainer.innerHTML === '') resultsContainer.style.display = 'none';
                         };
 

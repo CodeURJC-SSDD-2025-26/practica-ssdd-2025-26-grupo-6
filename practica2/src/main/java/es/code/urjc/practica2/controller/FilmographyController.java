@@ -25,6 +25,7 @@ import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Lists;
+import es.code.urjc.practica2.model.Lists.Types;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
@@ -53,19 +54,19 @@ public class FilmographyController {
         List<Map<String, Object>> movieSections = new ArrayList<>();
 
         for (Lists list : systemLists) {
-            if (list.getListName().endsWith("- Series"))
-                continue;
-            List<Movie> movies = list.getFilmographyList().stream()
-                    .filter(f -> f instanceof Movie)
-                    .map(f -> (Movie) f)
-                    .toList();
+            if (list.getType().equals(Types.MOVIE)) {
+                List<Movie> movies = list.getFilmographyList().stream()
+                        .filter(f -> f instanceof Movie)
+                        .map(f -> (Movie) f)
+                        .toList();
 
-            if (!movies.isEmpty()) {
-                Map<String, Object> sec = new HashMap<>();
-                sec.put("name", list.getListName());
-                sec.put("listsId", list.getListsId());
-                sec.put("movies", movies);
-                movieSections.add(sec);
+                if (!movies.isEmpty()) {
+                    Map<String, Object> sec = new HashMap<>();
+                    sec.put("name", list.getListName());
+                    sec.put("listsId", list.getListsId());
+                    sec.put("movies", movies);
+                    movieSections.add(sec);
+                }
             }
         }
 
@@ -104,6 +105,7 @@ public class FilmographyController {
         sections.add(sec5);
 
         model.addAttribute("sections", sections);
+
         return "lists";
     }
 
@@ -114,20 +116,19 @@ public class FilmographyController {
         List<Map<String, Object>> seriesSections = new ArrayList<>();
 
         for (Lists list : systemLists) {
-            if (!list.getListName().endsWith("- Series"))
-                continue;
+            if (list.getType().equals(Types.SERIE)) {
+                List<Serie> seriesList = list.getFilmographyList().stream()
+                        .filter(f -> f instanceof Serie)
+                        .map(f -> (Serie) f)
+                        .toList();
 
-            List<Serie> seriesList = list.getFilmographyList().stream()
-                    .filter(f -> f instanceof Serie)
-                    .map(f -> (Serie) f)
-                    .toList();
-
-            if (!seriesList.isEmpty()) {
-                Map<String, Object> sec = new HashMap<>();
-                sec.put("name", list.getListName().replace(" - Series", ""));
-                sec.put("listsId", list.getListsId());
-                sec.put("series", seriesList);
-                seriesSections.add(sec);
+                if (!seriesList.isEmpty()) {
+                    Map<String, Object> sec = new HashMap<>();
+                    sec.put("name", list.getListName().replace(" - Series", ""));
+                    sec.put("listsId", list.getListsId());
+                    sec.put("series", seriesList);
+                    seriesSections.add(sec);
+                }
             }
         }
 
