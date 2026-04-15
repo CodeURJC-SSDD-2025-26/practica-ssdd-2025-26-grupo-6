@@ -6,23 +6,19 @@
     <!-- Page Content -->
     <div class="content px-5 mb-4">
         <div class="d-flex justify-content-start gap-3 p-3">
+            {{^fromAdmin}}
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
             </a>
-
             {{#isAdmin}}
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
-            <a href="/myLists" class="profile-btn text-decoration-none">
-                Todas las Listas
-            </a>
             {{/isAdmin}}
-            {{^isAdmin}}
             <a href="/myLists" class="profile-btn text-decoration-none">
-                Mis Listas
+                {{#isAdmin}} Todas las Listas{{/isAdmin}} {{^isAdmin}} Mis Listas {{/isAdmin}}
             </a>
-            {{/isAdmin}}
+            {{/fromAdmin}}
 
         </div>
         <h4 class="text-start mb-4">Mis Reseñas</h4>

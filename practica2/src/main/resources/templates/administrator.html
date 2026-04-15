@@ -24,11 +24,14 @@
                     <table class="table table-striped caption-top table-bordered">
                         <colgroup>
                             <col style="width:8%;">
-                            <col style="width:27%;">
-                            <col style="width:39%;">
-                            <col style="width:10%;">
+                            <col style="width:21%;">
+                            <col style="width:25%;">
                             <col style="width:8%;">
                             <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:8%;">
+                            <col style="width:6%;">
                         </colgroup>
 
                         <caption class="admin-caption">Usuarios del Sistema</caption>
@@ -38,6 +41,9 @@
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Cumpleaños</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col" class="text-center align-middle">Lists</th>
+                                <th scope="col" class="text-center align-middle">Reseñas</th>
                                 <th scope="col" class="text-center align-middle">Editar</th>
                                 <th scope="col" class="text-center align-middle">Borrar</th>
                             </tr>
@@ -49,6 +55,18 @@
                                 <td>{{accountName}}</td>
                                 <td>{{accountEmail}}</td>
                                 <td>{{accountBirthDate}}</td>
+                                <td>{{accountRole}}</td>
+
+                                <td class="text-center">
+                                    <a href="/administrator/profile/{{accountId}}/userlist"
+                                        class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-list-nested fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/administrator/profile/{{accountId}}/review"
+                                        class="btn btn-sm border-0 p-0 text-dark"><i
+                                            class="bi bi-card-text fs-5"></i></a>
+                                </td>
                                 <td class="text-center">
                                     <a href="/administrator/profile/{{accountId}}/editProfile"
                                         class="btn btn-sm border-0 p-0 text-dark"><i
@@ -265,45 +283,48 @@
             </div>
         </div>
 
-        <!-- Users Lists Table -->
+        <!-- Directors Table -->
         <div class="row mx-0 justify-content-md-center justify-content-start">
             <div class="col-sm-10 col-lg-10 col-8">
                 <div class="table-responsive">
                     <table class="table table-striped caption-top table-bordered">
                         <colgroup>
                             <col style="width:8%;">
-                            <col style="width:34%;">
+                            <col style="width:46%;">
+                            <col style="width:30%;">
                             <col style="width:8%;">
-                            <col style="width:42%;">
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="admin-caption">Listas del Usuario</caption>
+                        <caption class="admin-caption">Directores</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">N.Peliculas</th>
-                                <th scope="col">Usuario</th>
+                                <th scope="col">Año de Nacimiento</th>
+                                <th scope="col" class="text-center">Editar</th>
                                 <th scope="col" class="text-center">Borrar</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            {{#usersListsPreview}}
+                            {{#directorPreview}}
                             <tr>
-                                <th scope="row" class="text-center">{{listsId}}</th>
-                                <td>{{listName}}</td>
-                                <td class="text-center">{{listSize}}</td>
-                                <td>{{listOwner.accountName}}</td>
+                                <th scope="row" class="text-center">{{directorId}}</th>
+                                <td>{{directorName}}</td>
+                                <td class="text-center">{{directorBirthDate}}</td>
                                 <td class="text-center">
-                                    <form action="/administrator/userLists/{{listsId}}/delete" method="post">
+                                    <a href="/myLists" class="btn btn-sm border-0 p-0 text-dark"
+                                            class="bi bi-pencil-square fs-5"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <form action="administrator/systemLists/{{listsId}}/delete" method="post">
                                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
                                     </form>
                                 </td>
                             </tr>
-                            {{/usersListsPreview}}
+                            {{/directorPreview}}
                         </tbody>
                     </table>
                 </div>
@@ -312,10 +333,12 @@
         <div class="row mx-0 justify-content-md-center justify-content-start mb-5 mt-3 mt-md-0">
             <div class="col-3">
                 <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modalListUser">
-                    Mas Listas del usuario</button>
+                    data-bs-target="#modalListSistem">
+                    Mas Listas del Sistema</button>
             </div>
         </div>
+
+
 
         <!-- Chart -->
         <div class="row justify-content-md-center justify-content-start">
@@ -341,11 +364,14 @@
                             <table class="table table-striped caption-top table-bordered align-middle w-100">
                                 <colgroup>
                                     <col style="width:8%;">
-                                    <col style="width:27%;">
-                                    <col style="width:39%;">
-                                    <col style="width:10%;">
+                                    <col style="width:21%;">
+                                    <col style="width:25%;">
                                     <col style="width:8%;">
                                     <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                    <col style="width:6%;">
                                 </colgroup>
                                 <caption class="admin-caption">Usuarios del sistema</caption>
                                 <thead>
@@ -354,6 +380,9 @@
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Cumpleaños</th>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col" class="text-center align-middle">Lists</th>
+                                        <th scope="col" class="text-center align-middle">Reseñas</th>
                                         <th scope="col" class="text-center align-middle">Editar</th>
                                         <th scope="col" class="text-center align-middle">Borrar</th>
                                     </tr>
@@ -366,8 +395,21 @@
                                         <td>{{accountName}}</td>
                                         <td>{{accountEmail}}</td>
                                         <td>{{accountBirthDate}}</td>
+                                        <td>{{accountRole}}</td>
+
                                         <td class="text-center">
-                                            <a href="profile" class="btn btn-sm border-0 p-0 text-dark"><i
+                                            <a href="/administrator/profile/{{accountId}}/userlist"
+                                                class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-list-nested fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/administrator/profile/{{accountId}}/review"
+                                                class="btn btn-sm border-0 p-0 text-dark"><i
+                                                    class="bi bi-card-text fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/administrator/profile/{{accountId}}/editProfile"
+                                                class="btn btn-sm border-0 p-0 text-dark"><i
                                                     class="bi bi-pencil-square fs-5"></i></a>
                                         </td>
                                         <td class="text-center">
@@ -603,67 +645,6 @@
         </div>
     </div>
 
-    <!-- Users Lists Modal-->
-    <div class="modal fade" id="modalListUser" tabindex="-1" aria-labelledby="modalListUserLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl table-admin">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ListUserTitleLabel">Todas las Listas de Usuarios</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="table-responsive">
-                            <table class="table table-striped caption-top table-bordered">
-                                <colgroup>
-                                    <col style="width:8%;">
-                                    <col style="width:34%;">
-                                    <col style="width:8%;">
-                                    <col style="width:42%;">
-                                    <col style="width:8%;">
-
-                                </colgroup>
-
-                                <caption class="admin-caption">Listas del Usario</caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center">ID</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">N.Peliculas</th>
-                                        <th scope="col">Usuario</th>
-                                        <th scope="col" class="text-center">Borrar</th>
-                                    </tr>
-
-                                </thead>
-                                <tbody class="table-group-divider">
-                                    {{#usersLists}}
-                                    <tr>
-                                        <th scope="row" class="text-center">{{listsId}}</th>
-                                        <td>{{listName}}</td>
-                                        <td class="text-center">{{listSize}}</td>
-                                        <td>{{listOwner.accountName}}</td>
-                                        <td class="text-center">
-                                            <form action="/administrator/userLists/{{listsId}}/delete" method="post">
-                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                                                <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
-                                                        class="bi bi-trash3 fs-5 text-danger"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    {{/usersLists}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary btn-small" data-bs-dismiss="modal">Guardar
-                        Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="js/loadMoviesSeriesLists.js"></script>

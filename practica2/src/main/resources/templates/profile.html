@@ -7,31 +7,26 @@
     <!-- Page Content -->
     <div class="content">
         <!-- Profile Buttons -->
-        {{^fromAdmin}}
+        
         <div class="d-flex justify-content-start gap-3 p-3">
+            {{^fromAdmin}}
             {{#isAdmin}}
             <a href="administrator" class="profile-btn text-decoration-none">
                 Administrador
             </a>
+            {{/isAdmin}}
+            
             <a href="myLists" class="profile-btn text-decoration-none">
-                Todas las Listas
+                {{#isAdmin}} Todas las Listas {{/isAdmin}} 
+                {{^isAdmin}} Mis Listas {{/isAdmin}}
             </a>
             <a href="myReviews" class="profile-btn text-decoration-none">
-                Todas las Reseñas
+                {{#isAdmin}} Todas las Reseñas {{/isAdmin}} 
+                {{^isAdmin}} Mis Reseñas {{/isAdmin}}
             </a>
-            {{/isAdmin}}
-            {{^isAdmin}}
-            <a href="myLists" class="profile-btn text-decoration-none">
-                Mis Listas
-            </a>
-            <a href="myReviews" class="profile-btn text-decoration-none">
-                Mis Reseñas
-            </a>
-            {{/isAdmin}}
-
+            {{/fromAdmin}}
         </div>
-        {{/fromAdmin}}
-
+        
         <!-- Profile Information -->
         <div class="row align-items-center justify-content-center">
             <div class="col-12 col-lg-7">

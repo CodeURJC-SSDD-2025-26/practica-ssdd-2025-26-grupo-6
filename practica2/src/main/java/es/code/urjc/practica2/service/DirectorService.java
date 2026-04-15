@@ -1,5 +1,7 @@
 package es.code.urjc.practica2.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,8 @@ public class DirectorService {
 
     public Director getDirectorByName(String name){
         return directorRepository.findByDirectorName(name).orElseGet(() -> directorRepository.save(new Director(name, "")));
+    }
+    public List<Director> findAll(){
+        return directorRepository.findAll();
     }
 }
