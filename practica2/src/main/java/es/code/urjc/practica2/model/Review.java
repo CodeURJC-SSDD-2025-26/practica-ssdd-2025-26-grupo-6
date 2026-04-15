@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,8 @@ public class Review {
     private Long reviewId;
 
     private Float reviewStars;
+    
+    @Column(columnDefinition = "TEXT")
     private String reviewDescription;
 
     @ManyToOne
