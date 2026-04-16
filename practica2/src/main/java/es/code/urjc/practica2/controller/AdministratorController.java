@@ -355,15 +355,29 @@ public class AdministratorController {
 
     private String formatGenre(Genre.Genres g) {
         return switch (g) {
-            case ACCION -> "Acción";
+            case ACCIÓN -> "Acción";
+            case ANIMACIÓN -> "Animación";
             case AVENTURA -> "Aventura";
-            case CIENCIA_FICCION -> "Ciencia Ficción";
-            case SUSPENSE -> "Suspense";
-            case DRAMA -> "Drama";
-            case MIEDO -> "Miedo";
+            case BÉLICO -> "Bélico";
+            case BIOGRÁFICO -> "Biográfico";
+            case CIENCIA_FICCIÓN -> "Ciencia Ficción";
+            case CINE_NEGRO -> "Cine Negro";
             case COMEDIA -> "Comedia";
-            case ROMANCE -> "Romance";
             case CRIMEN -> "Crimen";
+            case DEPORTE -> "Deporte";
+            case DOCUMENTAL -> "Documental";
+            case DRAMA -> "Drama";
+            case FAMILIAR -> "Familiar";
+            case FANTASÍA -> "Fantasía";
+            case HISTORIA -> "Historia";
+            case INDEPENDIENTE -> "Independiente";
+            case MIEDO -> "Miedo";
+            case MISTERIO -> "Misterio";
+            case MUSICAL -> "Musical";
+            case OESTE -> "Oeste";
+            case REALITY -> "Reality";
+            case ROMANCE -> "Romance";
+            case SUSPENSE -> "Suspense";
         };
     }
 }

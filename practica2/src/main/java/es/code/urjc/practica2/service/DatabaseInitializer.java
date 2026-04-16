@@ -86,9 +86,9 @@ public class DatabaseInitializer implements CommandLineRunner {
         directorRepository.saveAll(Objects.requireNonNull(List.of(nolan, villeneuve, lynch, nolanJ, gilligan, scorsese, tarantino, spielberg, hitchcock, kubrick, greta, bong, armstrong, simon, hwang)));
 
         // Genres
-        Genre accion         = genreRepository.save(new Genre(Genres.ACCION));
+        Genre accion         = genreRepository.save(new Genre(Genres.ACCIÓN));
         Genre romance        = genreRepository.save(new Genre(Genres.ROMANCE));
-        Genre cienciaFiccion = genreRepository.save(new Genre(Genres.CIENCIA_FICCION));
+        Genre cienciaFiccion = genreRepository.save(new Genre(Genres.CIENCIA_FICCIÓN));
         Genre suspense       = genreRepository.save(new Genre(Genres.SUSPENSE));
         Genre drama          = genreRepository.save(new Genre(Genres.DRAMA));
         Genre miedo          = genreRepository.save(new Genre(Genres.MIEDO));
