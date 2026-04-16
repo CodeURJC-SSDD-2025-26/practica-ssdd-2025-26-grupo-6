@@ -45,14 +45,29 @@
                         data-bs-target="#editListModal{{listsId}}">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <form action="/lists/{{listsId}}/delete" method="post"
-                        onsubmit="return confirm('¿Estás seguro de que quieres borrar esta lista?');">
-                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                        <button type="submit" class="btn btn-sm btn-secondary">
-                            <i class="bi bi-trash fs-6"></i>
-                        </button>
-                    </form>
+                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#alertDelete{{listsId}}">
+                        <i class="bi bi-trash fs-6"></i>
+                    </button>
 
+                </div>
+            </div>
+            <div class="modal fade" id="alertDelete{{listsId}}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content text-dark">
+                        <div class="modal-header">
+                            <h3 class="modal-title fs-5">¿Seguro que quieres borrarlo?</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h6>Ten en cuenta que no podrá recuperarse.</h6>
+                        </div>
+                        <form class="modal-footer" action="/lists/{{listsId}}/delete" method="post">
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                            <button class="btn btn-danger" type="submit">Borrar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -152,7 +167,7 @@
                     <input type="text" name="listName" class="form-control" id="listName" placeholder="Ej: Favoritas..."
                         required>
                     {{#isAdmin}}
-                        <h6 class="m-3">Incluir en:</h6>
+                    <h6 class="m-3">Incluir en:</h6>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="type" id="typeMovie" value="MOVIE" required>
                         <label class="form-check-label" for="typeMovie">Películas</label>
@@ -163,7 +178,7 @@
                         <label class="form-check-label" for="typeSerie">Series</label>
                     </div>
                     {{/isAdmin}}
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>

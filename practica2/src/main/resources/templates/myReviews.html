@@ -28,7 +28,8 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title m-0">{{filmography.filmographyName}}  {{#isAdmin}}| {{reviewAuthor.accountName}}  {{/isAdmin}}</h5>
+                            <h5 class="card-title m-0">{{filmography.filmographyName}} {{#isAdmin}}|
+                                {{reviewAuthor.accountName}} {{/isAdmin}}</h5>
                             <div class="rating d-flex align-items-center">
                                 <h4 class="punctuation m-0 me-1">{{reviewStars}}</h4>
                                 <i class="bi bi-star-fill fs-4 text-warning"></i>
@@ -41,13 +42,32 @@
                                 <a href="/reviews/{{reviewId}}/edit" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <form action="/reviews/{{reviewId}}/delete" method="post" class="d-inline">
-                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                                    <button type="submit" class="btn btn-outline-danger btn-sm"
-                                        onclick="return confirm('¿Borrar reseña?')">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
+                                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#alertDelete{{reviewId}}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
+                                <div class="modal fade" id="alertDelete{{reviewId}}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content text-dark">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title fs-5">¿Seguro que quieres borrarlo?</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h6>Ten en cuenta que no podrá recuperarse.</h6>
+                                            </div>
+                                            <form class="modal-footer" action="/reviews/{{reviewId}}/delete"
+                                                method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                                <button class="btn btn-danger" type="submit">Borrar</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer bg-transparent py-1 border-0">
                                 <a class="btn btn-primary btn-sm btn-small" data-bs-toggle="modal"
