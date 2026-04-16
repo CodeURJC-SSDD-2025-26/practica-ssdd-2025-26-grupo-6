@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-import javax.lang.model.util.Types;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -57,8 +55,7 @@ public class AccountController {
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal, Model model) {
-        if (principal == null)
-            return "redirect:/login";
+        if (principal == null) return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(filmographyId);
         Account currentUser = accountService.findByEmail(principal.getName());
@@ -89,18 +86,40 @@ public class AccountController {
 
     @PostMapping("/reviews/{reviewId}/edit")
     public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
-            @RequestParam String reviewDescription) {
-        Review review = reviewService.update(reviewId, reviewStars, reviewDescription);
-        Long filmographyId = review.getFilmography().getFilmographyId();
+            @RequestParam String reviewDescription, Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
 
+        Review review = reviewService.findById(reviewId);
+        if (review == null) return "error/404";
+
+        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
+        boolean isOwner = review.getReviewAuthor().getAccountEmail().equals(principal.getName());
+        if (!isAdmin && !isOwner){
+            model.addAttribute("error", "No es posible realizar esta operación.");
+            return "error/403";
+        } 
+
+        reviewService.update(reviewId, reviewStars, reviewDescription);
+        Long filmographyId = review.getFilmography().getFilmographyId();
         reloadReviewsToCalculateAverage(filmographyId);
 
         return "redirect:/myReviews";
     }
 
     @PostMapping("/reviews/{reviewId}/delete")
-    public String deleteReview(@PathVariable Long reviewId) {
+    public String deleteReview(@PathVariable Long reviewId, Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
+    
         Review review = reviewService.findById(reviewId);
+        if (review == null) return "error/404";
+
+        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
+        boolean isOwner = review.getReviewAuthor().getAccountEmail().equals(principal.getName());
+        if (!isAdmin && !isOwner){
+            model.addAttribute("error", "No es posible realizar esta operación.");
+            return "error/403";
+        } 
+
         Long filmographyId = review.getFilmography().getFilmographyId();
         reviewService.delete(reviewId);
         reloadReviewsToCalculateAverage(filmographyId);
@@ -109,8 +128,7 @@ public class AccountController {
 
     @GetMapping("/myLists")
     public String myLists(Model model, Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
+        if (principal == null) return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
@@ -197,12 +215,18 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/update")
     public String updateListName(@PathVariable Long id, @RequestParam String newName,
-            @RequestParam(required = false) List<Long> filmographyIds, Principal principal) {
+            @RequestParam(required = false) List<Long> filmographyIds, Principal principal, Model model) {
 
-        if (principal == null)
-            return "redirect:/login";
-
+        if (principal == null) return "redirect:/login";
+    
         Lists list = listsService.findById(id);
+
+        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
+        boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        if (!isAdmin && !isOwner){
+            model.addAttribute("error", "No es posible realizar esta operación.");
+            return "error/403";
+        } 
 
         if (list != null) {
             list.setListName(newName);
@@ -224,11 +248,17 @@ public class AccountController {
     }
 
     @PostMapping("/lists/{id}/delete")
-    public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
+    public String deleteList(@PathVariable Long id, Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
 
         Lists list = listsService.findById(id);
+
+        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
+        boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        if (!isAdmin && !isOwner){
+            model.addAttribute("error", "No es posible realizar esta operación.");
+            return "error/403";
+        } 
 
         if (list != null) {
             listsService.delete(list.getListsId());
