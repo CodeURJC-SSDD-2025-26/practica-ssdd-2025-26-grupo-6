@@ -17,8 +17,6 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.EmailService;
 import jakarta.servlet.http.HttpSession;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 @Controller
 public class AutenticationController {
     @Autowired
