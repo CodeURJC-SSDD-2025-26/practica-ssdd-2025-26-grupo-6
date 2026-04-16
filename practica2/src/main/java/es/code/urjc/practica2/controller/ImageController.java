@@ -21,7 +21,6 @@ public class ImageController {
 
     @GetMapping("/img/{id}")
     public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
-
         Resource imageFile = imageService.getImageFile(id);
 
         MediaType mediaType = MediaTypeFactory
