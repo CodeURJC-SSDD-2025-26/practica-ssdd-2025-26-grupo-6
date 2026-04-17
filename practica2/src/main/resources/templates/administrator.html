@@ -296,7 +296,7 @@
                             <col style="width:8%;">
                         </colgroup>
 
-                        <caption class="admin-caption">Directores</caption>
+                        <caption class="admin-caption">Directores del Sistema</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
@@ -313,11 +313,11 @@
                                 <td>{{directorName}}</td>
                                 <td class="text-center">{{directorBirthDate}}</td>
                                 <td class="text-center">
-                                    <a href="/myLists" class="btn btn-sm border-0 p-0 text-dark"
-                                            class="bi bi-pencil-square fs-5"></i></a>
+                                    <a href="/administrator/director/{{directorId}}/edit" class="btn btn-sm border-0 p-0 text-dark"
+                                            ><i class="bi bi-pencil-square fs-5"></i></a>
                                 </td>
                                 <td class="text-center">
-                                    <form action="administrator/systemLists/{{listsId}}/delete" method="post">
+                                    <form action="/administrator/director/{{directorId}}/delete" method="post">
                                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                                         <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
                                                 class="bi bi-trash3 fs-5 text-danger"></i></button>
@@ -333,8 +333,12 @@
         <div class="row mx-0 justify-content-md-center justify-content-start mb-5 mt-3 mt-md-0">
             <div class="col-3">
                 <button type="button" class="btn p-0 border-0 btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modalListSistem">
-                    Mas Listas del Sistema</button>
+                    data-bs-target="#modalDirectors">
+                    Mas Directores</button>
+            </div>
+            <div class="col-auto">
+                <a href="/director/new" class="btn btn-sm border-0 p-0 "><i
+                        class="bi bi-plus-square fs-5 text-primary"></i></a>
             </div>
         </div>
 
@@ -645,6 +649,70 @@
         </div>
     </div>
 
+
+    <!-- Director Modal -->
+    <div class="modal fade" id="modalDirectors" tabindex="-1" aria-labelledby="modalDirectorsLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDirectorsLabel">Todas los Directores del Sitema</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table class="table table-striped caption-top table-bordered">
+                                <colgroup>
+                                    <col style="width:8%;">
+                                    <col style="width:46%;">
+                                    <col style="width:30%;">
+                                    <col style="width:8%;">
+                                    <col style="width:8%;">
+                                </colgroup>
+
+                                <caption class="admin-caption">Directores del Sistema</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Año de Nacimiento</th>
+                                        <th scope="col" class="text-center">Editar</th>
+                                        <th scope="col" class="text-center">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {{#director}}
+                                    <tr>
+                                        <th scope="row" class="text-center">{{directorId}}</th>
+                                        <td>{{directorName}}</td>
+                                        <td class="text-center">{{directorBirthDate}}</td>
+                                        <td class="text-center">
+                                            <a href="/administrator/director/{{directorId}}/edit" class="btn btn-sm border-0 p-0 text-dark"
+                                                    ><i class="bi bi-pencil-square fs-5"></i></a>
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="/administrator/director/{{directorId}}/delete" method="post">
+                                                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                                <button type="submit" class="btn btn-sm border-0 p-0 text-dark"><i
+                                                        class="bi bi-trash3 fs-5 text-danger"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {{/director}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary btn-small" data-bs-dismiss="modal">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/loadMoviesSeriesLists.js"></script>

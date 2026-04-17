@@ -11,6 +11,7 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
+import es.code.urjc.practica2.model.Director;
 
 public interface FilmographyRepository extends JpaRepository<Filmography, Long> {
     @Query("SELECT f FROM Movie f")
@@ -35,4 +36,6 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
             "WHERE LOWER(f.filmographyName) LIKE LOWER(CONCAT('%', :query, '%')) " +
             "OR LOWER(g.genres) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Filmography> findFilmographyRelatedByTitleOrGenre(@Param("query") String query);
+
+    List<Filmography> findByFilmographyDirector(Director director);
 }

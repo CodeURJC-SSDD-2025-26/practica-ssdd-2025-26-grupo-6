@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.controller;
 
+import es.code.urjc.practica2.repository.DirectorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,8 @@ public class AdministratorController {
     @Autowired private AccountService accountService;
     @Autowired private ListsService listsService;
     @Autowired private ReviewService reviewService;
+    @Autowired private DirectorRepository directorRepository;
+
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -81,9 +84,6 @@ public class AdministratorController {
 
         return "administrator";
     }
-    //@GetMapping("/director/new")
-    //public String
-
 
     @GetMapping("/administrator/profile/{id}/editProfile")
     public String editUserFromAdmin(@PathVariable Long id,Model model) {
@@ -152,7 +152,59 @@ public class AdministratorController {
 
         return "myLists";
     }
-    
+
+    @GetMapping("/director/new")
+    public String newDirector(Model model){
+        model.addAttribute("directorName", "");
+        model.addAttribute("directorBirthDate", "");
+       
+        return "directorForm";
+    }
+
+    @PostMapping("/director/new")
+    public String saveDirector(@RequestParam String directorName, @RequestParam String directorBirthDate){
+        Director director= new Director();
+        director.setDirectorName(directorName);
+        director.setDirectorBirthDate(directorBirthDate);
+        directorRepository.save(director);
+
+        return "redirect:/administrator";
+    }
+
+    @GetMapping("/administrator/director/{id}/edit")
+    public String editDirectorFromAdmin(@PathVariable Long id, Model model){
+        Director director = directorService.findById(id);
+        model.addAttribute("director",director);
+        model.addAttribute("directorId",director.getDirectorId());
+        model.addAttribute("directorName",director.getDirectorName());
+        model.addAttribute("directorBirthDate",director.getDirectorBirthDate());
+        return "directorForm";
+    }
+    @PostMapping("/administrator/director/{id}/edit")
+    public String updateDirector(@PathVariable Long id, @RequestParam String directorName, @RequestParam String directorBirthDate){
+        Director director = directorService.findById(id);
+        director.setDirectorName(directorName);
+        director.setDirectorBirthDate(directorBirthDate);
+        directorService.save(director);
+        
+        return "redirect:/administrator";
+    }
+
+
+
+    @PostMapping("/administrator/director/{id}/delete")
+    public String deleteDirector(@PathVariable Long id){
+        Director director = directorService.findById(id);
+
+        //Remove the directors of his filmographies
+        List<Filmography> filmographies = filmographyService.findByDirector(director);
+        for(Filmography f : filmographies ){
+            f.setFilmographyDirector(null);
+            filmographyService.save(f);
+        }
+        directorService.delete(id);
+        return "redirect:/administrator";
+    }
 
     // INCLUDING/MODIFYING FILMOGRAPHIES
     @GetMapping("/movies/new")

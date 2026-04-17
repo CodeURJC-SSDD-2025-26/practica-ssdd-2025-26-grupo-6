@@ -31,7 +31,14 @@
                                 <span class="text-white-50">•</span>
                                 {{/filmography.filmographyGenres}}
                             </div>
-                            <p class="mt-1 mb-1 label-directed">DIRIGIDA POR <span class="text-white fs-6">{{filmography.filmographyDirector.directorName}}</span></p>
+
+                            <p class="mt-1 mb-1 label-directed">DIRIGIDA POR <span class="text-white fs-6">
+                                {{#filmography.filmographyDirector}} {{filmography.filmographyDirector.directorName}} {{/filmography.filmographyDirector}}
+                                {{^filmography.filmographyDirector}} Director Desconocido {{/filmography.filmographyDirector}}</span></p>
+                            
+                            
+                            
+                            
                             <p class="mb-2 text-white-50">
                                 {{filmography.filmographyYear}}
                                 <span class="mx-1">•</span>
