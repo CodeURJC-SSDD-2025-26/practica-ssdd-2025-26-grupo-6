@@ -16,27 +16,27 @@
                     
                     <!-- Form -->
                     {{#directorId}}
-                    <form action="" enctype="multipart/form-data" method="post"
+                    <form action="/administrator/director/{{directorId}}/edit" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
                     {{/directorId}}
 
                     {{^directorId}}
-                    <form action="" enctype="multipart/form-data" method="post"
+                    <form action="/director/new" enctype="multipart/form-data" method="post"
                         class="d-flex flex-column gap-3 administer-form">
                     {{/directorId}}
                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <!-- Name -->
                         <div class="d-flex flex-column">
                             <label class="fw-bold text-white">Director:</label>
-                            <input type="text" class="form-control" name="filmographyName"
-                                placeholder="Título" value="{{filmographyName}}" required>
+                            <input type="text" class="form-control" name="directorName"
+                                placeholder="Nombre" value="{{directorName}}" required>
                         </div>
                         <!-- Birth date -->
                         <div class="d-flex flex-column">
                             <label class="fw-bold text-white">Año de nacimiento:</label>
-                            <input type="number" class="form-control" name="directoBirthDate"
+                            <input type="date" class="form-control" name="directorBirthDate"
                                 placeholder="Año de nacimiento" min="1900" max="2026"
-                                value="" required>
+                                value="{{directorBirthDate}}" required>
                         </div>
                         <!-- Submit & Cancel buttons -->
                         <div class="d-flex gap-2">

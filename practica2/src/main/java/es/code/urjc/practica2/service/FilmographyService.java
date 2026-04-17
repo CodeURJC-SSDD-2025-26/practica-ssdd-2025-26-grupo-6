@@ -17,6 +17,7 @@ import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
+import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.repository.FilmographyRepository;
 
 @Service
@@ -194,6 +195,9 @@ public class FilmographyService {
 
         }
         return result;
-
+    }
+    
+    public List<Filmography> findByDirector(Director director){
+        return filmographyRepository.findByFilmographyDirector(director);
     }
 }
