@@ -299,9 +299,9 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
 
 #### **Diagrama de Navegación**
 
-![Diagrama de Navegación](readMe_Images/navigationDiagram.jpg)
+![Diagrama de Navegación](readMe_Images/navigationDiagramP2.jpg)
 
-> El diagrama es el mismo, es decir, la forma de navegar dentro de la aplicación no cambió respecto a la parte anterior.
+> El único cambio que tuvo, fue el de agregar la pantalla de creación del Director, que va desde el apartado de administrador, por lo cual, solo es accesible por el mismo.
 
 #### **Capturas de Pantalla Actualizadas**
 
@@ -313,6 +313,9 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
 
 ![Perfil Administrador](readMe_Images/profileAdmin.png)
 > La diferencia es que el administrador, puede acceder al apartado de administración, y que los otros botones muestran las listas del sistema y todas las reseñas de la aplicación.
+
+![Perfil Administrador](readMe_Images/includeDirector.png)
+> Es la pantalla dedicada a la creación de la entidad Director, la cual será utilizada por filmography.
 
 
 
@@ -333,12 +336,16 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
    ```
 
 2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+Cuando se inicia la aplicación, se tiene que asegurar que la URL dice "https://localhost:8443/", como mínimo.
+Por defecto, se dirigirá hacia la pantalla de Login, en la cual podrá acceder utilizando las credenciales que vienen a continuación.
+Y luego, ya habrá accedido a la aplicación y se le permitirá utilizar las funcionalidades, según el tipo de usuario que utilice.
+
+
 
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin@palomix.com`, contraseña: `admin`
 - **Usuario Registrado 1**: usuario: `alice@palomix.com`, contraseña: `alice123`
-- **Usuario Registrado 2**: usuario: `bob@palomix.com`, contraseña: `bob123`
-
+- **Usuario Anonimo**: Haciendo click en "No quiero iniciar sesión" en Login.
 
 ### **Diagrama de Entidades de Base de Datos**
 
@@ -360,17 +367,19 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 #### **Alumno 1 - [Matias Maccarrone]**
 
-Mis responsabilidades principales consistieron en poner en funcionamiento las páginas de login y signUp, implementando el servicio de correo para el caso de que el usuario olvide la contraseña o cuando se registre un nuevo usuario. 
-Además, estuve encargado de las páginas de myLists y myReviews, tanto para el caso de los usuarios (ven solo sus reseñas y listas, y pueden modificarlas), como para el administrador (ve las listas del sistema y todas las reseñas de la página, pudiendo editarlas). 
-Y por último, implementé la barra de búsqueda que se encuentra en la cabecera de la página.
+- **Gestión de Usuarios**: Implementacion de los apartados de Login y SignUp, incluyendo mensajes de error y controles de escritura.
+- **Servicio de Mensajería**: Integración del servicio de correo electrónico automático, para los casos de confirmación de registro de usuario y de recuperación de contraseña. Utilizando el JavaMailSender y STMP, con una cuenta de Gmail propia.
+- **Sección del Usuario**: Desarrollo de los apartados donde el usuario puede visualizar y modificar tanto sus listas, como sus reseñas. Y para el caso del administrador, visualizará las listas del sistema, pudiéndolas modificar, y todas las reseñas del sistema, habilitándolo a modificarlas e identificar al dueño de la misma. Todo esta sección tiene control de acceso y dueño de objeto.
+- **Barra de Búsqueda**: Creación de una barra de búsqueda que permite a cualquier usuario a buscar películas o series, por su nombre o género, y devuelve la filmografía que coincida (parcial o totalmente) con la búsqueda, al igual que la que coincida con el género de la búsqueda
+- **Implementación de Seguridad y Páginas de Error**: Fui encargado de la seguridad con Spring Security y desarrollé las páginas de error.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Primera implementación del Login y SignUp](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/83c1a1f315749bfb9708d09a5fec6323f022f38c)  | [Login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/login.html) - [SignUp.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/signUp.html)   |
+|2| [Primera implementación del servicio de correo](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/9484d2e81fe7c49ba7fc35edfb19a7803ee71438)  | [EmailService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/java/es/code/urjc/practica2/service/EmailService.java)   |
+|3| [Primera implementación de myLists y myReviews](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/011f90c15d65fb05dc4e96dd9ca21fa6d508b062)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myLists.html) - [myReviews.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myReviews.html)  |
+|4| [Primera implementación de la barra de búsqueda](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/0adac643ad333c483005aeaf3413cd28dd13e038)  | [searchBar.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/searchBar.html)   |
+|5| [Primera implementación de seguridad](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/1dd8f30d377d57fb383b718aae29f12065189cc9), [Desarrollo de las páginas de error](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/d2a9e92d5ef8a9c6bae877460c6393b39a075e06)  | [Security](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/java/es/code/urjc/practica2/security) - [ErrorPages](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/resources/templates/error)  |
 
 ---
 

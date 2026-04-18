@@ -4,11 +4,13 @@ import es.code.urjc.practica2.repository.ListsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.Map;
 import java.util.LinkedHashMap;
-
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,8 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 @Service
 public class FilmographyService {
     private final ListsRepository listsRepository;
-    @Autowired private FilmographyRepository filmographyRepository;
+    @Autowired
+    private FilmographyRepository filmographyRepository;
 
     FilmographyService(ListsRepository listsRepository) {
         this.listsRepository = listsRepository;
@@ -150,45 +153,73 @@ public class FilmographyService {
         return filmographyRepository.findByTitleContaining(name);
     }
 
-    public List<Filmography> findFilmographyRelatedByTitleOrGenre(String query){
-        return filmographyRepository.findFilmographyRelatedByTitleOrGenre(query);
+    public List<Filmography> findFilmographyRelatedByTitleOrGenre(String query) {
+        if (query == null || query.trim().isEmpty())
+            return new ArrayList<>();
+
+        List<Filmography> directMatches = filmographyRepository.findByTitleContaining(query);
+
+        if (directMatches.isEmpty())
+            return new ArrayList<>();
+
+        Set<Genres> genresOfDirectMatches = directMatches.stream()
+                .flatMap(f -> f.getFilmographyGenres().stream())
+                .map(Genre::getGenres)
+                .collect(Collectors.toSet());
+
+        Set<Filmography> relatedByGenre = new HashSet<>();
+        for (Genres genre : genresOfDirectMatches) {
+            relatedByGenre.addAll(filmographyRepository.findByFilmographyGenres_Genres(genre));
+        }
+
+        Set<Long> directIds = directMatches.stream()
+                .map(Filmography::getFilmographyId)
+                .collect(Collectors.toSet());
+
+        return relatedByGenre.stream()
+                .filter(f -> !directIds.contains(f.getFilmographyId()))
+                .collect(Collectors.toList());
     }
 
-    public List<Filmography> findAllFilmography(){
+    public List<Filmography> findAllFilmography() {
         return filmographyRepository.findAll();
     }
 
-    public List<Movie> findAllMovies(){
+    public List<Movie> findAllMovies() {
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
     }
-    public List<Serie> findAllSeries(){
+
+    public List<Serie> findAllSeries() {
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Serie).map(f -> (Serie) f).toList();
     }
-    public void deleteMovie(Long id){
+
+    public void deleteMovie(Long id) {
         listsRepository.findAll().forEach(list -> {
             list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
             listsRepository.save(list);
         });
         filmographyRepository.deleteById(id);
     }
-    public void deleteSerie(Long id){
+
+    public void deleteSerie(Long id) {
         listsRepository.findAll().forEach(list -> {
             list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
             listsRepository.save(list);
         });
         filmographyRepository.deleteById(id);
     }
-    public Map<String,Long> countByGenre(){
-        Map<String,Long> result = new LinkedHashMap<>();
+
+    public Map<String, Long> countByGenre() {
+        Map<String, Long> result = new LinkedHashMap<>();
 
         List<Filmography> all = filmographyRepository.findAll();
 
-        for(Filmography f : all){
-            for (Genre g : f.getFilmographyGenres()){
+        for (Filmography f : all) {
+            for (Genre g : f.getFilmographyGenres()) {
                 String name = g.getGenres().name();
-                if(result.containsKey(name)){
-                    result.put(name, result.get(name) +1);
-                }else{
+                if (result.containsKey(name)) {
+                    result.put(name, result.get(name) + 1);
+                } else {
                     result.put(name, 1L);
                 }
             }
@@ -196,8 +227,8 @@ public class FilmographyService {
         }
         return result;
     }
-    
-    public List<Filmography> findByDirector(Director director){
+
+    public List<Filmography> findByDirector(Director director) {
         return filmographyRepository.findByFilmographyDirector(director);
     }
 }

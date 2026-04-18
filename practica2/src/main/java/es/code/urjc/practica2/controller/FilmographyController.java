@@ -136,7 +136,7 @@ public class FilmographyController {
     }
 
     @GetMapping("/filmographies/{id}")
-    public String detail(@PathVariable Long id, Model model, Principal principal,HttpServletRequest request) {
+    public String detail(@PathVariable Long id, Model model, Principal principal, HttpServletRequest request) {
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = null;
         if (principal != null) {
@@ -145,7 +145,7 @@ public class FilmographyController {
 
         model.addAttribute("filmography", filmography);
         model.addAttribute("logged", currentUser != null);
-        model.addAttribute("currentUrl",request.getRequestURI());
+        model.addAttribute("currentUrl", request.getRequestURI());
 
         // Check if it's a movie or a serie to show the correct information
         if (filmography instanceof Serie serie) {
@@ -277,49 +277,31 @@ public class FilmographyController {
             return "redirect:/principal";
         }
 
-        // Search by title
-        List<Filmography> byTitle = filmographyService.findByTitleContaining(query);
+        // A. COINCIDENCIAS DIRECTAS (Por título)
+        List<Filmography> directResults = filmographyService.findByTitleContaining(query);
 
-        // Search by genre (normalized for Enum comparison)
-        List<Filmography> byGenre = new ArrayList<>();
-        try {
-            // Replaces spaces with underscores and removes common Spanish accents to match
-            // Enum constants
-            String enumQuery = query.toUpperCase().replace(" ", "_").replace("CION", "CIÓN").replace("FANTASIA", "FANTASÍA").replace("BIOGRAFICO", "BIOGRÁFICO").replace("BELICO", "BÉLICO");
-
-            Genres genreSearched = Genres.valueOf(enumQuery);
-            byGenre = filmographyService.findByGenre(genreSearched);
-        } catch (IllegalArgumentException e) {
-            // Not a valid genre, list remains empty
-        }
-
-        Set<Filmography> relatedFilms = new HashSet<>();
-        relatedFilms.addAll(filmographyService.findFilmographyRelatedByTitleOrGenre(query));
-
-        // Combine results using a Set to avoid duplicates
-        Set<Filmography> uniqueResults = new HashSet<>(byTitle);
-        uniqueResults.addAll(byGenre);
-
-        // Split into Movies and Series
-        List<Movie> movies = uniqueResults.stream()
+        // Separamos en Películas y Series para la vista
+        List<Movie> movies = directResults.stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
                 .toList();
 
-        List<Serie> series = uniqueResults.stream()
+        List<Serie> series = directResults.stream()
                 .filter(f -> f instanceof Serie)
                 .map(f -> (Serie) f)
                 .toList();
 
-        // Check if both categories are empty
+        // B. RELACIONADOS (Mismo género que los resultados de A)
+        List<Filmography> relatedFilms = filmographyService.findFilmographyRelatedByTitleOrGenre(query);
+
+        // C. CONTROL DE RESULTADOS
         boolean noResults = movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty();
 
-        // Add attributes to the model
         model.addAttribute("query", query);
         model.addAttribute("movies", movies);
         model.addAttribute("series", series);
-        model.addAttribute("noResults", noResults);
         model.addAttribute("related", relatedFilms);
+        model.addAttribute("noResults", noResults);
 
         return "searchBar";
     }

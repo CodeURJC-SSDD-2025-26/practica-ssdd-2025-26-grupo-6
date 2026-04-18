@@ -1,12 +1,10 @@
 package es.code.urjc.practica2.controller;
 
-import es.code.urjc.practica2.repository.DirectorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -29,7 +27,6 @@ import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Review;
-import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.DirectorService;
@@ -39,7 +36,6 @@ import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AdministratorController {
@@ -57,8 +53,7 @@ public class AdministratorController {
     private ListsService listsService;
     @Autowired
     private ReviewService reviewService;
-    @Autowired
-    private DirectorRepository directorRepository;
+    
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -179,7 +174,7 @@ public class AdministratorController {
         Director director = new Director();
         director.setDirectorName(directorName);
         director.setDirectorBirthDate(directorBirthDate);
-        directorRepository.save(director);
+        directorService.save(director);
 
         return "redirect:/administrator";
     }
