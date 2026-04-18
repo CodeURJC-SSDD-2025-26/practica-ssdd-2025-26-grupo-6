@@ -31,6 +31,7 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class FilmographyController {
@@ -135,7 +136,7 @@ public class FilmographyController {
     }
 
     @GetMapping("/filmographies/{id}")
-    public String detail(@PathVariable Long id, Model model, Principal principal) {
+    public String detail(@PathVariable Long id, Model model, Principal principal,HttpServletRequest request) {
         Filmography filmography = filmographyService.findById(id);
         Account currentUser = null;
         if (principal != null) {
@@ -144,6 +145,7 @@ public class FilmographyController {
 
         model.addAttribute("filmography", filmography);
         model.addAttribute("logged", currentUser != null);
+        model.addAttribute("currentUrl",request.getRequestURI());
 
         // Check if it's a movie or a serie to show the correct information
         if (filmography instanceof Serie serie) {
@@ -283,9 +285,7 @@ public class FilmographyController {
         try {
             // Replaces spaces with underscores and removes common Spanish accents to match
             // Enum constants
-            String enumQuery = query.toUpperCase().replace(" ", "_")
-                    .replace("Ó", "O").replace("É", "E")
-                    .replace("Í", "I").replace("Á", "A");
+            String enumQuery = query.toUpperCase().replace(" ", "_").replace("CION", "CIÓN").replace("FANTASIA", "FANTASÍA").replace("BIOGRAFICO", "BIOGRÁFICO").replace("BELICO", "BÉLICO");
 
             Genres genreSearched = Genres.valueOf(enumQuery);
             byGenre = filmographyService.findByGenre(genreSearched);

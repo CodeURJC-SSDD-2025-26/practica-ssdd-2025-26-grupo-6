@@ -5,7 +5,7 @@
 
     <!-- Page content -->
     <div class="content">
-        
+
         <div class="d-flex justify-content-start gap-3 p-3">
             {{^fromAdmin}}
             <a href="/profile" class="profile-btn text-decoration-none">
@@ -18,17 +18,19 @@
             {{/isAdmin}}
             <a href="/myReviews" class="profile-btn text-decoration-none">
                 {{#isAdmin}} Todas las Reseñas {{/isAdmin}} {{^isAdmin}} Mis Reseñas {{/isAdmin}}
-            </a>    
+            </a>
             {{/fromAdmin}}
         </div>
-        
+
 
         <div class="d-flex justify-content-between gap-3 p-3 add-list mb-0">
+            {{^fromAdmin}}
             <div class="btn btn-primary rounded btn-small" data-bs-toggle="modal" data-bs-target="#newListModal"
                 role="button">
                 Añadir Lista
             </div>
-
+            {{/fromAdmin}}
+            
             {{#fromAdmin}}
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Volver
@@ -70,6 +72,7 @@
                         </div>
                         <form class="modal-footer" action="/lists/{{listsId}}/delete" method="post">
                             <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                            <input type="hidden" name="redirectTo" value="{{currentUrl}}">
                             <button class="btn btn-danger" type="submit">Borrar</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </form>
@@ -81,6 +84,7 @@
                 <div class="modal-dialog modal-lg">
                     <form action="/lists/{{listsId}}/update" method="post" class="modal-content text-dark">
                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                        <input type="hidden" name="redirectTo" value="{{currentUrl}}">
                         <div class="modal-header">
                             <h5 class="modal-title">Editar Lista: "{{listName}}"</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -126,8 +130,13 @@
             <div class="films">
                 {{#filmographyList}}
                 <div class="card">
-                    <a href="/filmographies/{{filmographyId}}"> <img src="/img/{{filmographyImage.imageId}}"
-                            alt="{{filmographyName}}">
+                    <a href="/filmographies/{{filmographyId}}"> 
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
+                        {{^filmographyImage}}
+                        <img src="/images/posterNotAvailable.jpg" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
                         <h5>{{filmographyName}}</h5>
                     </a>
                 </div>

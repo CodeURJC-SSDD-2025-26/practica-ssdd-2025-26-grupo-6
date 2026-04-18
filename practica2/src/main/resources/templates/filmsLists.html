@@ -18,7 +18,12 @@
             <div class="col">
                 <div class="card film-list">
                     <a href="/filmographies/{{filmographyId}}" class="text-decoration-none text-dark">
-                        <img src="{{filmographyImageUrl}}" class="card-img-top" alt="{{filmographyName}}">
+                        {{#filmographyImage}}
+                        <img src="/img/{{imageId}}" class="card-img-top" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
+                        {{^filmographyImage}}
+                        <img src="/images/posterNotAvailable.jpg" class="card-img-top" alt="{{filmographyName}}">
+                        {{/filmographyImage}}
                     </a>
                 </div>
             </div>
@@ -34,8 +39,6 @@
 
     {{>footer}}
 
-    <!-- Scripts -->
-    <script src="js/reviews.js"></script>
 </body>
 
 </html>

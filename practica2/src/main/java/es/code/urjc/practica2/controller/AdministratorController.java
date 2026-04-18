@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -36,21 +37,28 @@ import es.code.urjc.practica2.service.GenreService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @Controller
 public class AdministratorController {
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private DirectorService directorService;
-    @Autowired private GenreService genreService;
-    @Autowired private ImageService imageService;
-    @Autowired private AccountService accountService;
-    @Autowired private ListsService listsService;
-    @Autowired private ReviewService reviewService;
-    @Autowired private DirectorRepository directorRepository;
-
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private DirectorService directorService;
+    @Autowired
+    private GenreService genreService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private ListsService listsService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private DirectorRepository directorRepository;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -66,7 +74,7 @@ public class AdministratorController {
         List<Serie> allSeries = filmographyService.findAllSeries();
         model.addAttribute("seriesPreview", allSeries.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("series", allSeries);
-       
+
         var allSystemLists = listsService.findAllSystemLists();
         model.addAttribute("systemListsPreview", allSystemLists.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("systemLists", allSystemLists);
@@ -75,27 +83,27 @@ public class AdministratorController {
         model.addAttribute("directorPreview", allDirectors.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("director", allDirectors);
 
-        //Chart
-        Map <String, Long> genreCount = filmographyService.countByGenre();
-        String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"" ).collect(Collectors.joining(","))+ "]";
-        String data = "[" + genreCount.values().stream().map(String::valueOf).collect(Collectors.joining(","))+ "]";
+        // Chart
+        Map<String, Long> genreCount = filmographyService.countByGenre();
+        String labels = "[" + genreCount.keySet().stream().map(k -> "\"" + k + "\"").collect(Collectors.joining(","))
+                + "]";
+        String data = "[" + genreCount.values().stream().map(String::valueOf).collect(Collectors.joining(",")) + "]";
 
-
-        model.addAttribute("chartLabels",labels);
-        model.addAttribute("chartData",data);
+        model.addAttribute("chartLabels", labels);
+        model.addAttribute("chartData", data);
 
         return "administrator";
     }
 
     @GetMapping("/administrator/profile/{id}/editProfile")
-    public String editUserFromAdmin(@PathVariable Long id,Model model) {
+    public String editUserFromAdmin(@PathVariable Long id, Model model) {
         Account user = accountService.findById(id);
-        model.addAttribute("currentUser",user);
-        model.addAttribute("isAdmin",true);
-        model.addAttribute("editMode",true);
-        model.addAttribute("fromAdmin",true);
+        model.addAttribute("currentUser", user);
+        model.addAttribute("isAdmin", true);
+        model.addAttribute("editMode", true);
+        model.addAttribute("fromAdmin", true);
 
-        //Chart
+        // Chart
         List<Review> reviews = reviewService.findByAuthor(user);
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
@@ -104,68 +112,71 @@ public class AdministratorController {
 
     @PostMapping("/administrator/profile/{id}/editProfile")
     public String updateUserFromAdmin(@PathVariable Long id, @RequestParam String accountName,
-        @RequestParam String accountEmail,@RequestParam LocalDate accountBirthDate){
+            @RequestParam String accountEmail, @RequestParam LocalDate accountBirthDate) {
         Account user = accountService.findById(id);
         user.setAccountName(accountName);
         user.setAccountEmail(accountEmail);
         user.setAccountBirthDate(accountBirthDate);
         accountService.save(user);
-        
-        return"redirect:/administrator";
+
+        return "redirect:/administrator";
     }
-    
+
     @PostMapping("/administrator/account/{id}/delete")
     public String deleteUsers(@PathVariable Long id) {
         accountService.delete(id);
-        
+
         return "redirect:/administrator";
     }
 
     @GetMapping("/administrator/profile/{id}/review")
-    public String editUsersReviewFromAdmin(@PathVariable Long id,Model model) {
+    public String editUsersReviewFromAdmin(@PathVariable Long id, Model model, HttpServletRequest request) {
         Account user = accountService.findById(id);
-        model.addAttribute("currentUser",user);
-        
+        model.addAttribute("currentUrl", request.getRequestURI());
+
+        model.addAttribute("currentUser", user);
+
         boolean isAdmin = user.getAccountRole() == Account.Role.ADMIN;
         List<Review> reviews;
         if (isAdmin) {
 
             reviews = reviewService.findAll();
-        }else{
+        } else {
             reviews = reviewService.findByAuthor(user);
         }
 
         model.addAttribute("reviews", reviews);
         model.addAttribute("isAdmin", true);
-        model.addAttribute("fromAdmin",true);
+        model.addAttribute("fromAdmin", true);
 
         return "myReviews";
     }
 
     @GetMapping("/administrator/profile/{id}/userlist")
-    public String editUsersListsFromAdmin(@PathVariable Long id,Model model) {
+    public String editUsersListsFromAdmin(@PathVariable Long id, Model model, HttpServletRequest request) {
         Account user = accountService.findById(id);
-        model.addAttribute("currentUser",user);
+        model.addAttribute("currentUser", user);
         List<Lists> list = listsService.findAllListsByAuthor(user);
 
         model.addAttribute("lists", list);
         model.addAttribute("isAdmin", true);
-        model.addAttribute("fromAdmin",true);
+        model.addAttribute("fromAdmin", true);
+        model.addAttribute("currentUrl", request.getRequestURI());
 
         return "myLists";
     }
 
     @GetMapping("/director/new")
-    public String newDirector(Model model){
+    public String newDirector(Model model) {
         model.addAttribute("directorName", "");
         model.addAttribute("directorBirthDate", "");
-       
+
         return "directorForm";
     }
 
     @PostMapping("/director/new")
-    public String saveDirector(@RequestParam String directorName, @RequestParam String directorBirthDate){
-        Director director= new Director();
+    public String saveDirector(@RequestParam String directorName, @RequestParam String directorBirthDate) {
+        Director director = new Director();
         director.setDirectorName(directorName);
         director.setDirectorBirthDate(directorBirthDate);
         directorRepository.save(director);
@@ -174,31 +185,33 @@ public class AdministratorController {
     }
 
     @GetMapping("/administrator/director/{id}/edit")
-    public String editDirectorFromAdmin(@PathVariable Long id, Model model){
+    public String editDirectorFromAdmin(@PathVariable Long id, Model model) {
         Director director = directorService.findById(id);
-        model.addAttribute("director",director);
-        model.addAttribute("directorId",director.getDirectorId());
-        model.addAttribute("directorName",director.getDirectorName());
-        model.addAttribute("directorBirthDate",director.getDirectorBirthDate());
+        model.addAttribute("director", director);
+        model.addAttribute("directorId", director.getDirectorId());
+        model.addAttribute("directorName", director.getDirectorName());
+        model.addAttribute("directorBirthDate", director.getDirectorBirthDate());
         return "directorForm";
     }
+
     @PostMapping("/administrator/director/{id}/edit")
-    public String updateDirector(@PathVariable Long id, @RequestParam String directorName, @RequestParam String directorBirthDate){
+    public String updateDirector(@PathVariable Long id, @RequestParam String directorName,
+            @RequestParam String directorBirthDate) {
         Director director = directorService.findById(id);
         director.setDirectorName(directorName);
         director.setDirectorBirthDate(directorBirthDate);
         directorService.save(director);
-        
+
         return "redirect:/administrator";
     }
 
     @PostMapping("/administrator/director/{id}/delete")
-    public String deleteDirector(@PathVariable Long id){
+    public String deleteDirector(@PathVariable Long id) {
         Director director = directorService.findById(id);
 
-        //Remove the directors of his filmographies
+        // Remove the directors of his filmographies
         List<Filmography> filmographies = filmographyService.findByDirector(director);
-        for(Filmography f : filmographies ){
+        for (Filmography f : filmographies) {
             f.setFilmographyDirector(null);
             filmographyService.save(f);
         }
@@ -207,17 +220,16 @@ public class AdministratorController {
     }
 
     @PostMapping("/administrator/profile/{id}/changeRole")
-    public String changeUserRole(@PathVariable Long id, @RequestParam (required = false) String isAdmin) {
+    public String changeUserRole(@PathVariable Long id, @RequestParam(required = false) String isAdmin) {
         Account user = accountService.findById(id);
-        if(isAdmin != null){
+        if (isAdmin != null) {
             user.setAccountRole(Account.Role.ADMIN);
-        }else{
+        } else {
             user.setAccountRole(Account.Role.USER);
         }
         accountService.save(user);
         return "redirect:/administrator";
     }
-    
 
     // INCLUDING/MODIFYING FILMOGRAPHIES
     @GetMapping("/movies/new")
@@ -229,10 +241,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/new")
-    public String saveMovie(Movie movie, @RequestParam String directorName, 
-        @RequestParam(required = false) List<String> genreIds, 
-        @RequestParam(required = false) List<String> platformsIds, 
-        @RequestParam(required = false) MultipartFile imageFile) throws IOException {  
+    public String saveMovie(Movie movie, @RequestParam String directorName,
+            @RequestParam(required = false) List<String> genreIds,
+            @RequestParam(required = false) List<String> platformsIds,
+            @RequestParam(required = false) MultipartFile imageFile) throws IOException {
 
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
@@ -247,9 +259,10 @@ public class AdministratorController {
         // Add movie to system lists that match its genres
         List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSystemLists();
         for (es.code.urjc.practica2.model.Lists list : systemLists) {
-            if (list.getListName().endsWith("- Series")) continue;
+            if (list.getListName().endsWith("- Series"))
+                continue;
             boolean matches = movie.getFilmographyGenres().stream()
-                .anyMatch(g -> formatGenre(g.getGenres()).equals(list.getListName()));
+                    .anyMatch(g -> formatGenre(g.getGenres()).equals(list.getListName()));
             if (matches) {
                 list.getFilmographyList().add(movie);
                 listsService.save(list);
@@ -257,7 +270,7 @@ public class AdministratorController {
         }
         return "redirect:/administrator";
     }
-    
+
     @GetMapping("/movies/{id}/edit")
     public String editMovie(@PathVariable Long id, Model model) {
         Movie movie = filmographyService.findMovieById(id);
@@ -268,10 +281,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/edit")
-    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName, 
-        @RequestParam(required = false) List<String> genreIds, 
-        @RequestParam(required = false) List<String> platformsIds, 
-        @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String updateMovie(@PathVariable Long id, Movie movie, @RequestParam String directorName,
+            @RequestParam(required = false) List<String> genreIds,
+            @RequestParam(required = false) List<String> platformsIds,
+            @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             movie.setFilmographyImage(image);
@@ -285,7 +298,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/movies/{id}/delete")
-    public String deleteMovie(@PathVariable Long id){
+    public String deleteMovie(@PathVariable Long id) {
         filmographyService.deleteMovie(id);
         return "redirect:/administrator";
     }
@@ -299,7 +312,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/new")
-    public String saveSeries(Serie serie, @RequestParam String directorName, @RequestParam(required = false) List<String> genreIds, @RequestParam(required = false) List<String> platformsIds, @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String saveSeries(Serie serie, @RequestParam String directorName,
+            @RequestParam(required = false) List<String> genreIds,
+            @RequestParam(required = false) List<String> platformsIds,
+            @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             serie.setFilmographyImage(image);
@@ -313,10 +329,11 @@ public class AdministratorController {
         // Add serie to system lists that match its genres
         List<Lists> systemLists = listsService.findAllSystemLists();
         for (Lists list : systemLists) {
-            if (!list.getListName().endsWith("- Series")) continue;
+            if (!list.getListName().endsWith("- Series"))
+                continue;
             String listGenre = list.getListName().replace(" - Series", "");
             boolean matches = serie.getFilmographyGenres().stream()
-                .anyMatch(g -> formatGenre(g.getGenres()).equals(listGenre));
+                    .anyMatch(g -> formatGenre(g.getGenres()).equals(listGenre));
             if (matches) {
                 list.getFilmographyList().add(serie);
                 listsService.save(list);
@@ -335,10 +352,10 @@ public class AdministratorController {
     }
 
     @PostMapping("/series/{id}/edit")
-    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName, 
-        @RequestParam(required = false) List<String> genreIds, 
-        @RequestParam(required = false) List<String> platformsIds, 
-        @RequestParam(required = false) MultipartFile imageFile) throws IOException {    
+    public String updateSerie(@PathVariable Long id, Serie serie, @RequestParam String directorName,
+            @RequestParam(required = false) List<String> genreIds,
+            @RequestParam(required = false) List<String> platformsIds,
+            @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         if (imageFile != null && !imageFile.isEmpty()) {
             Image image = imageService.createImage(imageFile.getInputStream());
             serie.setFilmographyImage(image);
@@ -350,13 +367,14 @@ public class AdministratorController {
         filmographyService.updateSeries(id, serie);
         return "redirect:/administrator";
     }
+
     @PostMapping("/series/{id}/delete")
-    public String deleteSerie(@PathVariable Long id){
+    public String deleteSerie(@PathVariable Long id) {
         filmographyService.deleteMovie(id);
         return "redirect:/administrator";
     }
 
-    private void addEmptyFilmographyAttributes(Model model){
+    private void addEmptyFilmographyAttributes(Model model) {
         model.addAttribute("filmographyName", "");
         model.addAttribute("filmographyDirector", "");
         model.addAttribute("filmographyYear", "");
@@ -366,7 +384,7 @@ public class AdministratorController {
         model.addAttribute("allPlatforms", buildPlatformList(null));
     }
 
-    private void addFilmographyAttributes(Model model, Filmography f){
+    private void addFilmographyAttributes(Model model, Filmography f) {
         model.addAttribute("filmographyId", f.getFilmographyId());
         model.addAttribute("filmographyImage", f.getFilmographyImage());
         model.addAttribute("filmographyName", f.getFilmographyName());
@@ -404,17 +422,18 @@ public class AdministratorController {
         }
         return allPlatforms;
     }
+
     @PostMapping("/administrator/systemLists/{id}/delete")
     public String deleteSystemList(@PathVariable Long id) {
         listsService.delete(id);
-        
+
         return "redirect:/administrator";
     }
 
     @PostMapping("/administrator/userLists/{id}/delete")
     public String deleteUserLists(@PathVariable Long id) {
         listsService.delete(id);
-        
+
         return "redirect:/administrator";
     }
 

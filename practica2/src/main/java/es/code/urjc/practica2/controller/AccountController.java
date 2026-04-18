@@ -27,6 +27,7 @@ import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.service.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
@@ -44,18 +45,20 @@ public class AccountController {
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model,
-            @RequestParam(required = false) String error) {
+            @RequestParam(required = false) String error,@RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
         model.addAttribute("review", review);
         review.setReviewStars(0f);
         review.setReviewDescription("");
+         model.addAttribute("currentUrl", redirectTo);
         return "reviewForm";
     }
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
     public String saveReview(@PathVariable Long filmographyId, Review review, Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
+        if (principal == null)
+            return "redirect:/login";
 
         Filmography filmography = filmographyService.findById(filmographyId);
         Account currentUser = accountService.findByEmail(principal.getName());
@@ -77,63 +80,73 @@ public class AccountController {
     }
 
     @GetMapping("/reviews/{reviewId}/edit")
-    public String editReview(@PathVariable Long reviewId, Model model) {
+    public String editReview(@PathVariable Long reviewId, Model model,
+            @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
         Review review = reviewService.findById(reviewId);
         model.addAttribute("filmography", review.getFilmography());
         model.addAttribute("review", review);
+        model.addAttribute("currentUrl", redirectTo);
         return "reviewForm";
     }
 
     @PostMapping("/reviews/{reviewId}/edit")
     public String updateReview(@PathVariable Long reviewId, @RequestParam Float reviewStars,
-            @RequestParam String reviewDescription, Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
+            @RequestParam String reviewDescription, Principal principal, Model model,
+            @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
+        if (principal == null)
+            return "redirect:/login";
 
         Review review = reviewService.findById(reviewId);
-        if (review == null) return "error/404";
+        if (review == null)
+            return "error/404";
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
         boolean isOwner = review.getReviewAuthor().getAccountEmail().equals(principal.getName());
-        if (!isAdmin && !isOwner){
+        if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
-        } 
+        }
 
         reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
         reloadReviewsToCalculateAverage(filmographyId);
 
-        return "redirect:/myReviews";
+        return "redirect:" + redirectTo;
     }
 
     @PostMapping("/reviews/{reviewId}/delete")
-    public String deleteReview(@PathVariable Long reviewId, Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
-    
+    public String deleteReview(@PathVariable Long reviewId, Principal principal, Model model,
+            @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
+        if (principal == null)
+            return "redirect:/login";
+
         Review review = reviewService.findById(reviewId);
-        if (review == null) return "error/404";
+        if (review == null)
+            return "error/404";
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
         boolean isOwner = review.getReviewAuthor().getAccountEmail().equals(principal.getName());
-        if (!isAdmin && !isOwner){
+        if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
-        } 
+        }
 
         Long filmographyId = review.getFilmography().getFilmographyId();
         reviewService.delete(reviewId);
         reloadReviewsToCalculateAverage(filmographyId);
-        return "redirect:/myReviews";
+        return "redirect:" + redirectTo;
     }
 
     @GetMapping("/myLists")
-    public String myLists(Model model, Principal principal) {
-        if (principal == null) return "redirect:/login";
+    public String myLists(Model model, Principal principal, HttpServletRequest request) {
+        if (principal == null)
+            return "redirect:/login";
 
         Account currentUser = accountService.findByEmail(principal.getName());
 
         boolean isAdmin = currentUser.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("currentUrl", request.getRequestURI());
 
         if (isAdmin) {
             model.addAttribute("lists", listsService.findAllSystemLists());
@@ -215,18 +228,20 @@ public class AccountController {
 
     @PostMapping("/lists/{id}/update")
     public String updateListName(@PathVariable Long id, @RequestParam String newName,
-            @RequestParam(required = false) List<Long> filmographyIds, Principal principal, Model model) {
+            @RequestParam(required = false) List<Long> filmographyIds, Principal principal, Model model,
+            @RequestParam(required = false, defaultValue = "/myLists") String redirectTo) {
 
-        if (principal == null) return "redirect:/login";
-    
+        if (principal == null)
+            return "redirect:/login";
+
         Lists list = listsService.findById(id);
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
         boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
-        if (!isAdmin && !isOwner){
+        if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
-        } 
+        }
 
         if (list != null) {
             list.setListName(newName);
@@ -244,30 +259,32 @@ public class AccountController {
 
             listsService.save(list);
         }
-        return "redirect:/myLists";
+        return "redirect:" + redirectTo;
     }
 
     @PostMapping("/lists/{id}/delete")
-    public String deleteList(@PathVariable Long id, Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
+    public String deleteList(@PathVariable Long id, Principal principal, Model model,
+            @RequestParam(required = false, defaultValue = "/myLists") String redirectTo) {
+        if (principal == null)
+            return "redirect:/login";
 
         Lists list = listsService.findById(id);
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
         boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
-        if (!isAdmin && !isOwner){
+        if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
-        } 
+        }
 
         if (list != null) {
             listsService.delete(list.getListsId());
         }
-        return "redirect:/myLists";
+        return "redirect:" + redirectTo;
     }
 
     @GetMapping("/myReviews")
-    public String myReviews(Model model, Principal principal) {
+    public String myReviews(Model model, Principal principal, HttpServletRequest request) {
         if (principal == null)
             return "redirect:/login";
 
@@ -280,6 +297,7 @@ public class AccountController {
         } else {
             model.addAttribute("reviews", reviewService.findByAuthor(currentUser));
         }
+        model.addAttribute("currentUrl", request.getRequestURI());
         return "myReviews";
     }
 

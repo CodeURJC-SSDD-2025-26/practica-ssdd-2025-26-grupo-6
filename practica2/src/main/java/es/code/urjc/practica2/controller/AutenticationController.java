@@ -26,6 +26,15 @@ public class AutenticationController {
     @Autowired
     EmailService emailService;
 
+
+    @GetMapping("/")
+    public String start(Model model, @RequestParam(value = "error", required = false) String error) {
+        if (error != null) {
+            model.addAttribute("loginError", true);
+        }
+        return "login";
+    }
+
     @GetMapping("/login")
     public String login(Model model, @RequestParam(value = "error", required = false) String error) {
         if (error != null) {
@@ -103,8 +112,7 @@ public class AutenticationController {
             @RequestParam String name,
             @RequestParam String password,
             @RequestParam String confirmPassword,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate,
-            @RequestParam(required = false) String role) {
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate) {
 
         boolean hasError = false;
 
@@ -136,11 +144,10 @@ public class AutenticationController {
             return "signUp";
         }
 
-        Account.Role userRole = (role != null) ? Account.Role.ADMIN : Account.Role.USER;
 
         String encodedPassword = passwordEncoder.encode(password);
 
-        Account newAccount = new Account(name, birthDate, email, userRole, encodedPassword);
+        Account newAccount = new Account(name, birthDate, email, Account.Role.USER, encodedPassword);
         accountService.save(newAccount);
 
         emailService.sendMail(email,

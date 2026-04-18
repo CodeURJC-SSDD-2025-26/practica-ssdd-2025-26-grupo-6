@@ -48,7 +48,7 @@
                         <hr class="m-0">
                         <div class="d-flex justify-content-between">
                             <div class="card-footer bg-transparent py-1 border-0 d-flex gap-2">
-                                <a href="/reviews/{{reviewId}}/edit" class="btn btn-outline-primary btn-sm">
+                                <a href="/reviews/{{reviewId}}/edit?redirectTo={{currentUrl}}" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
@@ -70,6 +70,7 @@
                                             <form class="modal-footer" action="/reviews/{{reviewId}}/delete"
                                                 method="post">
                                                 <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                                <input type="hidden" name="redirectTo" value="{{currentUrl}}">  
                                                 <button class="btn btn-danger" type="submit">Borrar</button>
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancelar</button>

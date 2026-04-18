@@ -43,6 +43,7 @@ public class Filmography {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Image filmographyImage;
 
+
     //We can have more than one platform for each filmography, so we use a list of platforms the rest is for SQL
     @Enumerated(EnumType.STRING)
     @ElementCollection
