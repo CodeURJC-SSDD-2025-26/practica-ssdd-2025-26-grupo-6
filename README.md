@@ -214,7 +214,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ### **Participación de Miembros en la Práctica 1**
 
 
-#### **Alumno 1 - Matias Maccarrone**
+#### **Alumno 1 - [Matias Maccarrone]**
 - **HTML (principal, series, lists, login, signUp)**
 Creé las páginas principales de la app: la pantalla de inicio con secciones de películas/series/listas, las páginas de login y registro con formularios validados, y la estructura de navegación común con navbar y footer.
 
@@ -358,35 +358,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - Alejandro Carretero Badorrey**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 2 - Carla García Romer**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 3 - Matias Maccarrone**
+#### **Alumno 1 - [Matias Maccarrone]**
 
 Mis responsabilidades principales consistieron en poner en funcionamiento las páginas de login y signUp, implementando el servicio de correo para el caso de que el usuario olvide la contraseña o cuando se registre un nuevo usuario. 
 Además, estuve encargado de las páginas de myLists y myReviews, tanto para el caso de los usuarios (ven solo sus reseñas y listas, y pueden modificarlas), como para el administrador (ve las listas del sistema y todas las reseñas de la página, pudiendo editarlas). 
@@ -402,7 +374,43 @@ Y por último, implementé la barra de búsqueda que se encuentra en la cabecera
 
 ---
 
-#### **Alumno 4 - Raúl Sánchez López**
+#### **Alumno 2 - [Alejandro Carretero Badorrey]**
+
+[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+
+| Nº    | Commits      | Files      |
+|:------------: |:------------:| :------------:|
+|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
+|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
+|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
+|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
+|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+
+---
+
+#### **Alumno 3 - [Raúl Sánchez López]**
+
+- **Rediseño de la Página Principal y de Series**: He organizado estas secciones para que el contenido aparezca dividido por géneros. Además, he creado un apartado específico de "Añadidos recientemente" para que el usuario pueda ver las últimas novedades de la plataforma nada más entrar.
+
+- **Sistema de Listas y Ordenación**: Me he encargado de la página de listas de usuarios, implementando diferentes formas de organizarlas. Por ejemplo, se pueden ordenar basándose en la valoración media de las películas y series que contienen.
+
+- **Visualización de Contenido de Listas**: He desarrollado la pantalla que muestra los títulos que hay dentro de una lista específica, funcionando tanto para las listas automáticas del sistema (como las de géneros) como para las que crean los propios usuarios.
+
+- **Sección de Reseñas Detalladas**: He trabajado en la página donde se muestran todas las reseñas de una película o serie concreta, permitiendo que los usuarios consulten las valoraciones de la comunidad.
+
+- **Ajustes Técnicos y Estructura**: Para que todo lo anterior funcione, he realizado los cambios necesarios en todas las capas internas del programa (modelos, repositorios, controladores y servicios), asegurándome de que la información se guarde y se muestre correctamente en cada sección.
+
+| Nº    | Commits      | Files      |
+|:------------: |:------------:| :------------:|
+|1| [Primeros cambios en la pantalla principal y la de series](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/ec286ad54d0d9476efbba8b02ce8c3e9ac587da0)  | [principal.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/principal.html)   |
+|2| [Modificación en la principal y en series de las películas y series ordenadas por generos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/6dffdfab748af6fd9a308499a252422ae4552e37)  | [series.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/series.html)   |
+|3| [Algunos cambios en series y principal y la modificación de filmslist](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/ac24417deff698aba5b2c898cbf69db5f29ebd5d)  | [filmsLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/filmsLists.html)   |
+|4| [Modificación de lists y cambios en las imagenes](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/447848e6f4c78f1d2bdf012f6d3ce3201b06ba17)  | [lists.htlm](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/lists.html)   |
+|5| [Realización de reviews](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/314514e5d9c13edea563af7b704468137011b917)  | [review.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/review.html)   |
+
+---
+
+#### **Alumno 4 - [Carla García Romero]**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
