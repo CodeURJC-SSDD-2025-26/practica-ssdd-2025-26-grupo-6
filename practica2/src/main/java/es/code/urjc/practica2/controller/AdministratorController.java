@@ -36,6 +36,8 @@ import es.code.urjc.practica2.service.GenreService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -190,8 +192,6 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-
-
     @PostMapping("/administrator/director/{id}/delete")
     public String deleteDirector(@PathVariable Long id){
         Director director = directorService.findById(id);
@@ -205,6 +205,19 @@ public class AdministratorController {
         directorService.delete(id);
         return "redirect:/administrator";
     }
+
+    @PostMapping("/administrator/profile/{id}/changeRole")
+    public String changeUserRole(@PathVariable Long id, @RequestParam (required = false) String isAdmin) {
+        Account user = accountService.findById(id);
+        if(isAdmin != null){
+            user.setAccountRole(Account.Role.ADMIN);
+        }else{
+            user.setAccountRole(Account.Role.USER);
+        }
+        accountService.save(user);
+        return "redirect:/administrator";
+    }
+    
 
     // INCLUDING/MODIFYING FILMOGRAPHIES
     @GetMapping("/movies/new")

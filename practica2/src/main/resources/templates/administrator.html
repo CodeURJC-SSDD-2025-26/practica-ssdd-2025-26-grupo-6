@@ -41,7 +41,7 @@
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Cumpleaños</th>
-                                <th scope="col">Rol</th>
+                                <th scope="col" class="text-center align-middle">Rol</th>
                                 <th scope="col" class="text-center align-middle">Lists</th>
                                 <th scope="col" class="text-center align-middle">Reseñas</th>
                                 <th scope="col" class="text-center align-middle">Editar</th>
@@ -55,7 +55,18 @@
                                 <td>{{accountName}}</td>
                                 <td>{{accountEmail}}</td>
                                 <td>{{accountBirthDate}}</td>
-                                <td>{{accountRole}}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm border-0 p-0 text-dark" 
+                                        data-bs-toggle="modal" data-bs-target="#modalChangeRole" 
+                                        data-user-id="{{accountId}}" 
+                                        data-user-name="{{accountName}}" 
+                                        data-user-role="{{accountRole}}" 
+                                        data-current-user="{{currentUser.accountId}}">
+                                            <span class="badge bg-secondary role-badge">
+                                                {{accountRole}}
+                                               </span>
+                                        </button>
+                                </td>
 
                                 <td class="text-center">
                                     <a href="/administrator/profile/{{accountId}}/userlist"
@@ -399,7 +410,18 @@
                                         <td>{{accountName}}</td>
                                         <td>{{accountEmail}}</td>
                                         <td>{{accountBirthDate}}</td>
-                                        <td>{{accountRole}}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm border-0 p-0 text-dark" 
+                                            data-bs-toggle="modal" data-bs-target="#modalChangeRole" 
+                                            data-user-id="{{accountId}}" 
+                                            data-user-name="{{accountName}}" 
+                                            data-user-role="{{accountRole}}" 
+                                            data-current-user="{{currentUser.accountId}}">
+                                                <span class="badge bg-secondary role-badge">
+                                                    {{accountRole}}
+                                                </span>
+                                            </button>
+                                         </td>
 
                                         <td class="text-center">
                                             <a href="/administrator/profile/{{accountId}}/userlist"
@@ -713,6 +735,75 @@
             </div>
         </div>
     </div>
+
+    <!-- Change of Role -->
+    <div class="modal fade" id="modalChangeRole" tabindex="-1" aria-labelledby="modalChangeRoleLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl table-admin">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalChangeRoleLabel">Cambiar Rol</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                    <form id="changeRoleForm" method="post">
+                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                        <div class="modal-body">
+                            <p class="mb-2">Usuario: <strong id="roleUserName"></strong></p>
+                            <div id="selfEditWarning" class="alert alert-warning d-none">
+                                No puedes cambiar tu propio rol.
+                            </div>
+                            
+                            <label class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isAdminCheck" name="isAdmin">
+                                <label class="form-check-label" for="isAdminCheck">
+                                    ADMIN
+                                </label>    
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-small" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" id="saveRoleBtn" class="btn btn-primary btn-small" data-bs-dismiss="modal">Guardar
+                            Cambios</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalChangeRole = document.getElementById('modalChangeRole');
+        modalChangeRole.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-user-id');
+            const userName = button.getAttribute('data-user-name');
+            const userRole = button.getAttribute('data-user-role');
+            const currentUserId = button.getAttribute('data-current-user');
+
+            document.getElementById('roleUserName').textContent = userName;
+            document.getElementById('isAdminCheck').checked = (userRole === 'ADMIN');
+            document.getElementById('changeRoleForm').action = '/administrator/profile/' + userId + '/changeRole';
+
+
+            //Block if you try to change your own rol
+            const saveBtn = document.getElementById('saveRoleBtn');
+            const warningMsg = document.getElementById('selfEditWarning');
+
+            if(userId === currentUserId){
+                saveBtn.disabled = true;
+                warningMsg.classList.remove('d-none');
+            } else {
+                saveBtn.disabled = false;
+                warningMsg.classList.add('d-none');
+            }
+
+
+
+        })
+
+
+    </script>
+
 
     <!-- Scripts -->
     <script src="js/loadMoviesSeriesLists.js"></script>
