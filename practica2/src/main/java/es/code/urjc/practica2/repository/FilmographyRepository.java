@@ -31,11 +31,5 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
     @Query("SELECT f FROM Filmography f WHERE LOWER(f.filmographyName) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Filmography> findByTitleContaining(@Param("name") String filmographyName);
 
-    @Query("SELECT DISTINCT f FROM Filmography f " +
-            "LEFT JOIN f.filmographyGenres g " +
-            "WHERE LOWER(f.filmographyName) LIKE LOWER(CONCAT('%', :query, '%')) " +
-            "OR LOWER(g.genres) LIKE LOWER(CONCAT('%', :query, '%'))")
-    List<Filmography> findFilmographyRelatedByTitleOrGenre(@Param("query") String query);
-
     List<Filmography> findByFilmographyDirector(Director director);
 }
