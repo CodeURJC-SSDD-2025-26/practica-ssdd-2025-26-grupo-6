@@ -21,7 +21,16 @@
             {{/fromAdmin}}
 
         </div>
-        <h4 class="text-start mb-4">Mis Reseñas</h4>
+        <div class="d-flex justify-content-between gap-3 p-3 add-list mb-0">
+            <h4 class="text-start mt-2">Mis Reseñas</h4>
+
+            {{#fromAdmin}}
+            <a href="/administrator" class="profile-btn text-decoration-none">
+                Volver
+            </a>
+            {{/fromAdmin}}
+        </div>
+        
         <div class="row row-cols-1 row-cols-md-2 g-5">
             {{#reviews}}
             <div class="col">

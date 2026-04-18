@@ -5,8 +5,8 @@
 
     <!-- Page content -->
     <div class="content">
+        
         <div class="d-flex justify-content-start gap-3 p-3">
-
             {{^fromAdmin}}
             <a href="/profile" class="profile-btn text-decoration-none">
                 Perfil
@@ -18,16 +18,22 @@
             {{/isAdmin}}
             <a href="/myReviews" class="profile-btn text-decoration-none">
                 {{#isAdmin}} Todas las Reseñas {{/isAdmin}} {{^isAdmin}} Mis Reseñas {{/isAdmin}}
-            </a>
+            </a>    
             {{/fromAdmin}}
-
         </div>
+        
 
-        <div class="d-flex justify-content-start gap-3 p-3 add-list mb-0">
+        <div class="d-flex justify-content-between gap-3 p-3 add-list mb-0">
             <div class="btn btn-primary rounded btn-small" data-bs-toggle="modal" data-bs-target="#newListModal"
                 role="button">
                 Añadir Lista
             </div>
+
+            {{#fromAdmin}}
+            <a href="/administrator" class="profile-btn text-decoration-none">
+                Volver
+            </a>
+            {{/fromAdmin}}
         </div>
 
         {{#lists}}
