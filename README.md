@@ -336,12 +336,16 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
    ```
 
 2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+Cuando se inicia la aplicación, se tiene que asegurar que la URL dice "https://localhost:8443/", como mínimo.
+Por defecto, se dirigirá hacia la pantalla de Login, en la cual podrá acceder utilizando las credenciales que vienen a continuación.
+Y luego, ya habrá accedido a la aplicación y se le permitirá utilizar las funcionalidades, según el tipo de usuario que utilice.
+
+
 
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin@palomix.com`, contraseña: `admin`
 - **Usuario Registrado 1**: usuario: `alice@palomix.com`, contraseña: `alice123`
-- **Usuario Registrado 2**: usuario: `bob@palomix.com`, contraseña: `bob123`
-
+- **Usuario Anonimo**: Haciendo click en "No quiero iniciar sesión" en Login.
 
 ### **Diagrama de Entidades de Base de Datos**
 
@@ -399,11 +403,11 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Primera implementación del Login y SignUp](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/83c1a1f315749bfb9708d09a5fec6323f022f38c)  | [Login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/login.html), [SignUp.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/signUp.html)   |
+|1| [Primera implementación del Login y SignUp](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/83c1a1f315749bfb9708d09a5fec6323f022f38c)  | [Login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/login.html) - [SignUp.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/signUp.html)   |
 |2| [Primera implementación del servicio de correo](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/9484d2e81fe7c49ba7fc35edfb19a7803ee71438)  | [EmailService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/java/es/code/urjc/practica2/service/EmailService.java)   |
-|3| [Primera implementación de myLists y myReviews](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/011f90c15d65fb05dc4e96dd9ca21fa6d508b062)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myLists.html), [myReviews.html] (https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myReviews.html)  |
+|3| [Primera implementación de myLists y myReviews](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/011f90c15d65fb05dc4e96dd9ca21fa6d508b062)  | [myLists.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myLists.html) - [myReviews.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/myReviews.html)  |
 |4| [Primera implementación de la barra de búsqueda](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/0adac643ad333c483005aeaf3413cd28dd13e038)  | [searchBar.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/searchBar.html)   |
-|5| [Primera implementación de seguridad](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/1dd8f30d377d57fb383b718aae29f12065189cc9), [Desarrollo de las páginas de error](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/d2a9e92d5ef8a9c6bae877460c6393b39a075e06)  | [Security](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/java/es/code/urjc/practica2/security), [ErrorPages](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/resources/templates/error)  |
+|5| [Primera implementación de seguridad](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/1dd8f30d377d57fb383b718aae29f12065189cc9), [Desarrollo de las páginas de error](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/d2a9e92d5ef8a9c6bae877460c6393b39a075e06)  | [Security](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/java/es/code/urjc/practica2/security) - [ErrorPages](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/practica2/src/main/resources/templates/error)  |
 
 ---
 
