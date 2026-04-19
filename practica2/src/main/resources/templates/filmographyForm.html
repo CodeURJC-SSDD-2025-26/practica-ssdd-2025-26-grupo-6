@@ -113,6 +113,7 @@
                                 </span>
                                 {{/allGenres}}
                             </div>
+                            <span id="genreError" class="text-danger small mt-1" style="display:none;">Selecciona al menos un género.</span>
                         </div>
                         <!-- Platforms -->
                         <div class="d-flex flex-column">
@@ -126,6 +127,7 @@
                                 </span>
                                 {{/allPlatforms}}
                             </div>
+                            <span id="platformError" class="text-danger small mt-1" style="display:none;">Selecciona al menos una plataforma.</span>
                         </div>
                         <!-- Synopsis -->
                         <div class="d-flex flex-column">
@@ -141,12 +143,11 @@
                         </div>
                         <!-- Submit & Cancel buttons -->
                         <div class="d-flex gap-2">
-                            <button href="/administrator" class="btn btn-primary w-50 py-2 " type="submit">
+                            <button href="/administrator" class="btn btn-primary w-50 py-2" type="submit" id="submitBtn">
                                 {{#filmographyId}}Actualizar{{/filmographyId}}
                                 {{^filmographyId}}Añadir{{/filmographyId}}
                             </button>
-                            <a href="/administrator"
-                                class="btn btn-danger p-2 w-50 "><strong>Cancelar</strong></a>
+                            <a href="/administrator" class="btn btn-danger p-2 w-50"><strong>Cancelar</strong></a>
                         </div>
                     </form>
                 </div>
@@ -190,6 +191,29 @@
                 this.style.backgroundColor = this.classList.contains('active') ? '#0d6efd' : '#6c757d';
             });
         });
+        
+        document.querySelector('.administer-form').addEventListener('submit', function(e) {
+        const genreInputs = document.querySelectorAll('input[name="genreIds"]');
+        const platformInputs = document.querySelectorAll('input[name="platformsIds"]');
+        
+        let valid = true;
+
+        if (genreInputs.length === 0) {
+            document.getElementById('genreError').style.display = 'inline';
+            valid = false;
+        } else {
+            document.getElementById('genreError').style.display = 'none';
+        }
+
+        if (platformInputs.length === 0) {
+            document.getElementById('platformError').style.display = 'inline';
+            valid = false;
+        } else {
+            document.getElementById('platformError').style.display = 'none';
+        }
+
+        if (!valid) e.preventDefault();
+    });
     </script>
 
 </body>
