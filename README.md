@@ -385,15 +385,23 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 #### **Alumno 2 - [Alejandro Carretero Badorrey]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Perfil de Usuario**: Fui el encargado de implementar el perfil del usuario, además de gestionar el avatar, asegurando que el avatar se mantenga en el encabezado de todas las pantallas mientras se encuentre la sesión del usuario activa.
+
+- **Gestión de Directores**: Desarrollé la página de directores tanto para crear como modificar la entidad de directores.
+
+- **Panel de Administrador**: He desarrollado la pantalla de administrador que muestra tablas que recogen la información de las entidades (usuarios, películas, series, listas del sistema y directores) permitiendo su visualización y modificación.
+
+- **Edición y borrado de entidades**: He trabajado para que desde la página de administrador se puedan editar y borrar entidades (usuarios, películas, series, listas del sistema y directores), además de poder visualizar, modificar y borrar las listas de usuarios y las reseñas. 
+  
+- **Gráficos**: He trabajado en las pantallas de filmografía, perfil y administrador para que los gráficos reflejen los datos reales de la base de datos.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Cambios en el perfil](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/11eb44d35ddf63ea2ffa29ad6d269a911d7d2bb5)  | [Archivo1](URL_archivo_1)   |
+|2| [Gestión de Directores](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/3ac4d86c0e7783dfd96da3bc7c215b172758f883)  | [Archivo2](URL_archivo_2)   |
+|3| [Panel de Administrador*](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/15764f9ebefe7840f9c11da57e65b4b0236c1bdc)  | [Archivo3](URL_archivo_3)   |
+|4| [Edición y borrado de entidades](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f59202a8198b4da182629cd51c1f48a2d4e42c17)  | [Archivo4](URL_archivo_4)   |
+|5| [Gráficos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f832c430acf58852adbff4e0d4ec292c63d72f6c)  | [Archivo5](URL_archivo_5)   |
 
 ---
 
