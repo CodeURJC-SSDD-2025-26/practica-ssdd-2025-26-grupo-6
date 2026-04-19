@@ -67,8 +67,15 @@
                         <!-- Director -->
                         <div class="d-flex flex-column">
                             <label class="fw-bold text-white">Director:</label>
-                            <input type="text" class="form-control" name="directorName"
-                                placeholder="Director" value="{{filmographyDirector}}">
+                            <select class="form-select" name="directorName" required>
+                                <option value="" disabled selected>Selecciona un director...</option>
+                                <option value="UNKNOWN">Director desconocido</option>
+                                {{#allDirectors}}
+                                <option value="{{directorName}}" {{#selected}}selected{{/selected}}>
+                                    {{directorName}}
+                                </option>
+                                {{/allDirectors}}
+                            </select>
                         </div>
                         <!-- Release Year & Duration/Seasons -->
                         <div class="row g-3">
@@ -191,7 +198,7 @@
                 this.style.backgroundColor = this.classList.contains('active') ? '#0d6efd' : '#6c757d';
             });
         });
-        
+
         document.querySelector('.administer-form').addEventListener('submit', function(e) {
         const genreInputs = document.querySelectorAll('input[name="genreIds"]');
         const platformInputs = document.querySelectorAll('input[name="platformsIds"]');

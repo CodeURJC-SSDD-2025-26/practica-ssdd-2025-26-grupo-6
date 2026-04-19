@@ -14,7 +14,6 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 @Service
 public class DirectorService {
     @Autowired DirectorRepository directorRepository;
-
     @Autowired FilmographyRepository filmographyRepository;
 
     public Director getDirectorByName(String name){
@@ -23,19 +22,19 @@ public class DirectorService {
     public List<Director> findAll(){
         return directorRepository.findAll();
     }
+    
     public void delete(Long id){
         Director director= directorRepository.findById(id).orElse(null);
 
+        if(director != null){
+            List<Filmography> filmographies= filmographyRepository.findByFilmographyDirector(director);
 
-        List<Filmography> filmographies= filmographyRepository.findByFilmographyDirector(director);
-
-        for(Filmography f : filmographies){
-            f.setFilmographyDirector(null);
-            filmographyRepository.save(f);
+            for(Filmography f : filmographies){
+                f.setFilmographyDirector(null);
+                filmographyRepository.save(f);
+            }
+            directorRepository.delete(director);
         }
-        directorRepository.delete(director);
-
-
     }
     public Director findById(Long Id){
         return directorRepository.findById(Id).orElse(null);

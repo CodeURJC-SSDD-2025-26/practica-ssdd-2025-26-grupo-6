@@ -10,9 +10,15 @@
                 <div class="card p-3 p-md-4 generic-card rounded-4 border-0">
                     <h3 class="mb-3 text-center text-white fs-md-2">{{filmography.filmographyName}}</h3>
                     <!-- Poster -->
-                    <img src="/img/{{filmography.filmographyImage.imageId}}" alt="Poster"
-                        class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster">
-
+                    {{#filmography}}
+                    {{#filmographyImage}}
+                    <img src="/img/{{imageId}}" class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster" alt="{{filmographyName}}">
+                    {{/filmographyImage}}
+                    {{^filmographyImage}}
+                    <img src="/images/posterNotAvailable.jpg" class="border rounded-3 d-block mx-auto mb-4 bg-white-50 img-fluid poster" alt="{{filmographyName}}">
+                    {{/filmographyImage}}
+                    {{/filmography}}
+                    
                     {{#review.reviewId}}
                     <form action="/reviews/{{review.reviewId}}/edit" method="post" class="form-review">
                         {{/review.reviewId}}

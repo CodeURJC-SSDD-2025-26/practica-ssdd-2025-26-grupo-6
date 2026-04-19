@@ -246,7 +246,9 @@ public class AdministratorController {
             movie.setFilmographyImage(image);
         }
 
-        movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        movie.setFilmographyDirector(
+            "UNKNOWN".equals(directorName) ? null : directorService.getDirectorByName(directorName)
+        );
         movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(movie);
@@ -285,7 +287,9 @@ public class AdministratorController {
             movie.setFilmographyImage(image);
         }
 
-        movie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        movie.setFilmographyDirector(
+            "UNKNOWN".equals(directorName) ? null : directorService.getDirectorByName(directorName)
+        );
         movie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.updateMovie(id, movie);
@@ -316,7 +320,9 @@ public class AdministratorController {
             serie.setFilmographyImage(image);
         }
 
-        serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        serie.setFilmographyDirector(
+            "UNKNOWN".equals(directorName) ? null : directorService.getDirectorByName(directorName)
+        );
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(serie);
@@ -356,7 +362,9 @@ public class AdministratorController {
             serie.setFilmographyImage(image);
         }
 
-        serie.setFilmographyDirector(directorService.getDirectorByName(directorName));
+        serie.setFilmographyDirector(
+            "UNKNOWN".equals(directorName) ? null : directorService.getDirectorByName(directorName)
+        );
         serie.setFilmographyGenres(genreService.getGenresByName(genreIds));
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.updateSeries(id, serie);
@@ -371,7 +379,7 @@ public class AdministratorController {
 
     private void addEmptyFilmographyAttributes(Model model) {
         model.addAttribute("filmographyName", "");
-        model.addAttribute("filmographyDirector", "");
+        model.addAttribute("allDirectors", buildDirectorList(null));
         model.addAttribute("filmographyYear", "");
         model.addAttribute("filmographySynopsis", "");
         model.addAttribute("filmographyTrailerUrl", "");
@@ -383,12 +391,26 @@ public class AdministratorController {
         model.addAttribute("filmographyId", f.getFilmographyId());
         model.addAttribute("filmographyImage", f.getFilmographyImage());
         model.addAttribute("filmographyName", f.getFilmographyName());
-        model.addAttribute("filmographyDirector", f.getDirectorName());
+        model.addAttribute("allDirectors", buildDirectorList(f));
         model.addAttribute("filmographyYear", f.getFilmographyYear());
         model.addAttribute("filmographySynopsis", f.getFilmographySynopsis());
         model.addAttribute("filmographyTrailerUrl", f.getFilmographyTrailerUrl());
         model.addAttribute("allGenres", buildGenreList(f));
         model.addAttribute("allPlatforms", buildPlatformList(f));
+    }
+
+    private List<Map<String, Object>> buildDirectorList(Filmography filmography) {
+        List<Map<String, Object>> allDirectors = new ArrayList<>();
+        for (Director director : directorService.findAll()) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("directorName", director.getDirectorName());
+            boolean selected = filmography != null 
+                && filmography.getFilmographyDirector() != null
+                && director.getDirectorName().equals(filmography.getDirectorName());
+            map.put("selected", selected);
+            allDirectors.add(map);
+        }
+        return allDirectors;
     }
 
     private List<Map<String, Object>> buildGenreList(Filmography filmography) {
