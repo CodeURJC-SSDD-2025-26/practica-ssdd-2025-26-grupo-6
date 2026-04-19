@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
             datasets: [{
                 data: chartData,
                 backgroundColor: ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', 
-    '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#2f4554']
+                    '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#2f4554',
+                    '#5b8ff9', '#61ddaa', '#65789b', '#f6bd16', '#7262fd',
+                    '#78d3f8', '#9661bc', '#f6903d', '#008685', '#f08bb4',
+                    '#dcb43c', '#945fb9', '#1e9493']
             }]
         };
 

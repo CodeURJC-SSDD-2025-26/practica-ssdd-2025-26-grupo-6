@@ -314,7 +314,7 @@ public class AccountController {
         model.addAttribute("currentUser", currentUser);
 
         // Chart
-        List<Review> reviews = reviewService.findByAuthor(currentUser);
+        List<Review> reviews = isAdmin ? reviewService.findAll() : reviewService.findByAuthor(currentUser);
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
         return "profile";
