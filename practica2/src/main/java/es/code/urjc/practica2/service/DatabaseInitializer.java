@@ -66,6 +66,18 @@ public class DatabaseInitializer implements CommandLineRunner {
         public void run(String... args) {
 
                 try {
+                        setAccountAvatar(null,"/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+                try {
+                        setAccountAvatar(null,"/static/images/Palomix.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+                try {
                         setAccountAvatar(null,"/static/images/filmixGafas1.jpg");
                 } catch (Exception e) {
                         e.printStackTrace();
@@ -77,17 +89,6 @@ public class DatabaseInitializer implements CommandLineRunner {
                         e.printStackTrace();
                 }
 
-                try {
-                        setAccountAvatar(null,"/static/images/perfilNoReg.jpg");
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
-
-                try {
-                        setAccountAvatar(null,"/static/images/Palomix.jpg");
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
 
                 // Accounts
                 Account admin = new Account("admin", LocalDate.of(1990, 1, 1), "admin@palomix.com", Role.ADMIN,

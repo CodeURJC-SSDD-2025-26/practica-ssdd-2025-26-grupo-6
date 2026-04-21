@@ -70,10 +70,6 @@
                             <img id="avatarProfile" src="/img/{{currentUser.accountAvatar.imageId}}" class="rounded-circle"
                                 width="175" height="175">
                                 {{/currentUser.accountAvatar}}
-                                {{^currentUser.accountAvatar}}
-                                <img id="avatarProfile" src="/images/perfilNoReg.jpg" class="rounded-circle"
-                                width="175" height="175">
-                                {{/currentUser.accountAvatar}}
                         </button>
                     </div>
                     <div class="mb-3 text-center">
@@ -132,10 +128,6 @@
                             <img src="/img/{{currentUser.accountAvatar.imageId}}" id="previewAvatar"
                                 class="rounded-circle border border-primary border-3" width="100" height="100">
                             {{/currentUser.accountAvatar}}
-                            {{^currentUser.accountAvatar}}
-                            <img src="images/perfilNoReg.jpg" id="previewAvatar"
-                                class="rounded-circle border border-primary border-3" width="100" height="100">
-                            {{/currentUser.accountAvatar}}
                         </div>
                         <div class="row g-3 justify-content-center" id="avatarGallery">
 
@@ -146,28 +138,12 @@
                                     data-value="{{imageId}}">
                             </div>
                             {{/availableAvatars}}
-                            <!-- 
-                            <div class="col-4 text-center">
-                                <img src="/posters/Palomix.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="/posters/Palomix.jpg">
-                            </div>
-                            <div class="col-4 text-center">
-                                <img src="/posters/filmix1.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="/posters/filmix1.jpg">
-                            </div>
-                            <div class="col-4 text-center">
-                                <img src="/posters/filmixGafas1.jpg"
-                                    class="img-thumbnail rounded-circle img-selectable active-avatar" role="button"
-                                    data-value="/posters/filmixGafas1.jpg">
-                            </div>-->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <form id="avatarForm" action="/profile/avatar" method="post">
-                        <input type="hidden" id="avatarInput" name="imageId" value="{{#currentUser.accountAvatar}}/{{currentUser.accountAvatar.imageId}}{{/currentUser.accountAvatar}}{{^currentUser.accountAvatar}}/images/perfilNoReg{{/currentUser.accountAvatar}}">
+                        <input type="hidden" id="avatarInput" name="imageId" value="{{#currentUser.accountAvatar}}/{{currentUser.accountAvatar.imageId}}{{/currentUser.accountAvatar}}">
                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <button type="button" class="btn btn-secondary btn-small"
                             data-bs-dismiss="modal">Cerrar</button>
