@@ -3,6 +3,7 @@ package es.code.urjc.practica2.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Director;
@@ -40,6 +41,11 @@ public class DirectorService {
         return directorRepository.findById(Id).orElse(null);
     }
     public void save(Director director){
-        directorRepository.save(director);
+        if(director != null){
+            directorRepository.save(director);
+        }
+    }
+    public List<Director> findAllSorted() {
+        return directorRepository.findAll(Sort.by(Sort.Direction.ASC, "directorName"));
     }
 }

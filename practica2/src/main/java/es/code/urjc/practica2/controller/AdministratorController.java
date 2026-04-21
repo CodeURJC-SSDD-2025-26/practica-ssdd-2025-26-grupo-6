@@ -391,7 +391,7 @@ public class AdministratorController {
 
     private List<Map<String, Object>> buildDirectorList(Filmography filmography) {
         List<Map<String, Object>> allDirectors = new ArrayList<>();
-        for (Director director : directorService.findAll()) {
+        for (Director director : directorService.findAllSorted()) {
             Map<String, Object> map = new HashMap<>();
             map.put("directorName", director.getDirectorName());
             boolean selected = filmography != null 
