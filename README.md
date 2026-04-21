@@ -397,11 +397,11 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Cambios en el perfil](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/11eb44d35ddf63ea2ffa29ad6d269a911d7d2bb5)  | [Archivo1](URL_archivo_1)   |
-|2| [Gestión de Directores](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/3ac4d86c0e7783dfd96da3bc7c215b172758f883)  | [Archivo2](URL_archivo_2)   |
-|3| [Panel de Administrador*](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/15764f9ebefe7840f9c11da57e65b4b0236c1bdc)  | [Archivo3](URL_archivo_3)   |
-|4| [Edición y borrado de entidades](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f59202a8198b4da182629cd51c1f48a2d4e42c17)  | [Archivo4](URL_archivo_4)   |
-|5| [Gráficos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f832c430acf58852adbff4e0d4ec292c63d72f6c)  | [Archivo5](URL_archivo_5)   |
+|1| [Cambios en el perfil](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/11eb44d35ddf63ea2ffa29ad6d269a911d7d2bb5)  | [profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/profile.html)   |
+|2| [Gestión de Directores](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/3ac4d86c0e7783dfd96da3bc7c215b172758f883)  | [directorForm.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/directorForm.html)   |
+|3| [Panel de Administrador*](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/15764f9ebefe7840f9c11da57e65b4b0236c1bdc)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/administrator.html)   |
+|4| [Edición y borrado de entidades](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f59202a8198b4da182629cd51c1f48a2d4e42c17)  | [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/administrator.html)   |
+|5| [Gráficos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/f832c430acf58852adbff4e0d4ec292c63d72f6c)  | [profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/profile.html), [administrator.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/administrator.html), [filmographyDetails.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/filmographyDetails.html)  |
 
 ---
 
