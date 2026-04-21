@@ -27,15 +27,23 @@ public class ListsService {
     }
 
     public Lists findById(Long id) {
+        if (id == null) {
+            return null;
+        }
         return listsRepository.findById(id).orElse(null);
     }
 
     public Lists save(Lists list) {
+        if (list == null) {
+            return null;
+        }
         return listsRepository.save(list);
     }
 
     public void delete(Long id) {
-        listsRepository.deleteById(id);
+        if (id != null) {
+            listsRepository.deleteById(id);
+        }
     }
 
     private Map<String, Object> convertToMap(Lists list) {
@@ -54,7 +62,6 @@ public class ListsService {
 
         return map;
     }
-
 
     // Best rated lists
     public List<Map<String, Object>> getBestRatedLists() {
@@ -150,9 +157,11 @@ public class ListsService {
     public List<Lists> findAllSystemLists(){
         return listsRepository.findByListOwnerIsNull();
     }
+    
     public List<Lists> findAllUserList(){
         return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN).toList();
     }
+
     public List<Lists> findAllListsByAuthor(Account user){
         boolean isAdmin = user.getAccountRole() == Account.Role.ADMIN;
         if(isAdmin){

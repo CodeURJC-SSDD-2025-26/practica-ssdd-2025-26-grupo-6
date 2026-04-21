@@ -13,9 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
-	@Autowired
-	RepositoryUserDetailsService userDetailsService;
+	@Autowired RepositoryUserDetailsService userDetailsService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

@@ -13,19 +13,23 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import es.code.urjc.practica2.model.Director;
-import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.repository.ImageRepository;
 
 @Service
 public class ImageService {
-
-    @Autowired
-    private ImageRepository imageRepository;
+    @Autowired private ImageRepository imageRepository;
 
     public Image getImage(long id) {
         return imageRepository.findById(id).orElseThrow();
+    }
+
+    public Image findById(Long id){
+        return imageRepository.findById(Objects.requireNonNull(id)).orElseThrow();
+    }
+
+    public List<Image> getAvatarOptions(){
+        return imageRepository.findAllById(Objects.requireNonNull(List.of(1L,2L,3L,4L)));
     }
 
     public Image createImage(InputStream inputStream) throws IOException {
@@ -73,11 +77,5 @@ public class ImageService {
         Image image = imageRepository.findById(id).orElseThrow();
         imageRepository.deleteById(id);
         return image;
-    }
-    public Image findById(Long Id){
-        return imageRepository.findById(Id).orElse(null);
-    }
-    public List<Image> getAvatarOptions(){
-        return imageRepository.findAllById(List.of(1L,2L,3L,4L));
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Account.Role;
@@ -37,26 +36,15 @@ import es.code.urjc.practica2.repository.ReviewRepository;
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
         private final AccountService accountService;
-        @Autowired
-        private AccountRepository accountRepository;
-        @Autowired
-        private FilmographyRepository filmographyRepository;
-        @Autowired
-        private ReviewRepository reviewRepository;
-        @Autowired
-        private ListsRepository listsRepository;
-        @Autowired
-        private DirectorRepository directorRepository;
-        @Autowired
-        private GenreRepository genreRepository;
-        @Autowired
-        private PasswordEncoder passwordEncoder;
-        @Autowired
-        private ImageService imageService;
-        @Autowired
-        private FilmographyService filmographyService;
-        @Autowired
-        private ListsService listsService;
+        @Autowired private AccountRepository accountRepository;
+        @Autowired private FilmographyRepository filmographyRepository;
+        @Autowired private ReviewRepository reviewRepository;
+        @Autowired private ListsRepository listsRepository;
+        @Autowired private DirectorRepository directorRepository;
+        @Autowired private GenreRepository genreRepository;
+        @Autowired private PasswordEncoder passwordEncoder;
+        @Autowired private ImageService imageService;
+        @Autowired private FilmographyService filmographyService;
 
         DatabaseInitializer(AccountService accountService) {
                 this.accountService = accountService;
@@ -220,7 +208,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
                 // Genres
                 Genre accion = genreRepository.save(new Genre(Genres.ACCIÓN));
-                Genre romance = genreRepository.save(new Genre(Genres.ROMANCE));
+                genreRepository.save(new Genre(Genres.ROMANCE));
                 Genre cienciaFiccion = genreRepository.save(new Genre(Genres.CIENCIA_FICCIÓN));
                 Genre suspense = genreRepository.save(new Genre(Genres.SUSPENSE));
                 Genre drama = genreRepository.save(new Genre(Genres.DRAMA));
@@ -228,20 +216,20 @@ public class DatabaseInitializer implements CommandLineRunner {
                 Genre aventura = genreRepository.save(new Genre(Genres.AVENTURA));
                 Genre comedia = genreRepository.save(new Genre(Genres.COMEDIA));
                 Genre crimen = genreRepository.save(new Genre(Genres.CRIMEN));
-                Genre animacion = genreRepository.save(new Genre(Genres.ANIMACIÓN));
-                Genre belico = genreRepository.save(new Genre(Genres.BÉLICO));
-                Genre biografico = genreRepository.save(new Genre(Genres.BIOGRÁFICO));
-                Genre cineNegro = genreRepository.save(new Genre(Genres.CINE_NEGRO));
-                Genre deporte = genreRepository.save(new Genre(Genres.DEPORTE));
-                Genre documental = genreRepository.save(new Genre(Genres.DOCUMENTAL));
-                Genre familiar = genreRepository.save(new Genre(Genres.FAMILIAR));
-                Genre fantasia = genreRepository.save(new Genre(Genres.FANTASÍA));
-                Genre historia = genreRepository.save(new Genre(Genres.HISTORIA));
-                Genre independiente = genreRepository.save(new Genre(Genres.INDEPENDIENTE));
-                Genre misterio = genreRepository.save(new Genre(Genres.MISTERIO));
-                Genre musical = genreRepository.save(new Genre(Genres.MUSICAL));
-                Genre oeste = genreRepository.save(new Genre(Genres.OESTE));
-                Genre reality = genreRepository.save(new Genre(Genres.REALITY));
+                genreRepository.save(new Genre(Genres.ANIMACIÓN));
+                genreRepository.save(new Genre(Genres.BÉLICO));
+                genreRepository.save(new Genre(Genres.BIOGRÁFICO));
+                genreRepository.save(new Genre(Genres.CINE_NEGRO));
+                genreRepository.save(new Genre(Genres.DEPORTE));
+                genreRepository.save(new Genre(Genres.DOCUMENTAL));
+                genreRepository.save(new Genre(Genres.FAMILIAR));
+                genreRepository.save(new Genre(Genres.FANTASÍA));
+                genreRepository.save(new Genre(Genres.HISTORIA));
+                genreRepository.save(new Genre(Genres.INDEPENDIENTE));
+                genreRepository.save(new Genre(Genres.MISTERIO));
+                genreRepository.save(new Genre(Genres.MUSICAL));
+                genreRepository.save(new Genre(Genres.OESTE));
+                genreRepository.save(new Genre(Genres.REALITY));
 
                 // Movies
                 Movie inception = new Movie(

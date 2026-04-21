@@ -25,8 +25,7 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 @Service
 public class FilmographyService {
     private final ListsRepository listsRepository;
-    @Autowired
-    private FilmographyRepository filmographyRepository;
+    @Autowired private FilmographyRepository filmographyRepository;
 
     FilmographyService(ListsRepository listsRepository) {
         this.listsRepository = listsRepository;
@@ -75,64 +74,7 @@ public class FilmographyService {
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
     }
 
-    public void recalculateAllAverages() {
-        filmographyRepository.findAll().forEach(f -> {
-            filmographyRepository.findByIdWithReviews(f.getFilmographyId()).ifPresent(loaded -> {
-                loaded.updateAverageStars();
-                filmographyRepository.save(loaded);
-            });
-        });
-    }
-
-    public List<Filmography.Platforms> toPlatformList(List<String> platformIds) {
-        if (platformIds == null)
-            return new ArrayList<>();
-        return platformIds.stream()
-                .map(Filmography.Platforms::valueOf)
-                .collect(java.util.stream.Collectors.toList());
-    }
-
-    public Filmography save(Filmography filmography) {
-        return filmographyRepository.save(Objects.requireNonNull(filmography));
-    }
-
-    public Movie updateMovie(Long id, Filmography updatedMovie) {
-        Movie existingMovie = findMovieById(id);
-
-        existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
-        existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
-        existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
-        existingMovie.setMovieDuration(((Movie) updatedMovie).getMovieDuration());
-        existingMovie.setFilmographyGenres(updatedMovie.getFilmographyGenres());
-        existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
-        existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
-        existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
-        if (updatedMovie.getFilmographyImage() != null) {
-            existingMovie.setFilmographyImage(updatedMovie.getFilmographyImage());
-        }
-
-        return filmographyRepository.save(existingMovie);
-    }
-
-    public Serie updateSeries(Long id, Filmography updatedSerie) {
-        Serie existingSerie = findSeriesById(id);
-
-        existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
-        existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
-        existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
-        existingSerie.setSerieDuration(((Serie) updatedSerie).getSerieDuration());
-        existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
-        existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
-        existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
-        existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
-        if (updatedSerie.getFilmographyImage() != null) {
-            existingSerie.setFilmographyImage(updatedSerie.getFilmographyImage());
-        }
-
-        return filmographyRepository.save(existingSerie);
-    }
-
-    public List<Movie> getRecentFilms(int limit) {
+        public List<Movie> getRecentFilms(int limit) {
         return filmographyRepository.findAll().stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
@@ -193,20 +135,8 @@ public class FilmographyService {
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Serie).map(f -> (Serie) f).toList();
     }
 
-    public void deleteMovie(Long id) {
-        listsRepository.findAll().forEach(list -> {
-            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
-            listsRepository.save(list);
-        });
-        filmographyRepository.deleteById(id);
-    }
-
-    public void deleteSerie(Long id) {
-        listsRepository.findAll().forEach(list -> {
-            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
-            listsRepository.save(list);
-        });
-        filmographyRepository.deleteById(id);
+    public List<Filmography> findByDirector(Director director) {
+        return filmographyRepository.findByFilmographyDirector(director);
     }
 
     public Map<String, Long> countByGenre() {
@@ -228,7 +158,76 @@ public class FilmographyService {
         return result;
     }
 
-    public List<Filmography> findByDirector(Director director) {
-        return filmographyRepository.findByFilmographyDirector(director);
+    public void recalculateAllAverages() {
+        filmographyRepository.findAll().forEach(f -> {
+            filmographyRepository.findByIdWithReviews(f.getFilmographyId()).ifPresent(loaded -> {
+                loaded.updateAverageStars();
+                filmographyRepository.save(loaded);
+            });
+        });
+    }
+
+    public List<Filmography.Platforms> toPlatformList(List<String> platformIds) {
+        if (platformIds == null)
+            return new ArrayList<>();
+        return platformIds.stream()
+                .map(Filmography.Platforms::valueOf)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public Filmography save(Filmography filmography) {
+        return filmographyRepository.save(Objects.requireNonNull(filmography));
+    }
+
+    public Movie updateMovie(Long id, Filmography updatedMovie) {
+        Movie existingMovie = findMovieById(id);
+
+        existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
+        existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
+        existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
+        existingMovie.setMovieDuration(((Movie) updatedMovie).getMovieDuration());
+        existingMovie.setFilmographyGenres(updatedMovie.getFilmographyGenres());
+        existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
+        existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
+        existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
+        if (updatedMovie.getFilmographyImage() != null) {
+            existingMovie.setFilmographyImage(updatedMovie.getFilmographyImage());
+        }
+
+        return filmographyRepository.save(existingMovie);
+    }
+
+    public Serie updateSeries(Long id, Filmography updatedSerie) {
+        Serie existingSerie = findSeriesById(id);
+
+        existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
+        existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
+        existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
+        existingSerie.setSerieDuration(((Serie) updatedSerie).getSerieDuration());
+        existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
+        existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
+        existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
+        existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+        if (updatedSerie.getFilmographyImage() != null) {
+            existingSerie.setFilmographyImage(updatedSerie.getFilmographyImage());
+        }
+
+        return filmographyRepository.save(existingSerie);
+    }
+
+    public void deleteMovie(Long id) {
+        listsRepository.findAll().forEach(list -> {
+            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
+            listsRepository.save(list);
+        });
+        filmographyRepository.deleteById(Objects.requireNonNull(id));
+    }
+
+    public void deleteSerie(Long id) {
+        listsRepository.findAll().forEach(list -> {
+            list.getFilmographyList().removeIf(f -> f.getFilmographyId().equals(id));
+            listsRepository.save(list);
+        });
+        filmographyRepository.deleteById(Objects.requireNonNull(id));
     }
 }

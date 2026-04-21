@@ -1,6 +1,5 @@
 package es.code.urjc.practica2.controller;
 
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Random;
 

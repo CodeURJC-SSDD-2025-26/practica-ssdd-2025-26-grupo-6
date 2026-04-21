@@ -20,35 +20,41 @@ public class DirectorService {
     public Director getDirectorByName(String name){
         return directorRepository.findByDirectorName(name).orElseGet(() -> directorRepository.save(new Director(name, "")));
     }
+
     public List<Director> findAll(){
         return directorRepository.findAll();
     }
     
-    public void delete(Long id){
-        Director director= directorRepository.findById(id).orElse(null);
-
-        if(director != null){
-            List<Filmography> filmographies= filmographyRepository.findByFilmographyDirector(director);
-
-            for(Filmography f : filmographies){
-                f.setFilmographyDirector(null);
-                filmographyRepository.save(f);
-            }
-            directorRepository.delete(director);
-        }
-    }
     public Director findById(Long id){
         if(id != null){
             return directorRepository.findById(id).orElse(null);
         }
         return null;
     }
+
+    public List<Director> findAllSorted() {
+        return directorRepository.findAll(Sort.by(Sort.Direction.ASC, "directorName"));
+    }
+
     public void save(Director director){
         if(director != null){
             directorRepository.save(director);
         }
     }
-    public List<Director> findAllSorted() {
-        return directorRepository.findAll(Sort.by(Sort.Direction.ASC, "directorName"));
+
+    public void delete(Long id){
+        if(id != null){
+            Director director= directorRepository.findById(id).orElse(null);
+
+            if(director != null){
+                List<Filmography> filmographies= filmographyRepository.findByFilmographyDirector(director);
+
+                for(Filmography f : filmographies){
+                    f.setFilmographyDirector(null);
+                    filmographyRepository.save(f);
+                }
+                directorRepository.delete(director);
+            }
+        }
     }
 }

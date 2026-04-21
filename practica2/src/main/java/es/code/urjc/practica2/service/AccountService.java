@@ -41,10 +41,6 @@ public class AccountService {
         return accountRepository.existsByAccountName(name);
     }
 
-    public Account save(Account account) {
-        return accountRepository.save(Objects.requireNonNull(account));
-    }
-
     public Account findById(Long id) {
         return accountRepository.findById(Objects.requireNonNull(id)).orElse(null);
     }
@@ -57,8 +53,16 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public Account findByEmail(String email) {
+        return accountRepository.findByAccountEmail(email).orElse(null);
+    }
+
+    public Account save(Account account) {
+        return accountRepository.save(Objects.requireNonNull(account));
+    }
+
     public void delete(Long id) {
-        Account user = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Account user = accountRepository.findById(Objects.requireNonNull(id)).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         List<Review> reviews = reviewRepository.findByReviewAuthor(user);
         if (reviews != null) {
@@ -71,9 +75,5 @@ public class AccountService {
         }
 
         accountRepository.deleteById(id);
-    }
-
-    public Account findByEmail(String email) {
-        return accountRepository.findByAccountEmail(email).orElse(null);
     }
 }

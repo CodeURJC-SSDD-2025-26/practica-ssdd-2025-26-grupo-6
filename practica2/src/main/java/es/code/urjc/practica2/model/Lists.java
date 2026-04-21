@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -40,8 +39,7 @@ public class Lists {
     @JoinTable(name = "list_filmographies", joinColumns = @JoinColumn(name = "list_id"), inverseJoinColumns = @JoinColumn(name = "filmography_id"))
     private List<Filmography> filmographyList = new ArrayList<>();
 
-    public Lists() {
-    } // Default constructor for JPA
+    public Lists() {} // Default constructor for JPA
 
     public Lists(String listName, List<Filmography> filmographyList, Types type) {
         this.listName = listName;
@@ -93,7 +91,6 @@ public class Lists {
         this.type = type;
     }
 
-    
     public static Types getTypeString(String type) {
         if (type.equals("MOVIE")) {
             return Types.MOVIE;
