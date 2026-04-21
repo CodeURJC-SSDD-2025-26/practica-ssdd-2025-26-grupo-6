@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const chartData= JSON.parse(ctx.dataset.values);
         const username = ctx.dataset.username;
-        const isAdmin = ctx.dataset.isAdmin === 'true';
 
         /* Chart Data */
         const data = {
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     title: {
                         display: true,
-                        text: isAdmin ? 'Gráfico Global de Valoraciones' : 'Grafico de Valoraciones de ' + username,
+                        text: 'Grafico de Valoraciones de ' + username,
                         font: {
                             size: 20,
                             weight: 'bold'

@@ -93,13 +93,14 @@ public class AdministratorController {
     @GetMapping("/administrator/profile/{id}/editProfile")
     public String editUserFromAdmin(@PathVariable Long id, Model model) {
         Account user = accountService.findById(id);
+        boolean isAdmin2 = user.getAccountRole() == Account.Role.ADMIN;
         model.addAttribute("currentUser", user);
         model.addAttribute("isAdmin", true);
         model.addAttribute("editMode", true);
         model.addAttribute("fromAdmin", true);
 
         // Chart
-        List<Review> reviews = reviewService.findByAuthor(user);
+        List<Review> reviews = isAdmin2 ? reviewService.findAll() : reviewService.findByAuthor(user);
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
         return "profile";
