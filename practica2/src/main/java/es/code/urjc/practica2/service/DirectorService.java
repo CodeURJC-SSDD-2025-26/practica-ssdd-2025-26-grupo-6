@@ -37,8 +37,11 @@ public class DirectorService {
             directorRepository.delete(director);
         }
     }
-    public Director findById(Long Id){
-        return directorRepository.findById(Id).orElse(null);
+    public Director findById(Long id){
+        if(id != null){
+            return directorRepository.findById(id).orElse(null);
+        }
+        return null;
     }
     public void save(Director director){
         if(director != null){

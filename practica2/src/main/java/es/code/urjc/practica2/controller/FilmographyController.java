@@ -35,14 +35,10 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class FilmographyController {
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ListsService listsService;
-    @Autowired
-    private ReviewService reviewService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
+    @Autowired private ReviewService reviewService;
 
     @GetMapping("/principal")
     public String principal(Model model) {

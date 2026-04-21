@@ -36,16 +36,11 @@ import es.code.urjc.practica2.service.ImageService;
 
 @Controller
 public class AccountController {
-    @Autowired
-    private ListsService listsService;
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private ReviewService reviewService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ImageService imageService;
+    @Autowired private ListsService listsService;
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private ReviewService reviewService;
+    @Autowired private AccountService accountService;
+    @Autowired private ImageService imageService;
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model,

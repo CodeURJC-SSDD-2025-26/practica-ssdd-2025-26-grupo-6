@@ -12,14 +12,13 @@ import es.code.urjc.practica2.model.Account;
 
 @ControllerAdvice
 public class GlobalModelAdvice {
-
-    @Autowired
-    private AccountService accountService;
+    @Autowired private AccountService accountService;
 
     @ModelAttribute
     public void addGlobalAttributes(Model model, Principal principal) {
         model.addAttribute("isLoggedIn", principal != null);
     }
+
     @ModelAttribute
     public void addCurrentUser(Model model, Principal principal){
         if(principal !=null){

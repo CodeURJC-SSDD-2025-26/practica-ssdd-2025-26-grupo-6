@@ -39,21 +39,13 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AdministratorController {
-    @Autowired
-    private FilmographyService filmographyService;
-    @Autowired
-    private DirectorService directorService;
-    @Autowired
-    private GenreService genreService;
-    @Autowired
-    private ImageService imageService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ListsService listsService;
-    @Autowired
-    private ReviewService reviewService;
-    
+    @Autowired private FilmographyService filmographyService;
+    @Autowired private DirectorService directorService;
+    @Autowired private GenreService genreService;
+    @Autowired private ImageService imageService;
+    @Autowired private AccountService accountService;
+    @Autowired private ListsService listsService;
+    @Autowired private ReviewService reviewService;
 
     @GetMapping("/administrator")
     public String administrator(Model model) {
@@ -367,6 +359,48 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
+    @PostMapping("/administrator/systemLists/{id}/delete")
+    public String deleteSystemList(@PathVariable Long id) {
+        listsService.delete(id);
+
+        return "redirect:/administrator";
+    }
+
+    @PostMapping("/administrator/userLists/{id}/delete")
+    public String deleteUserLists(@PathVariable Long id) {
+        listsService.delete(id);
+
+        return "redirect:/administrator";
+    }
+
+    private String formatGenre(Genre.Genres g) {
+        return switch (g) {
+            case ACCIÓN -> "Acción";
+            case ANIMACIÓN -> "Animación";
+            case AVENTURA -> "Aventura";
+            case BÉLICO -> "Bélico";
+            case BIOGRÁFICO -> "Biográfico";
+            case CIENCIA_FICCIÓN -> "Ciencia Ficción";
+            case CINE_NEGRO -> "Cine Negro";
+            case COMEDIA -> "Comedia";
+            case CRIMEN -> "Crimen";
+            case DEPORTE -> "Deporte";
+            case DOCUMENTAL -> "Documental";
+            case DRAMA -> "Drama";
+            case FAMILIAR -> "Familiar";
+            case FANTASÍA -> "Fantasía";
+            case HISTORIA -> "Historia";
+            case INDEPENDIENTE -> "Independiente";
+            case MIEDO -> "Miedo";
+            case MISTERIO -> "Misterio";
+            case MUSICAL -> "Musical";
+            case OESTE -> "Oeste";
+            case REALITY -> "Reality";
+            case ROMANCE -> "Romance";
+            case SUSPENSE -> "Suspense";
+        };
+    }
+
     private void addEmptyFilmographyAttributes(Model model) {
         model.addAttribute("filmographyName", "");
         model.addAttribute("allDirectors", buildDirectorList(null));
@@ -428,47 +462,5 @@ public class AdministratorController {
             allPlatforms.add(map);
         }
         return allPlatforms;
-    }
-
-    @PostMapping("/administrator/systemLists/{id}/delete")
-    public String deleteSystemList(@PathVariable Long id) {
-        listsService.delete(id);
-
-        return "redirect:/administrator";
-    }
-
-    @PostMapping("/administrator/userLists/{id}/delete")
-    public String deleteUserLists(@PathVariable Long id) {
-        listsService.delete(id);
-
-        return "redirect:/administrator";
-    }
-
-    private String formatGenre(Genre.Genres g) {
-        return switch (g) {
-            case ACCIÓN -> "Acción";
-            case ANIMACIÓN -> "Animación";
-            case AVENTURA -> "Aventura";
-            case BÉLICO -> "Bélico";
-            case BIOGRÁFICO -> "Biográfico";
-            case CIENCIA_FICCIÓN -> "Ciencia Ficción";
-            case CINE_NEGRO -> "Cine Negro";
-            case COMEDIA -> "Comedia";
-            case CRIMEN -> "Crimen";
-            case DEPORTE -> "Deporte";
-            case DOCUMENTAL -> "Documental";
-            case DRAMA -> "Drama";
-            case FAMILIAR -> "Familiar";
-            case FANTASÍA -> "Fantasía";
-            case HISTORIA -> "Historia";
-            case INDEPENDIENTE -> "Independiente";
-            case MIEDO -> "Miedo";
-            case MISTERIO -> "Misterio";
-            case MUSICAL -> "Musical";
-            case OESTE -> "Oeste";
-            case REALITY -> "Reality";
-            case ROMANCE -> "Romance";
-            case SUSPENSE -> "Suspense";
-        };
     }
 }

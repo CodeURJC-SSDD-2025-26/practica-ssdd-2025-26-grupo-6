@@ -24,14 +24,10 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AutenticationController {
-    @Autowired
-    AccountService accountService;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    EmailService emailService;
-    @Autowired
-    ImageService imageService;
+    @Autowired AccountService accountService;
+    @Autowired PasswordEncoder passwordEncoder;
+    @Autowired EmailService emailService;
+    @Autowired ImageService imageService;
 
     @GetMapping("/")
     public String start(Model model, @RequestParam(value = "error", required = false) String error) {
