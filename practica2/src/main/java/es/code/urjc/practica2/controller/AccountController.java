@@ -26,11 +26,14 @@ import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
+import es.code.urjc.practica2.service.ImageService;
+
 
 @Controller
 public class AccountController {
@@ -42,6 +45,8 @@ public class AccountController {
     private ReviewService reviewService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model,
@@ -317,14 +322,17 @@ public class AccountController {
         List<Review> reviews = isAdmin ? reviewService.findAll() : reviewService.findByAuthor(currentUser);
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
+        List<Image> availableAvatars = imageService.getAvatarOptions();
+        model.addAttribute("availableAvatars",availableAvatars);
+
         return "profile";
     }
 
     @PostMapping("/profile/avatar")
-    public String saveAvatar(@RequestParam String avatarSrc, Principal principal) {
+    public String saveAvatar(@RequestParam Long imageId, Principal principal) {
         Account currentUser = accountService.findByEmail(principal.getName());
-
-        currentUser.setAccountAvatar(avatarSrc);
+        Image image = imageService.findById(imageId);
+        currentUser.setAccountAvatar(image);
         accountService.save(currentUser);
         return "redirect:/profile";
     }

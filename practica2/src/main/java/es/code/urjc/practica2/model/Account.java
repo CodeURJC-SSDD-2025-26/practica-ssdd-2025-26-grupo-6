@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 //It's the user account, but to avoid later problems we call it account
 @Entity
@@ -24,7 +26,6 @@ public class Account {
     private String accountEmail;
     private Role accountRole;
     private String accountPassword;
-    private String accountAvatar = "/images/perfilNoReg.jpg";
 
     public enum Role {
         USER,
@@ -33,6 +34,10 @@ public class Account {
 
     @OneToMany(mappedBy = "listOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lists> accountLists = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "accountAvatar_id")
+    private Image accountAvatar;
 
     public Account() {} //Default constructor for JPA
 
@@ -100,11 +105,11 @@ public class Account {
     public void setAccountLists(List<Lists> accountLists) {
         this.accountLists = accountLists; 
     }
-    public String getAccountAvatar() { 
+    public Image getAccountAvatar() { 
         return accountAvatar;
     
     }
-    public void setAccountAvatar(String accountAvatar) {
+    public void setAccountAvatar(Image accountAvatar) {
         this.accountAvatar = accountAvatar; 
     }
 }

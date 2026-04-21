@@ -48,8 +48,7 @@
                             <button class="btn btn-secondary dropdown-toggle border-0 bg-transparent" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img id="avatarLogo" 
-                                src="{{#currentUser}}{{currentUser.accountAvatar}}{{/currentUser}}
-                                {{^currentUser}}/images/perfilNoReg.jpg{{/currentUser}}"
+                                src="{{#currentUser.accountAvatar}}/img/{{currentUser.accountAvatar.imageId}}{{/currentUser.accountAvatar}}{{^currentUser.accountAvatar}}/images/perfilNoReg.jpg{{/currentUser.accountAvatar}}"
                                 class="rounded-circle" width="50" height="50">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
