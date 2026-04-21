@@ -71,7 +71,8 @@ public class AccountController {
         if (review.getReviewStars() == null || review.getReviewStars() <= 0) {
             model.addAttribute("filmography", filmographyService.findById(filmographyId));
             model.addAttribute("review", review);
-            model.addAttribute("starsError", "Estrellas no seleccionadas.");
+            model.addAttribute("starsError", true);
+            model.addAttribute("currentUrl", "/filmographies/" + filmographyId);
             return "reviewForm";
         }
 
