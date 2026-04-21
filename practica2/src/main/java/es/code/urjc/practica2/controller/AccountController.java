@@ -34,7 +34,6 @@ import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ImageService;
 
-
 @Controller
 public class AccountController {
     @Autowired
@@ -50,13 +49,14 @@ public class AccountController {
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model,
-            @RequestParam(required = false) String error,@RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
+            @RequestParam(required = false) String error,
+            @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
         model.addAttribute("review", review);
         review.setReviewStars(0f);
         review.setReviewDescription("");
-         model.addAttribute("currentUrl", redirectTo);
+        model.addAttribute("currentUrl", redirectTo);
         return "reviewForm";
     }
 
@@ -242,7 +242,10 @@ public class AccountController {
         Lists list = listsService.findById(id);
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
-        boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        boolean isOwner = true;
+        if (!isAdmin) {
+            isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        }
         if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
@@ -276,7 +279,10 @@ public class AccountController {
         Lists list = listsService.findById(id);
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
-        boolean isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        boolean isOwner = true;
+        if (!isAdmin) {
+            isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
+        }
         if (!isAdmin && !isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
@@ -323,8 +329,8 @@ public class AccountController {
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
         List<Image> availableAvatars = imageService.getAvatarOptions();
-        
-        model.addAttribute("availableAvatars",availableAvatars);
+
+        model.addAttribute("availableAvatars", availableAvatars);
 
         return "profile";
     }
