@@ -44,21 +44,21 @@
                                 <div class="alert alert-danger p-1 ms-2" role="alert">Se debe seleccionar una valoración válida.</div>
                                 {{/starsError}}
                             </div>
-                        </div>
-                        <!-- Review -->
-                        <div class="d-flex flex-column gap-2 mb-4">
-                            <textarea name="reviewDescription" class="form-control bg-white text-dark" rows="4"
-                                placeholder="Escribe tu reseña aquí (opcional)...">{{review.reviewDescription}}</textarea>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary p-2 w-50">
-                                {{#review.reviewId}}Actualizar reseña{{/review.reviewId}}
-                                {{^review.reviewId}}Añadir reseña{{/review.reviewId}}
-                            </button>
-                            <a href="/filmographies/{{filmography.filmographyId}}"
-                                class="btn btn-danger p-2 w-50 d-flex align-items-center justify-content-center"><strong>Cancelar</strong></a>
-                        </div>
-                    </form>
+                            <!-- Review -->
+                            <div class="d-flex flex-column gap-2 mb-4">
+                                <textarea name="reviewDescription" class="form-control bg-white text-dark" rows="4"
+                                    placeholder="Escribe tu reseña aquí (opcional)...">{{review.reviewDescription}}</textarea>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary p-2 w-50">
+                                    {{#review.reviewId}}Actualizar reseña{{/review.reviewId}}
+                                    {{^review.reviewId}}Añadir reseña{{/review.reviewId}}
+                                </button>
+                                <a href="{{currentUrl}}"
+                                    class="btn btn-danger p-2 w-50 d-flex align-items-center justify-content-center"><strong>Cancelar</strong></a>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

@@ -277,24 +277,41 @@ public class FilmographyController {
             return "redirect:/principal";
         }
 
-        // A. COINCIDENCIAS DIRECTAS (Por título)
         List<Filmography> directResults = filmographyService.findByTitleContaining(query);
 
-        // Separamos en Películas y Series para la vista
-        List<Movie> movies = directResults.stream()
+        List<Filmography> byGenre = new ArrayList<>();
+        try {
+            String enumQuery = query.toUpperCase()
+                    .replace(" ", "_")
+                    .replace("Ó", "O").replace("É", "E")
+                    .replace("Í", "I").replace("Á", "A")
+                    .replace("CION", "CIÓN").replace("FICCION", "FICCIÓN")
+                    .replace("FANTASIA", "FANTASÍA").replace("BIOGRAFICO", "BIOGRÁFICO")
+                    .replace("BELICO", "BÉLICO").replace("ANIMACION", "ANIMACIÓN");
+
+            Genres genreSearched = Genres.valueOf(enumQuery);
+            byGenre = filmographyService.findByGenre(genreSearched);
+        } catch (IllegalArgumentException e) {
+           e.printStackTrace();
+        }
+
+        Set<Filmography> uniqueResults = new HashSet<>(directResults);
+        uniqueResults.addAll(byGenre);
+
+        List<Movie> movies = uniqueResults.stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
                 .toList();
 
-        List<Serie> series = directResults.stream()
+        List<Serie> series = uniqueResults.stream()
                 .filter(f -> f instanceof Serie)
                 .map(f -> (Serie) f)
                 .toList();
 
-        // B. RELACIONADOS (Mismo género que los resultados de A)
+        
         List<Filmography> relatedFilms = filmographyService.findFilmographyRelatedByTitleOrGenre(query);
+        relatedFilms.removeAll(new ArrayList<>(uniqueResults));
 
-        // C. CONTROL DE RESULTADOS
         boolean noResults = movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty();
 
         model.addAttribute("query", query);

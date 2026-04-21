@@ -30,13 +30,27 @@
                 Añadir Lista
             </div>
             {{/fromAdmin}}
-            
+
             {{#fromAdmin}}
             <a href="/administrator" class="profile-btn text-decoration-none">
                 Volver
             </a>
             {{/fromAdmin}}
         </div>
+        {{#nameError}}
+        <div class=" alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>{{nameError}}</strong>
+        </div>
+
+
+        <script>
+            var alertList = document.querySelectorAll(".alert");
+            alertList.forEach(function (alert) {
+                new bootstrap.Alert(alert);
+            });
+        </script>
+        {{/nameError}}
 
         {{#lists}}
         <div class="mt-4">
@@ -130,7 +144,7 @@
             <div class="films">
                 {{#filmographyList}}
                 <div class="card">
-                    <a href="/filmographies/{{filmographyId}}"> 
+                    <a href="/filmographies/{{filmographyId}}">
                         {{#filmographyImage}}
                         <img src="/img/{{imageId}}" alt="{{filmographyName}}">
                         {{/filmographyImage}}
