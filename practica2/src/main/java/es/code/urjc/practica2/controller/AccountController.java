@@ -323,6 +323,7 @@ public class AccountController {
         model.addAttribute("chartData", reviewService.getChartData(reviews));
 
         List<Image> availableAvatars = imageService.getAvatarOptions();
+        
         model.addAttribute("availableAvatars",availableAvatars);
 
         return "profile";

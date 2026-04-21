@@ -1,9 +1,12 @@
 package es.code.urjc.practica2.controller;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.code.urjc.practica2.model.Account;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.EmailService;
+import es.code.urjc.practica2.service.ImageService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,7 +30,8 @@ public class AutenticationController {
     PasswordEncoder passwordEncoder;
     @Autowired
     EmailService emailService;
-
+    @Autowired
+    ImageService imageService;
 
     @GetMapping("/")
     public String start(Model model, @RequestParam(value = "error", required = false) String error) {
@@ -53,20 +59,18 @@ public class AutenticationController {
             return "login";
         }
 
-        
         String recoveryCode = String.format("%06d", new Random().nextInt(1000000));
 
-        
         session.setAttribute("recoveryCode", recoveryCode);
         session.setAttribute("recoveryEmail", email);
-        session.setMaxInactiveInterval(300); 
+        session.setMaxInactiveInterval(300);
 
         emailService.sendMail(email, "Código de recuperación - Palomix",
                 "<h3>Tu código de recuperación es:</h3><h1>" + recoveryCode + "</h1>" +
                         "<p>Introduce este código junto a tu nueva contraseña en la web.</p>");
-                        
+
         model.addAttribute("message", "Código enviado con éxito.");
-        System.out.println("Código enviado con éxito."); 
+        System.out.println("Código enviado con éxito.");
         return "login";
     }
 
@@ -84,7 +88,7 @@ public class AutenticationController {
 
             Account account = accountService.findByEmail(email);
             if (account != null) {
-                
+
                 account.setAccountPassword(passwordEncoder.encode(newPassword));
                 accountService.save(account);
 
@@ -144,10 +148,18 @@ public class AutenticationController {
             return "signUp";
         }
 
-
         String encodedPassword = passwordEncoder.encode(password);
 
         Account newAccount = new Account(name, birthDate, email, Account.Role.USER, encodedPassword);
+        Resource image = new ClassPathResource("/images/perfilNoReg.jpg");
+       
+        try {
+             Image avatar = imageService.createImage(image.getInputStream());
+            newAccount.setAccountAvatar(avatar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         accountService.save(newAccount);
 
         emailService.sendMail(email,

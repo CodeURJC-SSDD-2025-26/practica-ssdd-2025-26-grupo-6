@@ -37,7 +37,7 @@
                     <form action="/administrator/profile/{{currentUser.accountId}}/editProfile" method="post">
                         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                         <div class="text-center mb-4">
-                            <img id="avatarProfile" src="/img/{{currentUser.accountAvatar}}" class="rounded-circle"
+                            <img id="avatarProfile" src="/img/{{currentUser.accountAvatar.imageId}}" class="rounded-circle"
                                 width="175" height="175">
                         </div>
 
@@ -133,7 +133,7 @@
                                 class="rounded-circle border border-primary border-3" width="100" height="100">
                             {{/currentUser.accountAvatar}}
                             {{^currentUser.accountAvatar}}
-                            <img src="/images/perfilNoReg.jpg" id="previewAvatar"
+                            <img src="images/perfilNoReg.jpg" id="previewAvatar"
                                 class="rounded-circle border border-primary border-3" width="100" height="100">
                             {{/currentUser.accountAvatar}}
                         </div>
