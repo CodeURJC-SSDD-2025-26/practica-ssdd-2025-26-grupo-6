@@ -182,7 +182,7 @@ public class AccountController {
                 model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
                 model.addAttribute("isAdmin", isAdmin);
                 model.addAttribute("lists", userLists);
-
+                model.addAttribute("currentUrl",redirect);
                 return "myLists";
             }
         }
