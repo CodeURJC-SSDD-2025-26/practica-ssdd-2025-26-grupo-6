@@ -421,15 +421,21 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 #### **Alumno 4 - [Carla García Romero]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Formularios y gestión de datos**: Me he encargado de unificar y modificar todos los formularios principales (filmographyForm, reviewForm). Así mismo, me he encargado de sus respectivas lógicas para el correcto funcionamiento de cada uno.
+- **Detalles de las películas/series**: He desarrollado la página de detalles de series y peliculas usando mustache para que solo se necesite una página html. Junto con esto, me he encargado del correcto funcionamiento de las reseñas por cada película y de las listas a las que un usuario puede agregar dichas peliculas o series.
+- **Entidad Imagen**: Tras gestionar las imágenes mediante enlaces en una primera aproximación, he introducido la entidad imagen para que estas fueran guardadas correctamente en la base de datos. 
+- **Organización del diseño**: Tras revisar varias veces las páginas, reestructuré el Header, Footer y Head para evitar la repetición de código, modularizandolo de manera que fuera consistente para todas las páginas.
+- **Cambio a SQL**: Realicé el cambio de la base de datos temporal H2 a MySQL. Además, contruí el DatabaseInitializer para poder ir viendo los cambios que se realizaban mientras modificábamos la base de datos.
+- **Seguridad con Spring Security**: Junto a mi compañero Matías, implementamos la seguridad usando Spring Security. En este caso, fui la encargada de generar el certificado autofirmado y de crear las clases que apoyan la seguridad.
+
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Primeros cambios: formulario de películas y series](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/59d579ebbf689fbd3828192b6145b5dab72bacbe) y [formulario de reseñas](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b6554b9e6c7d5606b6bcbc92f4fa7cad547fd5e4) | [filmographyForm.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/filmographyForm.html), [reviewForm.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/reviewForm.html)  |
+|2| [Primera funcionalidad de los detalles de las filmografías](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/62ce5cea4c85e1abbec4dee05957cf6ca1a34354)  | [filmographyDetails.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/filmographyDetails.html)   |
+|3| [Añadido de la entidad imagen](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/2daaa0b9c8aeb61a1e8f56fa0a6f38f0569c0edb)  | [Image.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/java/es/code/urjc/practica2/model/Image.java)   |
+|4| [Reestructuración de header, footer y head](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/210936b5c0d6e5cb572baac08d4d749b7ea27705)  | [header.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/header.html), [footer.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/footer.html), [head.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/templates/head.html) |
+|5| [Introducción de SQL](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/2149ef5c1549d9e541bbe397ba5d187b843f59dd) y [creación de databaseInitializer](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/bfa293f924c3a946e19284009915a37ab1b2edeb) | [application.properties](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/resources/application.properties), [DatabaseInitializer.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/practica2/src/main/java/es/code/urjc/practica2/service/DatabaseInitializer.java) |
 
 ---
 
