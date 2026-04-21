@@ -12,6 +12,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Account.Role;
@@ -35,6 +36,7 @@ import es.code.urjc.practica2.repository.ReviewRepository;
 
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
+        private final AccountService accountService;
         @Autowired
         private AccountRepository accountRepository;
         @Autowired
@@ -56,37 +58,141 @@ public class DatabaseInitializer implements CommandLineRunner {
         @Autowired
         private ListsService listsService;
 
+        DatabaseInitializer(AccountService accountService) {
+                this.accountService = accountService;
+        }
+
         @Override
         public void run(String... args) {
+
+                try {
+                        setAccountAvatar(null,"/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+                try {
+                        setAccountAvatar(null,"/static/images/Palomix.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+                try {
+                        setAccountAvatar(null,"/static/images/filmixGafas1.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+                try {
+                        setAccountAvatar(null,"/static/images/filmix1.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
+
                 // Accounts
                 Account admin = new Account("admin", LocalDate.of(1990, 1, 1), "admin@palomix.com", Role.ADMIN,
                                 passwordEncoder.encode("admin"));
+                try {
+                        setAccountAvatar(admin, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account alice = new Account("alice", LocalDate.of(1995, 6, 15), "alice@palomix.com", Role.USER,
                                 passwordEncoder.encode("alice123"));
+                try {
+                        setAccountAvatar(alice, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
                 Account bob = new Account("bob", LocalDate.of(1998, 11, 3), "bob@palomix.com", Role.USER,
                                 passwordEncoder.encode("bob123"));
+                try {
+                        setAccountAvatar(bob, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
                 Account carla = new Account("carla", LocalDate.of(2005, 07, 15), "carlagrsmm@gmail.com", Role.USER,
                                 passwordEncoder.encode("carla"));
+                try {
+                        setAccountAvatar(carla, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account charlie = new Account("charlie", LocalDate.of(1992, 3, 20), "charlie@palomix.com", Role.USER,
                                 passwordEncoder.encode("charlie123"));
+
+                try {
+                        setAccountAvatar(charlie, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+
                 Account diana = new Account("diana", LocalDate.of(1994, 8, 12), "diana@palomix.com", Role.USER,
                                 passwordEncoder.encode("diana123"));
+                try {
+                        setAccountAvatar(diana, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account eve = new Account("eve", LocalDate.of(2000, 1, 30), "eve@palomix.com", Role.ADMIN,
                                 passwordEncoder.encode("eve123"));
+                try {
+                        setAccountAvatar(eve, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account frank = new Account("frank", LocalDate.of(1985, 12, 5), "frank@palomix.com", Role.USER,
                                 passwordEncoder.encode("frank123"));
+                try {
+                        setAccountAvatar(frank, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account grace = new Account("grace", LocalDate.of(1997, 5, 22), "grace@palomix.com", Role.USER,
                                 passwordEncoder.encode("grace123"));
+                try {
+                        setAccountAvatar(grace, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account hector = new Account("hector", LocalDate.of(1991, 7, 14), "hector@palomix.com", Role.USER,
                                 passwordEncoder.encode("hector123"));
+                try {
+                        setAccountAvatar(hector, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account ivan = new Account("ivan", LocalDate.of(1999, 2, 28), "ivan@palomix.com", Role.USER,
                                 passwordEncoder.encode("ivan123"));
+                try {
+                        setAccountAvatar(ivan, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account julia = new Account("julia", LocalDate.of(1993, 10, 10), "julia@palomix.com", Role.USER,
                                 passwordEncoder.encode("julia123"));
+                try {
+                        setAccountAvatar(julia, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account kevin = new Account("kevin", LocalDate.of(1988, 4, 18), "kevin@palomix.com", Role.USER,
                                 passwordEncoder.encode("kevin123"));
+                try {
+                        setAccountAvatar(kevin, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
                 Account laura = new Account("laura", LocalDate.of(1996, 12, 25), "laura@palomix.com", Role.USER,
                                 passwordEncoder.encode("laura123"));
+                try {
+                        setAccountAvatar(laura, "/static/images/perfilNoReg.jpg");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
 
                 accountRepository.saveAll(Objects.requireNonNull(List.of(admin, alice, bob, carla, charlie, diana, eve,
                                 frank, grace, hector, ivan, julia, kevin, laura)));
@@ -480,5 +586,22 @@ public class DatabaseInitializer implements CommandLineRunner {
                 film.setFilmographyImage(createdImage);
 
                 filmographyRepository.save(film);
+        }
+
+        public void setAccountAvatar(Account account, String classPathResource)
+                        throws IOException {
+                if (classPathResource == null) {
+                        throw new IllegalArgumentException("classPathResource cannot be null");
+                }
+
+                Resource image = new ClassPathResource(classPathResource);
+
+                Image createdImage = imageService.createImage(image.getInputStream());
+
+                if (account!=null) {
+                        account.setAccountAvatar(createdImage);
+                        accountService.save(account);
+                }
+
         }
 }

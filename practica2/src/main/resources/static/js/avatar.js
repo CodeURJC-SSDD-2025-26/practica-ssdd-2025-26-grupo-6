@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const avatarLogo = document.getElementById('avatarLogo');
     const avatarProfile = document.getElementById('avatarProfile');
-    let selectedSrc = "/images/perfilNoReg.jpg";
+    let selectedId = null;
 
     /* Select Avatar */
     galleryImages.forEach(IMG => {
@@ -15,21 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryImages.forEach(i => i.classList.remove('active-avatar'));
 
             this.classList.add('active-avatar');
-            selectedSrc =this.getAttribute('data-value');
-            preview.src =selectedSrc;
+            selectedId =this.getAttribute('data-value');
+            preview.src = '/img/'+selectedId;
 
         })
     })
 
     /* Save the Selection */
     btnSave.addEventListener('click', function() {
+        if(!selectedId) return;
         if(avatarLogo){
-            avatarLogo.src = selectedSrc;
+            avatarLogo.src = '/img/'+selectedId;
         }
         if(avatarProfile){
-            avatarProfile.src = selectedSrc;
+            avatarProfile.src = '/img/'+selectedId;
         }
-        document.getElementById('avatarInput').value = selectedSrc;
+        document.getElementById('avatarInput').value = selectedId;
         document.getElementById('avatarForm').submit();
         });
 });
