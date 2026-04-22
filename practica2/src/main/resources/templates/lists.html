@@ -17,8 +17,11 @@
                     <a href="/lists/{{listsId}}" class="text-decoration-none">
                         <img src="{{firstImage}}" alt="{{listName}}">
                         <h5>{{listName}}</h5>
-                        <p>{{size}} elementos</p>
-                        <p class="mb-0text-white small text-end">Por: {{authorName}}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <p class="mb-0 text-white-50 small">{{size}} elementos</p>
+                            
+                            <p class="mb-0 text-white small">Por: {{authorName}}</p>
+                        </div>
                     </a>
                 </div>
                 {{/lists}}
