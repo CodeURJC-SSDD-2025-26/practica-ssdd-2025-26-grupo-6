@@ -267,7 +267,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 "Tras un accidente de coche en la sinuosa carretera Mulholland Drive que deja a "
                                                 + "una mujer amnésica, ella y una aspirante a actriz buscan respuestas en una "
                                                 + "aventura laberíntica entre los sueños y la realidad.",
-                                2001, lynch, "https://www.youtube.com/embed/2RKOQUqBxFM", 147);
+                                2001, lynch, "https://www.youtube.com/embed/jbZJ487oJlY", 147);
                 filmographyRepository.save(mulhollandDrive);
                 mulhollandDrive.setFilmographyPlatforms(List.of(Platforms.PRIMEVIDEO));
                 mulhollandDrive.setFilmographyGenres(List.of(suspense, drama, miedo));
@@ -311,7 +311,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 null, "Parásitos", 0f,
                                 "La codicia y la discriminación de clase amenazan la relación recién formada "
                                                 + "entre la adinerada familia Park y el clan Kim, que vive en la precariedad.",
-                                2019, bong, "https://www.youtube.com/embed/m4ncWL7FvY0", 132);
+                                2019, bong, "https://www.youtube.com/embed/90dWVETAdtI", 132);
                 filmographyRepository.save(parasitos);
                 parasitos.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
                 parasitos.setFilmographyGenres(List.of(drama, suspense));
@@ -342,7 +342,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 "Situada en la intersección del futuro cercano y el pasado reimaginado, "
                                                 + "Westworld explora un mundo en el que cada apetito humano puede ser "
                                                 + "satisfecho sin consecuencias.",
-                                2016, nolanJ, "https://www.youtube.com/embed/bqMg4crFP5g", 4);
+                                2016, nolanJ, "https://www.youtube.com/embed/kEkZdgWu7mM", 4);
                 filmographyRepository.save(westworld);
                 westworld.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
                 westworld.setFilmographyGenres(List.of(cienciaFiccion, drama, suspense));
@@ -372,7 +372,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 "La saga de una familia disfuncional dueña de un imperio de medios de comunicación "
                                                 + "que lucha por el control de la empresa ante la incertidumbre sobre la salud "
                                                 + "del patriarca Logan Roy.",
-                                2018, armstrong, "https://www.youtube.com/embed/OzYxJV_9TnM", 4);
+                                2018, armstrong, "https://www.youtube.com/embed/OzYxJV_rmE8", 4);
                 filmographyRepository.save(succession);
                 succession.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
                 succession.setFilmographyGenres(List.of(drama, comedia));
@@ -386,7 +386,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 null, "The Wire (Bajo escucha)", 0f,
                                 "Una mirada realista al mundo del narcotráfico en Baltimore, vista a través de "
                                                 + "los ojos de los traficantes y de las fuerzas del orden que intentan detenerlos.",
-                                2002, simon, "https://www.youtube.com/embed/9qK-VGjMr8g", 5);
+                                2002, simon, "https://www.youtube.com/embed/hnKpCNoJoBE", 5);
                 filmographyRepository.save(theWire);
                 theWire.setFilmographyPlatforms(List.of(Platforms.HBOMAX));
                 theWire.setFilmographyGenres(List.of(drama, crimen, suspense));
@@ -414,7 +414,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                                 null, "Better Call Saul", 0f,
                                 "La metamorfosis del abogado de poca monta Jimmy McGill en el carismático y poco "
                                                 + "ético Saul Goodman antes de los eventos de Breaking Bad.",
-                                2015, gilligan, "https://www.youtube.com/embed/HN4oydykJFc", 6);
+                                2015, gilligan, "https://www.youtube.com/embed/Ylv21uNzW4k", 6);
                 filmographyRepository.save(betterCallSaul);
                 betterCallSaul.setFilmographyPlatforms(List.of(Platforms.NETFLIX));
                 betterCallSaul.setFilmographyGenres(List.of(drama, crimen));
