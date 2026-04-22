@@ -53,6 +53,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         @Override
         public void run(String... args) {
 
+                if (filmographyRepository.count() > 0) {
+                        return;
+                }
+
                 try {
                         setAccountAvatar(null,"/static/images/perfilNoReg.jpg");
                 } catch (Exception e) {
