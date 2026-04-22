@@ -333,19 +333,18 @@ interfaces y resolución conjunta de incidencias durante el desarrollo.
    ```bash
    git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6.git
    cd practica-ssdd-2025-26-grupo-6
+   mvn spring-boot:run
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+2. **SIGUIENTES PASOS**  
 Cuando se inicia la aplicación, se tiene que asegurar que la URL dice "https://localhost:8443/", como mínimo.
-Por defecto, se dirigirá hacia la pantalla de Login, en la cual podrá acceder utilizando las credenciales que vienen a continuación.
-Y luego, ya habrá accedido a la aplicación y se le permitirá utilizar las funcionalidades, según el tipo de usuario que utilice.
-
+Por defecto, se dirigirá a la pantalla de Login, en la cual se podrá acceder utilizando las credenciales que vienen a continuación.
 
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin@palomix.com`, contraseña: `admin`
-- **Usuario Registrado 1**: usuario: `alice@palomix.com`, contraseña: `alice123`
-- **Usuario Anonimo**: Haciendo click en "No quiero iniciar sesión" en Login.
+- **Administrador**: usuario: `admin@palomix.com`, contraseña: `admin`
+- **Usuario Registrado**: usuario: `alice@palomix.com`, contraseña: `alice123`
+- **Usuario Anónimo**: Haciendo click en "No quiero iniciar sesión" en Login.
 
 ### **Diagrama de Entidades de Base de Datos**
 
