@@ -52,6 +52,7 @@ public class ListsService {
         map.put("listsId", list.getListsId());
         map.put("listName", list.getListName());
         map.put("size", list.getFilmographyList().size());
+        map.put("authorName", list.getListOwner() != null ? list.getListOwner().getAccountName() : "Sistema");
 
         if (!list.getFilmographyList().isEmpty()) {
             Filmography first = list.getFilmographyList().get(0);
@@ -66,6 +67,7 @@ public class ListsService {
     // Best rated lists
     public List<Map<String, Object>> getBestRatedLists() {
         return findAllUserList().stream()
+                .filter(l -> !l.getFilmographyList().isEmpty())
                 .sorted(Comparator.comparingDouble(this::getListAverageRating).reversed())
                 .limit(10)
                 .map(this::convertToMap)
@@ -75,6 +77,7 @@ public class ListsService {
     // Worst rated lists
     public List<Map<String, Object>> getWorstRatedLists() {
         return findAllUserList().stream()
+                .filter(l -> !l.getFilmographyList().isEmpty())
                 .sorted(Comparator.comparingDouble(this::getListAverageRating))
                 .limit(10)
                 .map(this::convertToMap)
@@ -84,6 +87,7 @@ public class ListsService {
     // Longest lists (most items)
     public List<Map<String, Object>> getLongestLists() {
         return findAllUserList().stream()
+                .filter(l -> !l.getFilmographyList().isEmpty())
                 .sorted((a, b) -> Integer.compare(
                         b.getFilmographyList().size(),
                         a.getFilmographyList().size()))
@@ -95,6 +99,7 @@ public class ListsService {
     // Lists with longest movies (average duration)
     public List<Map<String, Object>> getLongestMoviesLists() {
         return findAllUserList().stream()
+                .filter(l -> !l.getFilmographyList().isEmpty())
                 .sorted(Comparator.comparingDouble(this::getAverageMovieDuration).reversed())
                 .limit(10)
                 .map(this::convertToMap)
@@ -104,6 +109,7 @@ public class ListsService {
     // Lists with series with most seasons
     public List<Map<String, Object>> getSeriesWithMostSeasons() {
         return findAllUserList().stream()
+                .filter(l -> !l.getFilmographyList().isEmpty())
                 .sorted(Comparator.comparingInt(this::getAverageSeriesSeasons).reversed())
                 .limit(10)
                 .map(this::convertToMap)

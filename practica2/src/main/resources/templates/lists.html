@@ -13,11 +13,12 @@
             </div>
             <div class="films">
                 {{#lists}}
-                <div class="card">
-                    <a href="/lists/{{listsId}}">
+                <div class="card text-center">
+                    <a href="/lists/{{listsId}}" class="text-decoration-none">
                         <img src="{{firstImage}}" alt="{{listName}}">
                         <h5>{{listName}}</h5>
                         <p>{{size}} elementos</p>
+                        <p class="mb-0text-white small text-end">Por: {{authorName}}</p>
                     </a>
                 </div>
                 {{/lists}}
