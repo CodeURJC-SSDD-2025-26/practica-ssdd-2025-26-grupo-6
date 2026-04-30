@@ -44,90 +44,22 @@ public class FilmographyController {
     public String principal(Model model) {
         model.addAttribute("newMovies", filmographyService.findTop10MoviesByYear());
 
-        List<Lists> systemLists = listsService.findAllSystemLists();
-
-        List<Map<String, Object>> movieSections = new ArrayList<>();
-
-        for (Lists list : systemLists) {
-            if (list.getType().equals(Types.MOVIE)) {
-                List<Movie> movies = list.getFilmographyList().stream()
-                        .filter(f -> f instanceof Movie)
-                        .map(f -> (Movie) f)
-                        .toList();
-
-                if (!movies.isEmpty()) {
-                    Map<String, Object> sec = new HashMap<>();
-                    sec.put("name", list.getListName());
-                    sec.put("listsId", list.getListsId());
-                    sec.put("movies", movies);
-                    movieSections.add(sec);
-                }
-            }
-        }
-
-        model.addAttribute("movieSections", movieSections);
+        model.addAttribute("movieSections", listsService.getMovieSections());
         return "principal";
     }
 
     @GetMapping("/lists")
     public String listsPage(Model model) {
 
-        List<Map<String, Object>> sections = new ArrayList<>();
-
-        Map<String, Object> sec1 = new HashMap<>();
-        sec1.put("sectionTitle", "Listas Mejor Valoradas");
-        sec1.put("lists", listsService.getBestRatedLists());
-        sections.add(sec1);
-
-        Map<String, Object> sec2 = new HashMap<>();
-        sec2.put("sectionTitle", "Listas Peor Valoradas");
-        sec2.put("lists", listsService.getWorstRatedLists());
-        sections.add(sec2);
-
-        Map<String, Object> sec3 = new HashMap<>();
-        sec3.put("sectionTitle", "Listas Más Largas");
-        sec3.put("lists", listsService.getLongestLists());
-        sections.add(sec3);
-
-        Map<String, Object> sec4 = new HashMap<>();
-        sec4.put("sectionTitle", "Listas Películas Más Largas");
-        sec4.put("lists", listsService.getLongestMoviesLists());
-        sections.add(sec4);
-
-        Map<String, Object> sec5 = new HashMap<>();
-        sec5.put("sectionTitle", "Listas Series con Más Temporadas");
-        sec5.put("lists", listsService.getSeriesWithMostSeasons());
-        sections.add(sec5);
-
-        model.addAttribute("sections", sections);
+    
+        model.addAttribute("sections", listsService.getAllListSections());
 
         return "lists";
     }
 
     @GetMapping("/series")
     public String series(Model model) {
-        List<Lists> systemLists = listsService.findAllSystemLists();
-
-        List<Map<String, Object>> seriesSections = new ArrayList<>();
-
-        for (Lists list : systemLists) {
-            if (list.getType().equals(Types.SERIE)) {
-                List<Serie> seriesList = list.getFilmographyList().stream()
-                        .filter(f -> f instanceof Serie)
-                        .map(f -> (Serie) f)
-                        .toList();
-
-                if (!seriesList.isEmpty()) {
-                    Map<String, Object> sec = new HashMap<>();
-                    sec.put("name", list.getListName().replace(" - Series", ""));
-                    sec.put("listsId", list.getListsId());
-                    sec.put("series", seriesList);
-                    seriesSections.add(sec);
-                }
-            }
-        }
-
-        model.addAttribute("seriesSections", seriesSections);
+        model.addAttribute("seriesSections", listsService.getSeriesSections());
         return "series";
     }
 
@@ -154,51 +86,23 @@ public class FilmographyController {
         }
 
         // Stars
-        List<Map<String, Object>> starsList = new ArrayList<>();
         float avg = filmography.getFilmographyAverageStars();
+
         model.addAttribute("averageStars", Math.round(avg * 100.0f) / 100.0f);
-        for (int i = 1; i <= 5; i++) {
-            Map<String, Object> star = new HashMap<>();
-            float fill;
-            if (avg >= i) {
-                fill = 100f;
-            } else if (avg > i - 1) {
-                fill = (avg - (i - 1)) * 100f;
-            } else {
-                fill = 0f;
-            }
-            star.put("fillPercent", Math.round(fill));
-            star.put("hasColor", fill > 0);
-            starsList.add(star);
-        }
-        model.addAttribute("starsList", starsList);
+        model.addAttribute("starsList", filmographyService.builtStartsList(avg));
 
         // Empty review
         model.addAttribute("review", new Review());
 
         // User lists
-        List<Map<String, Object>> userListsWithCheck = new ArrayList<>();
         if (currentUser != null) {
-            List<Lists> listsToShow;
-            if (currentUser.getAccountRole() == Account.Role.ADMIN) {
-                listsToShow = listsService.findAllSystemLists();
-            } else {
-                listsToShow = currentUser.getAccountLists();
-            }
-
-            for (Lists list : listsToShow) {
-                Map<String, Object> listMap = new HashMap<>();
-                listMap.put("listsId", list.getListsId());
-                listMap.put("listName", list.getListName());
-                listMap.put("checked", list.getFilmographyList().contains(filmography));
-                userListsWithCheck.add(listMap);
-            }
+            model.addAttribute("userLists", listsService.getUserListsWithCheck(currentUser, filmography));
+        } else {
+            model.addAttribute("userLists", List.of());
         }
-        model.addAttribute("userLists", userListsWithCheck);
 
         // Chart
-        List<Review> reviews = filmography.getFilmographyReviews();
-        model.addAttribute("chartData", reviewService.getChartData(reviews));
+        model.addAttribute("chartData", reviewService.getChartData(filmography.getFilmographyReviews()));
 
         return "filmographyDetails";
     }
@@ -211,28 +115,7 @@ public class FilmographyController {
         if (principal == null)
             return "redirect:/login";
 
-        Filmography filmography = filmographyService.findById(id);
-        Account currentUser = accountService.findByEmail(principal.getName());
-
-        List<Lists> listsToUpdate;
-        if (currentUser.getAccountRole() == Account.Role.ADMIN) {
-            listsToUpdate = listsService.findAllSystemLists();
-        } else {
-            listsToUpdate = currentUser.getAccountLists();
-        }
-
-        for (Lists list : listsToUpdate) {
-            boolean isChecked = listIds != null && listIds.contains(list.getListsId());
-            boolean alreadyContains = list.getFilmographyList().contains(filmography);
-
-            if (isChecked && !alreadyContains) {
-                list.getFilmographyList().add(filmography);
-                listsService.save(list);
-            } else if (!isChecked && alreadyContains) {
-                list.getFilmographyList().remove(filmography);
-                listsService.save(list);
-            }
-        }
+        listsService.updateFilmographyInUserLists(id, listIds, principal.getName());
         return "redirect:/filmographies/" + id;
     }
 
@@ -268,54 +151,11 @@ public class FilmographyController {
     @GetMapping("/searchBar")
     public String searchBar(Model model, @RequestParam String search) {
         String query = (search != null) ? search.trim() : "";
+        if (query.isEmpty()) return "redirect:/principal";
 
-        if (query.isEmpty()) {
-            return "redirect:/principal";
-        }
-
-        List<Filmography> directResults = filmographyService.findByTitleContaining(query);
-
-        List<Filmography> byGenre = new ArrayList<>();
-        try {
-            String enumQuery = query.toUpperCase()
-                    .replace(" ", "_")
-                    .replace("Ó", "O").replace("É", "E")
-                    .replace("Í", "I").replace("Á", "A")
-                    .replace("CION", "CIÓN").replace("FICCION", "FICCIÓN")
-                    .replace("FANTASIA", "FANTASÍA").replace("BIOGRAFICO", "BIOGRÁFICO")
-                    .replace("BELICO", "BÉLICO").replace("ANIMACION", "ANIMACIÓN");
-
-            Genres genreSearched = Genres.valueOf(enumQuery);
-            byGenre = filmographyService.findByGenre(genreSearched);
-        } catch (IllegalArgumentException e) {
-           e.printStackTrace();
-        }
-
-        Set<Filmography> uniqueResults = new HashSet<>(directResults);
-        uniqueResults.addAll(byGenre);
-
-        List<Movie> movies = uniqueResults.stream()
-                .filter(f -> f instanceof Movie)
-                .map(f -> (Movie) f)
-                .toList();
-
-        List<Serie> series = uniqueResults.stream()
-                .filter(f -> f instanceof Serie)
-                .map(f -> (Serie) f)
-                .toList();
-
-        
-        List<Filmography> relatedFilms = filmographyService.findFilmographyRelatedByTitleOrGenre(query);
-        relatedFilms.removeAll(new ArrayList<>(uniqueResults));
-
-        boolean noResults = movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty();
-
+        Map<String, Object> results = filmographyService.search(query);
         model.addAttribute("query", query);
-        model.addAttribute("movies", movies);
-        model.addAttribute("series", series);
-        model.addAttribute("related", relatedFilms);
-        model.addAttribute("noResults", noResults);
-
+        model.mergeAttributes(results); // mete movies, series, related, noResults
         return "searchBar";
     }
 

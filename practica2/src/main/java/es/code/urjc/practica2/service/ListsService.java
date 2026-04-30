@@ -2,6 +2,7 @@ package es.code.urjc.practica2.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.HashMap;
@@ -16,11 +17,19 @@ import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.ListsRepository;
+import es.code.urjc.practica2.repository.FilmographyRepository;
+import es.code.urjc.practica2.service.AccountService;
 
 @Service
 public class ListsService {
     @Autowired
     private ListsRepository listsRepository;
+
+    @Autowired
+    private FilmographyRepository filmographyRepository;
+
+    @Autowired 
+    private AccountService accountService;
 
     public List<Lists> findByOwner(Account owner) {
         return listsRepository.findByListOwner(owner);
@@ -176,4 +185,96 @@ public class ListsService {
             return listsRepository.findAll().stream().filter(l-> l.getListOwner() == user).toList();   
         }
     }
+    public List<Map<String, Object>> getMovieSections() {
+        List<Map<String, Object>> movieSections = new ArrayList<>();
+        for (Lists list : findAllSystemLists()) {
+            if (list.getType().equals(Lists.Types.MOVIE)) {
+                List<Movie> movies = list.getFilmographyList().stream()
+                        .filter(f -> f instanceof Movie)
+                        .map(f -> (Movie) f)
+                        .toList();
+                if (!movies.isEmpty()) {
+                    Map<String, Object> sec = new HashMap<>();
+                    sec.put("name", list.getListName());
+                    sec.put("listsId", list.getListsId());
+                    sec.put("movies", movies);
+                    movieSections.add(sec);
+                }
+            }
+        }
+        return movieSections;
+    }
+    public List<Map<String, Object>> getSeriesSections() {
+        List<Map<String, Object>> seriesSections = new ArrayList<>();
+        for (Lists list : findAllSystemLists()) {
+            if (list.getType().equals(Lists.Types.SERIE)) {
+                List<Serie> seriesList = list.getFilmographyList().stream()
+                        .filter(f -> f instanceof Serie)
+                        .map(f -> (Serie) f)
+                        .toList();
+                if (!seriesList.isEmpty()) {
+                    Map<String, Object> sec = new HashMap<>();
+                    sec.put("name", list.getListName().replace(" - Series", ""));
+                    sec.put("listsId", list.getListsId());
+                    sec.put("series", seriesList);
+                    seriesSections.add(sec);
+                }
+            }
+        }
+        return seriesSections;
+    }
+    public List<Map<String, Object>> getUserListsWithCheck(Account currentUser, Filmography filmography) {
+        List<Lists> listsToShow;
+        if (currentUser.getAccountRole() == Account.Role.ADMIN) {
+            listsToShow = findAllSystemLists();
+        } else {
+            listsToShow = currentUser.getAccountLists();
+        }
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Lists list : listsToShow) {
+            Map<String, Object> listMap = new HashMap<>();
+            listMap.put("listsId", list.getListsId());
+            listMap.put("listName", list.getListName());
+            listMap.put("checked", list.getFilmographyList().contains(filmography));
+            result.add(listMap);
+        }
+        return result;
+    }
+    public void updateFilmographyInUserLists(Long filmographyId, List<Long> checkedIds, String userEmail) {
+        Filmography filmography = filmographyRepository.findById(filmographyId).orElseThrow();
+        Account currentUser = accountService.findByEmail(userEmail);
+
+        List<Lists> listsToUpdate;
+        if (currentUser.getAccountRole() == Account.Role.ADMIN) {
+            listsToUpdate = findAllSystemLists();
+        } else {
+            listsToUpdate = currentUser.getAccountLists();
+        }
+
+        for (Lists list : listsToUpdate) {
+            boolean isChecked = checkedIds != null && checkedIds.contains(list.getListsId());
+            boolean alreadyContains = list.getFilmographyList().contains(filmography);
+
+            if (isChecked && !alreadyContains) {
+                list.getFilmographyList().add(filmography);
+                save(list);
+            } else if (!isChecked && alreadyContains) {
+                list.getFilmographyList().remove(filmography);
+                save(list);
+            }
+        }
+    }
+    public List<Map<String, Object>> getAllListSections() {
+        List<Map<String, Object>> sections = new ArrayList<>();
+
+        sections.add(Map.of("sectionTitle", "Listas Mejor Valoradas",   "lists", getBestRatedLists()));
+        sections.add(Map.of("sectionTitle", "Listas Peor Valoradas",    "lists", getWorstRatedLists()));
+        sections.add(Map.of("sectionTitle", "Listas Más Largas",        "lists", getLongestLists()));
+        sections.add(Map.of("sectionTitle", "Listas Películas Más Largas", "lists", getLongestMoviesLists()));
+        sections.add(Map.of("sectionTitle", "Listas Series con Más Temporadas", "lists", getSeriesWithMostSeasons()));
+
+        return sections;
+    }
+
 }
