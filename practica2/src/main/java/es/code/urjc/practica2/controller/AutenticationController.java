@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,14 +20,19 @@ import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.EmailService;
 import es.code.urjc.practica2.service.ImageService;
+import es.code.urjc.practica2.service.PasswordRecoveryService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AutenticationController {
+    @Value("${app.recovery.expiry-seconds}")
+    private int recoveryExpirySeconds;
+
     @Autowired AccountService accountService;
     @Autowired PasswordEncoder passwordEncoder;
     @Autowired EmailService emailService;
     @Autowired ImageService imageService;
+    @Autowired PasswordRecoveryService passwordRecoveryService;
 
     @GetMapping("/")
     public String start(Model model, @RequestParam(value = "error", required = false) String error) {
@@ -49,23 +55,16 @@ public class AutenticationController {
 
         if (!accountService.existsAccountEmail(email)) {
             model.addAttribute("error", "El correo no está registrado.");
-            System.out.println("correo no registrado con éxito."); // <--- AÑADE ESTO
-
             return "login";
         }
 
-        String recoveryCode = String.format("%06d", new Random().nextInt(1000000));
+        String recoveryCode = passwordRecoveryService.generateAndSendRecoveryCode(email);
 
         session.setAttribute("recoveryCode", recoveryCode);
         session.setAttribute("recoveryEmail", email);
-        session.setMaxInactiveInterval(300);
-
-        emailService.sendMail(email, "Código de recuperación - Palomix",
-                "<h3>Tu código de recuperación es:</h3><h1>" + recoveryCode + "</h1>" +
-                        "<p>Introduce este código junto a tu nueva contraseña en la web.</p>");
+        session.setMaxInactiveInterval(recoveryExpirySeconds);
 
         model.addAttribute("message", "Código enviado con éxito.");
-        System.out.println("Código enviado con éxito.");
         return "login";
     }
 
