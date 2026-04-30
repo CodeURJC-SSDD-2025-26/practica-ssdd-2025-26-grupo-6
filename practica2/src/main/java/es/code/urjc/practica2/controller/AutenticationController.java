@@ -95,12 +95,8 @@ public class AutenticationController {
     }
 
     @PostMapping("/signUp")
-    public String postSignUp(Model model,
-            @RequestParam String email,
-            @RequestParam String name,
-            @RequestParam String password,
-            @RequestParam String confirmPassword,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate) {
+    public String postSignUp(Model model, @RequestParam String email,@RequestParam String name, @RequestParam String password,
+        @RequestParam String confirmPassword, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate) {
 
         boolean hasError = false;
 
@@ -133,24 +129,8 @@ public class AutenticationController {
         }
 
         String encodedPassword = passwordEncoder.encode(password);
-
-        Account newAccount = new Account(name, birthDate, email, Account.Role.USER, encodedPassword);
-        Resource image = new ClassPathResource("/images/perfilNoReg.jpg");
-       
-        try {
-             Image avatar = imageService.createImage(image.getInputStream());
-            newAccount.setAccountAvatar(avatar);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        accountService.save(newAccount);
-
-        emailService.sendMail(email,
-                "Bienvenido a Palomix",
-                "¡Hola! <br> Tu cuenta ha sido <b>creada con éxito</b>. A partir de ahora, podrás calificar todas las series y películas de nuestro catálogo, al igual, de crear listas con la filmografía que quieras. \nTe esperamos.");
+        accountService.registerAccount(email, name, encodedPassword, birthDate);
 
         return "redirect:/login";
     }
-
 }
