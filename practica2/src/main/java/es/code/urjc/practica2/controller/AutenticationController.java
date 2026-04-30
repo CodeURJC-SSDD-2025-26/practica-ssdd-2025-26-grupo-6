@@ -69,28 +69,18 @@ public class AutenticationController {
     }
 
     @PostMapping("/restartPassword")
-    public String restartPassword(@RequestParam String email,
-            @RequestParam String code,
-            @RequestParam String newPassword,
-            HttpSession session,
-            Model model) {
+    public String restartPassword(@RequestParam String email, @RequestParam String code, @RequestParam String newPassword, 
+        HttpSession session, Model model) {
 
         String sessionCode = (String) session.getAttribute("recoveryCode");
         String sessionEmail = (String) session.getAttribute("recoveryEmail");
 
-        if (sessionCode != null && sessionCode.equals(code) && sessionEmail.equals(email)) {
-
-            Account account = accountService.findByEmail(email);
-            if (account != null) {
-
-                account.setAccountPassword(passwordEncoder.encode(newPassword));
-                accountService.save(account);
-
-                session.removeAttribute("recoveryCode");
-                session.removeAttribute("recoveryEmail");
-
-                model.addAttribute("message", "Contraseña actualizada correctamente.");
-            }
+        boolean success = passwordRecoveryService.verifyAndResetPassword(sessionCode, sessionEmail, sessionCode, sessionEmail, newPassword);
+        
+        if (success) {
+            session.removeAttribute("recoveryCode"); 
+            session.removeAttribute("recoveryEmail");
+            model.addAttribute("message", "Contraseña actualizada correctamente.");
         } else {
             model.addAttribute("error", "El código es incorrecto, ha expirado o el email no coincide.");
         }
