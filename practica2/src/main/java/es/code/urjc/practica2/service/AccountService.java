@@ -1,16 +1,21 @@
 package es.code.urjc.practica2.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.repository.AccountRepository;
 import java.util.Objects;
+
 import es.code.urjc.practica2.repository.ListsRepository;
 import es.code.urjc.practica2.repository.ReviewRepository;
 import es.code.urjc.practica2.model.Account;
+import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Review;
 
@@ -20,6 +25,8 @@ public class AccountService {
     @Autowired private ReviewRepository reviewRepository;
     @Autowired private ListsRepository listsRepository;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private ImageService imageService;
+    @Autowired private EmailService emailService;
 
     public Account loginAccount(String email, String password) {
         // 1. Search for the account by email
@@ -31,6 +38,24 @@ public class AccountService {
         }
 
         return null; // Authentication failed
+    }
+
+    public void registerAccount(String email, String name, String password, LocalDate birthDate){
+        String encodedPassword = passwordEncoder.encode(password);
+        Account newAccount = new Account(name, birthDate, email, Account.Role.USER, encodedPassword);
+
+        try {
+            Resource image = new ClassPathResource("/images/perfilNoReg.jpg");
+            Image avatar = imageService.createImage(image.getInputStream());
+            newAccount.setAccountAvatar(avatar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        save(newAccount);
+        emailService.sendMail(email,
+                "Bienvenido a Palomix",
+                "¡Hola! <br> Tu cuenta ha sido <b>creada con éxito</b>. A partir de ahora, podrás calificar todas las series y películas de nuestro catálogo, al igual, de crear listas con la filmografía que quieras. \nTe esperamos.");
     }
 
     public boolean existsAccountEmail(String email) {
