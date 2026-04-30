@@ -46,6 +46,8 @@ public class AccountController {
     public String newReview(@PathVariable Long filmographyId, Model model,
             @RequestParam(required = false) String error,
             @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
+
+
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
         model.addAttribute("review", review);
@@ -60,9 +62,6 @@ public class AccountController {
         if (principal == null)
             return "redirect:/login";
 
-        Filmography filmography = filmographyService.findById(filmographyId);
-        Account currentUser = accountService.findByEmail(principal.getName());
-
         if (review.getReviewStars() == null || review.getReviewStars() <= 0) {
             model.addAttribute("filmography", filmographyService.findById(filmographyId));
             model.addAttribute("review", review);
@@ -71,11 +70,7 @@ public class AccountController {
             return "reviewForm";
         }
 
-        review.setFilmography(filmography);
-        review.setReviewAuthor(currentUser);
-        reviewService.save(review);
-
-        reloadReviewsToCalculateAverage(filmographyId);
+        reviewService.save(review, filmographyId, principal.getName());
 
         return "redirect:/filmographies/" + filmographyId;
     }
@@ -353,9 +348,5 @@ public class AccountController {
         return "redirect:/profile";
     }
 
-    private void reloadReviewsToCalculateAverage(Long filmographyId) {
-        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
-        updatedFilmography.updateAverageStars();
-        filmographyService.save(updatedFilmography);
-    }
+    
 }
