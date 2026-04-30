@@ -195,15 +195,7 @@ public class AdministratorController {
 
     @PostMapping("/administrator/director/{id}/delete")
     public String deleteDirector(@PathVariable Long id) {
-        Director director = directorService.findById(id);
-
-        // Remove the directors of his filmographies
-        List<Filmography> filmographies = filmographyService.findByDirector(director);
-        for (Filmography f : filmographies) {
-            f.setFilmographyDirector(null);
-            filmographyService.save(f);
-        }
-        directorService.delete(id);
+        directorService.deleteWithFilmographies(id);
         return "redirect:/administrator";
     }
 
@@ -235,18 +227,8 @@ public class AdministratorController {
         movie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(movie);
 
-        // Add movie to system lists that match its genres
-        List<es.code.urjc.practica2.model.Lists> systemLists = listsService.findAllSystemLists();
-        for (es.code.urjc.practica2.model.Lists list : systemLists) {
-            if (list.getListName().endsWith("- Series"))
-                continue;
-            boolean matches = movie.getFilmographyGenres().stream()
-                    .anyMatch(g -> formatGenre(g.getGenres()).equals(list.getListName()));
-            if (matches) {
-                list.getFilmographyList().add(movie);
-                listsService.save(list);
-            }
-        }
+        listsService.addMovieToSystemLists(movie);
+
         return "redirect:/administrator";
     }
 
@@ -309,19 +291,8 @@ public class AdministratorController {
         serie.setFilmographyPlatforms(filmographyService.toPlatformList(platformsIds));
         filmographyService.save(serie);
 
-        // Add serie to system lists that match its genres
-        List<Lists> systemLists = listsService.findAllSystemLists();
-        for (Lists list : systemLists) {
-            if (!list.getListName().endsWith("- Series"))
-                continue;
-            String listGenre = list.getListName().replace(" - Series", "");
-            boolean matches = serie.getFilmographyGenres().stream()
-                    .anyMatch(g -> formatGenre(g.getGenres()).equals(listGenre));
-            if (matches) {
-                list.getFilmographyList().add(serie);
-                listsService.save(list);
-            }
-        }
+        listsService.addSeriesToSystemLists(serie);
+
         return "redirect:/administrator";
     }
 
@@ -373,33 +344,6 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-    private String formatGenre(Genre.Genres g) {
-        return switch (g) {
-            case ACCIÓN -> "Acción";
-            case ANIMACIÓN -> "Animación";
-            case AVENTURA -> "Aventura";
-            case BÉLICO -> "Bélico";
-            case BIOGRÁFICO -> "Biográfico";
-            case CIENCIA_FICCIÓN -> "Ciencia Ficción";
-            case CINE_NEGRO -> "Cine Negro";
-            case COMEDIA -> "Comedia";
-            case CRIMEN -> "Crimen";
-            case DEPORTE -> "Deporte";
-            case DOCUMENTAL -> "Documental";
-            case DRAMA -> "Drama";
-            case FAMILIAR -> "Familiar";
-            case FANTASÍA -> "Fantasía";
-            case HISTORIA -> "Historia";
-            case INDEPENDIENTE -> "Independiente";
-            case MIEDO -> "Miedo";
-            case MISTERIO -> "Misterio";
-            case MUSICAL -> "Musical";
-            case OESTE -> "Oeste";
-            case REALITY -> "Reality";
-            case ROMANCE -> "Romance";
-            case SUSPENSE -> "Suspense";
-        };
-    }
 
     private void addEmptyFilmographyAttributes(Model model) {
         model.addAttribute("filmographyName", "");

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
@@ -175,5 +176,61 @@ public class ListsService {
         }else{
             return listsRepository.findAll().stream().filter(l-> l.getListOwner() == user).toList();   
         }
+    }
+
+    // Add filmography to system lists that match its genres
+    public void addMovieToSystemLists(Movie movie) {
+        List<Lists> systemLists = findAllSystemLists();
+        for (Lists list : systemLists) {
+            if (list.getListName().endsWith("- Series")) continue;
+            boolean matches = movie.getFilmographyGenres().stream()
+                    .anyMatch(g -> formatGenre(g.getGenres()).equals(list.getListName()));
+            if (matches && !list.getFilmographyList().contains(movie)) {
+                list.getFilmographyList().add(movie);
+                save(list);
+            }
+        }
+    }
+
+    public void addSeriesToSystemLists(Serie serie) {
+        List<Lists> systemLists = findAllSystemLists();
+        for (Lists list : systemLists) {
+            if (!list.getListName().endsWith("- Series")) continue;
+            String listGenre = list.getListName().replace(" - Series", "");
+            boolean matches = serie.getFilmographyGenres().stream()
+                    .anyMatch(g -> formatGenre(g.getGenres()).equals(listGenre));
+            if (matches && !list.getFilmographyList().contains(serie)) {
+                list.getFilmographyList().add(serie);
+                save(list);
+            }
+        }
+    }
+
+    private String formatGenre(Genre.Genres g) {
+        return switch (g) {
+            case ACCIÓN -> "Acción";
+            case ANIMACIÓN -> "Animación";
+            case AVENTURA -> "Aventura";
+            case BÉLICO -> "Bélico";
+            case BIOGRÁFICO -> "Biográfico";
+            case CIENCIA_FICCIÓN -> "Ciencia Ficción";
+            case CINE_NEGRO -> "Cine Negro";
+            case COMEDIA -> "Comedia";
+            case CRIMEN -> "Crimen";
+            case DEPORTE -> "Deporte";
+            case DOCUMENTAL -> "Documental";
+            case DRAMA -> "Drama";
+            case FAMILIAR -> "Familiar";
+            case FANTASÍA -> "Fantasía";
+            case HISTORIA -> "Historia";
+            case INDEPENDIENTE -> "Independiente";
+            case MIEDO -> "Miedo";
+            case MISTERIO -> "Misterio";
+            case MUSICAL -> "Musical";
+            case OESTE -> "Oeste";
+            case REALITY -> "Reality";
+            case ROMANCE -> "Romance";
+            case SUSPENSE -> "Suspense";
+        };
     }
 }
