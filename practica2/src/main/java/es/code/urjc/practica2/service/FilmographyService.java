@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -230,4 +231,64 @@ public class FilmographyService {
         });
         filmographyRepository.deleteById(Objects.requireNonNull(id));
     }
+
+    public List<Map<String, Object>> builtStartsList(float avg){
+        List<Map<String,Object>> startsList = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Map<String, Object> star = new HashMap<>();
+            float fill;
+            if (avg >= i) {
+                fill = 100f;
+            } else if (avg > i - 1) {
+                fill = (avg - (i - 1)) * 100f;
+            } else {
+                fill = 0f;
+            }
+            star.put("fillPercent", Math.round(fill));
+            star.put("hasColor", fill > 0);
+            startsList.add(star);
+        }
+        return startsList;
+    }
+
+    public Map<String, Object> search(String query) {
+        List<Filmography> directResults = findByTitleContaining(query);
+
+        List<Filmography> byGenre = new ArrayList<>();
+        try {
+            String enumQuery = query.toUpperCase()
+                    .replace(" ", "_")
+                    .replace("Ó", "O").replace("É", "E")
+                    .replace("Í", "I").replace("Á", "A")
+                    .replace("CION", "CIÓN").replace("FICCION", "FICCIÓN")
+                    .replace("FANTASIA", "FANTASÍA").replace("BIOGRAFICO", "BIOGRÁFICO")
+                    .replace("BELICO", "BÉLICO").replace("ANIMACION", "ANIMACIÓN");
+
+            Genres genreSearched = Genres.valueOf(enumQuery);
+            byGenre = findByGenre(genreSearched);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        Set<Filmography> uniqueResults = new HashSet<>(directResults);
+        uniqueResults.addAll(byGenre);
+
+        List<Movie> movies = uniqueResults.stream()
+                .filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
+
+        List<Serie> series = uniqueResults.stream()
+                .filter(f -> f instanceof Serie).map(f -> (Serie) f).toList();
+
+        List<Filmography> relatedFilms = findFilmographyRelatedByTitleOrGenre(query);
+        relatedFilms.removeAll(new ArrayList<>(uniqueResults));
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("movies", movies);
+        result.put("series", series);
+        result.put("related", relatedFilms);
+        result.put("noResults", movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty());
+        return result;
+    }
+
+
 }
