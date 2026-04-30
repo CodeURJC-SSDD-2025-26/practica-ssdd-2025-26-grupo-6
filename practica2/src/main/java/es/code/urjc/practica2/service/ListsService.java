@@ -33,12 +33,13 @@ public class ListsService {
         return listsRepository.findById(id).orElse(null);
     }
 
-    public Lists save(Lists list) {
-        if (list == null) {
-            return null;
-        }
-        return listsRepository.save(list);
+    public Lists save(String listName, Lists.Types type, Account owner, List<Filmography> films) {
+        Lists list = new Lists(listName, films, type);
+        list.setListOwner(owner);
+        listsRepository.save(list);
+        return list;
     }
+
 
     public void delete(Long id) {
         if (id != null) {
@@ -122,7 +123,8 @@ public class ListsService {
                 .flatMap(f -> f.getFilmographyReviews().stream())
                 .collect(Collectors.toList());
 
-        if (allReviews.isEmpty()) return 0;
+        if (allReviews.isEmpty())
+            return 0;
 
         return allReviews.stream()
                 .mapToDouble(Review::getReviewStars)
@@ -137,7 +139,8 @@ public class ListsService {
                 .map(f -> (Movie) f)
                 .collect(Collectors.toList());
 
-        if (movies.isEmpty()) return 0;
+        if (movies.isEmpty())
+            return 0;
 
         return movies.stream()
                 .mapToDouble(Movie::getMovieDuration)
@@ -152,7 +155,8 @@ public class ListsService {
                 .map(f -> (Serie) f)
                 .collect(Collectors.toList());
 
-        if (series.isEmpty()) return 0;
+        if (series.isEmpty())
+            return 0;
 
         return (int) series.stream()
                 .mapToInt(Serie::getSerieDuration)
@@ -160,20 +164,22 @@ public class ListsService {
                 .orElse(0);
     }
 
-    public List<Lists> findAllSystemLists(){
+    public List<Lists> findAllSystemLists() {
         return listsRepository.findByListOwnerIsNull();
     }
-    
-    public List<Lists> findAllUserList(){
-        return listsRepository.findAll().stream().filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN).toList();
+
+    public List<Lists> findAllUserList() {
+        return listsRepository.findAll().stream()
+                .filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN)
+                .toList();
     }
 
-    public List<Lists> findAllListsByAuthor(Account user){
+    public List<Lists> findAllListsByAuthor(Account user) {
         boolean isAdmin = user.getAccountRole() == Account.Role.ADMIN;
-        if(isAdmin){
-            return listsRepository.findAll().stream().filter(l-> l.getListOwner() == null).toList();
-        }else{
-            return listsRepository.findAll().stream().filter(l-> l.getListOwner() == user).toList();   
+        if (isAdmin) {
+            return listsRepository.findAll().stream().filter(l -> l.getListOwner() == null).toList();
+        } else {
+            return listsRepository.findAll().stream().filter(l -> l.getListOwner() == user).toList();
         }
     }
 }

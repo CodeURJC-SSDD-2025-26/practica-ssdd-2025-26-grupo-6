@@ -61,7 +61,7 @@ public class ReviewService {
         review.setFilmography(filmography);
         review.setReviewAuthor(currentUser);
         Review savedReview = reviewRepository.save(review);
-        
+
         Filmography filmToUpdate = filmographyService.findByIdWithReviews(filmographyId);
         filmToUpdate.updateAverageStars();
         filmographyService.save(filmToUpdate);
@@ -69,17 +69,18 @@ public class ReviewService {
         return savedReview;
     }
 
-    public Review update(Long reviewId, Float reviewStars, String reviewDescription) {
+    public Review update(Long reviewId, Float reviewStars, String reviewDescription, Long filmographyId) {
         Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             review.setReviewStars(reviewStars);
             review.setReviewDescription(reviewDescription);
+            reloadReviewsToCalculateAverage(filmographyId); 
             return reviewRepository.save(review);
         }
         return null;
     }
 
-    public void delete(Long reviewId) {
+    public void delete(Long reviewId, Long filmographyId) {
         Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             Filmography filmography = review.getFilmography();
@@ -88,6 +89,7 @@ public class ReviewService {
                     .orElse(filmography);
             filmography.updateAverageStars();
             filmographyRepository.save(filmography);
+            reloadReviewsToCalculateAverage(filmographyId);
         }
     }
 

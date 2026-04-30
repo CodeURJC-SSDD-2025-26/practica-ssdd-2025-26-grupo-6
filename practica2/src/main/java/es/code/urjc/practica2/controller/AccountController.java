@@ -36,17 +36,21 @@ import es.code.urjc.practica2.service.ImageService;
 
 @Controller
 public class AccountController {
-    @Autowired private ListsService listsService;
-    @Autowired private FilmographyService filmographyService;
-    @Autowired private ReviewService reviewService;
-    @Autowired private AccountService accountService;
-    @Autowired private ImageService imageService;
+    @Autowired
+    private ListsService listsService;
+    @Autowired
+    private FilmographyService filmographyService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/filmographies/{filmographyId}/reviews/new")
     public String newReview(@PathVariable Long filmographyId, Model model,
             @RequestParam(required = false) String error,
             @RequestParam(required = false, defaultValue = "/myReviews") String redirectTo) {
-
 
         Review review = new Review();
         model.addAttribute("filmography", filmographyService.findById(filmographyId));
@@ -102,10 +106,8 @@ public class AccountController {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
         }
-
-        reviewService.update(reviewId, reviewStars, reviewDescription);
         Long filmographyId = review.getFilmography().getFilmographyId();
-        reloadReviewsToCalculateAverage(filmographyId);
+        reviewService.update(reviewId, reviewStars, reviewDescription, filmographyId);
 
         return "redirect:" + redirectTo;
     }
@@ -128,8 +130,7 @@ public class AccountController {
         }
 
         Long filmographyId = review.getFilmography().getFilmographyId();
-        reviewService.delete(reviewId);
-        reloadReviewsToCalculateAverage(filmographyId);
+        reviewService.delete(reviewId, filmographyId);
         return "redirect:" + redirectTo;
     }
 
@@ -173,21 +174,19 @@ public class AccountController {
                 model.addAttribute("nameError", "Ya tienes una lista con ese nombre");
                 model.addAttribute("isAdmin", isAdmin);
                 model.addAttribute("lists", userLists);
-                model.addAttribute("currentUrl",redirect);
+                model.addAttribute("currentUrl", redirect);
                 return "myLists";
             }
         }
 
         if (listName != null && !listName.isBlank()) {
-            Lists newList = new Lists();
-            newList.setListName(listName);
-            newList.setListOwner(isAdmin ? null : currentUser);
+            Lists newList;
             if (!isAdmin) {
-                newList.setType(Lists.getTypeString("USER"));
+                newList = listsService.save(listName, Lists.getTypeString("USER"), currentUser);
+
             } else {
-                newList.setType(Lists.getTypeString(type));
+                newList = listsService.save(listName, Lists.getTypeString(type), null);
             }
-            listsService.save(newList);
 
             if ("true".equals(returnJson)) {
                 Map<String, Object> result = new HashMap<>();
@@ -243,7 +242,7 @@ public class AccountController {
         }
 
         if (list != null) {
-            list.setListName(newName);
+            List<Filmography> updateFilms = list.getFilmographyList();
 
             // Update the list content
             if (filmographyIds != null) {
@@ -251,12 +250,10 @@ public class AccountController {
                         .map(fId -> filmographyService.findById(fId))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList());
-                list.setFilmographyList(selectedFilms);
-            } else {
-                list.getFilmographyList().clear();
+                updateFilms.addAll(selectedFilms);
             }
-
-            listsService.save(list);
+            
+            listsService.save(newName, list.getType(), list.getListOwner(),updateFilms);
         }
         return "redirect:" + redirectTo;
     }
@@ -348,5 +345,4 @@ public class AccountController {
         return "redirect:/profile";
     }
 
-    
 }
