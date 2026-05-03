@@ -182,10 +182,10 @@ public class AccountController {
         if (listName != null && !listName.isBlank()) {
             Lists newList;
             if (!isAdmin) {
-                newList = listsService.save(listName, Lists.getTypeString("USER"), currentUser);
+                newList = listsService.save(listName, Lists.getTypeString("USER"), currentUser, null);
 
             } else {
-                newList = listsService.save(listName, Lists.getTypeString(type), null);
+                newList = listsService.save(listName, Lists.getTypeString(type), null, null);
             }
 
             if ("true".equals(returnJson)) {
