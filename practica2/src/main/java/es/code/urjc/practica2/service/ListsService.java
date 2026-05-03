@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Account;
@@ -19,7 +20,6 @@ import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.repository.ListsRepository;
 import es.code.urjc.practica2.repository.FilmographyRepository;
-import es.code.urjc.practica2.service.AccountService;
 
 @Service
 public class ListsService {
@@ -48,6 +48,10 @@ public class ListsService {
         list.setListOwner(owner);
         listsRepository.save(list);
         return list;
+    }
+
+    public Lists save(@NonNull Lists list) {
+        return listsRepository.save(list);
     }
 
 
@@ -304,7 +308,7 @@ public class ListsService {
         }
         return result;
     }
-    public void updateFilmographyInUserLists(Long filmographyId, List<Long> checkedIds, String userEmail) {
+    public void updateFilmographyInUserLists(@NonNull Long filmographyId, List<Long> checkedIds, String userEmail) {
         Filmography filmography = filmographyRepository.findById(filmographyId).orElseThrow();
         Account currentUser = accountService.findByEmail(userEmail);
 
@@ -328,6 +332,7 @@ public class ListsService {
             }
         }
     }
+
     public List<Map<String, Object>> getAllListSections() {
         List<Map<String, Object>> sections = new ArrayList<>();
 

@@ -230,31 +230,31 @@ public class AccountController {
             return "redirect:/login";
 
         Lists list = listsService.findById(id);
+        if (list == null)
+            return "redirect:" + redirectTo;
 
         boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
-        boolean isOwner = true;
-        if (!isAdmin) {
-            isOwner = list.getListOwner().getAccountEmail().equals(principal.getName());
-        }
-        if (!isAdmin && !isOwner) {
+        boolean isOwner = isAdmin || (list.getListOwner() != null &&
+                list.getListOwner().getAccountEmail().equals(principal.getName()));
+        if (!isOwner) {
             model.addAttribute("error", "No es posible realizar esta operación.");
             return "error/403";
         }
 
-        if (list != null) {
-            List<Filmography> updateFilms = list.getFilmographyList();
+        list.setListName(newName);
 
-            // Update the list content
-            if (filmographyIds != null) {
-                List<Filmography> selectedFilms = filmographyIds.stream()
-                        .map(fId -> filmographyService.findById(fId))
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
-                updateFilms.addAll(selectedFilms);
-            }
-            
-            listsService.save(newName, list.getType(), list.getListOwner(),updateFilms);
+        // Limpiar y repoblar en vez de crear lista nueva
+        list.getFilmographyList().clear();
+        if (filmographyIds != null) {
+            List<Filmography> selectedFilms = filmographyIds.stream()
+                    .map(fId -> filmographyService.findById(fId))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            list.getFilmographyList().addAll(selectedFilms);
         }
+
+        listsService.save(list); // ← nuevo método en el service
+
         return "redirect:" + redirectTo;
     }
 
