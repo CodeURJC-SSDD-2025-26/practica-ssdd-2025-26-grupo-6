@@ -1,5 +1,6 @@
 package es.code.urjc.practica2.service;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,11 @@ public class ReviewService {
     @Autowired
     private FilmographyRepository filmographyRepository;
 
+    @Autowired
+    AccountService accountService;
+    @Autowired
+    FilmographyService filmographyService;
+
     public Review findById(Long reviewId) {
         return reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
     }
@@ -30,11 +36,11 @@ public class ReviewService {
         return reviewRepository.findByReviewAuthor(author);
     }
 
-    public List<Review> findAll(){
+    public List<Review> findAll() {
         return reviewRepository.findAll();
     }
 
-    public String getChartData(List<Review> reviews){
+    public String getChartData(List<Review> reviews) {
         float[] starValues = { 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
         long[] counts = new long[starValues.length];
 
@@ -47,25 +53,34 @@ public class ReviewService {
         return "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]";
     }
 
-    public Review save(Review review) {
-        Review saved = reviewRepository.save(Objects.requireNonNull(review));
-        Filmography filmography = saved.getFilmography();
-        filmography.updateAverageStars();
-        filmographyRepository.save(filmography);
-        return saved;
+    public Review save(Review review, Long filmographyId, String userEmail) {
+
+        Filmography filmography = filmographyService.findById(filmographyId);
+        Account currentUser = accountService.findByEmail(userEmail);
+
+        review.setFilmography(filmography);
+        review.setReviewAuthor(currentUser);
+        Review savedReview = reviewRepository.save(review);
+
+        Filmography filmToUpdate = filmographyService.findByIdWithReviews(filmographyId);
+        filmToUpdate.updateAverageStars();
+        filmographyService.save(filmToUpdate);
+
+        return savedReview;
     }
 
-    public Review update(Long reviewId, Float reviewStars, String reviewDescription) {
+    public Review update(Long reviewId, Float reviewStars, String reviewDescription, Long filmographyId) {
         Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             review.setReviewStars(reviewStars);
             review.setReviewDescription(reviewDescription);
+            reloadReviewsToCalculateAverage(filmographyId); 
             return reviewRepository.save(review);
         }
         return null;
     }
 
-    public void delete(Long reviewId) {
+    public void delete(Long reviewId, Long filmographyId) {
         Review review = reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
         if (review != null) {
             Filmography filmography = review.getFilmography();
@@ -74,6 +89,13 @@ public class ReviewService {
                     .orElse(filmography);
             filmography.updateAverageStars();
             filmographyRepository.save(filmography);
+            reloadReviewsToCalculateAverage(filmographyId);
         }
+    }
+
+    private void reloadReviewsToCalculateAverage(Long filmographyId) {
+        Filmography updatedFilmography = filmographyService.findByIdWithReviews(filmographyId);
+        updatedFilmography.updateAverageStars();
+        filmographyService.save(updatedFilmography);
     }
 }
