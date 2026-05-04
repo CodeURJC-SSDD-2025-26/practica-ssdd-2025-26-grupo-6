@@ -71,12 +71,60 @@ public class FilmographyRestController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/filmographies/{id}")  // return ok and detail of film
-    public ResponseEntity<FilmographyDto> detail(@PathVariable long id) {
-        return ResponseEntity.ok(filmographyMapper.toDTO(filmographyService.findById(id)));
+    @GetMapping("/series")
+    public ResponseEntity<List<Map<String, Object>>> getSeriesData(){
+        return ResponseEntity.ok(listsService.getSeriesSections());
     }
 
-    
-    
+    @GetMapping("/lists")
+    public ResponseEntity<List<Map<String, Object>>> getLists(){
+        return ResponseEntity.ok(listsService.getAllListsSections());
+    }
 
+    @GetMapping("/lists/{id}")
+    public ResponseEntity<ListsDto> getList(@PathVariable Long id){
+        Lists list = listsService.findById(id);
+        if(list == null) return ResponseEntity.notFound().build();
+        return ReponseEntity.ok(listsMapper.toDTO(list));
+    }
+
+    @PostMapping("/filmographies/{id}/lists/update")
+    public ResponseEntity<Void> updateFilmographyLists(@PathVariable Long id, @RequestParam(required = false) List<Long> listIds, Principal principal){
+        if(principal == null) return ResponseEntity.status(401).build();
+        listsService.updateFilmographyInUserLists(id, listIds, principal.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/filmographies/{id}")  // return ok and detail of film
+    public ResponseEntity<FilmographyDto> detail(@PathVariable long id) {
+        Filmography filmography = filmographyService.findById(id);
+        if(filmography == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(filmographyMapper.toDTO(filmography));
+    }
+
+    @GetMapping("/filmographies/{id}/reviews")
+    public ResponseEntity<List<ReviewDto>> getFilmographyReviews(@PathVariable Long id){
+        Filmography filmography = filmographyService.findByIdWithReviews(id);
+        if(filmography == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(reviewMapper.toDTOs(filmography.getFilmographyReviews()));
+    }
+    
+    @GetMapping("/films/recent")
+    public ResponseEntity<List<MovieDto>> getRecentFilms(){
+        List<Movie> movies = filmographyService.getRecentFilms(20);
+        return ResponseEntity.ok(movieMapper.toDTOs(movies));
+    }
+
+    @GetMapping("/films/genre/{genre}")
+    public ResponseEntity<List<MovieDto>> getFilmsByGenre(@PathVariable String genre){
+        List<Filmography> films = filmographyService.getFilmsByGenre(genre.toUpperCase());
+        List<Movie> movies = films.stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
+        return ResponseEntity.ok(movieMapper.toDTOs(movies));
+    }
+
+    @GetMapping("/series/genre/{genre}")
+    public ResponseEntity<List<SerieDto>> getSeriesByGenre(@PathVariable String genre){
+        List<Serie> series = filmographyService.findSeriesByGenre(es.code.urjc.practica2.model.Genre.Genres.valueOf(genre.toUpperCase()));
+        return ResponseEntity.ok(serieMapper.toDTOs(series));
+    }
 }
