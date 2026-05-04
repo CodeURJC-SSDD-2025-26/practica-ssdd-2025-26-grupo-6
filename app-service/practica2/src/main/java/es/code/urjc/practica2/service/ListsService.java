@@ -61,7 +61,7 @@ public class ListsService {
         }
     }
 
-    private Map<String, Object> convertToMap(Lists list) {
+    public Map<String, Object> convertToMap(Lists list) {
         Map<String, Object> map = new HashMap<>();
 
         map.put("listsId", list.getListsId());

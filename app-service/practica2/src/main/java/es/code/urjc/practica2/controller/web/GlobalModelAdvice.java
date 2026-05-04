@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller;
+package es.code.urjc.practica2.controller.web;
 
 import java.security.Principal;
 

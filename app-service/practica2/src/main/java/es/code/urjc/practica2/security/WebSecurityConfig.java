@@ -1,11 +1,14 @@
 package es.code.urjc.practica2.security;
 
+import org.springframework.security.config.Customizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -30,8 +33,25 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
+    @Order(1) 
+    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher("/api/**") 
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/principal").permitAll() 
+                .anyRequest().authenticated() 
+            )
+            .httpBasic(Customizer.withDefaults()) 
+            .csrf(csrf -> csrf.disable()) 
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		return http.build();
+	}
+
+	@Bean
+	@Order(2)
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
+				
 				.requiresChannel(channel -> channel.anyRequest().requiresSecure())
 				.authorizeHttpRequests(auth -> auth
 						// Public pages

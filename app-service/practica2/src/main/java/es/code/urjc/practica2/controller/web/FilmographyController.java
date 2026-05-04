@@ -1,13 +1,10 @@
-package es.code.urjc.practica2.controller;
+package es.code.urjc.practica2.controller.web;
 
 import java.security.Principal;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Filmography;
-import es.code.urjc.practica2.model.Genre.Genres;
 import es.code.urjc.practica2.model.Lists;
-import es.code.urjc.practica2.model.Lists.Types;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
 import es.code.urjc.practica2.model.Serie;

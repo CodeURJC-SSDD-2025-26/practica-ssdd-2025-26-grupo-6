@@ -1,12 +1,9 @@
-package es.code.urjc.practica2.controller;
+package es.code.urjc.practica2.controller.web;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import es.code.urjc.practica2.model.Account;
-import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.EmailService;
 import es.code.urjc.practica2.service.ImageService;

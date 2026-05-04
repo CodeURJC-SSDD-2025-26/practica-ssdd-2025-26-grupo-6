@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller;
+package es.code.urjc.practica2.controller.web;
 
 import java.sql.SQLException;
 
@@ -19,7 +19,7 @@ import es.code.urjc.practica2.service.ImageService;
 public class ImageController {
     @Autowired private ImageService imageService;
 
-    @GetMapping("/img/{id}")
+    @GetMapping({"/img/{id}","/api/img/{id}"})
     public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
         Resource imageFile = imageService.getImageFile(id);
 
