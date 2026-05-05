@@ -21,7 +21,7 @@ import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.ImageService;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping("/api/v1/img")
 public class ImageRestController {
     @Autowired
 	private ImageService imageService;
