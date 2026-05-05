@@ -12,11 +12,9 @@ public record FilmographyDto(
     String filmographySynopsis,
     int filmographyYear,
     String filmographyTrailerUrl,
-    String imageUrl,
+    ImageDto image,
     String directorName,
     List<Platforms> filmographyPlatforms,
-    Integer movieDuration, // null if serie
-    Integer serieDuration  //null if movie
+    String type // "MOVIE" o "SERIE"
     ) {
 }
-
