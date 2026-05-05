@@ -1,6 +1,5 @@
 package es.code.urjc.practica2.service;
 
-import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
