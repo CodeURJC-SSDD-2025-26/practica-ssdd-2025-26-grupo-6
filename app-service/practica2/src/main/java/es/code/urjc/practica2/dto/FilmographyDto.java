@@ -2,31 +2,21 @@ package es.code.urjc.practica2.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Filmography.Platforms;
-import es.code.urjc.practica2.model.Image;
+
 
 public record FilmographyDto(
-                Long filmographyId,
-
-                String filmographyName,
-                float filmographyAverageStars,
-
-                String filmographySynopsis,
-
-                int filmographyYear,
-                String filmographyTrailerUrl,
-
-                @JsonIgnore
-                Image filmographyImage,
-                String imageUrl,
-
-                List<Platforms> filmographyPlatforms,
-
-                Director filmographyDirector,
-            
-                int duration) {
-
+    Long filmographyId,
+    String filmographyName,
+    float filmographyAverageStars,
+    String filmographySynopsis,
+    int filmographyYear,
+    String filmographyTrailerUrl,
+    String imageUrl,
+    String directorName,
+    List<Platforms> filmographyPlatforms,
+    Integer movieDuration, // null if serie
+    Integer serieDuration  //null if movie
+    ) {
 }
+

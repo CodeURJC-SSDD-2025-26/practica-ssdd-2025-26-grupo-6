@@ -1,13 +1,10 @@
 package es.code.urjc.practica2.dto;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List; 
 
 import es.code.urjc.practica2.model.Account.Role;
-import es.code.urjc.practica2.model.Image;
-import es.code.urjc.practica2.model.Lists;
+
 
 public record AccountDto(
         Long accountId,
@@ -15,9 +12,6 @@ public record AccountDto(
         LocalDate accountBirthDate,
         String accountEmail,
         Role accountRole,
-        String accountPassword,
-        @JsonIgnore Image accountAvatar,
-        String imageUrl,
-        List<Lists> accountLists) {
-
+        ImageDto avatar,
+        List<Long> listIds) { //Just IDs to avoid recursion
 }
