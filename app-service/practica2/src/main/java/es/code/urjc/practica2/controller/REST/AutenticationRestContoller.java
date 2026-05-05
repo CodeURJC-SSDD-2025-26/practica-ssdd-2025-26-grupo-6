@@ -1,10 +1,11 @@
-package es.code.urjc.practica2.controller.REST;
+package es.code.urjc.practica2.controller.rest;
 
 import es.code.urjc.practica2.security.jwt.AuthResponse;
 import es.code.urjc.practica2.security.jwt.AuthResponse.Status;
 import es.code.urjc.practica2.security.jwt.LoginRequest;
 import es.code.urjc.practica2.security.jwt.AccountLoginService;
 import es.code.urjc.practica2.service.AccountService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.time.LocalDate;

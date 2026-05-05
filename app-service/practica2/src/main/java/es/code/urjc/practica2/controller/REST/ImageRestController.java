@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller.REST;
+package es.code.urjc.practica2.controller.rest;
 
 import java.io.IOException;
 import java.sql.SQLException;

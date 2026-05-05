@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller.REST;
+package es.code.urjc.practica2.controller.rest;
 
 import java.security.Principal;
 import java.util.List;
@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class FilmographyRestController {
     @Autowired
     private ListsService listsService;

@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller.REST;
+package es.code.urjc.practica2.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
