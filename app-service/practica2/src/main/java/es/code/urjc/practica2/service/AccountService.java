@@ -26,7 +26,7 @@ public class AccountService {
     @Autowired private ListsRepository listsRepository;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private ImageService imageService;
-    @Autowired private EmailService emailService;
+    @Autowired private EmailClientService emailClientService;
 
     public Account loginAccount(String email, String password) {
         // 1. Search for the account by email
@@ -53,7 +53,7 @@ public class AccountService {
         }
 
         save(newAccount);
-        emailService.sendMail(email,
+        emailClientService.sendMail(email,
                 "Bienvenido a Palomix",
                 "¡Hola! <br> Tu cuenta ha sido <b>creada con éxito</b>. A partir de ahora, podrás calificar todas las series y películas de nuestro catálogo, al igual, de crear listas con la filmografía que quieras. \nTe esperamos.");
     }

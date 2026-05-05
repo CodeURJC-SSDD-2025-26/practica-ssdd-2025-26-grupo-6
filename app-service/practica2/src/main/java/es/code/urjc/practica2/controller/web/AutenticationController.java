@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import es.code.urjc.practica2.service.AccountService;
-import es.code.urjc.practica2.service.EmailService;
+import es.code.urjc.practica2.service.EmailClientService;
 import es.code.urjc.practica2.service.ImageService;
 import es.code.urjc.practica2.service.PasswordRecoveryService;
 import jakarta.servlet.http.HttpSession;
@@ -24,7 +24,7 @@ public class AutenticationController {
 
     @Autowired AccountService accountService;
     @Autowired PasswordEncoder passwordEncoder;
-    @Autowired EmailService emailService;
+    @Autowired EmailClientService emailClientService;
     @Autowired ImageService imageService;
     @Autowired PasswordRecoveryService passwordRecoveryService;
 
