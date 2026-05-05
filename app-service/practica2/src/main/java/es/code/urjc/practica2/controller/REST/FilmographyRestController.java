@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import es.code.urjc.practica2.dto.FilmographyDto;
 import es.code.urjc.practica2.dto.HomeResponseDto;
 import es.code.urjc.practica2.dto.ListsDto;
 import es.code.urjc.practica2.dto.MovieDto;
+import es.code.urjc.practica2.dto.ReviewDto;
 import es.code.urjc.practica2.dto.SerieDto;
 import es.code.urjc.practica2.mapper.AccountMapper;
 import es.code.urjc.practica2.mapper.FilmographyMapper;
@@ -78,14 +80,14 @@ public class FilmographyRestController {
 
     @GetMapping("/lists")
     public ResponseEntity<List<Map<String, Object>>> getLists(){
-        return ResponseEntity.ok(listsService.getAllListsSections());
+        return ResponseEntity.ok(listsService.getAllListSections());
     }
 
     @GetMapping("/lists/{id}")
     public ResponseEntity<ListsDto> getList(@PathVariable Long id){
         Lists list = listsService.findById(id);
         if(list == null) return ResponseEntity.notFound().build();
-        return ReponseEntity.ok(listsMapper.toDTO(list));
+        return ResponseEntity.ok(listsMapper.toDTO(list));
     }
 
     @PostMapping("/filmographies/{id}/lists/update")
