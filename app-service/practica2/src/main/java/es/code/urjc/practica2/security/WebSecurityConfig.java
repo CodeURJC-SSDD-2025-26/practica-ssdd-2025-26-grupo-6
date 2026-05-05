@@ -54,10 +54,10 @@ public class WebSecurityConfig {
         
 		http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/api/auth/refresh").permitAll()
-                .requestMatchers("/api/auth/logout").permitAll()
-				.requestMatchers("/api/auth/signup").permitAll()
+                .requestMatchers("/api/auth/v1/login").permitAll()
+                .requestMatchers("/api/auth/v1/refresh").permitAll()
+                .requestMatchers("/api/auth/v1/logout").permitAll()
+				.requestMatchers("/api/auth/v1/signup").permitAll()
                 .requestMatchers("/api/principal").permitAll()
                 .anyRequest().authenticated()
             );
