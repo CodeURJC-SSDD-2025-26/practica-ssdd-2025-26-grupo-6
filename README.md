@@ -476,25 +476,57 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 1. **Clonar el repositorio** (si no lo has hecho ya):
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   git clone https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6.git
+   cd practica-ssdd-2025-26-grupo-6
    ```
-
-2. **AQUÍ LOS SIGUIENTES PASOS**:
 
 ### **Construcción de la Imagen Docker**
 
 #### **Requisitos:**
 - Docker instalado en el sistema
 
-#### **Pasos para construir y publicar la imagen:**
+#### **Pasos para construir y publicar la imagen de App-service:**
 
-1. **Navegar al directorio de Docker**:
+1. **Navegar al directorio de App-service**:
    ```bash
-   cd docker
+      cd app-service
+   ```
+2. **Construir la imágen Docker**:
+   ```bash
+   docker build -t [tu_usario_DockerHub]/app-service:latest ./app-service
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+3. **Publicar la imágen en DockerHub**
+   ```bash
+   docker push -t [tu_usario_DockerHub]/app-service:latest
+   ```
+
+#### **Pasos para construir y publicar la imagen de Utility-service:**
+
+1. **Navegar al directorio de App-service**:
+   ```bash
+      cd utility-service
+   ```
+2. **Construir la imágen Docker**:
+   ```bash
+   docker build -t [tu_usario_DockerHub]/utility-service:latest ./utility-service
+   ```
+
+3. **Publicar la imágen en DockerHub**
+   ```bash
+   docker push -t [tu_usario_DockerHub]/utility-service:latest
+   ```
+
+### **Publicar Docker Compose**
+1. **Navegar al directorio de Docker**:
+   ```bash
+      cd docker
+   ```
+2. **Publicar artefacto en DockerHub**:
+   ```bash
+   docker compose push
+   ```
+
 
 ### **Despliegue en Máquina Virtual**
 
@@ -525,31 +557,36 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin@palomix.com | admin123 |
+| Usuario Registrado | alice@palomix.com | alice123 |
+| Usuario Registrado | bob@palomix.com | bob123 |
 
-### **OTRA DOCUMENTACIÓN ADICIONAL REQUERIDA EN LA PRÁCTICA**
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Matias Maccarrone**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **AdministratorRestController**
+Este componente es el encargado de exponer la lógica de negocio administrativa mediante una **interfaz REST**, permitiendo la gestión del sistema de forma programática.
+* **Gestión de Recursos**: Implementación de endpoints de escritura (`POST`, `PUT`, `DELETE`) para la administración de películas, series, directores y demás elementos del catálogo.
+* **Sincronización Funcional**: Replica íntegramente las capacidades del controlador web tradicional (`AdministratorController`), adaptándolas a los estándares de una API REST.
 
+- **Infraestructura y Despliegue (Docker)**
+Responsable de la **containerización** y orquestación del sistema completo para garantizar la portabilidad y escalabilidad del despliegue:
+* **Dockerfiles**: Diseño y configuración de los archivos de definición para las imágenes de `app-service` y `utility-service`, asegurando entornos de ejecución aislados y ligeros basados en OpenJDK.
+* **Orquestación con Docker Compose**: Creación del archivo `docker-compose.yml`. Este coordina la comunicación entre los servicios de aplicación, el servicio de utilidades y la base de datos oficial **MySQL**, integrando mecanismos de persistencia (volúmenes) y control de salud (**healthchecks**).
+* **Publicación y Distribución**: Gestión del ciclo de vida de las imágenes en **Docker Hub** y publicación del **OCI Artifact**, cumpliendo con los requisitos de despliegue automatizado y disponibilidad en la nube.
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [AdminRestController terminado](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/e015fa491efc48c67b00317e89a0b92ba4f001bb)  | [AdminRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AdministratorRestController.java)   |
+|2| [AdminRestController en proceso](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/9d3e2a3778115a51cc4fe06bd842f66a87c5d22c)  | [AdminRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AdministratorRestController.java)   |
+|3| [Docker](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b6e19f23038cb493b32f75b622e70260f57ed049)  | [Docker Compose](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/docker/docker/docker-compose.yml)   |
+|4| [Dockerfile app-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b6e19f23038cb493b32f75b622e70260f57ed049)  | [dockerfile app-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/docker/app-service/dockerfile), [dockerfile utility-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/docker/utility-service/dockerfile)   |
 
 ---
+#### **Alumno 2 - [Nombre Completo]**
 
-#### **Alumno 2 - Matias Maccarrone**
-
-- **AdministratorRestController**: Responsable de implementar como métodos REST todas las funcionalidades existentes en el controlador Web "AdministratorController", es decir, endpoints (POST, PUT y DELETE) para movies, series, directores, entre otras. Al igual, que el acceso a listas y reseñas de usuarios.
+[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
