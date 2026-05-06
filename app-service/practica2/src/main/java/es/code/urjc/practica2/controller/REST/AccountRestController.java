@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -27,7 +30,7 @@ import es.code.urjc.practica2.service.ListsService;
 import es.code.urjc.practica2.service.ReviewService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class AccountRestController {
     @Autowired
     private ListsService listsService;
@@ -48,7 +51,6 @@ public class AccountRestController {
     private ListsMapper listsMapper;
 
     // PROFILE
-
     @GetMapping("/profile")
     public ResponseEntity<AccountDto> getProfile(Principal principal){
         if(principal == null){
@@ -57,8 +59,6 @@ public class AccountRestController {
         Account account = accountService.findByEmail(principal.getName());
         return ResponseEntity.ok(accountMapper.toDTO(account));
     }
-
- 
 
     @PutMapping("/profile/edit")
     public ResponseEntity<AccountDto> editProfile(@RequestBody AccountDto accountDto,  Principal principal ){
@@ -74,7 +74,7 @@ public class AccountRestController {
         return ResponseEntity.ok(accountMapper.toDTO(account));
     }
 
-   public record AvatarRequest(Long imageId){}
+    public record AvatarRequest(Long imageId){}
 
     @PutMapping("/profile/avatar")
     public ResponseEntity<AccountDto> saveAvatar(@RequestBody AvatarRequest body, Principal principal){
@@ -93,18 +93,23 @@ public class AccountRestController {
     }
 
     // REVIEWS
-
     @GetMapping("/myReviews")
-    public ResponseEntity<List<ReviewDto>> getMyReviews(Principal principal){
-        if(principal == null){
-            return ResponseEntity.status(401).build();
-        }
+    public ResponseEntity<Page<ReviewDto>> getMyReviews(
+            Principal principal,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        if (principal == null) return ResponseEntity.status(401).build();
         Account account = accountService.findByEmail(principal.getName());
         boolean isAdmin = account.getAccountRole() == Account.Role.ADMIN;
 
         List<Review> reviews = isAdmin ? reviewService.findAll() : reviewService.findByAuthor(account);
+        List<ReviewDto> allDtos = reviewMapper.toDTOs(reviews);
 
-        return ResponseEntity.ok(reviewMapper.toDTOs(reviews));
+        int start = page * size;
+        int end = Math.min(start + size, allDtos.size());
+        Page<ReviewDto> result = new PageImpl<>(allDtos.subList(start, end), PageRequest.of(page, size), allDtos.size());
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/filmographies/{filmographyId}/reviews/new")
@@ -168,19 +173,23 @@ public class AccountRestController {
     }
 
     // LISTS
-
     @GetMapping("/myLists")
-    public ResponseEntity<List<ListsDto>> getMyLists(Principal principal){
-        if(principal == null){
-            return ResponseEntity.status(401).build();
-        }
+    public ResponseEntity<Page<ListsDto>> getMyLists(
+            Principal principal,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
+        if (principal == null) return ResponseEntity.status(401).build();
         Account account = accountService.findByEmail(principal.getName());
         boolean isAdmin = account.getAccountRole() == Account.Role.ADMIN;
 
         List<Lists> lists = isAdmin ? listsService.findAllSystemLists() : listsService.findByOwner(account);
+        List<ListsDto> allDtos = listsMapper.toDTOs(lists);
 
-        return ResponseEntity.ok(listsMapper.toDTOs(lists));
+        int start = page * size;
+        int end = Math.min(start + size, allDtos.size());
+        Page<ListsDto> result = new PageImpl<>(allDtos.subList(start, end), PageRequest.of(page, size), allDtos.size());
+        return ResponseEntity.ok(result);
     }
     
 public record ListCreateRequest(String listName, String type){}
