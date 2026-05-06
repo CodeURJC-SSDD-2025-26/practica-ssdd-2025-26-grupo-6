@@ -1,7 +1,6 @@
 package es.code.urjc.practica2.controller.rest;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 

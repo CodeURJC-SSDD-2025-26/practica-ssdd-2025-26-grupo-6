@@ -51,10 +51,6 @@ public class AdministratorRestController {
     @Autowired
     private DirectorService directorService;
     @Autowired
-    private GenreService genreService;
-    @Autowired
-    private ImageService imageService;
-    @Autowired
     private AccountService accountService;
     @Autowired
     private ListsService listsService;
@@ -71,8 +67,6 @@ public class AdministratorRestController {
     private ReviewMapper reviewMapper;
     @Autowired
     private ListsMapper listsMapper;
-    @Autowired
-    private FilmographyMapper filmographyMapper;
     @Autowired
     private DirectorMapper directorMapper;
 
