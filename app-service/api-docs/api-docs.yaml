@@ -1,0 +1,1344 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/v1/reviews/{reviewId}/edit:
+    put:
+      tags:
+      - account-rest-controller
+      operationId: updateReview
+      parameters:
+      - name: reviewId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewUpdateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ReviewDto"
+  /api/v1/profile/edit:
+    put:
+      tags:
+      - account-rest-controller
+      operationId: editProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /api/v1/profile/avatar:
+    put:
+      tags:
+      - account-rest-controller
+      operationId: saveAvatar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AvatarRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /api/v1/lists/{id}/update:
+    put:
+      tags:
+      - account-rest-controller
+      operationId: updateList
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListUpdateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ListsDto"
+  /api/v1/administrator/series/{id}:
+    put:
+      tags:
+      - administrator-rest-controller
+      operationId: updateSerie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SerieDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+    delete:
+      tags:
+      - administrator-rest-controller
+      operationId: deleteSerie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/movies/{id}:
+    put:
+      tags:
+      - administrator-rest-controller
+      operationId: updateMovie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+    delete:
+      tags:
+      - administrator-rest-controller
+      operationId: deleteMovie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/directors/{id}:
+    put:
+      tags:
+      - administrator-rest-controller
+      operationId: updateDirector
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DirectorDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+    delete:
+      tags:
+      - administrator-rest-controller
+      operationId: deleteDirector
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/accounts/{id}:
+    put:
+      tags:
+      - administrator-rest-controller
+      operationId: updateAccount
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+    delete:
+      tags:
+      - administrator-rest-controller
+      operationId: deleteAccount
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/myLists/new:
+    post:
+      tags:
+      - account-rest-controller
+      operationId: createList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ListsDto"
+  /api/v1/filmographies/{id}/lists/update:
+    post:
+      tags:
+      - filmography-rest-controller
+      operationId: updateFilmographyLists
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: listIds
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/v1/filmographies/{filmographyId}/reviews/new:
+    post:
+      tags:
+      - account-rest-controller
+      operationId: createReview
+      parameters:
+      - name: filmographyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ReviewDto"
+  /api/v1/auth/signup:
+    post:
+      tags:
+      - autentication-rest-contoller
+      operationId: signUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignUpRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/v1/auth/refresh:
+    post:
+      tags:
+      - autentication-rest-contoller
+      operationId: refresh
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/auth/logout:
+    post:
+      tags:
+      - autentication-rest-contoller
+      operationId: logout
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/auth/login:
+    post:
+      tags:
+      - autentication-rest-contoller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/administrator/series:
+    post:
+      tags:
+      - administrator-rest-controller
+      operationId: createSerie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SerieDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/movies:
+    post:
+      tags:
+      - administrator-rest-controller
+      operationId: createMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/directors:
+    post:
+      tags:
+      - administrator-rest-controller
+      operationId: createDirector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DirectorDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/series:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getSeriesData
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: {}
+  /api/v1/series/genre/{genre}:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getSeriesByGenre
+      parameters:
+      - name: genre
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/profile:
+    get:
+      tags:
+      - account-rest-controller
+      operationId: getProfile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /api/v1/profile/chart:
+    get:
+      tags:
+      - account-rest-controller
+      operationId: getChartData
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
+  /api/v1/principal:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getPrincipalData
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/HomeResponseDto"
+  /api/v1/myReviews:
+    get:
+      tags:
+      - account-rest-controller
+      operationId: getMyReviews
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/myLists:
+    get:
+      tags:
+      - account-rest-controller
+      operationId: getMyLists
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/lists:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getLists
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: {}
+  /api/v1/lists/{id}:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getList
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ListsDto"
+    delete:
+      tags:
+      - account-rest-controller
+      operationId: deleteList
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+  /api/v1/images/{id}:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDto"
+  /api/v1/images/{id}/media:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImageFile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/films/recent:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getRecentFilms
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/films/genre/{genre}:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getFilmsByGenre
+      parameters:
+      - name: genre
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/filmographies/{id}:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: detail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FilmographyDto"
+  /api/v1/filmographies/{id}/reviews:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getFilmographyReviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModel"
+  /api/v1/filmographies/{id}/chart:
+    get:
+      tags:
+      - filmography-rest-controller
+      operationId: getFilmographyChart
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
+  /api/v1/administrator/chart:
+    get:
+      tags:
+      - administrator-rest-controller
+      operationId: getAdminChart
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
+  /api/v1/administrator/accounts/{id}/reviews:
+    get:
+      tags:
+      - administrator-rest-controller
+      operationId: getUserReviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/accounts/{id}/lists:
+    get:
+      tags:
+      - administrator-rest-controller
+      operationId: getUserLists
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema: {}
+  /api/v1/administrator/:
+    get:
+      tags:
+      - administrator-rest-controller
+      operationId: getAllAdminEntity
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AdminEntityDto"
+  /api/search:
+    get:
+      tags:
+      - filmography-controller
+      operationId: searchApi
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: {}
+  /api/v1/reviews/{reviewId}:
+    delete:
+      tags:
+      - account-rest-controller
+      operationId: deleteReview
+      parameters:
+      - name: reviewId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ReviewDto"
+components:
+  schemas:
+    ReviewUpdateRequest:
+      type: object
+      properties:
+        reviewStars:
+          type: number
+          format: float
+        reviewDescription:
+          type: string
+    ReviewDto:
+      type: object
+      properties:
+        reviewId:
+          type: integer
+          format: int64
+        reviewStars:
+          type: number
+          format: float
+        reviewDescription:
+          type: string
+        filmographyId:
+          type: integer
+          format: int64
+        authorId:
+          type: integer
+          format: int64
+        authorName:
+          type: string
+    AccountDto:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        accountName:
+          type: string
+        accountBirthDate:
+          type: string
+          format: date
+        accountEmail:
+          type: string
+        accountRole:
+          type: string
+          enum:
+          - USER
+          - ADMIN
+        avatar:
+          $ref: "#/components/schemas/ImageDto"
+        listIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    ImageDto:
+      type: object
+      properties:
+        imageId:
+          type: integer
+          format: int64
+    AvatarRequest:
+      type: object
+      properties:
+        imageId:
+          type: integer
+          format: int64
+    ListUpdateRequest:
+      type: object
+      properties:
+        newName:
+          type: string
+        filmographyIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    FilmographyBasicDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        averageStars:
+          type: number
+          format: float
+        type:
+          type: string
+        image:
+          $ref: "#/components/schemas/ImageDto"
+    ListsDto:
+      type: object
+      properties:
+        listsId:
+          type: integer
+          format: int64
+        listName:
+          type: string
+        type:
+          type: string
+          enum:
+          - MOVIE
+          - SERIE
+          - USER
+        filmographyList:
+          type: array
+          items:
+            $ref: "#/components/schemas/FilmographyBasicDto"
+    GenreDto:
+      type: object
+      properties:
+        genres:
+          type: string
+          enum:
+          - ACCIÓN
+          - ANIMACIÓN
+          - AVENTURA
+          - BÉLICO
+          - BIOGRÁFICO
+          - CIENCIA_FICCIÓN
+          - CINE_NEGRO
+          - COMEDIA
+          - CRIMEN
+          - DEPORTE
+          - DOCUMENTAL
+          - DRAMA
+          - FAMILIAR
+          - FANTASÍA
+          - HISTORIA
+          - INDEPENDIENTE
+          - MIEDO
+          - MISTERIO
+          - MUSICAL
+          - OESTE
+          - REALITY
+          - ROMANCE
+          - SUSPENSE
+    SerieDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        averageStars:
+          type: number
+          format: float
+        synopsis:
+          type: string
+        year:
+          type: integer
+          format: int32
+        trailerUrl:
+          type: string
+        image:
+          $ref: "#/components/schemas/ImageDto"
+        platforms:
+          type: array
+          items:
+            type: string
+            enum:
+            - DISNEY
+            - NETFLIX
+            - PRIMEVIDEO
+            - HBOMAX
+            - MOVISTARPLUS
+        directorName:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        genres:
+          type: array
+          items:
+            $ref: "#/components/schemas/GenreDto"
+    MovieDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        averageStars:
+          type: number
+          format: float
+        synopsis:
+          type: string
+        year:
+          type: integer
+          format: int32
+        trailerUrl:
+          type: string
+        image:
+          $ref: "#/components/schemas/ImageDto"
+        platforms:
+          type: array
+          items:
+            type: string
+            enum:
+            - DISNEY
+            - NETFLIX
+            - PRIMEVIDEO
+            - HBOMAX
+            - MOVISTARPLUS
+        directorName:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        genres:
+          type: array
+          items:
+            $ref: "#/components/schemas/GenreDto"
+    DirectorDto:
+      type: object
+      properties:
+        directorId:
+          type: integer
+          format: int64
+        directorName:
+          type: string
+        directorBirthDate:
+          type: string
+    ListCreateRequest:
+      type: object
+      properties:
+        listName:
+          type: string
+        type:
+          type: string
+    SignUpRequest:
+      type: object
+      properties:
+        accountName:
+          type: string
+        accountEmail:
+          type: string
+        accountPassword:
+          type: string
+        confirmPassword:
+          type: string
+        accountBirthDate:
+          type: string
+          format: date
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        accountname:
+          type: string
+        password:
+          type: string
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    PagedModel:
+      type: object
+      properties:
+        content:
+          type: array
+          items: {}
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    HomeResponseDto:
+      type: object
+      properties:
+        topMovies:
+          type: array
+          items:
+            $ref: "#/components/schemas/MovieDto"
+        movieSections:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+    FilmographyDto:
+      type: object
+      properties:
+        filmographyId:
+          type: integer
+          format: int64
+        filmographyName:
+          type: string
+        filmographyAverageStars:
+          type: number
+          format: float
+        filmographySynopsis:
+          type: string
+        filmographyYear:
+          type: integer
+          format: int32
+        filmographyTrailerUrl:
+          type: string
+        image:
+          $ref: "#/components/schemas/ImageDto"
+        directorName:
+          type: string
+        filmographyGenres:
+          type: array
+          items:
+            $ref: "#/components/schemas/GenreDto"
+        filmographyPlatforms:
+          type: array
+          items:
+            type: string
+            enum:
+            - DISNEY
+            - NETFLIX
+            - PRIMEVIDEO
+            - HBOMAX
+            - MOVISTARPLUS
+        type:
+          type: string
+    Pageable:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          minimum: 0
+        size:
+          type: integer
+          format: int32
+          minimum: 1
+        sort:
+          type: array
+          items:
+            type: string
+    AdminEntityDto:
+      type: object
+      properties:
+        accounts:
+          $ref: "#/components/schemas/Pagenull"
+        movies:
+          $ref: "#/components/schemas/Pagenull"
+        series:
+          $ref: "#/components/schemas/Pagenull"
+        systemLists:
+          $ref: "#/components/schemas/Pagenull"
+        directors:
+          $ref: "#/components/schemas/Pagenull"
+    Pageablenull:
+      type: object
+      properties:
+        paged:
+          type: boolean
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: "#/components/schemas/Sortnull"
+        unpaged:
+          type: boolean
+    Pagenull:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        pageable:
+          $ref: "#/components/schemas/Pageablenull"
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/DirectorDto"
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: "#/components/schemas/Sortnull"
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    Sortnull:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        empty:
+          type: boolean
+        unsorted:
+          type: boolean
