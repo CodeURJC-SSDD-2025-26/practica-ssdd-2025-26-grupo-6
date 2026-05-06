@@ -14,6 +14,7 @@ import es.code.urjc.practica2.model.Filmography;
 public interface FilmographyMapper {
     @Mapping(source = "filmographyImage", target = "image")
     @Mapping(source = "filmographyDirector.directorName", target = "directorName")
+    @Mapping(target = "type", ignore = true)
     FilmographyDto toDTO(Filmography filmography);
 
     @Mapping(source = "filmographyId", target = "id")
