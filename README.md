@@ -451,10 +451,12 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación App-Service OpenAPI (YAML)]()**  
+📄 **[Especificación Utility-Service OpenAPI (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/utility-service/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación App-Service API REST (HTML)]()**  
+📖 **[Documentación Utility-Service API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/main/app-service/api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -525,9 +527,9 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin@palomix.com | admin |
+| Usuario Registrado | alice@palomix.com | alice123 |
+| Usuario Registrado | bob@palomix.com | bob123 |
 
 ### **OTRA DOCUMENTACIÓN ADICIONAL REQUERIDA EN LA PRÁCTICA**
 
@@ -575,14 +577,14 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - [Carla García Romero]**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
+|1| [Creación del authenticationRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/a49d574a0ac93038625c813c7cac5a7f4285bee3)  | [AutenticationRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AutenticationRestContoller.java)   |
+|2| [Creación de los jwt](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/a49d574a0ac93038625c813c7cac5a7f4285bee3)  | [JwtTokenProvider.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/security/jwt/JwtTokenProvider.java)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
 |5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
