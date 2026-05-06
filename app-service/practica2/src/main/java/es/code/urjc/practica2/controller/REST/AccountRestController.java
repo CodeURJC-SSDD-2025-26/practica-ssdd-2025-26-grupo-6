@@ -3,7 +3,7 @@ package es.code.urjc.practica2.controller.REST;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -199,6 +199,39 @@ public class AccountRestController {
         return ResponseEntity.status(201).body(listsMapper.toDTO(newList));
     }
 
+    @PutMapping("/lists/{id}/update")
+    public ResponseEntity<ListsDto> updateList(
+            @PathVariable Long id,
+            @RequestParam String newName,
+            @RequestParam(required = false) List<Long> filmographyIds,
+            Principal principal) {
+
+        if (principal == null) return ResponseEntity.status(401).build();
+
+        Lists list = listsService.findById(id);
+        if (list == null) return ResponseEntity.notFound().build();
+
+        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
+        boolean isOwner = isAdmin || (list.getListOwner() != null &&
+                list.getListOwner().getAccountEmail().equals(principal.getName()));
+
+        if (!isOwner) return ResponseEntity.status(403).build();
+
+        list.setListName(newName);
+        list.getFilmographyList().clear();
+
+        if (filmographyIds != null) {
+            filmographyIds.stream()
+                    .map(filmographyService::findById)
+                    .filter(Objects::nonNull)
+                    .forEach(list.getFilmographyList()::add);
+        }
+
+        listsService.save(list);
+        return ResponseEntity.ok(listsMapper.toDTO(list));
+    }
+
+
     @DeleteMapping("lists/{id}")
     public ResponseEntity<Void> deleteList(@PathVariable Long id, Principal principal){
         if(principal == null){
@@ -214,40 +247,6 @@ public class AccountRestController {
             return ResponseEntity.status(403).build();
         }
         listsService.delete(list.getListsId());
-
-        return ResponseEntity.noContent().build();
-    }
-
-    // ADMIN
-    
-    @GetMapping("/accounts")
-    public ResponseEntity<List<AccountDto>> getAllAccounts(Principal principal) {
-        if(principal == null){
-            return ResponseEntity.status(401).build();
-        }
-        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
-        if (!isAdmin){ 
-            return ResponseEntity.status(403).build();
-        }
-
-        return ResponseEntity.ok(accountMapper.toDTOs(accountService.findAll()));
-    }
-
-    @DeleteMapping("/accounts/{id}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable Long id, Principal principal) {
-
-        if(principal == null){
-            return ResponseEntity.status(401).build();
-        }
-
-        boolean isAdmin = accountService.findByEmail(principal.getName()).getAccountRole() == Account.Role.ADMIN;
-        if (!isAdmin){ 
-            return ResponseEntity.status(403).build();
-        }
-        if (accountService.findById(id) == null){
-            return ResponseEntity.notFound().build();
-        }
-        accountService.delete(id);
 
         return ResponseEntity.noContent().build();
     }
