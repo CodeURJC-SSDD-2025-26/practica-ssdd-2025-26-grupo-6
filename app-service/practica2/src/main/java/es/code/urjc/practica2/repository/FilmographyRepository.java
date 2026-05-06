@@ -3,6 +3,8 @@ package es.code.urjc.practica2.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -34,4 +36,10 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
     List<Filmography> findByFilmographyDirector(Director director);
 
     Filmography findByFilmographyName(String filmographyName);
+
+    @Query("SELECT m FROM Movie m ORDER BY m.filmographyYear DESC")
+    Page<Movie> findMoviesOrderByYearDesc(Pageable pageable);
+
+    @Query("SELECT s FROM Serie s")
+    Page<Serie> findAllSeriesPaged(Pageable pageable);
 }

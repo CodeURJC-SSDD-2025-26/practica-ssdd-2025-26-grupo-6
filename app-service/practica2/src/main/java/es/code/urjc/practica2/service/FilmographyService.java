@@ -2,6 +2,8 @@ package es.code.urjc.practica2.service;
 
 import es.code.urjc.practica2.repository.ListsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -75,7 +77,7 @@ public class FilmographyService {
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
     }
 
-        public List<Movie> getRecentFilms(int limit) {
+    public List<Movie> getRecentFilms(int limit) {
         return filmographyRepository.findAll().stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
@@ -83,6 +85,14 @@ public class FilmographyService {
                 .limit(limit)
                 .toList();
     }
+
+    public Page<Movie> getRecentFilms(Pageable pageable) {
+        return filmographyRepository.findMoviesOrderByYearDesc(pageable);
+    }
+
+    public Page<Serie> findAllSeriesPaged(Pageable pageable) {
+        return filmographyRepository.findAllSeriesPaged(pageable);
+    }    
 
     public List<Filmography> getFilmsByGenre(String genre) {
         Genres g = Genres.valueOf(genre.toUpperCase());
