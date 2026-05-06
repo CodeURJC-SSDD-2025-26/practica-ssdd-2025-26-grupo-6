@@ -6,7 +6,6 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import es.code.urjc.practica2.dto.FilmographySummaryDto;
 import es.code.urjc.practica2.dto.ListsDto;
 import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;

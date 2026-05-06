@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import es.code.urjc.practica2.dto.MovieDto;
 import es.code.urjc.practica2.model.Movie;
 
-@Mapper(componentModel = "spring", uses = {ImageMapper.class})
+@Mapper(componentModel = "spring", uses = { ImageMapper.class })
 public interface MovieMapper {
 
     @Mapping(source = "filmographyId", target = "id")
@@ -22,6 +22,7 @@ public interface MovieMapper {
     @Mapping(source = "filmographyPlatforms", target = "platforms")
     @Mapping(source = "filmographyDirector.directorName", target = "directorName")
     @Mapping(source = "movieDuration", target = "duration")
+    @Mapping(target = "genres", source = "filmographyGenres")
     MovieDto toDTO(Movie movie);
 
     List<MovieDto> toDTOs(Collection<Movie> movies);
