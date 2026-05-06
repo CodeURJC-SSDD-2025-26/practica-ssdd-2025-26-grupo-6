@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,20 @@ public class ReviewService {
         }
 
         return "[" + Arrays.stream(counts).mapToObj(String::valueOf).collect(Collectors.joining(",")) + "]";
+    }
+
+    public Map<Float, Long> getChartDataMap(List<Review> reviews) {
+        float[] starValues = { 0.5f, 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f };
+        Map<Float, Long> result = new java.util.LinkedHashMap<>();
+
+        for (float star : starValues) {
+            long count = reviews.stream()
+                    .filter(r -> r.getReviewStars() != null && Float.compare(r.getReviewStars(), star) == 0)
+                    .count();
+            result.put(star, count);
+        }
+
+        return result;
     }
 
     public Review save(Review review, Long filmographyId, String userEmail) {

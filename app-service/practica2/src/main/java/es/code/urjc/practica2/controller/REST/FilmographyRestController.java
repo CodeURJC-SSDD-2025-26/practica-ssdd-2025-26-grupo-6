@@ -33,6 +33,8 @@ import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
+import es.code.urjc.practica2.service.ReviewService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -44,6 +46,8 @@ public class FilmographyRestController {
     private ListsService listsService;
     @Autowired
     private FilmographyService filmographyService;
+    @Autowired
+    private ReviewService reviewService;
     @Autowired
     private MovieMapper movieMapper;
     @Autowired
@@ -178,5 +182,13 @@ public class FilmographyRestController {
         Page<SerieDto> result = new org.springframework.data.domain.PageImpl<>(
             paged, PageRequest.of(page, size), series.size());
         return ResponseEntity.ok(result);
+    }
+    @GetMapping("/filmographies/{id}/chart")
+    public ResponseEntity<Map<Float, Long>> getFilmographyChart(@PathVariable Long id) {
+        Filmography filmography = filmographyService.findByIdWithReviews(id);
+        if (filmography == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(reviewService.getChartDataMap(filmography.getFilmographyReviews()));
     }
 }
