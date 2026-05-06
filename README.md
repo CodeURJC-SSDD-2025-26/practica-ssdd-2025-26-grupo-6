@@ -451,10 +451,12 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación App-Service OpenAPI (YAML)]()**  
+📄 **[Especificación Utility-Service OpenAPI (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/utility-service/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación App-Service API REST (HTML)]()**  
+📖 **[Documentación Utility-Service API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/main/app-service/api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -607,16 +609,26 @@ Responsable de la **containerización** y orquestación del sistema completo par
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - [Carla García Romero]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Autenticación y Seguridad JWT**: He llevado a cabo la implementación del sistema de autenticación stateless mediante JWT. Esto incluyó la creación del AuthenticationRestController para gestionar el login y signup y la lógica del JwtTokenProvider y otras clases para la generación y validación de tokens de seguridad.
+
+- **Seguridad en la API*: Me he encargado de configurar y asegurar los endpoints de la API REST, garantizando que el flujo de autenticación sea robusto y escalable para las comunicaciones entre servicios.
+
+- **Optimización de la Transferencia de Datos (DTOs y Mappers)**: Con el objetivo de mejorar la eficiencia y la limpieza del código, realicé una reestructuración de los DTOs y sus respectivos Mappers (como en el caso de Filmography). 
+
+- **Gestión de Datos y Paginación**: Implementé el uso del objeto Pageable en los controladores REST (por ejemplo, en AccountRestController). 
+
+- **Documentación de Servicios con OpenAPI**: Responsable de la integración y configuración de OpenAPI/Swagger en el utility-service.
+
+- **Mantenimiento de Controladores de Cuenta**: He gestionado la lógica del AccountRestController, asegurando que la gestión de perfiles de usuario y sus datos asociados funcionen correctamente bajo los nuevos estándares de seguridad y paginación establecidos.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Creación del authenticationRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/a49d574a0ac93038625c813c7cac5a7f4285bee3)  | [AutenticationRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AutenticationRestContoller.java)   |
+|2| [Creación de los jwt](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/e07b818434c778bd1b36c60447668f206858bcf4)  | [JwtTokenProvider.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/security/jwt/JwtTokenProvider.java)   |
+|3| [Modificación y mejora de los dtos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b976b1e2525a16b14e2e2a732eb3a2f5bf009116) y [mappers](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/697623692cb5de2502eea6dce831a50b40c43e64) | [FilmographyDto.java](URL_archivo_3), [FilmographyMapper.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/mapper/FilmographyMapper.java)   |
+|4| [Inclusión de objeto pageable](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/25938a1a7f8c1d0218f7a282cfb95e8fd737b560)  | [AccountRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AccountRestController.java)   |
+|5| [OpenAPI en utility-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/cd051d211f80405967d1f88732214ccdfc335e1b)  | [api-docs](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/utility-service/api-docs)   |
 
 ---
