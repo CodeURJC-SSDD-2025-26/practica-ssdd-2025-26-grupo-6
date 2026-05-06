@@ -451,12 +451,12 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación App-Service OpenAPI (YAML)]()**  
+📄 **[Especificación App-Service OpenAPI (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/api-docs/api-docs.yaml)**  
 📄 **[Especificación Utility-Service OpenAPI (YAML)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/utility-service/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación App-Service API REST (HTML)]()**  
-📖 **[Documentación Utility-Service API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/main/app-service/api-docs/api-docs.html)**
+📖 **[Documentación App-Service API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/main/app-service/api-docs/api-docs.html)**  
+📖 **[Documentación Utility-Service API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/main/utility-service/api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
