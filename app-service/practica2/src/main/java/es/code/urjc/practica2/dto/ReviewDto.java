@@ -10,8 +10,8 @@ public record ReviewDto(
 
         String reviewDescription,
 
-        Filmography filmography,
+        Long filmographyId,
 
-        Account reviewAuthor) {
+        String reviewAuthor) {
 
 }

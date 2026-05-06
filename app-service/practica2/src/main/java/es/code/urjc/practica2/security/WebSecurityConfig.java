@@ -1,6 +1,9 @@
 package es.code.urjc.practica2.security;
 
 import org.springframework.security.config.Customizer;
+
+import javax.management.relation.Role;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import es.code.urjc.practica2.model.Account;
 
 @Configuration
 @EnableWebSecurity
@@ -39,7 +44,7 @@ public class WebSecurityConfig {
             .securityMatcher("/api/**") 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/principal").permitAll() 
-				.requestMatchers("/api/admin/**").hasRole("ADMIN") 
+				.requestMatchers("/api/v1/administrator/**").hasRole("ADMIN")
                 .anyRequest().authenticated() 
 
             )

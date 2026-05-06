@@ -9,7 +9,8 @@ public record ListsDto(
     Long listsId,
     String listName,
     Types type,
-    List<Filmography> filmographyList
+    String listOwner,
+    List<FilmographySummaryDto> filmographyList
     ) {
 
 }

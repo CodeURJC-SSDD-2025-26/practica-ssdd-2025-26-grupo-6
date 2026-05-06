@@ -44,8 +44,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@PreAuthorize("hasRole('ADMIN')")
-@RequestMapping("api/administrator")
+@RequestMapping("/api/v1/administrator")
 public class AdministratorRestController {
 
     @Autowired
@@ -75,24 +74,26 @@ public class AdministratorRestController {
     private ListsMapper listsMapper;
     @Autowired
     private FilmographyMapper filmographyMapper;
-    @Autowired private DirectorMapper directorMapper;
+    @Autowired
+    private DirectorMapper directorMapper;
 
     // MOVIES
     @PostMapping("/movies")
     public ResponseEntity<MovieDto> createMovie(@RequestBody MovieDto dto) {
-        var movie = movieMapper.toDomain(dto);
+        Movie movie = movieMapper.toDomain(dto);
+        if(filmographyService.getByName(movie.getFilmographyName())!=null){
+            return ResponseEntity.badRequest().build();
+        }
         var saved = filmographyService.save(movie);
         return ResponseEntity.ok(movieMapper.toDTO((Movie) saved));
     }
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto dto) {
-        Movie movie = movieMapper.toDomain(dto);
-        if (filmographyService.findMovieById(movie.getFilmographyId()) == null) {
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable Long id, @RequestBody MovieDto dto) {
+        if (filmographyService.findMovieById(id) == null)
             return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(movieMapper.toDTO(filmographyService.updateMovie(movie.getFilmographyId(), movie)));
+        Movie movie = movieMapper.toDomain(dto);
+        return ResponseEntity.ok(movieMapper.toDTO(filmographyService.updateMovie(id, movie)));
     }
 
     @DeleteMapping("/movies/{id}")
@@ -104,20 +105,18 @@ public class AdministratorRestController {
 
     // SERIES
     @PostMapping("/series")
-    public ResponseEntity<MovieDto> createSerie(@RequestBody SerieDto dto) {
+    public ResponseEntity<SerieDto> createSerie(@RequestBody SerieDto dto) {
         var serie = serieMapper.toDomain(dto);
         var saved = filmographyService.save(serie);
-        return ResponseEntity.ok(movieMapper.toDTO((Movie) saved));
+        return ResponseEntity.status(HttpStatus.CREATED).body(serieMapper.toDTO((Serie) saved));
     }
 
     @PutMapping("/series/{id}")
-    public ResponseEntity<MovieDto> updateSerie(@RequestBody SerieDto dto) {
-        Serie serie = serieMapper.toDomain(dto);
-        if (filmographyService.findMovieById(serie.getFilmographyId()) == null) {
+    public ResponseEntity<SerieDto> updateSerie(@PathVariable Long id, @RequestBody SerieDto dto) {
+        if (filmographyService.findSeriesById(id) == null)
             return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(movieMapper.toDTO(filmographyService.updateMovie(serie.getFilmographyId(), serie)));
+        Serie serie = serieMapper.toDomain(dto);
+        return ResponseEntity.ok(serieMapper.toDTO(filmographyService.updateSeries(id, serie)));
     }
 
     @DeleteMapping("/series/{id}")
@@ -128,8 +127,8 @@ public class AdministratorRestController {
     }
 
     // ACCOUNTS
-    //update user
-    @PutMapping("accounts/{id}")
+    // update user
+    @PutMapping("/accounts/{id}")
     public ResponseEntity<AccountDto> updateAccount(@PathVariable Long id, @RequestBody AccountDto accountDto) {
         Account user = accountService.findById(id);
         if (user == null)
@@ -144,8 +143,8 @@ public class AdministratorRestController {
         return ResponseEntity.ok(accountMapper.toDTO(user));
     }
 
-    //delete user
-    @DeleteMapping("accounts/{id}")
+    // delete user
+    @DeleteMapping("/accounts/{id}")
     public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
         if (accountService.findById(id) == null) {
             return ResponseEntity.notFound().build();
@@ -153,9 +152,9 @@ public class AdministratorRestController {
         accountService.delete(id);
         return ResponseEntity.noContent().build();
     }
-    //get user's reviews
+    // get user's reviews
 
-    @GetMapping("accounts/{id}/reviews")
+    @GetMapping("/accounts/{id}/reviews")
     public ResponseEntity<List<ReviewDto>> getUserReviews(@PathVariable Long id) {
         Account user = accountService.findById(id);
         if (user == null)
@@ -169,7 +168,7 @@ public class AdministratorRestController {
     }
 
     // get user's lists
-    @GetMapping("accounts/{id}/lists")
+    @GetMapping("/accounts/{id}/lists")
     public ResponseEntity<List<ListsDto>> getUserLists(@PathVariable Long id) {
         Account user = accountService.findById(id);
         if (user == null)
@@ -179,33 +178,34 @@ public class AdministratorRestController {
         return ResponseEntity.ok(listsMapper.toDTOs(lists));
     }
 
-    //DIRECTOR
+    // DIRECTOR
     // new Director
-    @PostMapping("directors/")
+    @PostMapping("/directors")
     public ResponseEntity<DirectorDto> createDirector(@RequestBody DirectorDto directorDto) {
         Director director = new Director();
         director.setDirectorName(directorDto.directorName());
         director.setDirectorBirthDate(directorDto.directorBirthDate());
-        
+
         Director savedDirector = directorService.save(director);
         return ResponseEntity.status(HttpStatus.CREATED).body(directorMapper.toDTO(savedDirector));
     }
 
     // update director
-    @PutMapping("directors/{id}")
+    @PutMapping("/directors/{id}")
     public ResponseEntity<DirectorDto> updateDirector(@PathVariable Long id, @RequestBody DirectorDto directorDto) {
         Director director = directorService.findById(id);
-        if (director == null) return ResponseEntity.notFound().build();
+        if (director == null)
+            return ResponseEntity.notFound().build();
 
         director.setDirectorName(directorDto.directorName());
         director.setDirectorBirthDate(directorDto.directorBirthDate());
-        
+
         directorService.save(director);
         return ResponseEntity.ok(directorMapper.toDTO(director));
     }
 
     // delete director and his movies
-    @DeleteMapping("directors/{id}")
+    @DeleteMapping("/directors/{id}")
     public ResponseEntity<Void> deleteDirector(@PathVariable Long id) {
         if (directorService.findById(id) == null) {
             return ResponseEntity.notFound().build();
