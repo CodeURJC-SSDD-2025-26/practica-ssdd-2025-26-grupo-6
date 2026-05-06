@@ -561,17 +561,20 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Raúl Sánchez López]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **Lógica de Administración**: He implementado la lógica de negocio del `AdministratorController`, encargándome de crear los endpoints y gestionar las operaciones relacionadas con la administración dentro del sistema.
+
+- **Desarrollo de Filmography**: He creado la versión del `FilmographyRestController`, definiendo los endpoints básicos para trabajar con la filmografía y conectándolo con los servicios correspondientes.
+
+- **Servicio de Correo Electrónico (`utility-service`)**: He desarrollado un microservicio independiente para el envío de correos electrónicos, centralizando esta funcionalidad para que pueda ser utilizada por el resto de servicios del sistema.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Lógica de negocio AdministratorController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/5a24cf0f70199ec772f6a5672465d77f4ab69283)  | [AdministratorController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/web/AdministratorController.java)   |
+|2| [Primera modificación del FilmographyRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/2fd2efcdc3fec4691b3cf062837e800a602f19c1)  | [FilmographyRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/FilmographyRestController.java)   |
+|3| [Pequeños cambios en FilmographyRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/8b03f3acbc6ddd7b320d160b12bf595c13ea9f39)  | [FilmographyRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/FilmographyRestController.java)   |
+|4| [Creación de utility-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/306d1bd0a74072585d42d08ae990173464583033)  | [utility-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/tree/main/utility-service)   |
 
 ---
 
