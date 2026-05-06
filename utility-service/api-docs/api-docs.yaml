@@ -1,0 +1,33 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/v1/email:
+    post:
+      tags:
+      - email-controller
+      operationId: sendEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    EmailRequest:
+      type: object
+      properties:
+        destiny:
+          type: string
+        subject:
+          type: string
+        content:
+          type: string
