@@ -1,5 +1,7 @@
 package es.code.urjc.practica2.controller.rest;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,6 +207,11 @@ public class AdministratorRestController {
         }
         directorService.deleteWithFilmographies(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/chart")
+    public ResponseEntity<Map<String, Long>> getAdminChart() {
+        return ResponseEntity.ok(filmographyService.countByGenre());
     }
 
 }

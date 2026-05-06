@@ -3,6 +3,7 @@ package es.code.urjc.practica2.controller.rest;
 import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,6 +58,19 @@ public class AccountRestController {
         }
         Account account = accountService.findByEmail(principal.getName());
         return ResponseEntity.ok(accountMapper.toDTO(account));
+    }
+
+    @GetMapping("/profile/chart")
+    public ResponseEntity<Map<Float, Long>> getChartData(Principal principal) {
+        if (principal == null){
+            return ResponseEntity.status(401).build();
+        }
+        Account account = accountService.findByEmail(principal.getName());
+        boolean isAdmin = account.getAccountRole() == Account.Role.ADMIN;
+
+        List<Review> reviews = isAdmin ? reviewService.findAll() : reviewService.findByAuthor(account);
+
+        return ResponseEntity.ok(reviewService.getChartDataMap(reviews));
     }
 
     @PutMapping("/profile/edit")
@@ -191,7 +205,7 @@ public class AccountRestController {
         return ResponseEntity.ok(result);
     }
     
-public record ListCreateRequest(String listName, String type){}
+    public record ListCreateRequest(String listName, String type){}
 
     @PostMapping("/myLists/new")
     public ResponseEntity<ListsDto> createList(@RequestBody ListCreateRequest body, Principal principal){
