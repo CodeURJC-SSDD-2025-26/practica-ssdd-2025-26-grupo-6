@@ -70,6 +70,7 @@ public class WebSecurityConfig {
             .requestMatchers("/api/v1/filmographies/**").permitAll()
             .requestMatchers("/api/v1/filmographies/*/lists/update").authenticated()
             .requestMatchers("/api/v1/administrator/**").hasRole("ADMIN")
+			.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
         );
 
@@ -100,6 +101,8 @@ public class WebSecurityConfig {
 							"/filmographies/{id}/reviews", "/lists/{id}", "/img/**", "/aboutUs", "/cookies",
 							"/frequentlyAskedQuestions", "/legalAdvise", "/error", "/searchBar","/sendRecoveryEmail", "/restartPassword")
 					.permitAll()
+					
+					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
 
 					// Specific roles
 					.requestMatchers("/administrator/**", "/movies/**", "/series/**").hasRole("ADMIN")
