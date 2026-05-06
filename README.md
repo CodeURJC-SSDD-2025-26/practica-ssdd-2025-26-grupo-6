@@ -463,8 +463,8 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ![Diagrama de Servicios](readMe_images/DiagramaDeServicios.jpg)
 
 ### **Diagrama de Clases Actualizado**
-
-Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
+![Diagrama de Clases](readMe_Images\classesDiagramP3.png)
+Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos. Además, de que se agregan las clases de la "utility-service".
 
 ### **Instrucciones de Ejecución con Docker**
 
@@ -547,9 +547,9 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Matias Maccarrone**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+- **AdministratorRestController**: Responsable de implementar como métodos REST todas las funcionalidades existentes en el controlador Web "AdministratorController", es decir, endpoints (POST, PUT y DELETE) para movies, series, directores, entre otras. Al igual, que el acceso a listas y reseñas de usuarios.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
