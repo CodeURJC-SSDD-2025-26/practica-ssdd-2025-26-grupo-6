@@ -5,5 +5,3 @@ public record ImageDto(
     Long imageId
     ) {
 }
-
-//NO FUNCIONA NO SABEMOS PORQEU

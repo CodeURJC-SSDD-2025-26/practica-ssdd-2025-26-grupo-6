@@ -1,4 +1,4 @@
-package es.code.urjc.practica2.controller.REST;
+package es.code.urjc.practica2.controller.rest;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +21,7 @@ import es.code.urjc.practica2.model.Image;
 import es.code.urjc.practica2.service.ImageService;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping("/api/v1/img")
 public class ImageRestController {
     @Autowired
 	private ImageService imageService;

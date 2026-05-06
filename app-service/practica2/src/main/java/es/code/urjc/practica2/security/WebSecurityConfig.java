@@ -49,16 +49,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 		http.authenticationProvider(authenticationProvider());
 		http
-			.securityMatcher("/api/**")
+			.securityMatcher("/api/**", "/v3/api-docs/**", "/v3/api-docs")
 			.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
         
 		http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/api/auth/refresh").permitAll()
-                .requestMatchers("/api/auth/logout").permitAll()
-				.requestMatchers("/api/auth/signup").permitAll()
-                .requestMatchers("/api/principal").permitAll()
+				.requestMatchers("/v3/api-docs*/**", "/v3/api-docs").permitAll()
+            	.requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/api/v1/auth/login").permitAll()
+                .requestMatchers("/api/v1/auth/refresh").permitAll()
+                .requestMatchers("/api/v1/auth/logout").permitAll()
+				.requestMatchers("/api/v1/auth/signup").permitAll()
+                .requestMatchers("/api/v1/principal", "/api/v1/series", "/api/v1/lists").permitAll()
                 .anyRequest().authenticated()
             );
 
@@ -81,6 +83,7 @@ public class WebSecurityConfig {
 		http
 			.requiresChannel(channel -> channel.anyRequest().requiresSecure())
 			.authorizeHttpRequests(auth -> auth
+					.requestMatchers("/", "/css/**", "/js/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs*/**").permitAll()
 					// Public pages
 					.requestMatchers("/", "/css/**", "/js/**", "/images/**", "/posters/**", "/login", "/signUp",
 							"/logout", "/principal", "/lists", "/series", "/films/recent",
