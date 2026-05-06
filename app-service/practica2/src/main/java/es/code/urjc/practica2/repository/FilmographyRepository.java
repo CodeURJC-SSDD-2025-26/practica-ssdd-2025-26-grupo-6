@@ -32,4 +32,6 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
     List<Filmography> findByTitleContaining(@Param("name") String filmographyName);
 
     List<Filmography> findByFilmographyDirector(Director director);
+
+    Filmography findByFilmographyName(String filmographyName);
 }

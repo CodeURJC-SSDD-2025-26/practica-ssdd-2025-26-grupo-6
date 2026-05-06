@@ -19,7 +19,7 @@ import es.code.urjc.practica2.service.ImageService;
 public class ImageController {
     @Autowired private ImageService imageService;
 
-    @GetMapping({"/img/{id}","/api/img/{id}"})
+    @GetMapping("/img/{id}")
     public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
         Resource imageFile = imageService.getImageFile(id);
 

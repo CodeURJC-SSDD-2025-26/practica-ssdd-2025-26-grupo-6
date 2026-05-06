@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import es.code.urjc.practica2.dto.SerieDto;
+import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
 
 @Mapper(componentModel = "spring")
@@ -38,4 +39,11 @@ public interface SerieMapper {
     @Mapping(target = "filmographyGenres", ignore = true)
     @Mapping(target = "filmographyReviews", ignore = true)
     Serie toDomain(SerieDto serie);
+
+    default String mapImageUrl(Serie movie) {
+        if (movie.getFilmographyImage() == null) {
+            return null;
+        }
+        return "/api/images/" + movie.getFilmographyImage().getImageId();
+    }
 }

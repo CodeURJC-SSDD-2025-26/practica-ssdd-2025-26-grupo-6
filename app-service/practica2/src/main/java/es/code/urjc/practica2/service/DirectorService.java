@@ -39,10 +39,11 @@ public class DirectorService {
         return directorRepository.findAll(Sort.by(Sort.Direction.ASC, "directorName"));
     }
 
-    public void save(Director director){
+    public Director save(Director director){
         if(director != null){
             directorRepository.save(director);
         }
+        return director;
     }
 
     public void delete(Long id){

@@ -168,6 +168,10 @@ public class FilmographyService {
         });
     }
 
+    public Filmography getByName(String name){
+        return filmographyRepository.findByFilmographyName(name);
+    }
+
     public List<Filmography.Platforms> toPlatformList(List<String> platformIds) {
         if (platformIds == null)
             return new ArrayList<>();

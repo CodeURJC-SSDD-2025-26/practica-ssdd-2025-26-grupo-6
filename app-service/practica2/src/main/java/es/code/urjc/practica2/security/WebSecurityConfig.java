@@ -3,6 +3,9 @@ package es.code.urjc.practica2.security;
 import es.code.urjc.practica2.security.jwt.JwtRequestFilter;
 import es.code.urjc.practica2.security.jwt.JwtTokenProvider;
 import es.code.urjc.practica2.security.jwt.UnauthorizedHandlerJwt;
+import org.springframework.security.config.Customizer;
+
+import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +21,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import es.code.urjc.practica2.model.Account;
 
 @Configuration
 @EnableWebSecurity
@@ -61,6 +66,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/v1/auth/logout").permitAll()
 				.requestMatchers("/api/v1/auth/signup").permitAll()
                 .requestMatchers("/api/v1/principal", "/api/v1/series", "/api/v1/lists").permitAll()
+				.requestMatchers("/api/v1/administrator/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             );
 

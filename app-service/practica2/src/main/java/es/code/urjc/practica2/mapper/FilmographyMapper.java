@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 import es.code.urjc.practica2.dto.FilmographyDto;
 import es.code.urjc.practica2.dto.FilmographyBasicDto;
 import es.code.urjc.practica2.model.Filmography;
+import es.code.urjc.practica2.model.Movie;
 
 @Mapper(componentModel = "spring", uses = {ImageMapper.class})
 public interface FilmographyMapper {
