@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,6 @@ import es.code.urjc.practica2.dto.ListsDto;
 import es.code.urjc.practica2.dto.MovieDto;
 import es.code.urjc.practica2.dto.ReviewDto;
 import es.code.urjc.practica2.dto.SerieDto;
-import es.code.urjc.practica2.mapper.AccountMapper;
 import es.code.urjc.practica2.mapper.FilmographyMapper;
 import es.code.urjc.practica2.mapper.ListsMapper;
 import es.code.urjc.practica2.mapper.MovieMapper;
@@ -30,12 +31,8 @@ import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Serie;
-import es.code.urjc.practica2.service.AccountService;
 import es.code.urjc.practica2.service.FilmographyService;
 import es.code.urjc.practica2.service.ListsService;
-import es.code.urjc.practica2.service.ReviewService;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -47,13 +44,6 @@ public class FilmographyRestController {
     private ListsService listsService;
     @Autowired
     private FilmographyService filmographyService;
-    @Autowired
-    private ReviewService reviewService;
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private AccountMapper accountMapper;
     @Autowired
     private MovieMapper movieMapper;
     @Autowired
@@ -126,28 +116,67 @@ public class FilmographyRestController {
     }
 
     @GetMapping("/filmographies/{id}/reviews")
-    public ResponseEntity<List<ReviewDto>> getFilmographyReviews(@PathVariable Long id){
+    public ResponseEntity<Page<ReviewDto>> getFilmographyReviews(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
         Filmography filmography = filmographyService.findByIdWithReviews(id);
-        if(filmography == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(reviewMapper.toDTOs(filmography.getFilmographyReviews()));
+        if (filmography == null) return ResponseEntity.notFound().build();
+
+        List<ReviewDto> allReviews = reviewMapper.toDTOs(filmography.getFilmographyReviews());
+
+        int start = page * size;
+        int end = Math.min(start + size, allReviews.size());
+        List<ReviewDto> paged = allReviews.subList(start, end);
+
+        Page<ReviewDto> result = new PageImpl<>(paged, PageRequest.of(page, size), allReviews.size());
+        return ResponseEntity.ok(result);
     }
     
     @GetMapping("/films/recent")
-    public ResponseEntity<List<MovieDto>> getRecentFilms(){
-        List<Movie> movies = filmographyService.getRecentFilms(20);
-        return ResponseEntity.ok(movieMapper.toDTOs(movies));
+    public ResponseEntity<Page<MovieDto>> getRecentFilms(@RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size){
+        Page<Movie> movies = filmographyService.getRecentFilms(PageRequest.of(page, size));
+        return ResponseEntity.ok(movies.map(movieMapper::toDTO));
     }
 
     @GetMapping("/films/genre/{genre}")
-    public ResponseEntity<List<MovieDto>> getFilmsByGenre(@PathVariable String genre){
+    public ResponseEntity<Page<MovieDto>> getFilmsByGenre(@PathVariable String genre,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
         List<Filmography> films = filmographyService.getFilmsByGenre(genre.toUpperCase());
-        List<Movie> movies = films.stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
-        return ResponseEntity.ok(movieMapper.toDTOs(movies));
+        List<Movie> movies = films.stream()
+            .filter(f -> f instanceof Movie)
+            .map(f -> (Movie) f)
+            .toList();
+
+        int start = page * size;
+        int end = Math.min(start + size, movies.size());
+        List<MovieDto> paged = movieMapper.toDTOs(movies.subList(start, end));
+
+        Page<MovieDto> result = new org.springframework.data.domain.PageImpl<>(
+            paged, PageRequest.of(page, size), movies.size());
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/series/genre/{genre}")
-    public ResponseEntity<List<SerieDto>> getSeriesByGenre(@PathVariable String genre){
-        List<Serie> series = filmographyService.findSeriesByGenre(es.code.urjc.practica2.model.Genre.Genres.valueOf(genre.toUpperCase()));
-        return ResponseEntity.ok(serieMapper.toDTOs(series));
+    public ResponseEntity<Page<SerieDto>> getSeriesByGenre(
+            @PathVariable String genre,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        List<Serie> series = filmographyService.findSeriesByGenre(
+            es.code.urjc.practica2.model.Genre.Genres.valueOf(genre.toUpperCase()));
+        
+        // Manual pagination since findSeriesByGenre returns List
+        int start = page * size;
+        int end = Math.min(start + size, series.size());
+        List<SerieDto> paged = serieMapper.toDTOs(series.subList(start, end));
+        
+        Page<SerieDto> result = new org.springframework.data.domain.PageImpl<>(
+            paged, PageRequest.of(page, size), series.size());
+        return ResponseEntity.ok(result);
     }
 }
