@@ -1,6 +1,8 @@
 package es.code.urjc.practica2.controller.rest;
 
+import es.code.urjc.practica2.controller.web.AccountController;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.code.urjc.practica2.dto.AccountDto;
+import es.code.urjc.practica2.dto.AdminEntityDto;
 import es.code.urjc.practica2.dto.DirectorDto;
 import es.code.urjc.practica2.dto.ListsDto;
 import es.code.urjc.practica2.dto.MovieDto;
@@ -26,6 +29,7 @@ import es.code.urjc.practica2.mapper.ReviewMapper;
 import es.code.urjc.practica2.mapper.SerieMapper;
 import es.code.urjc.practica2.model.Account;
 import es.code.urjc.practica2.model.Director;
+import es.code.urjc.practica2.model.Filmography;
 import es.code.urjc.practica2.model.Lists;
 import es.code.urjc.practica2.model.Movie;
 import es.code.urjc.practica2.model.Review;
@@ -44,11 +48,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/v1/administrator")
 public class AdministratorRestController {
 
+    private final AccountController accountController;
     @Autowired
     private FilmographyService filmographyService;
     @Autowired
@@ -79,50 +86,79 @@ public class AdministratorRestController {
     @Autowired
     private DirectorMapper directorMapper;
 
+    AdministratorRestController(AccountController accountController) {
+        this.accountController = accountController;
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<AdminEntityDto> getAllAdminEntity(Pageable pageable) {
+        Page<Account> accountsPage = accountService.findAllPage(pageable);
+        Page<Movie> moviesPage = filmographyService.findAllMoviesPage(pageable);
+        Page<Serie> seriesPage = filmographyService.findAllSeriesPage(pageable);
+        Page<Lists> systemListsPage = listsService.findAllSystemListsPage(pageable);
+        Page<Director> directorsPage = directorService.findAllPage(pageable);
+
+        AdminEntityDto dashboard = new AdminEntityDto(
+                accountsPage.map(accountMapper::toDTO),
+                moviesPage.map(movieMapper::toDTO),
+                seriesPage.map(serieMapper::toDTO),
+                systemListsPage.map(listsMapper::toDTO),
+                directorsPage.map(directorMapper::toDTO));
+        return ResponseEntity.ok(dashboard);
+    }
+
     // MOVIES
     @PostMapping("/movies")
-    public ResponseEntity<MovieDto> createMovie(@RequestBody MovieDto dto) {
+    public ResponseEntity<?> createMovie(@RequestBody MovieDto dto) {
         Movie movie = movieMapper.toDomain(dto);
-        if(filmographyService.getByName(movie.getFilmographyName())!=null){
-            return ResponseEntity.badRequest().build();
+        if (filmographyService.getByName(movie.getFilmographyName()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La película ya existe."));
         }
         var saved = filmographyService.save(movie);
         return ResponseEntity.ok(movieMapper.toDTO((Movie) saved));
     }
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<MovieDto> updateMovie(@PathVariable Long id, @RequestBody MovieDto dto) {
+    public ResponseEntity<?> updateMovie(@PathVariable Long id, @RequestBody MovieDto dto) {
         if (filmographyService.findMovieById(id) == null)
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "La película no existe."));
         Movie movie = movieMapper.toDomain(dto);
         return ResponseEntity.ok(movieMapper.toDTO(filmographyService.updateMovie(id, movie)));
     }
 
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
+    public ResponseEntity<?> deleteMovie(@PathVariable Long id) {
+        if (filmographyService.findMovieById(id) == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "La película no existe."));
         filmographyService.deleteMovie(id);
-
         return ResponseEntity.noContent().build();
     }
 
     // SERIES
     @PostMapping("/series")
-    public ResponseEntity<SerieDto> createSerie(@RequestBody SerieDto dto) {
-        var serie = serieMapper.toDomain(dto);
-        var saved = filmographyService.save(serie);
+    public ResponseEntity<?> createSerie(@RequestBody SerieDto dto) {
+        Serie serie = serieMapper.toDomain(dto);
+        if (filmographyService.getByName(serie.getFilmographyName()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La serie ya existe."));
+        }
+        Filmography saved = filmographyService.save(serie);
         return ResponseEntity.status(HttpStatus.CREATED).body(serieMapper.toDTO((Serie) saved));
     }
 
     @PutMapping("/series/{id}")
-    public ResponseEntity<SerieDto> updateSerie(@PathVariable Long id, @RequestBody SerieDto dto) {
-        if (filmographyService.findSeriesById(id) == null)
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateSerie(@PathVariable Long id, @RequestBody SerieDto dto) {
+        if (filmographyService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La serie no existe."));
+        }
         Serie serie = serieMapper.toDomain(dto);
         return ResponseEntity.ok(serieMapper.toDTO(filmographyService.updateSeries(id, serie)));
     }
 
     @DeleteMapping("/series/{id}")
-    public ResponseEntity<Void> deleteSerie(@PathVariable Long id) {
+    public ResponseEntity<?> deleteSerie(@PathVariable Long id) {
+        if (filmographyService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La serie no existe."));
+        }
         filmographyService.deleteMovie(id);
 
         return ResponseEntity.noContent().build();
@@ -131,15 +167,13 @@ public class AdministratorRestController {
     // ACCOUNTS
     // update user
     @PutMapping("/accounts/{id}")
-    public ResponseEntity<AccountDto> updateAccount(@PathVariable Long id, @RequestBody AccountDto accountDto) {
+    public ResponseEntity<?> updateAccount(@PathVariable Long id, @RequestBody AccountDto accountDto) {
         Account user = accountService.findById(id);
-        if (user == null)
-            return ResponseEntity.notFound().build();
+        if (accountService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
+        }
 
-        // Actualizamos los campos permitidos
-        user.setAccountName(accountDto.accountName());
-        user.setAccountEmail(accountDto.accountEmail());
-        user.setAccountBirthDate(accountDto.accountBirthDate());
+        user = accountService.updateAccount(user,accountMapper.toDomain(accountDto));
 
         accountService.save(user);
         return ResponseEntity.ok(accountMapper.toDTO(user));
@@ -147,57 +181,68 @@ public class AdministratorRestController {
 
     // delete user
     @DeleteMapping("/accounts/{id}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAccount(@PathVariable Long id) {
         if (accountService.findById(id) == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
         }
         accountService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
     // get user's reviews
-
     @GetMapping("/accounts/{id}/reviews")
-    public ResponseEntity<List<ReviewDto>> getUserReviews(@PathVariable Long id, Pageable pageable) {
+    public ResponseEntity<?> getUserReviews(@PathVariable Long id, Pageable pageable) {
         Account user = accountService.findById(id);
-        if (user == null)
-            return ResponseEntity.notFound().build();
+        if (accountService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
+        }
+        ;
 
-        List<Review> reviews = (user.getAccountRole() == Account.Role.ADMIN)
-                ? reviewService.findAll()
-                : reviewService.findByAuthor(user);
+        Page<Review> reviewsPage = (user.getAccountRole() == Account.Role.ADMIN)
+                ? reviewService.findAllPage(pageable)
+                : reviewService.findByAuthorName(user, pageable);
 
-        return ResponseEntity.ok(reviewMapper.toDTOs(reviews));
+        Page<ReviewDto> dtoPage = reviewsPage.map(reviewMapper::toDTO);
+        return ResponseEntity.ok(dtoPage);
     }
 
     // get user's lists
     @GetMapping("/accounts/{id}/lists")
-    public ResponseEntity<List<ListsDto>> getUserLists(@PathVariable Long id) {
+    public ResponseEntity<?> getUserLists(@PathVariable Long id, Pageable pageable) {
         Account user = accountService.findById(id);
-        if (user == null)
-            return ResponseEntity.notFound().build();
+        if (accountService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
+        }
 
-        List<Lists> lists = listsService.findAllListsByAuthor(user);
-        return ResponseEntity.ok(listsMapper.toDTOs(lists));
+        Page<Lists> listsPage = (user.getAccountRole() == Account.Role.ADMIN)
+                ? listsService.findAllSystemListsPage(pageable)
+                : listsService.findAllListsByAuthorPage(user, pageable);
+
+        Page<ListsDto> dtoPage = listsPage.map(listsMapper::toDTO);
+        return ResponseEntity.ok(dtoPage);
     }
 
     // DIRECTOR
     // new Director
     @PostMapping("/directors")
-    public ResponseEntity<DirectorDto> createDirector(@RequestBody DirectorDto directorDto) {
-        Director director = new Director();
-        director.setDirectorName(directorDto.directorName());
-        director.setDirectorBirthDate(directorDto.directorBirthDate());
+    public ResponseEntity<?> createDirector(@RequestBody DirectorDto directorDto) {
+        Director dto = directorMapper.toDomain(directorDto);
+        if (directorService.getDirectorByNamePage(dto.getDirectorName()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "El director ya existe."));
+        }
 
-        Director savedDirector = directorService.save(director);
-        return ResponseEntity.status(HttpStatus.CREATED).body(directorMapper.toDTO(savedDirector));
+        Director director = new Director(directorDto.directorName(),directorDto.directorBirthDate());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(directorMapper.toDTO( directorService.save(director)));
     }
 
     // update director
     @PutMapping("/directors/{id}")
-    public ResponseEntity<DirectorDto> updateDirector(@PathVariable Long id, @RequestBody DirectorDto directorDto) {
+    public ResponseEntity<?> updateDirector(@PathVariable Long id, @RequestBody DirectorDto directorDto) {
         Director director = directorService.findById(id);
-        if (director == null)
-            return ResponseEntity.notFound().build();
+        if (directorService.findById(id) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
+        }
 
         director.setDirectorName(directorDto.directorName());
         director.setDirectorBirthDate(directorDto.directorBirthDate());
@@ -208,10 +253,11 @@ public class AdministratorRestController {
 
     // delete director and his movies
     @DeleteMapping("/directors/{id}")
-    public ResponseEntity<Void> deleteDirector(@PathVariable Long id) {
+    public ResponseEntity<?> deleteDirector(@PathVariable Long id) {
         if (directorService.findById(id) == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "La cuenta no existe."));
         }
+
         directorService.deleteWithFilmographies(id);
         return ResponseEntity.noContent().build();
     }

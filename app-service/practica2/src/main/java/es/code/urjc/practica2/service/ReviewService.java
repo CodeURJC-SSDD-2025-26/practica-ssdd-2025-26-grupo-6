@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.code.urjc.practica2.model.Account;
@@ -31,12 +33,20 @@ public class ReviewService {
         return reviewRepository.findById(Objects.requireNonNull(reviewId)).orElse(null);
     }
 
-    public List<Review> findByAuthor(Account author) {
+    public List<Review> findByAuthor(Account author){
         return reviewRepository.findByReviewAuthor(author);
+    }
+
+    public Page<Review> findByAuthorName(Account author, Pageable pageable) {
+        return reviewRepository.findByReviewAuthorName(author.getAccountName(), pageable);
     }
 
     public List<Review> findAll() {
         return reviewRepository.findAll();
+    }
+
+    public Page<Review> findAllPage(Pageable pageable){
+        return reviewRepository.findAllPage(pageable);
     }
 
     public String getChartData(List<Review> reviews) {

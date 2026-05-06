@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,19 @@ public class AccountService {
         return accountRepository.existsByAccountEmail(email);
     }
 
+    public Account updateAccount(Account old, Account young){
+
+        if (young.getAccountName() != null) {
+            old.setAccountName(young.getAccountName());
+        }
+        if (young.getAccountEmail() != null) {
+            old.setAccountEmail(young.getAccountEmail());
+        }
+        if(young.getAccountBirthDate()!=null){
+            old.setAccountBirthDate(young.getAccountBirthDate());
+        }
+        return old;
+    }
     public boolean existsAccountName(String name) {
         return accountRepository.existsByAccountName(name);
     }
@@ -76,6 +91,10 @@ public class AccountService {
 
     public List<Account> findAll() {
         return accountRepository.findAll();
+    }
+
+    public Page<Account> findAllPage(Pageable pageable) {
+        return accountRepository.findAllPage(pageable);
     }
 
     public Account findByEmail(String email) {

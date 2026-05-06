@@ -2,6 +2,8 @@ package es.code.urjc.practica2.service;
 
 import es.code.urjc.practica2.repository.ListsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +28,8 @@ import es.code.urjc.practica2.repository.FilmographyRepository;
 @Service
 public class FilmographyService {
     private final ListsRepository listsRepository;
-    @Autowired private FilmographyRepository filmographyRepository;
+    @Autowired
+    private FilmographyRepository filmographyRepository;
 
     FilmographyService(ListsRepository listsRepository) {
         this.listsRepository = listsRepository;
@@ -75,7 +78,7 @@ public class FilmographyService {
                 .orElseThrow(() -> new RuntimeException("Filmography not found"));
     }
 
-        public List<Movie> getRecentFilms(int limit) {
+    public List<Movie> getRecentFilms(int limit) {
         return filmographyRepository.findAll().stream()
                 .filter(f -> f instanceof Movie)
                 .map(f -> (Movie) f)
@@ -132,8 +135,16 @@ public class FilmographyService {
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Movie).map(f -> (Movie) f).toList();
     }
 
+    public Page<Movie> findAllMoviesPage(Pageable pageable) {
+        return filmographyRepository.findAllMovies(pageable);
+    }
+
     public List<Serie> findAllSeries() {
         return filmographyRepository.findAll().stream().filter(f -> f instanceof Serie).map(f -> (Serie) f).toList();
+    }
+
+    public Page<Serie> findAllSeriesPage(Pageable pageable) {
+        return filmographyRepository.findAllSeries(pageable);
     }
 
     public List<Filmography> findByDirector(Director director) {
@@ -168,7 +179,7 @@ public class FilmographyService {
         });
     }
 
-    public Filmography getByName(String name){
+    public Filmography getByName(String name) {
         return filmographyRepository.findByFilmographyName(name);
     }
 
@@ -181,20 +192,41 @@ public class FilmographyService {
     }
 
     public Filmography save(Filmography filmography) {
+        if (filmography.getFilmographyGenres()==null || filmography.getFilmographyName()==null ||  filmography.getFilmographyTrailerUrl()==null || filmography.getFilmographySynopsis()==null
+         || filmography.getFilmographyYear()==0) {
+            return null;
+        }
+        
         return filmographyRepository.save(Objects.requireNonNull(filmography));
     }
 
     public Movie updateMovie(Long id, Filmography updatedMovie) {
         Movie existingMovie = findMovieById(id);
 
-        existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
-        existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
-        existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
-        existingMovie.setMovieDuration(((Movie) updatedMovie).getMovieDuration());
-        existingMovie.setFilmographyGenres(updatedMovie.getFilmographyGenres());
-        existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
-        existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
-        existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
+        if (updatedMovie.getFilmographyName() != null) {
+            existingMovie.setFilmographyName(updatedMovie.getFilmographyName());
+        }
+        if (updatedMovie.getFilmographyDirector() != null) {
+            existingMovie.setFilmographyDirector(updatedMovie.getFilmographyDirector());
+        }
+        if (updatedMovie.getFilmographyYear() != 0) {
+            existingMovie.setFilmographyYear(updatedMovie.getFilmographyYear());
+        }
+        if (updatedMovie.getFilmographyGenres() != null) {
+            existingMovie.setFilmographyGenres(updatedMovie.getFilmographyGenres());
+        }
+        if (updatedMovie.getFilmographyPlatforms() != null) {
+            existingMovie.setFilmographyPlatforms(updatedMovie.getFilmographyPlatforms());
+        }
+        if (updatedMovie.getFilmographySynopsis() != null) {
+            existingMovie.setFilmographySynopsis(updatedMovie.getFilmographySynopsis());
+        }
+        if (updatedMovie.getFilmographyTrailerUrl() != null) {
+            existingMovie.setFilmographyTrailerUrl(updatedMovie.getFilmographyTrailerUrl());
+        }
+        if (updatedMovie.getFilmographyImage() != null) {
+            existingMovie.setFilmographyImage(updatedMovie.getFilmographyImage());
+        }
         if (updatedMovie.getFilmographyImage() != null) {
             existingMovie.setFilmographyImage(updatedMovie.getFilmographyImage());
         }
@@ -205,14 +237,30 @@ public class FilmographyService {
     public Serie updateSeries(Long id, Filmography updatedSerie) {
         Serie existingSerie = findSeriesById(id);
 
-        existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
-        existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
-        existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
-        existingSerie.setSerieDuration(((Serie) updatedSerie).getSerieDuration());
-        existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
-        existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
-        existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
-        existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+        if (updatedSerie.getFilmographyName() != null) {
+            existingSerie.setFilmographyName(updatedSerie.getFilmographyName());
+        }
+        if (updatedSerie.getFilmographyDirector() != null) {
+            existingSerie.setFilmographyDirector(updatedSerie.getFilmographyDirector());
+        }
+        if (updatedSerie.getFilmographyYear() != 0) {
+            existingSerie.setFilmographyYear(updatedSerie.getFilmographyYear());
+        }
+        if (updatedSerie.getFilmographyGenres() != null) {
+            existingSerie.setFilmographyGenres(updatedSerie.getFilmographyGenres());
+        }
+        if (updatedSerie.getFilmographyPlatforms() != null) {
+            existingSerie.setFilmographyPlatforms(updatedSerie.getFilmographyPlatforms());
+        }
+        if (updatedSerie.getFilmographySynopsis() != null) {
+            existingSerie.setFilmographySynopsis(updatedSerie.getFilmographySynopsis());
+        }
+        if (updatedSerie.getFilmographyTrailerUrl() != null) {
+            existingSerie.setFilmographyTrailerUrl(updatedSerie.getFilmographyTrailerUrl());
+        }
+        if (updatedSerie.getFilmographyImage() != null) {
+            existingSerie.setFilmographyImage(updatedSerie.getFilmographyImage());
+        }
         if (updatedSerie.getFilmographyImage() != null) {
             existingSerie.setFilmographyImage(updatedSerie.getFilmographyImage());
         }
@@ -236,8 +284,8 @@ public class FilmographyService {
         filmographyRepository.deleteById(Objects.requireNonNull(id));
     }
 
-    public List<Map<String, Object>> builtStartsList(float avg){
-        List<Map<String,Object>> startsList = new ArrayList<>();
+    public List<Map<String, Object>> builtStartsList(float avg) {
+        List<Map<String, Object>> startsList = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             Map<String, Object> star = new HashMap<>();
             float fill;
@@ -293,6 +341,5 @@ public class FilmographyService {
         result.put("noResults", movies.isEmpty() && series.isEmpty() && relatedFilms.isEmpty());
         return result;
     }
-
 
 }
