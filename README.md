@@ -570,6 +570,7 @@ Responsable de la **containerización** y orquestación del sistema completo par
 * **Dockerfiles**: Diseño y configuración de los archivos de definición para las imágenes de `app-service` y `utility-service`, asegurando entornos de ejecución aislados y ligeros basados en OpenJDK.
 * **Orquestación con Docker Compose**: Creación del archivo `docker-compose.yml`. Este coordina la comunicación entre los servicios de aplicación, el servicio de utilidades y la base de datos oficial **MySQL**, integrando mecanismos de persistencia (volúmenes) y control de salud (**healthchecks**).
 * **Publicación y Distribución**: Gestión del ciclo de vida de las imágenes en **Docker Hub** y publicación del **OCI Artifact**, cumpliendo con los requisitos de despliegue automatizado y disponibilidad en la nube.
+
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [AdminRestController terminado](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/e015fa491efc48c67b00317e89a0b92ba4f001bb)  | [AdminRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AdministratorRestController.java)   |
@@ -578,17 +579,18 @@ Responsable de la **containerización** y orquestación del sistema completo par
 |4| [Dockerfile app-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b6e19f23038cb493b32f75b622e70260f57ed049)  | [dockerfile app-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/docker/app-service/dockerfile), [dockerfile utility-service](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/docker/utility-service/dockerfile)   |
 
 ---
-#### **Alumno 2 - [Nombre Completo]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+#### **Alumno 2 - [Alejandro Carretero Badorrey]**
+
+- **Lógica de negocio de Filmografía**: Implementación del `FilmographyController`, desarrollando los endpoints necesarios y gestionando las operaciones del sistema relacionadas con las filmografías.
+- **Desarrollo de Account**: Creación del `AccountRestController`, definiendo los endpoints para la gestión de perfiles, reseñas y listas, asegurando su correcta integración con los servicios correspondientes.
+- **Visualización de datos (Charts)**: Desarrollo de los endpoints para la generación de gráficos en los módulos de filmografía, perfil y administración.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Lógica de negocio de Filmografía](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/b0017f4b037c95fdb62461d360e58e7e5393c5b1)  | [FilmographyController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/web/FilmographyController.java)   |
+|2| [Desarrollo de Account](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/ff1cfc74dc2b9fa374928ce2bb12304abacf0b02)  | [AccountRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AccountRestController.java)   |
+|3| [Visualización de datos (Charts)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/commit/a11e8173a942ae223db251a28528720750f019fd)  | [AdministratorRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-6/blob/main/app-service/src/main/java/es/code/urjc/palomix/controller/rest/AdministratorRestController.java)   |
 
 ---
 
