@@ -458,11 +458,13 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
-### **Diagrama de Clases y Templates Actualizado**
+### **Diagrama de Servicios**
+
+![Diagrama de Servicios](readMe_images/DiagramaDeServicios.jpg)
+
+### **Diagrama de Clases Actualizado**
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
-
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
 
 ### **Instrucciones de Ejecución con Docker**
 
