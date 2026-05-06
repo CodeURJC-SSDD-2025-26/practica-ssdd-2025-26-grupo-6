@@ -13,5 +13,5 @@ public interface DirectorMapper {
 
     DirectorDto toDTO(Director director);
     List<DirectorDto> toDTOs(Collection<Director> director);
-    DirectorDto toDomain(DirectorDto director);
+    Director toDomain(DirectorDto director);
 }

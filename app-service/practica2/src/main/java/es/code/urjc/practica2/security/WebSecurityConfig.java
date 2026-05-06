@@ -59,16 +59,19 @@ public class WebSecurityConfig {
         
 		http
             .authorizeHttpRequests(auth -> auth
-				.requestMatchers("/v3/api-docs*/**", "/v3/api-docs").permitAll()
-            	.requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/api/v1/auth/login").permitAll()
-                .requestMatchers("/api/v1/auth/refresh").permitAll()
-                .requestMatchers("/api/v1/auth/logout").permitAll()
-				.requestMatchers("/api/v1/auth/signup").permitAll()
-                .requestMatchers("/api/v1/principal", "/api/v1/series", "/api/v1/lists").permitAll()
-				.requestMatchers("/api/v1/administrator/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            );
+            .requestMatchers("/v3/api-docs*/**", "/v3/api-docs").permitAll()
+            .requestMatchers("/api/v1/auth/**").permitAll()
+            .requestMatchers("/api/v1/principal").permitAll()
+            .requestMatchers("/api/v1/series").permitAll()
+            .requestMatchers("/api/v1/series/genre/**").permitAll()
+            .requestMatchers("/api/v1/lists/**").permitAll()
+            .requestMatchers("/api/v1/films/recent").permitAll()
+            .requestMatchers("/api/v1/films/genre/**").permitAll()
+            .requestMatchers("/api/v1/filmographies/**").permitAll()
+            .requestMatchers("/api/v1/filmographies/*/lists/update").authenticated()
+            .requestMatchers("/api/v1/administrator/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
+        );
 
         http.formLogin(form -> form.disable());
         http.csrf(csrf -> csrf.disable());

@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -182,6 +184,10 @@ public class ListsService {
         return listsRepository.findByListOwnerIsNull();
     }
 
+    public Page<Lists> findAllSystemListsPage(Pageable pageable) {
+        return listsRepository.findByListOwnerIsNull(pageable);
+    }
+
     public List<Lists> findAllUserList() {
         return listsRepository.findAll().stream()
                 .filter(l -> l.getListOwner() != null && l.getListOwner().getAccountRole() != Account.Role.ADMIN)
@@ -194,6 +200,15 @@ public class ListsService {
             return listsRepository.findAll().stream().filter(l -> l.getListOwner() == null).toList();
         } else {
             return listsRepository.findAll().stream().filter(l -> l.getListOwner() == user).toList();
+        }
+    }
+
+    public Page<Lists> findAllListsByAuthorPage(Account user, Pageable pageable) {
+        boolean isAdmin = user.getAccountRole() == Account.Role.ADMIN;
+        if (isAdmin) {
+            return listsRepository.findAll(pageable);
+        } else {
+            return listsRepository.findAllByAccount(user, pageable);
         }
     }
 

@@ -42,4 +42,10 @@ public interface FilmographyRepository extends JpaRepository<Filmography, Long> 
 
     @Query("SELECT s FROM Serie s")
     Page<Serie> findAllSeriesPaged(Pageable pageable);
+    
+    @Query("SELECT m FROM Movie m")
+    Page<Movie> findAllMovies(Pageable pageable);
+
+    @Query("SELECT s FROM Serie s")
+    Page<Serie> findAllSeries(Pageable pageable);
 }
