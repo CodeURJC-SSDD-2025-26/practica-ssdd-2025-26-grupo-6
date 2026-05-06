@@ -243,7 +243,6 @@ public class AccountController {
 
         list.setListName(newName);
 
-        // Limpiar y repoblar en vez de crear lista nueva
         list.getFilmographyList().clear();
         if (filmographyIds != null) {
             List<Filmography> selectedFilms = filmographyIds.stream()
@@ -253,7 +252,7 @@ public class AccountController {
             list.getFilmographyList().addAll(selectedFilms);
         }
 
-        listsService.save(list); // ← nuevo método en el service
+        listsService.save(list);
 
         return "redirect:" + redirectTo;
     }

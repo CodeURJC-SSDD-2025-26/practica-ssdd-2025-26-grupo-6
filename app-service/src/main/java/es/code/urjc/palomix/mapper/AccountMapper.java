@@ -11,7 +11,6 @@ import es.code.urjc.palomix.dto.AccountDto;
 import es.code.urjc.palomix.model.Account;
 import es.code.urjc.palomix.model.Lists;
 
-// Usamos ImageMapper para convertir el avatar al ImageDto con ID
 @Mapper(componentModel = "spring", uses = {ImageMapper.class})
 public interface AccountMapper {
 

@@ -10,7 +10,6 @@ import es.code.urjc.palomix.dto.ListsDto;
 import es.code.urjc.palomix.model.Filmography;
 import es.code.urjc.palomix.model.Lists;
 
-// Usamos FilmographyMapper para que sepa cómo convertir la lista de películas
 @Mapper(componentModel = "spring", uses = {FilmographyMapper.class})
 public interface ListsMapper {
     @Mapping(target = "type", ignore = true)
