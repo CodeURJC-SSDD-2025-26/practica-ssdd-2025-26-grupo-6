@@ -39,7 +39,9 @@ public class WebSecurityConfig {
             .securityMatcher("/api/**") 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/principal").permitAll() 
+				.requestMatchers("/api/admin/**").hasRole("ADMIN") 
                 .anyRequest().authenticated() 
+
             )
             .httpBasic(Customizer.withDefaults()) 
             .csrf(csrf -> csrf.disable()) 

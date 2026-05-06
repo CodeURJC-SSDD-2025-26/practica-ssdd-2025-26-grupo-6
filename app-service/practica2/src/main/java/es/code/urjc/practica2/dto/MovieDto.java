@@ -6,26 +6,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Filmography.Platforms;
+import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Image;
+import es.code.urjc.practica2.model.Review;
 
 public record MovieDto(
-        Long filmographyId,
+                Long filmographyId,
 
-        String filmographyName,
-        float filmographyAverageStars,
+                String filmographyName,
+                float filmographyAverageStars,
 
-        String filmographySynopsis,
+                String filmographySynopsis,
 
-        int filmographyYear,
-        String filmographyTrailerUrl,
-        
-        @JsonIgnore
-        Image filmographyImage,
-        String imageUrl,
+                int filmographyYear,
+                String filmographyTrailerUrl,
 
-        List<Platforms> filmographyPlatforms,
+                @JsonIgnore Image filmographyImage,
+                String imageUrl,
 
-        Director filmographyDirector,
-        int movieDuration) {
+                List<Platforms> filmographyPlatforms,
+                List<Genre> filmographyGenres,
+                List<Review> filmographyReviews,
+                Director filmographyDirector,
+                int movieDuration) {
 
 }

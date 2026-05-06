@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.code.urjc.practica2.model.Director;
 import es.code.urjc.practica2.model.Filmography.Platforms;
+import es.code.urjc.practica2.model.Genre;
 import es.code.urjc.practica2.model.Image;
+import es.code.urjc.practica2.model.Review;
 
 public record FilmographyDto(
                 Long filmographyId,
@@ -24,9 +26,12 @@ public record FilmographyDto(
                 String imageUrl,
 
                 List<Platforms> filmographyPlatforms,
+                List<Genre> filmographyGenres,
+                List<Review> filmographyReviews,
 
                 Director filmographyDirector,
             
+                @JsonIgnore
                 int duration) {
 
 }

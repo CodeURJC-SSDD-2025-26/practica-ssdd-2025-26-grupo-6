@@ -1,6 +1,7 @@
 package es.code.urjc.practica2.controller.REST;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,37 +24,18 @@ import es.code.urjc.practica2.service.ImageService;
 @RestController
 @RequestMapping("/images")
 public class ImageRestController {
-    @Autowired
+	@Autowired
 	private ImageService imageService;
 
-
 	@GetMapping("/{id}")
-	public ImageDto getImage(@PathVariable long id) {
-        Image img = imageService.getImage(id);
-		return new ImageDto(img.getImageId());
-	}
+	public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws Exception {
+		Image img = imageService.findById(id);
 
-	@GetMapping("/{id}/media")
-	public ResponseEntity<Object> getImageFile(@PathVariable long id)
-			throws SQLException, IOException {
+		Blob blob = img.getImageFile();
+		byte[] bytes = blob.getBytes(1, (int) blob.length());
 
-		Resource imageFile = (Resource) imageService.getImageFile(id);
-
-		MediaType mediaType = MediaTypeFactory
-				.getMediaType((org.springframework.core.io.Resource) imageFile)
-				.orElse(MediaType.IMAGE_JPEG);
-
-		return ResponseEntity
-				.ok()
-				.contentType(mediaType)
-				.body(imageFile);
-	}
-
-	@PutMapping("/{id}/media")
-	public ResponseEntity<Object> replaceImageFile(@PathVariable long id,
-			@RequestParam MultipartFile imageFile) throws IOException {
-
-		imageService.replaceImageFile(id, imageFile.getInputStream());
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok()
+				.header("Content-Type", "image/jpg") 
+				.body(bytes);
 	}
 }
