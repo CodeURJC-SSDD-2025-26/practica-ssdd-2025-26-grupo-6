@@ -1,6 +1,7 @@
 package es.code.urjc.practica2.controller.rest;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,18 +65,38 @@ public class FilmographyRestController {
     @Autowired
     private FilmographyMapper filmographyMapper;
 
-    @GetMapping("/principal")   //Return ok and list of movies
+    @GetMapping("/principal")
     public ResponseEntity<HomeResponseDto> getPrincipalData() {
-
         List<MovieDto> moviesDTO = movieMapper.toDTOs(filmographyService.findTop10MoviesByYear());
-        List<Map<String, Object>> sections = listsService.getMovieSections();
+        
+        // Convert movie sections: replace Movie entities with MovieDtos
+        List<Map<String, Object>> sections = listsService.getMovieSections()
+            .stream()
+            .map(section -> {
+                Map<String, Object> converted = new HashMap<>(section);
+                List<Movie> movies = (List<Movie>) section.get("movies");
+                converted.put("movies", movieMapper.toDTOs(movies));
+                return converted;
+            })
+            .toList();
+
         HomeResponseDto response = new HomeResponseDto(moviesDTO, sections);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/series")
-    public ResponseEntity<List<Map<String, Object>>> getSeriesData(){
-        return ResponseEntity.ok(listsService.getSeriesSections());
+    public ResponseEntity<List<Map<String, Object>>> getSeriesData() {
+        return ResponseEntity.ok(
+            listsService.getSeriesSections()
+                .stream()
+                .map(section -> {
+                    Map<String, Object> converted = new HashMap<>(section);
+                    List<Serie> series = (List<Serie>) section.get("series");
+                    converted.put("series", serieMapper.toDTOs(series));
+                    return converted;
+                })
+                .toList()
+        );
     }
 
     @GetMapping("/lists")

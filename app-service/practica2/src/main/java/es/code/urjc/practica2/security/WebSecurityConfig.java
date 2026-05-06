@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/v1/auth/refresh").permitAll()
                 .requestMatchers("/api/v1/auth/logout").permitAll()
 				.requestMatchers("/api/v1/auth/signup").permitAll()
-                .requestMatchers("/api/v1/principal").permitAll()
+                .requestMatchers("/api/v1/principal", "/api/v1/series", "/api/v1/lists").permitAll()
                 .anyRequest().authenticated()
             );
 
