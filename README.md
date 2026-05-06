@@ -487,32 +487,24 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 #### **Pasos para construir y publicar la imagen de App-service:**
 
-1. **Navegar al directorio de App-service**:
-   ```bash
-      cd app-service
-   ```
-2. **Construir la imágen Docker**:
+1. **Construir la imágen Docker**:
    ```bash
    docker build -t [tu_usario_DockerHub]/app-service:latest ./app-service
    ```
 
-3. **Publicar la imágen en DockerHub**
+2. **Publicar la imágen en DockerHub**
    ```bash
    docker push -t [tu_usario_DockerHub]/app-service:latest
    ```
 
 #### **Pasos para construir y publicar la imagen de Utility-service:**
 
-1. **Navegar al directorio de App-service**:
-   ```bash
-      cd utility-service
-   ```
-2. **Construir la imágen Docker**:
+1. **Construir la imágen Docker**:
    ```bash
    docker build -t [tu_usario_DockerHub]/utility-service:latest ./utility-service
    ```
 
-3. **Publicar la imágen en DockerHub**
+2. **Publicar la imágen en DockerHub**
    ```bash
    docker push -t [tu_usario_DockerHub]/utility-service:latest
    ```
